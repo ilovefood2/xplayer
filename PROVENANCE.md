@@ -31,7 +31,9 @@ and is included in the test bundle only. The HLS fixture `stream.ts` is eight
 repetitions of that same pattern, remuxed with
 `ffmpeg -stream_loop 7 -i clip.mp4 -c copy -f mpegts stream.ts`.
 The MKV test fixture is generated from FFmpeg's testsrc2 pattern and sine tone,
-encoded as H.264/AAC, and contains no personal or third-party media. The FFmpeg
+encoded as H.264/AAC, and contains no personal or third-party media. The controls
+tests repeat this pattern to 18 seconds and remux a copy to MP4 so visibility
+and pause behavior can be checked without the fixture ending early. The FFmpeg
 command-line executable is only a fixture-generation tool; codec code inside
 MobileVLCKit remains governed by its upstream licenses.
 

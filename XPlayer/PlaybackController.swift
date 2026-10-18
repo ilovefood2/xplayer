@@ -200,48 +200,106 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
 
 struct NativeVideoPlayer: UIViewControllerRepresentable {
     let player: AVPlayer
+    let onInteraction: () -> Void
+    func makeCoordinator() -> Coordinator { Coordinator(onInteraction: onInteraction) }
     func makeUIViewController(context: Context) -> AVPlayerViewController {
         let controller = AVPlayerViewController()
         controller.player = player
+        controller.view.accessibilityIdentifier = "nativeVideo"
         controller.allowsPictureInPicturePlayback = false
+        let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.tapped))
+        tap.cancelsTouchesInView = false
+        tap.delegate = context.coordinator
+        controller.view.addGestureRecognizer(tap)
         return controller
     }
-    func updateUIViewController(_ controller: AVPlayerViewController, context: Context) {}
+    func updateUIViewController(_ controller: AVPlayerViewController, context: Context) {
+        context.coordinator.onInteraction = onInteraction
+    }
+    final class Coordinator: NSObject, UIGestureRecognizerDelegate {
+        var onInteraction: () -> Void
+        init(onInteraction: @escaping () -> Void) { self.onInteraction = onInteraction }
+        @objc func tapped() { onInteraction() }
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { true }
+    }
 }
 
 struct PlayerScreen: View {
     @ObservedObject var playback: PlaybackController
+    @Environment(\.accessibilityVoiceOverEnabled) private var voiceOverEnabled
+    @State private var controlsVisible = true
+    @State private var nativePlaying = false
+    @State private var scrubbing = false
+    @State private var interaction = UUID()
+    private var playing: Bool { playback.vlcPlayer != nil ? playback.vlcIsPlaying : nativePlaying }
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
                 if playback.vlcPlayer != nil {
                     VLCVideoPlayer(playback: playback)
-                    VLCPlaybackControls(playback: playback)
+                        .overlay {
+                            Button {
+                                if controlsVisible && playing && !voiceOverEnabled {
+                                    withAnimation { controlsVisible = false }
+                                    interaction = UUID()
+                                } else { showControls() }
+                            } label: { Color.clear.contentShape(Rectangle()) }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("playerVideo")
+                            .accessibilityLabel(controlsVisible && playing && !voiceOverEnabled ? "Hide playback controls" : "Show playback controls")
+                        }
+                    if controlsVisible {
+                        VLCPlaybackControls(playback: playback) { editing in
+                            scrubbing = editing
+                            showControls()
+                        }
+                    }
                 } else {
-                    NativeVideoPlayer(player: playback.player)
+                    NativeVideoPlayer(player: playback.player, onInteraction: showControls)
                 }
                 if let error = playback.error {
                     Text(error).font(.callout).foregroundStyle(.orange).padding().accessibilityIdentifier("playbackError")
                 }
-                HStack {
-                    Button { playback.previous() } label: { Label("Previous", systemImage: "backward.end.fill") }
-                        .disabled(playback.index == 0)
-                    Spacer()
-                    Text("\(playback.index + 1) / \(playback.paths.count)").monospacedDigit().foregroundStyle(.secondary)
-                    Spacer()
-                    Button { playback.next() } label: { Label("Next", systemImage: "forward.end.fill") }
-                        .disabled(playback.index + 1 >= playback.paths.count)
-                }.labelStyle(.iconOnly).font(.title2).padding(24)
+                if controlsVisible {
+                    HStack {
+                        Button { playback.previous() } label: { Label("Previous", systemImage: "backward.end.fill") }
+                            .disabled(playback.index == 0)
+                        Spacer()
+                        Text("\(playback.index + 1) / \(playback.paths.count)").monospacedDigit().foregroundStyle(.secondary)
+                        Spacer()
+                        Button { playback.next() } label: { Label("Next", systemImage: "forward.end.fill") }
+                            .disabled(playback.index + 1 >= playback.paths.count)
+                    }.labelStyle(.iconOnly).font(.title2).padding(24)
+                }
             }
+            .ignoresSafeArea(edges: controlsVisible ? [] : .all)
             .background(.black)
             .navigationTitle(playback.title)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbar(controlsVisible ? .visible : .hidden, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) { Button("Done") { playback.isPresented = false } }
             }
         }
+        .statusBarHidden(!controlsVisible)
+        .onReceive(playback.player.publisher(for: \.timeControlStatus)) { nativePlaying = $0 == .playing }
+        .onChange(of: playing) { _, _ in showControls() }
+        .onChange(of: playback.index) { _, _ in showControls() }
+        .onChange(of: playback.error) { _, _ in showControls() }
+        .onChange(of: voiceOverEnabled) { _, _ in showControls() }
+        .task(id: interaction) {
+            guard controlsVisible, playing, !scrubbing, !voiceOverEnabled, playback.error == nil else { return }
+            let currentInteraction = interaction
+            do { try await Task.sleep(for: .seconds(3)) } catch { return }
+            guard !Task.isCancelled, interaction == currentInteraction else { return }
+            withAnimation { controlsVisible = false }
+        }
         .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
         .onDisappear { UIApplication.shared.isIdleTimerDisabled = false; playback.stop() }
+    }
+    private func showControls() {
+        withAnimation { controlsVisible = true }
+        interaction = UUID()
     }
 }
 
@@ -253,13 +311,16 @@ struct VLCVideoPlayer: UIViewRepresentable {
 
 struct VLCPlaybackControls: View {
     @ObservedObject var playback: PlaybackController
+    let onEditingChanged: (Bool) -> Void
     @State private var scrubbing = false
     @State private var position: Float = 0
     var body: some View {
         VStack(spacing: 12) {
             Slider(value: Binding(get: { scrubbing ? position : playback.vlcPosition }, set: { position = $0 }), in: 0...1) { editing in
+                if editing { position = playback.vlcPosition }
                 scrubbing = editing
                 if !editing { playback.seekVLC(to: position) }
+                onEditingChanged(editing)
             }
             .disabled(!playback.vlcSeekable)
             .accessibilityLabel("Playback position")

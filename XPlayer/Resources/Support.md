@@ -64,7 +64,10 @@ for xplayer in Settings. Network playback requires a reachable server.
 
 ## Playback
 
-Tap a video to play it. Tap the video area to show Apple's playback controls.
+Tap a video to play it. Playback controls hide automatically while playing;
+tap the video to show them again. MKV controls stay visible while paused,
+seeking, showing an error, or using VoiceOver. Apple playback retains its native
+transport controls; the app's title and queue buttons also hide during playback.
 Use Previous and Next for the playback queue. Done stops playback. Backgrounding
 the app pauses playback. If audio plays on another device, check the system
 audio output or any device-mirroring session on your Mac.

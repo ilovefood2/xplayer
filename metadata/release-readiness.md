@@ -118,3 +118,25 @@ validation or review, and do not certify trademark or legal clearance.
   iPhone 16 Pro Max; device inventory confirmed the version. The app is ~99 MB.
 - Upstream decoder compilation was not run. App Store SDK privacy, licensing,
   codec/export review and public-site deployment remain separate release checks.
+
+## Verification of 4.11.137
+
+- MKV transport controls, title, status bar, and playlist buttons hide after
+  three seconds of playback. Tapping the video restores them; MKV also supports
+  tapping again to hide them immediately. Controls remain visible while paused,
+  scrubbing, showing an error, or using VoiceOver.
+- Native AVKit retains its own transport controls and auto-hide behavior. A
+  simultaneous tap observer restores the app's title and queue buttons without
+  cancelling native control touches. The app's added controls hide during play.
+- iPhone simulator hide/reveal checks passed for MKV and native playback,
+  including MKV pause/resume and native paused-state visibility. The hidden MKV
+  frame was visually checked.
+- The iPad simulator passed 24 selected checks: all 22 core/resource tests plus
+  both playback-control UI tests. Longer synthetic fixtures exercise visibility
+  without the video ending before the controls can be tested.
+- A fresh signed Release build passed source/bundle validation and deep signature
+  verification. Physical test execution was blocked by the locked iPhone, and
+  the waiting run was cancelled. Device inventory confirmed 4.11.137 (137)
+  installed; automatic launch was blocked by the lock screen.
+- VoiceOver behavior was preserved in code but not manually exercised with
+  VoiceOver enabled. Live support-site deployment was not changed.

@@ -137,8 +137,66 @@ final class XPlayerUITests: XCTestCase {
         XCTAssertTrue(app.buttons["vlcPlayPause"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.sliders["Playback position"].exists)
         XCTAssertFalse(app.staticTexts["playbackError"].exists)
+        let playPause = app.buttons["vlcPlayPause"]
+        let hidden = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: playPause)
+        await fulfillment(of: [hidden], timeout: 6)
+        XCTAssertFalse(app.buttons["Done"].exists)
+        XCTAssertFalse(app.buttons["Next"].exists)
         let screenshot = XCTAttachment(screenshot: app.screenshot())
-        screenshot.name = "MKV playback"
+        screenshot.name = "MKV controls hidden"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        app.buttons["playerVideo"].tap()
+        XCTAssertTrue(playPause.waitForExistence(timeout: 3))
+        playPause.tap()
+        let paused = expectation(for: NSPredicate(format: "label == 'Play'"), evaluatedWith: playPause)
+        await fulfillment(of: [paused], timeout: 3)
+        let staysVisible = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: playPause)
+        staysVisible.isInverted = true
+        await fulfillment(of: [staysVisible], timeout: 4)
+        XCTAssertTrue(app.buttons["Done"].exists)
+        playPause.tap()
+        let hidesAgain = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: playPause)
+        await fulfillment(of: [hidesAgain], timeout: 6)
+        app.buttons["playerVideo"].tap()
+        app.buttons["Done"].tap()
+        XCTAssertTrue(app.navigationBars["Library"].waitForExistence(timeout: 5))
+    }
+
+    @MainActor func testNativePlaybackHidesAndRestoresAppControls() async throws {
+        let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "controls", withExtension: "mp4"))
+        let server = try VideoHTTPServer(files: ["/controls.mp4": Data(contentsOf: fixture)])
+        defer { server.stop() }
+        let ready = expectation(description: "Native controls UI fixture ready")
+        server.start { ready.fulfill() }
+        await fulfillment(of: [ready], timeout: 5)
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Library actions"].tap()
+        app.buttons["Open Network Video"].tap()
+        let field = app.textFields["networkURL"]
+        XCTAssertTrue(field.waitForExistence(timeout: 5))
+        field.tap()
+        field.typeText("http://127.0.0.1:\(try XCTUnwrap(server.port))/controls.mp4")
+        app.buttons["Play"].tap()
+        XCTAssertTrue(app.buttons["Done"].waitForExistence(timeout: 5))
+        let hidden = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: app.buttons["Done"])
+        await fulfillment(of: [hidden], timeout: 6)
+        XCTAssertFalse(app.buttons["Next"].exists)
+        let transportHidden = expectation(for: NSPredicate(format: "exists == false OR hittable == false"), evaluatedWith: app.buttons["Play/Pause"])
+        await fulfillment(of: [transportHidden], timeout: 8)
+        app.otherElements["nativeVideo"].tap()
+        XCTAssertTrue(app.buttons["Done"].waitForExistence(timeout: 3))
+        let pause = app.buttons["Play/Pause"]
+        XCTAssertTrue(pause.waitForExistence(timeout: 3))
+        if pause.label.lowercased().contains("pause") { pause.tap() }
+        let paused = expectation(for: NSPredicate(format: "label == 'Play'"), evaluatedWith: pause)
+        await fulfillment(of: [paused], timeout: 3)
+        let staysVisible = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: app.buttons["Done"])
+        staysVisible.isInverted = true
+        await fulfillment(of: [staysVisible], timeout: 4)
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "Native controls restored and paused"
         screenshot.lifetime = .keepAlways
         add(screenshot)
         app.buttons["Done"].tap()

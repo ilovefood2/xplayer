@@ -27,6 +27,7 @@
 		A3FE0E366E66800D362D4CD7 /* Support.md in Resources */ = {isa = PBXBuildFile; fileRef = 549DE771ECEF0CE37832A5A1 /* Support.md */; };
 		A88335CDAA0E48C526C9521C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653AC7D19150C69805B9408 /* AboutView.swift */; };
 		CD23427B0A8CDE6F890204B0 /* LibraryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAF32AE412EBBBA1E145780 /* LibraryStore.swift */; };
+		D1DE9DD0F56BAAF743106113 /* controls.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5EB1BF2AF54DC1EE28FC7370 /* controls.mp4 */; };
 		E48CC45D315861E5F1205A99 /* PlaybackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80FA91F15FBCD800AAAB587 /* PlaybackController.swift */; };
 		E789B22AD077CCF265DD3843 /* MobileVLCKit-LGPL.txt in Resources */ = {isa = PBXBuildFile; fileRef = D6D2307CA45323107A477AC7 /* MobileVLCKit-LGPL.txt */; };
 		F21FB06450C02A496ECB8443 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CA5B4B2D6CA1DC81FA48196 /* Assets.xcassets */; };
@@ -76,6 +77,7 @@
 		4FAF32AE412EBBBA1E145780 /* LibraryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStore.swift; sourceTree = "<group>"; };
 		51BD5905938CAC51EBB7BC87 /* PlaybackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackTests.swift; sourceTree = "<group>"; };
 		549DE771ECEF0CE37832A5A1 /* Support.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Support.md; sourceTree = "<group>"; };
+		5EB1BF2AF54DC1EE28FC7370 /* controls.mp4 */ = {isa = PBXFileReference; path = controls.mp4; sourceTree = "<group>"; };
 		6CA5B4B2D6CA1DC81FA48196 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7A25B2379F2AE2B7B88B0F28 /* clip.mp4 */ = {isa = PBXFileReference; path = clip.mp4; sourceTree = "<group>"; };
 		90A8BA13245045940F6CDC57 /* VideoHTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHTTPServer.swift; sourceTree = "<group>"; };
@@ -153,10 +155,19 @@
 			path = XPlayerTests;
 			sourceTree = "<group>";
 		};
+		9432B020E82A8C7F4E5B95FA /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				5EB1BF2AF54DC1EE28FC7370 /* controls.mp4 */,
+			);
+			path = Fixtures;
+			sourceTree = "<group>";
+		};
 		A42BDD28655373AF2C752E92 /* XPlayerUITests */ = {
 			isa = PBXGroup;
 			children = (
 				4475D9061D50F492B7A8DE06 /* XPlayerUITests.swift */,
+				9432B020E82A8C7F4E5B95FA /* Fixtures */,
 			);
 			path = XPlayerUITests;
 			sourceTree = "<group>";
@@ -313,6 +324,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				510E893C514B3C08755D837E /* clip.mkv in Resources */,
+				D1DE9DD0F56BAAF743106113 /* controls.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -510,7 +522,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 136;
+				CURRENT_PROJECT_VERSION = 137;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -529,7 +541,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.136;
+				MARKETING_VERSION = 4.11.137;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -577,7 +589,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 136;
+				CURRENT_PROJECT_VERSION = 137;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -590,7 +602,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.136;
+				MARKETING_VERSION = 4.11.137;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
