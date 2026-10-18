@@ -76,6 +76,7 @@ struct FolderScreen: View {
     @State private var selecting = false
     @State private var selected: Set<String> = []
     @State private var networkVideo = false
+    @State private var about = false
     @State private var adding: VideoEntry?
     private var title: String { folder.isEmpty ? "Library" : (folder as NSString).lastPathComponent }
     private var visible: [VideoEntry] {
@@ -86,29 +87,7 @@ struct FolderScreen: View {
     }
     var body: some View {
         List {
-            if folder.isEmpty && query.isEmpty {
-                Section {
-                    VStack(alignment: .leading, spacing: 10) {
-                        Label("YOUR VIDEO LIBRARY", systemImage: "play.rectangle.fill")
-                            .font(.caption.weight(.semibold)).foregroundStyle(.mint)
-                        Text("Everything in its place.").font(.title2.bold())
-                        Text("\(library.videos().count) videos · \(library.entries.filter(\.isFolder).count) folders")
-                            .font(.subheadline).foregroundStyle(.secondary)
-                    }.padding(.vertical, 10)
-                }
-            }
-            if visible.isEmpty {
-                ContentUnavailableView {
-                    Label(query.isEmpty ? "Add your videos" : "No matches", systemImage: "folder.badge.plus")
-                } description: {
-                    Text(query.isEmpty ? "Import videos or an entire folder from Files. Subfolders stay organized. MP4, M4V, MOV, and MKV are supported." : "Try another name.")
-                } actions: {
-                    if query.isEmpty {
-                        Button("Import Videos") { importSelection = .videos }.buttonStyle(.borderedProminent).foregroundStyle(.black)
-                        Button("Import Folder") { importSelection = .folder }
-                    }
-                }.listRowBackground(Color.clear)
-            } else {
+            if !visible.isEmpty {
                 Section {
                     ForEach(visible) { entry in
                         Group {
@@ -131,7 +110,9 @@ struct FolderScreen: View {
                         }
                         .contextMenu {
                             if !selecting {
-                                Button { play(entry) } label: { Label(entry.isFolder ? "Play Folder" : "Play", systemImage: "play.fill") }
+                                if entry.isFolder {
+                                    Button { play(entry) } label: { Label("Play Folder", systemImage: "play.fill") }
+                                }
                                 Button { adding = entry } label: { Label("Add to Playlist", systemImage: "text.badge.plus") }
                                 Button { moving = entry } label: { Label("Move to Folder", systemImage: "folder") }
                                 if entry.isFolder {
@@ -148,13 +129,20 @@ struct FolderScreen: View {
                             }
                         }
                     }
-                } header: { Text(query.isEmpty ? "Folders & videos" : "Search results") }
+                }
             }
-            if folder.isEmpty && query.isEmpty {
-                Section {
-                    Label("Add files with Files or Finder", systemImage: "externaldrive")
-                    Text("You can also copy folders into On My iPhone or On My iPad → xplayer → Videos. Long-press a video or folder to organize it or add it to a playlist.")
-                        .font(.footnote).foregroundStyle(.secondary)
+        }
+        .listStyle(.plain)
+        .overlay {
+            if visible.isEmpty {
+                ContentUnavailableView {
+                    Label(query.isEmpty ? "No videos yet" : "No results", systemImage: query.isEmpty ? "play.rectangle" : "magnifyingglass")
+                } description: {
+                    Text(query.isEmpty ? "Import videos or folders to get started." : "Try a different name.")
+                } actions: {
+                    if query.isEmpty {
+                        Button("Import Videos") { importSelection = .videos }.buttonStyle(.borderedProminent)
+                    }
                 }
             }
         }
@@ -164,11 +152,13 @@ struct FolderScreen: View {
         .onChange(of: query) { _, _ in selected.removeAll() }
         .onChange(of: library.entries) { _, entries in selected.formIntersection(Set(entries.map(\.path))) }
         .toolbar {
-            ToolbarItem(placement: .topBarLeading) {
-                Button(selecting ? "Done" : "Select") {
-                    selecting.toggle()
-                    selected.removeAll()
-                }.disabled(visible.isEmpty && !selecting)
+            ToolbarItem(placement: .topBarTrailing) {
+                if !visible.isEmpty || selecting {
+                    Button(selecting ? "Done" : "Select") {
+                        selecting.toggle()
+                        selected.removeAll()
+                    }
+                }
             }
             ToolbarItem(placement: .topBarTrailing) {
                 if selecting {
@@ -177,15 +167,18 @@ struct FolderScreen: View {
                     }.disabled(visible.isEmpty)
                 } else {
                     Menu {
-                        Button("Open Network Video", systemImage: "network") { networkVideo = true }
                         Button("Import Videos", systemImage: "square.and.arrow.down") { importSelection = .videos }
                         Button("Import Folder", systemImage: "folder.badge.plus") { importSelection = .folder }
                         Button("New Folder", systemImage: "folder.fill.badge.plus") {
                             nameRequest = NameRequest(title: "New Folder") { try library.createFolder($0, in: folder) }
                         }
+                        Divider()
+                        Button("Open Network Video", systemImage: "network") { networkVideo = true }
                         Button("Play All", systemImage: "play.fill") { playback.play(library.videos(in: folder).map(\.path), library: library) }
                             .disabled(library.videos(in: folder).isEmpty)
-                    } label: { Image(systemName: "plus.circle.fill").font(.title3) }.accessibilityLabel("Library actions")
+                        Divider()
+                        Button("Help & About", systemImage: "info.circle") { about = true }
+                    } label: { Image(systemName: "ellipsis.circle") }.accessibilityLabel("Library actions")
                 }
             }
             ToolbarItem(placement: .topBarTrailing) {
@@ -197,6 +190,7 @@ struct FolderScreen: View {
             }
         }
         .sheet(isPresented: $networkVideo) { NetworkVideoSheet() }
+        .sheet(isPresented: $about) { NavigationStack { AboutView() } }
         .sheet(item: $nameRequest) { NameSheet(request: $0) }
         .sheet(item: $importSelection, onDismiss: {
             let urls = selectedImportURLs
@@ -232,21 +226,34 @@ struct FolderScreen: View {
     }
 
     private func entryRow(_ entry: VideoEntry) -> some View {
-        HStack(spacing: 14) {
-            Image(systemName: entry.isFolder ? "folder.fill" : "play.rectangle.fill")
-                .font(.title2).foregroundStyle(entry.isFolder ? Color.mint : Color.secondary)
-                .frame(width: 42, height: 46)
-            VStack(alignment: .leading, spacing: 4) {
-                HStack {
-                    Text(entry.name).lineLimit(2).font(.body.weight(.medium))
-                    if library.favorites.contains(entry.path) {
-                        Image(systemName: "heart.fill").foregroundStyle(.mint).accessibilityLabel("Favorite")
-                    }
+        let count = entry.isFolder ? library.videos(in: entry.path).count : 0
+        return LibraryEntryRow(entry: entry,
+                        subtitle: entry.isFolder ? "\(count) video\(count == 1 ? "" : "s")" : (query.isEmpty ? nil : entry.parent),
+                        favorite: library.favorites.contains(entry.path))
+    }
+}
+
+struct LibraryEntryRow: View {
+    let entry: VideoEntry
+    let subtitle: String?
+    var favorite = false
+    var body: some View {
+        HStack(spacing: 12) {
+            Image(systemName: entry.isFolder ? "folder.fill" : "play.rectangle")
+                .font(.title3)
+                .foregroundStyle(entry.isFolder ? Color.teal : Color.secondary)
+                .frame(width: 28)
+            VStack(alignment: .leading, spacing: 3) {
+                Text(entry.name).font(.body).foregroundStyle(.primary).lineLimit(2)
+                if let subtitle, !subtitle.isEmpty {
+                    Text(subtitle).font(.caption).foregroundStyle(.secondary).lineLimit(1)
                 }
-                Text(entry.isFolder ? "\(library.videos(in: entry.path).count) videos" : (query.isEmpty ? entry.name.components(separatedBy: ".").last!.uppercased() : entry.parent))
-                    .font(.caption).foregroundStyle(.secondary)
             }
-        }.padding(.vertical, 3)
+            Spacer(minLength: 4)
+            if favorite {
+                Image(systemName: "heart.fill").font(.caption).foregroundStyle(Color.teal).accessibilityLabel("Favorite")
+            }
+        }.padding(.vertical, 6).frame(minHeight: 44)
     }
 }
 
@@ -280,25 +287,33 @@ struct FavoritesScreen: View {
     @EnvironmentObject private var playback: PlaybackController
     private var videos: [VideoEntry] { library.videos().filter { library.favorites.contains($0.path) } }
     var body: some View {
-        List {
+        List(videos) { entry in
+            Button { playback.play(videos.map(\.path), startingAt: entry.path, library: library) } label: {
+                LibraryEntryRow(entry: entry, subtitle: entry.parent)
+            }.tint(.primary)
+            .swipeActions {
+                Button("Unfavorite", systemImage: "heart.slash") { library.perform { try library.toggleFavorite(entry.path) } }
+                    .tint(.orange)
+            }
+            .contextMenu {
+                Button("Remove from Favorites", systemImage: "heart.slash") { library.perform { try library.toggleFavorite(entry.path) } }
+            }
+        }
+        .listStyle(.plain)
+        .overlay {
             if videos.isEmpty {
-                ContentUnavailableView("No favorites yet", systemImage: "heart", description: Text("Long-press a video in Library and choose Add to Favorites."))
-            } else {
-                Button("Play All", systemImage: "play.fill") { playback.play(videos.map(\.path), library: library) }
-                ForEach(videos) { entry in
-                    Button { playback.play(videos.map(\.path), startingAt: entry.path, library: library) } label: {
-                        Label(entry.path, systemImage: "heart.fill")
-                    }
-                    .swipeActions {
-                        Button("Unfavorite", systemImage: "heart.slash") { library.perform { try library.toggleFavorite(entry.path) } }
-                            .tint(.orange)
-                    }
-                    .contextMenu {
-                        Button("Remove from Favorites", systemImage: "heart.slash") { library.perform { try library.toggleFavorite(entry.path) } }
-                    }
+                ContentUnavailableView("No favorites yet", systemImage: "heart", description: Text("Long-press a video to add it here."))
+            }
+        }
+        .navigationTitle("Favorites")
+        .refreshable { library.refresh() }
+        .toolbar {
+            if videos.count > 1 {
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Play All", systemImage: "play.fill") { playback.play(videos.map(\.path), library: library) }.labelStyle(.iconOnly)
                 }
             }
-        }.navigationTitle("Favorites").refreshable { library.refresh() }
+        }
     }
 }
 
@@ -311,13 +326,13 @@ struct NetworkVideoSheet: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section("Video URL") {
+                Section {
                     TextField("https://host/video.mp4", text: $address)
                         .keyboardType(.URL).textInputAutocapitalization(.never).autocorrectionDisabled()
                         .accessibilityIdentifier("networkURL")
-                    Text("Open a direct HTTP or HTTPS video link or HLS stream (.m3u8). Website pages, SMB shares, and DRM-protected streams are not supported.")
-                    Text("The server receives your IP address and requested URL. HTTP is unencrypted; prefer HTTPS. Links are not saved.")
-                        .font(.footnote).foregroundStyle(.secondary)
+                        .submitLabel(.go).onSubmit(openVideo)
+                } header: { Text("Video link") } footer: {
+                    Text("Direct video or HLS link. Links aren’t saved. The server receives your IP address and URL; prefer HTTPS.")
                 }
                 if let error { Text(error).foregroundStyle(.red) }
             }
@@ -325,15 +340,17 @@ struct NetworkVideoSheet: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
                 ToolbarItem(placement: .confirmationAction) {
-                    Button("Play") {
-                        do { pendingURL = try PlaybackController.networkURL(address); dismiss() }
-                        catch { self.error = error.localizedDescription }
-                    }.disabled(address.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+                    Button("Play", action: openVideo).disabled(address.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
                 }
             }
         }
+        .presentationDetents([.medium, .large])
         .onDisappear {
             if let pendingURL { playback.playNetwork(pendingURL) }
         }
+    }
+    private func openVideo() {
+        do { pendingURL = try PlaybackController.networkURL(address); dismiss() }
+        catch { self.error = error.localizedDescription }
     }
 }

@@ -7,21 +7,14 @@ struct PlaylistsScreen: View {
     @State private var deleting: Playlist?
     var body: some View {
         List {
-            if library.playlists.isEmpty {
-                ContentUnavailableView {
-                    Label("Your next watch, lined up", systemImage: "text.badge.plus")
-                } description: { Text("Build playlists from any folder. Arrange your videos once, then play them in order.") }
-                actions: { Button("New Playlist", action: create).buttonStyle(.borderedProminent).foregroundStyle(.black) }
-                    .listRowBackground(Color.clear)
-            }
             ForEach(library.playlists) { playlist in
                 NavigationLink { PlaylistScreen(id: playlist.id) } label: {
-                    HStack(spacing: 14) {
-                        Image(systemName: "text.line.first.and.arrowtriangle.forward").font(.title2).foregroundStyle(.mint).frame(width: 42)
+                    HStack(spacing: 12) {
+                        Image(systemName: "play.rectangle.on.rectangle").font(.title3).foregroundStyle(Color.teal).frame(width: 28)
                         VStack(alignment: .leading, spacing: 4) {
-                            Text(playlist.name).font(.headline)
-                            Text("\(playlist.paths.count) videos").font(.caption).foregroundStyle(.secondary)
-                        }.padding(.vertical, 8)
+                            Text(playlist.name).font(.body)
+                            Text("\(playlist.paths.count) video\(playlist.paths.count == 1 ? "" : "s")").font(.caption).foregroundStyle(.secondary)
+                        }.padding(.vertical, 6)
                     }
                 }
                 .contextMenu {
@@ -32,8 +25,21 @@ struct PlaylistsScreen: View {
                 }
             }
         }
+        .listStyle(.plain)
+        .overlay {
+            if library.playlists.isEmpty {
+                ContentUnavailableView {
+                    Label("No playlists yet", systemImage: "play.rectangle.on.rectangle")
+                } description: { Text("Keep videos together in a playlist.") }
+                actions: { Button("New Playlist", action: create).buttonStyle(.borderedProminent).accessibilityLabel("Create playlist") }
+            }
+        }
         .navigationTitle("Playlists")
-        .toolbar { ToolbarItem(placement: .topBarTrailing) { Button(action: create) { Image(systemName: "plus.circle.fill").font(.title3) }.accessibilityLabel("Create playlist") } }
+        .toolbar {
+            if !library.playlists.isEmpty {
+                ToolbarItem(placement: .topBarTrailing) { Button(action: create) { Image(systemName: "plus") }.accessibilityLabel("Create playlist") }
+            }
+        }
         .sheet(item: $nameRequest) { NameSheet(request: $0) }
         .confirmationDialog("Delete playlist?", isPresented: Binding(get: { deleting != nil }, set: { if !$0 { deleting = nil } }), titleVisibility: .visible) {
             Button("Delete Playlist", role: .destructive) { if let deleting { library.perform { try library.deletePlaylist(deleting.id) } }; deleting = nil }
@@ -52,28 +58,15 @@ struct PlaylistScreen: View {
     var body: some View {
         List {
             if let playlist {
-                Section {
-                    Button { playback.play(playlist.paths, library: library) } label: { Label("Play All", systemImage: "play.fill").font(.headline) }
-                        .disabled(!playlist.paths.contains(where: library.exists))
-                    Button { adding = true } label: { Label("Add Videos", systemImage: "plus") }
-                }
-                if playlist.paths.isEmpty {
-                    ContentUnavailableView("No videos yet", systemImage: "text.badge.plus", description: Text("Add videos from your library. Playlists can combine videos from different folders."))
-                        .listRowBackground(Color.clear)
-                } else {
+                if !playlist.paths.isEmpty {
                     Section {
                         ForEach(Array(playlist.paths.enumerated()), id: \.offset) { offset, path in
                             Button { playback.play(playlist.paths, startingAt: path, library: library) } label: {
-                                HStack(spacing: 14) {
-                                    Text("\(offset + 1)").monospacedDigit().foregroundStyle(.secondary).frame(width: 24)
-                                    VStack(alignment: .leading, spacing: 4) {
-                                        Text((path as NSString).lastPathComponent).lineLimit(2)
-                                        Text(library.exists(path) ? ((path as NSString).deletingLastPathComponent.isEmpty ? "Library" : (path as NSString).deletingLastPathComponent) : "File missing — remove or import again")
-                                            .font(.caption).foregroundStyle(library.exists(path) ? Color.secondary : Color.orange)
-                                    }
-                                    Spacer()
-                                    Image(systemName: library.exists(path) ? "play.circle" : "exclamationmark.triangle").foregroundStyle(.secondary)
-                                }.padding(.vertical, 5)
+                                HStack {
+                                    LibraryEntryRow(entry: VideoEntry(path: path, isFolder: false),
+                                                    subtitle: library.exists(path) ? (path as NSString).deletingLastPathComponent : "File unavailable")
+                                    if !library.exists(path) { Image(systemName: "exclamationmark.triangle").foregroundStyle(.orange) }
+                                }
                             }.tint(.primary).disabled(!library.exists(path))
                         }
                         .onMove { source, destination in
@@ -86,17 +79,34 @@ struct PlaylistScreen: View {
                             paths.remove(atOffsets: offsets)
                             library.perform { try library.updatePlaylist(id, paths: paths) }
                         }
-                    } footer: { Text("Playback advances automatically. Tap Edit to reorder or remove videos. Removing an entry keeps its file in the library.") }
+                    }
                 }
+            }
+        }
+        .listStyle(.plain)
+        .overlay {
+            if playlist?.paths.isEmpty == true {
+                ContentUnavailableView {
+                    Label("No videos yet", systemImage: "play.rectangle")
+                } description: { Text("Choose videos from your library.") }
+                actions: { Button("Add Videos") { adding = true }.buttonStyle(.borderedProminent) }
             }
         }
         .navigationTitle(playlist?.name ?? "Playlist")
         .toolbar {
-            ToolbarItem(placement: .topBarTrailing) { EditButton() }
+            if playlist?.paths.isEmpty == false {
+                ToolbarItem(placement: .topBarTrailing) { EditButton() }
+            }
             ToolbarItem(placement: .topBarTrailing) {
-                Button("Rename", systemImage: "pencil") {
-                    if let playlist { nameRequest = NameRequest(title: "Rename Playlist", value: playlist.name) { try library.updatePlaylist(id, name: $0) } }
-                }
+                Menu {
+                    Button("Add Videos", systemImage: "plus") { adding = true }
+                    Button("Play All", systemImage: "play.fill") {
+                        if let playlist { playback.play(playlist.paths, library: library) }
+                    }.disabled(playlist?.paths.contains(where: library.exists) != true)
+                    Button("Rename", systemImage: "pencil") {
+                        if let playlist { nameRequest = NameRequest(title: "Rename Playlist", value: playlist.name) { try library.updatePlaylist(id, name: $0) } }
+                    }
+                } label: { Image(systemName: "ellipsis.circle") }.accessibilityLabel("Playlist actions")
             }
         }
         .sheet(isPresented: $adding) { VideoSelectionSheet(playlistID: id) }
@@ -123,8 +133,7 @@ struct VideoSelectionSheet: View {
                         if selected.contains(entry.path) { selected.remove(entry.path) } else { selected.insert(entry.path) }
                     } label: {
                         HStack {
-                            Label(entry.path, systemImage: "play.rectangle")
-                            Spacer()
+                            LibraryEntryRow(entry: entry, subtitle: entry.parent)
                             Image(systemName: selected.contains(entry.path) ? "checkmark.circle.fill" : "circle")
                         }
                     }.accessibilityAddTraits(selected.contains(entry.path) ? [.isSelected] : [])

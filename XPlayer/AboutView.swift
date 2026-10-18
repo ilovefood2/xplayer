@@ -4,7 +4,6 @@ import SwiftUI
 enum AppInformation {
     static let privacyURL = URL(string: "https://ilovefood2.github.io/xplayer/privacy.html")!
     static let supportURL = URL(string: "https://ilovefood2.github.io/xplayer/support.html")!
-    static let issuesURL = URL(string: "https://github.com/ilovefood2/xplayer/issues")!
     static let emailURL = URL(string: "mailto:a@ikel.ca?subject=xplayer%20support")!
 
     static func document(_ name: String, extension suffix: String = "md") throws -> String {
@@ -16,21 +15,13 @@ enum AppInformation {
 }
 
 struct AboutView: View {
+    @Environment(\.dismiss) private var dismiss
     private var version: String { Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "" }
     var body: some View {
         List {
-            Section {
-                VStack(alignment: .leading, spacing: 8) {
-                    Label("xplayer", systemImage: "play.rectangle.fill").font(.largeTitle.bold()).foregroundStyle(.mint)
-                    Text("Your videos. Your folders. Your playlists.").foregroundStyle(.secondary)
-                    Text("Version \(version)").font(.caption).foregroundStyle(.secondary)
-                }.padding(.vertical, 8)
-            }
             Section("Help") {
                 NavigationLink("Help & Supported Formats") { AppDocumentView(title: "Help", resource: "Support", website: AppInformation.supportURL) }
-                Link("Support Website", destination: AppInformation.supportURL)
                 Link("Email Support", destination: AppInformation.emailURL)
-                Link("Report a Problem", destination: AppInformation.issuesURL)
             }
             Section {
                 NavigationLink("Privacy Policy") { AppDocumentView(title: "Privacy Policy", resource: "PrivacyPolicy", website: AppInformation.privacyURL) }
@@ -40,9 +31,11 @@ struct AboutView: View {
             } header: {
                 Text("Privacy & Licenses")
             } footer: {
-                Text("xplayer does not upload your videos or playlists. No account, ads, or tracking. © 2026 xplayer contributors.")
+                Text("xplayer \(version)")
             }
-        }.navigationTitle("About")
+        }
+        .navigationTitle("About").navigationBarTitleDisplayMode(.inline)
+        .toolbar { ToolbarItem(placement: .confirmationAction) { Button("Done") { dismiss() } } }
     }
 }
 

@@ -2,7 +2,7 @@
 
 ## Import videos and folders
 
-Open Library and tap +, then Import Videos or Import Folder. Choose files from
+Open Library and open the … menu, then choose Import Videos or Import Folder. Choose files from
 the iOS Files picker. Folder imports preserve nested folders. Imports copy
 files, so enough free device storage is needed. Keep xplayer open until the
 copy finishes. Duplicate names receive a numbered suffix.
@@ -25,7 +25,7 @@ control audio. Video decoding may consume more battery than native playback.
 
 ## Folders and playlists
 
-Use + → New Folder to create a folder. Long-press a file or folder to move it
+Use … → New Folder to create a folder. Long-press a file or folder to move it
 or add its videos to a playlist. Folders can also be renamed. In Playlists,
 create a list, add videos from any folder, and use Edit to reorder or remove
 entries. Play All advances to the next video automatically.
@@ -50,7 +50,7 @@ it from Favorites without deleting the video. Favorites persist on your device.
 
 ## Network videos
 
-In Library, tap + → Open Network Video, enter a direct HTTP or HTTPS video URL,
+In Library, tap … → Open Network Video, enter a direct HTTP or HTTPS video URL,
 and tap Play. MP4, M4V, MOV, MKV, and HLS (.m3u8) streams are supported subject to their codecs.
 MKV uses MobileVLCKit; other links start with Apple playback and can fall back
 to MobileVLCKit if the system player cannot open them. Website pages, SMB shares, embedded username/password
@@ -68,9 +68,16 @@ Tap a video to play it. Playback controls hide automatically while playing;
 tap the video to show them again. MKV controls stay visible while paused,
 seeking, showing an error, or using VoiceOver. Apple playback retains its native
 transport controls; the app's title and queue buttons also hide during playback.
-Use Previous and Next for the playback queue. Done stops playback. Backgrounding
+Previous and Next appear when playing more than one video. The × button
+closes playback. Backgrounding
 the app pauses playback. If audio plays on another device, check the system
 audio output or any device-mirroring session on your Mac.
+
+## Help and appearance
+
+Library → … → Help & About contains the full guide, support, privacy, and
+licenses. Library, Favorites, and Playlists follow your device's light/dark
+appearance. The video player stays dark for viewing.
 
 ## Report a problem
 

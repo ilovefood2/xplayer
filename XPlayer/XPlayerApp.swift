@@ -16,11 +16,8 @@ struct XPlayerApp: App {
                     .tabItem { Label("Favorites", systemImage: "heart.fill") }
                 NavigationStack { PlaylistsScreen() }
                     .tabItem { Label("Playlists", systemImage: "text.line.first.and.arrowtriangle.forward") }
-                NavigationStack { AboutView() }
-                    .tabItem { Label("About", systemImage: "info.circle") }
             }
-            .tint(.mint)
-            .preferredColorScheme(.dark)
+            .tint(.teal)
             .environmentObject(library)
             .environmentObject(playback)
             .fullScreenCover(isPresented: $playback.isPresented) { PlayerScreen(playback: playback).preferredColorScheme(.dark).tint(.mint) }

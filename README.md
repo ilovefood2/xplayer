@@ -9,7 +9,7 @@ or analytics.
 - Select multiple library files or folders and confirm batch deletion.
 - Favorite videos and play direct HTTP/HTTPS video or HLS links.
 - Reorder playlists and play them in sequence using native playback controls.
-- Read privacy, support, and license documents offline in About.
+- Read privacy, support, and license documents offline in Library → … → Help & About.
 
 Apple codecs apply to native playback; MKV uses the bundled MobileVLCKit decoder.
 AVI imports, DRM-protected content, and website downloads are not supported.

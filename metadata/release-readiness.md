@@ -143,3 +143,24 @@ validation or review, and do not certify trademark or legal clearance.
   the final automatic launch, so it must be opened manually.
 - VoiceOver behavior was preserved in code but not manually exercised with
   VoiceOver enabled. Live support-site deployment was not changed.
+
+## Verification of 4.11.138
+
+- Simplified navigation to Library, Favorites, and Playlists. Help & About is
+  available in Library's … menu, with privacy and all bundled licenses retained.
+- Removed the Library welcome card, persistent instructions, duplicate format
+  captions, redundant list action rows, and single-video queue controls.
+- Library, favorite, and playlist videos now share compact rows. Main screens
+  use native light/dark appearance. MKV controls occupy one compact panel over
+  the video; multi-video queues retain Previous/Next and controls still auto-hide.
+- All 29 iPhone-simulator checks passed (22 core/resource and 7 UI), and all 7
+  iPad UI checks passed. They cover import/library persistence, selection/deletion,
+  playlist navigation, moved Help access, network playback, MKV, and auto-hide.
+- Populated light-mode iPhone and dark-mode iPad screens and the new MKV panel
+  were visually reviewed. QA screenshots use synthetic media only and are kept
+  outside Git in build/ui138/screenshots/.
+- The fresh signed Release app passed source/bundle and deep codesign validation.
+  Device inventory confirms 4.11.138 (138) installed on the physical iPhone.
+  The phone was locked, so the redesigned screens were not reviewed on-device.
+- Library data structures and persistence were not changed. App Store screenshots
+  and live support-site publication remain separate release tasks.

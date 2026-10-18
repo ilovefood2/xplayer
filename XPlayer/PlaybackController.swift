@@ -236,22 +236,26 @@ struct PlayerScreen: View {
         NavigationStack {
             VStack(spacing: 0) {
                 if playback.vlcPlayer != nil {
-                    VLCVideoPlayer(playback: playback)
-                        .overlay {
-                            Button {
-                                if controlsVisible && playing && !voiceOverEnabled {
-                                    withAnimation { controlsVisible = false }
-                                    interaction = UUID()
-                                } else { showControls() }
-                            } label: { Color.clear.contentShape(Rectangle()) }
-                            .buttonStyle(.plain)
-                            .accessibilityIdentifier("playerVideo")
-                            .accessibilityLabel(controlsVisible && playing && !voiceOverEnabled ? "Hide playback controls" : "Show playback controls")
-                        }
-                    if controlsVisible {
-                        VLCPlaybackControls(playback: playback) { editing in
-                            scrubbing = editing
-                            showControls()
+                    ZStack(alignment: .bottom) {
+                        VLCVideoPlayer(playback: playback)
+                            .overlay {
+                                Button {
+                                    if controlsVisible && playing && !voiceOverEnabled {
+                                        withAnimation { controlsVisible = false }
+                                        interaction = UUID()
+                                    } else { showControls() }
+                                } label: { Color.clear.contentShape(Rectangle()) }
+                                .buttonStyle(.plain)
+                                .accessibilityIdentifier("playerVideo")
+                                .accessibilityLabel(controlsVisible && playing && !voiceOverEnabled ? "Hide playback controls" : "Show playback controls")
+                            }
+                        if controlsVisible {
+                            VLCPlaybackControls(playback: playback) { editing in
+                                scrubbing = editing
+                                showControls()
+                            }
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 20))
+                            .padding(16)
                         }
                     }
                 } else {
@@ -260,7 +264,7 @@ struct PlayerScreen: View {
                 if let error = playback.error {
                     Text(error).font(.callout).foregroundStyle(.orange).padding().accessibilityIdentifier("playbackError")
                 }
-                if controlsVisible {
+                if controlsVisible && playback.vlcPlayer == nil && playback.paths.count > 1 {
                     HStack {
                         Button { playback.previous() } label: { Label("Previous", systemImage: "backward.end.fill") }
                             .disabled(playback.index == 0)
@@ -269,7 +273,7 @@ struct PlayerScreen: View {
                         Spacer()
                         Button { playback.next() } label: { Label("Next", systemImage: "forward.end.fill") }
                             .disabled(playback.index + 1 >= playback.paths.count)
-                    }.labelStyle(.iconOnly).font(.title2).padding(24)
+                    }.labelStyle(.iconOnly).font(.body).padding(.horizontal, 24).padding(.vertical, 12)
                 }
             }
             .ignoresSafeArea(edges: controlsVisible ? [] : .all)
@@ -278,7 +282,7 @@ struct PlayerScreen: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(controlsVisible ? .visible : .hidden, for: .navigationBar)
             .toolbar {
-                ToolbarItem(placement: .topBarLeading) { Button("Done") { playback.isPresented = false } }
+                ToolbarItem(placement: .topBarLeading) { Button("Done", systemImage: "xmark") { playback.isPresented = false }.labelStyle(.iconOnly) }
             }
         }
         .statusBarHidden(!controlsVisible)
@@ -325,18 +329,28 @@ struct VLCPlaybackControls: View {
             .disabled(!playback.vlcSeekable)
             .accessibilityLabel("Playback position")
             HStack {
-                Text(time(playback.vlcTime)).monospacedDigit()
+                Text(time(playback.vlcTime)).font(.caption).monospacedDigit().foregroundStyle(.secondary)
                 Spacer()
+                if playback.paths.count > 1 {
+                    Button { playback.previous(); onEditingChanged(false) } label: { Label("Previous", systemImage: "backward.end.fill") }
+                        .labelStyle(.iconOnly).frame(minWidth: 44, minHeight: 44).disabled(playback.index == 0)
+                }
                 Button(action: playback.toggleVLCPlayback) {
                     Label(playback.vlcIsPlaying ? "Pause" : "Play", systemImage: playback.vlcIsPlaying ? "pause.fill" : "play.fill")
-                }.labelStyle(.iconOnly).font(.title2).accessibilityIdentifier("vlcPlayPause")
+                }.labelStyle(.iconOnly).font(.title2).frame(minWidth: 44, minHeight: 44).accessibilityIdentifier("vlcPlayPause")
+                if playback.paths.count > 1 {
+                    Button { playback.next(); onEditingChanged(false) } label: { Label("Next", systemImage: "forward.end.fill") }
+                        .labelStyle(.iconOnly).frame(minWidth: 44, minHeight: 44).disabled(playback.index + 1 >= playback.paths.count)
+                }
                 Spacer()
-                Text(time(playback.vlcDuration)).monospacedDigit()
+                Text(time(playback.vlcDuration)).font(.caption).monospacedDigit().foregroundStyle(.secondary)
             }
         }.padding(.horizontal, 24).padding(.vertical, 12)
     }
     private func time(_ seconds: Double) -> String {
         let value = Int(seconds)
-        return String(format: "%d:%02d:%02d", value / 3600, value / 60 % 60, value % 60)
+        return value >= 3600
+            ? String(format: "%d:%02d:%02d", value / 3600, value / 60 % 60, value % 60)
+            : String(format: "%d:%02d", value / 60, value % 60)
     }
 }

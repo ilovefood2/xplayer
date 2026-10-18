@@ -9,10 +9,30 @@ final class XPlayerUITests: XCTestCase {
         tab.tap()
     }
 
+    @MainActor func testLibraryAndFavoritesLayout() {
+        let app = XCUIApplication()
+        app.launch()
+        let library = XCTAttachment(screenshot: app.screenshot())
+        library.name = "Library layout"
+        library.lifetime = .keepAlways
+        add(library)
+        selectTab("Favorites", in: app)
+        let favorites = XCTAttachment(screenshot: app.screenshot())
+        favorites.name = "Favorites layout"
+        favorites.lifetime = .keepAlways
+        add(favorites)
+        selectTab("Playlists", in: app)
+        let playlists = XCTAttachment(screenshot: app.screenshot())
+        playlists.name = "Playlists layout"
+        playlists.lifetime = .keepAlways
+        add(playlists)
+    }
+
     @MainActor func testPrivacyAndLicenseAreReadableInApp() throws {
         let app = XCUIApplication()
         app.launch()
-        selectTab("About", in: app)
+        app.buttons["Library actions"].tap()
+        app.buttons["Help & About"].tap()
         app.buttons["Privacy Policy"].tap()
         XCTAssertTrue(app.navigationBars["Privacy Policy"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["Your video library"].exists)
@@ -154,6 +174,10 @@ final class XPlayerUITests: XCTestCase {
         let staysVisible = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: playPause)
         staysVisible.isInverted = true
         await fulfillment(of: [staysVisible], timeout: 4)
+        let visibleControls = XCTAttachment(screenshot: app.screenshot())
+        visibleControls.name = "Compact MKV controls"
+        visibleControls.lifetime = .keepAlways
+        add(visibleControls)
         XCTAssertTrue(app.buttons["Done"].exists)
         playPause.tap()
         let hidesAgain = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: playPause)
