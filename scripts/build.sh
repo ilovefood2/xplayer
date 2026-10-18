@@ -14,6 +14,7 @@ XPLAYER_SIGNING=(CODE_SIGNING_ALLOWED=NO)
 if [[ -n "${XPLAYER_TEAM_ID:-}" ]]; then
   XPLAYER_SIGNING=(-allowProvisioningUpdates -allowProvisioningDeviceRegistration "DEVELOPMENT_TEAM=${XPLAYER_TEAM_ID}")
 fi
+python3 "${XPLAYER_ROOT}/scripts/fetch-vlckit.py"
 python3 "${XPLAYER_ROOT}/scripts/verify-release.py"
 
 case "${XPLAYER_MODE}" in

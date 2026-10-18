@@ -117,4 +117,32 @@ final class XPlayerUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Favorites"].waitForExistence(timeout: 5))
     }
 
+    @MainActor func testMatroskaNetworkPlaybackControls() async throws {
+        let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "clip", withExtension: "mkv"))
+        let server = try VideoHTTPServer(files: ["/clip.mkv": Data(contentsOf: fixture)])
+        defer { server.stop() }
+        let ready = expectation(description: "MKV UI fixture server ready")
+        server.start { ready.fulfill() }
+        await fulfillment(of: [ready], timeout: 5)
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Library actions"].tap()
+        app.buttons["Open Network Video"].tap()
+        let field = app.textFields["networkURL"]
+        XCTAssertTrue(field.waitForExistence(timeout: 5))
+        field.tap()
+        field.typeText("http://127.0.0.1:\(try XCTUnwrap(server.port))/clip.mkv")
+        app.buttons["Play"].tap()
+        XCTAssertTrue(app.navigationBars["clip.mkv"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.buttons["vlcPlayPause"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.sliders["Playback position"].exists)
+        XCTAssertFalse(app.staticTexts["playbackError"].exists)
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "MKV playback"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        app.buttons["Done"].tap()
+        XCTAssertTrue(app.navigationBars["Library"].waitForExistence(timeout: 5))
+    }
+
 }

@@ -11,8 +11,11 @@ The initial five Swift source files were written for a native SwiftUI/AVKit
 application in commit `7aec85288625af418fa799a79c8ba57229a881d0` of
 https://github.com/ilovefood2/splayerx. The implementation uses Apple APIs for
 file picking, local file storage, SwiftUI views, and AVKit playback. It does not
-compile, link, translate, or call the upstream Electron/Vue desktop player,
-FFmpeg, VLC, or SPlayer subtitle libraries.
+compile, translate, or call the upstream Electron/Vue desktop player or SPlayer
+subtitle implementation. Starting with 4.11.136, a separately downloaded,
+unmodified VideoLAN MobileVLCKit framework supplies MKV decoding under its own
+LGPL license. No decoder code is copied from the SPlayer desktop project;
+THIRD_PARTY_NOTICES.md records the pinned binary and corresponding sources.
 
 Filesystem fixes are recorded in `afd66ae2a` and `6560983d3` in that repository.
 The source snapshot before the xplayer release preparation is `6560983d3`.
@@ -27,7 +30,10 @@ video is a synthetic FFmpeg test pattern, not a third-party film or recording,
 and is included in the test bundle only. The HLS fixture `stream.ts` is eight
 repetitions of that same pattern, remuxed with
 `ffmpeg -stream_loop 7 -i clip.mp4 -c copy -f mpegts stream.ts`.
-FFmpeg is a fixture-generation tool, not an application dependency.
+The MKV test fixture is generated from FFmpeg's testsrc2 pattern and sine tone,
+encoded as H.264/AAC, and contains no personal or third-party media. The FFmpeg
+command-line executable is only a fixture-generation tool; codec code inside
+MobileVLCKit remains governed by its upstream licenses.
 
 ## What is not relicensed
 

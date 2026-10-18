@@ -1,18 +1,18 @@
 # xplayer
 
 A local and network video player for iPhone and iPad, with nested folders and saved
-playlists and favorites. Requires iOS 17 or later. Native SwiftUI / AVKit, with no third-party
-runtime dependencies, ads, accounts, or analytics.
+playlists and favorites. Requires iOS 17 or later. Native SwiftUI / AVKit with MobileVLCKit for MKV playback; no ads, accounts,
+or analytics.
 
-- Import MP4, M4V, and MOV videos or entire folder trees through Files.
+- Import MP4, M4V, MOV, and MKV videos or entire folder trees through Files.
 - Create, move, rename, and delete folders; combine videos into playlists.
 - Select multiple library files or folders and confirm batch deletion.
 - Favorite videos and play direct HTTP/HTTPS video or HLS links.
 - Reorder playlists and play them in sequence using native playback controls.
 - Read privacy, support, and license documents offline in About.
 
-The device's Apple codec support applies. MKV/AVI, DRM-protected files, website
-downloads, and desktop FFmpeg codecs are not included.
+Apple codecs apply to native playback; MKV uses the bundled MobileVLCKit decoder.
+AVI imports, DRM-protected content, and website downloads are not supported.
 
 ## Source and license
 
@@ -24,8 +24,12 @@ application is not an official SPlayer release.
 
 ## Build and test
 
-Requires Xcode, an iOS SDK, Python 3, and an installed simulator runtime.
-The checked-in Xcode project builds directly. XcodeGen is only needed after
+Requires Xcode, an iOS SDK, Python 3.12 or later, and an installed simulator runtime.
+Run `python3 scripts/fetch-vlckit.py` once before opening the checked-in Xcode
+project. The build script runs this automatically. It downloads the official
+MobileVLCKit 3.7.3 archive (~264 MB) and verifies the registry-published SHA-256.
+The extracted framework stays in ignored `Vendor/`. See
+[decoder build and licensing](docs/dependency-build.md). XcodeGen is only needed after
 editing `project.yml` (`xcodegen generate`). No Node dependencies are installed;
 `package.json` holds the version and optional npm command aliases.
 

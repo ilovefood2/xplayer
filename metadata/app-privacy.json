@@ -3,7 +3,9 @@
   "bundleIdentifier": "com.ilovefood2.xplayer",
   "dataCollectedByApp": false,
   "tracking": false,
-  "thirdPartySDKsBundled": [],
+  "thirdPartySDKsBundled": [
+    "MobileVLCKit 3.7.3 (VideoLAN media decoding; no analytics SDK)"
+  ],
   "requiredReasonAPIs": {
     "NSPrivacyAccessedAPICategoryFileTimestamp": [
       "C617.1",

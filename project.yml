@@ -8,13 +8,16 @@ settings:
     SWIFT_VERSION: "5.0"
     TARGETED_DEVICE_FAMILY: "1,2"
     CODE_SIGN_STYLE: Automatic
-    MARKETING_VERSION: "4.11.135"
-    CURRENT_PROJECT_VERSION: "135"
+    MARKETING_VERSION: "4.11.136"
+    CURRENT_PROJECT_VERSION: "136"
 targets:
   XPlayer:
     type: application
     platform: iOS
     sources: [XPlayer]
+    dependencies:
+      - framework: Vendor/MobileVLCKit/MobileVLCKit.xcframework
+        embed: true
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.ilovefood2.xplayer
@@ -33,7 +36,11 @@ targets:
   XPlayerUITests:
     type: bundle.ui-testing
     platform: iOS
-    sources: [XPlayerUITests]
+    sources:
+      - path: XPlayerUITests
+      - path: XPlayerTests/VideoHTTPServer.swift
+      - path: XPlayerTests/Fixtures/clip.mkv
+        buildPhase: resources
     dependencies:
       - target: XPlayer
     settings:

@@ -14,8 +14,14 @@ On My iPhone or On My iPad → xplayer → Videos. Pull down in Library to refre
 
 xplayer supports MP4, M4V, and MOV containers with codecs supported by your
 device's Apple media player, typically H.264 and HEVC. A filename extension
-alone does not guarantee its codec is supported. MKV, AVI, protected/DRM
-content, and arbitrary desktop codecs are not supported.
+alone does not guarantee its codec is supported. MKV (Matroska) files use the
+bundled MobileVLCKit decoder. Damaged files, unsupported codecs, and protected/DRM
+content may not play. AVI importing is not supported.
+
+Import MKV files or folders through Files, or copy them into xplayer → Videos.
+MKV videos work with playlists, favorites, moves, and batch deletion. The MKV
+player has Play/Pause and a seek slider for seekable files; system volume buttons
+control audio. Video decoding may consume more battery than native playback.
 
 ## Folders and playlists
 
@@ -45,8 +51,9 @@ it from Favorites without deleting the video. Favorites persist on your device.
 ## Network videos
 
 In Library, tap + → Open Network Video, enter a direct HTTP or HTTPS video URL,
-and tap Play. MP4, M4V, MOV, and HLS (.m3u8) streams work when their codecs are
-supported by Apple playback. Website pages, SMB shares, embedded username/password
+and tap Play. MP4, M4V, MOV, MKV, and HLS (.m3u8) streams are supported subject to their codecs.
+MKV uses MobileVLCKit; other links start with Apple playback and can fall back
+to MobileVLCKit if the system player cannot open them. Website pages, SMB shares, embedded username/password
 URLs, and DRM-protected streams are not supported. Links are not saved or imported.
 The server receives your IP address and URL; HTTP is unencrypted, so prefer HTTPS.
 

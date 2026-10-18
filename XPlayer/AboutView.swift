@@ -35,6 +35,7 @@ struct AboutView: View {
             Section {
                 NavigationLink("Privacy Policy") { AppDocumentView(title: "Privacy Policy", resource: "PrivacyPolicy", website: AppInformation.privacyURL) }
                 NavigationLink("Open Source License") { AppDocumentView(title: "MIT License", resource: "License", suffix: "txt") }
+                NavigationLink("MobileVLCKit License") { AppDocumentView(title: "LGPL 2.1", resource: "MobileVLCKit-LGPL", suffix: "txt") }
                 NavigationLink("Third-Party Notices") { AppDocumentView(title: "Notices", resource: "ThirdPartyNotices") }
             } header: {
                 Text("Privacy & Licenses")

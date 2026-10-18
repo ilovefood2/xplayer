@@ -96,3 +96,25 @@ validation or review, and do not certify trademark or legal clearance.
   served main/docs; deployment of these revised pages is not verified here.
   App Store submission still requires the existing account/name/privacy checks,
   updated screenshots, and review of the media transport exception.
+
+## Verification of 4.11.136
+
+- Added MKV importing/scanning and local/network playback through the official
+  MobileVLCKit 3.7.3 dynamic framework. MP4/MOV/HLS retain native AVKit playback;
+  network endpoints that native playback cannot open can fall back to VLCKit.
+- The binary is fetched from VideoLAN with the CocoaPods-published SHA-256 pin,
+  stays outside Git, and is embedded/signature-verified in the app. Full LGPL
+  text, notices, source links, and rebuild/relink instructions are included.
+- All 27 iPhone-simulator tests passed (22 core/resource + 5 UI). All 22 core
+  tests passed on the physical iPhone. The iPad MKV playback UI test also passed.
+- Tests exercise byte-preserving MKV folder import, decoded audio/video and
+  displayed pictures, pause/seek, mixed MKV/MP4 queue transitions, network MKV
+  with and without a filename extension, corrupt-media errors, and cleanup.
+- iPhone and iPad playback screenshots were visually checked. Synthetic MKV
+  fixtures use H.264/AAC; this is not exhaustive verification of every MKV codec,
+  HDR mode, subtitle format, or damaged-file variant. DRM remains unsupported.
+- A fresh signed Release app passed source/bundle checks and deep codesign
+  verification. Version 4.11.136 (136) was installed and launched on the physical
+  iPhone 16 Pro Max; device inventory confirmed the version. The app is ~99 MB.
+- Upstream decoder compilation was not run. App Store SDK privacy, licensing,
+  codec/export review and public-site deployment remain separate release checks.

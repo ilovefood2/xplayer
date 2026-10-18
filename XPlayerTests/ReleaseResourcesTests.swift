@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: MIT
 import XCTest
+import UniformTypeIdentifiers
 @testable import XPlayer
 
 final class ReleaseResourcesTests: XCTestCase {
@@ -7,7 +8,9 @@ final class ReleaseResourcesTests: XCTestCase {
         XCTAssertTrue(try AppInformation.document("PrivacyPolicy").contains("does not upload"))
         XCTAssertTrue(try AppInformation.document("Support").contains("MP4, M4V, and MOV"))
         XCTAssertTrue(try AppInformation.document("License", extension: "txt").contains("MIT License"))
-        XCTAssertTrue(try AppInformation.document("ThirdPartyNotices").contains("no bundled third-party SDK"))
+        XCTAssertTrue(try AppInformation.document("ThirdPartyNotices").contains("MobileVLCKit 3.7.3"))
+        XCTAssertTrue(try AppInformation.document("MobileVLCKit-LGPL", extension: "txt").contains("GNU LESSER GENERAL PUBLIC LICENSE"))
+        XCTAssertTrue(UTType(filenameExtension: "mkv")?.conforms(to: .movie) == true)
         let url = try XCTUnwrap(Bundle.main.url(forResource: "PrivacyInfo", withExtension: "xcprivacy"))
         let data = try Data(contentsOf: url)
         let manifest = try XCTUnwrap(PropertyListSerialization.propertyList(from: data, format: nil) as? [String: Any])

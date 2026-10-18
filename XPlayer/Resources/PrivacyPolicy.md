@@ -27,6 +27,14 @@ unencrypted; prefer HTTPS. Local-server playback may prompt for Local Network
 permission. The app does not scan for servers. Network links are not saved in
 your library or a playback history; the system may temporarily buffer media.
 
+## Media decoding
+
+MKV playback uses the bundled VideoLAN MobileVLCKit library. Other network media
+may also use it when native playback cannot open the link. It decodes media on
+your device; xplayer does not add analytics, tracking, or a developer-operated
+media service. Network playback connects to the media source you choose as
+explained above. Decoder license and source information are in About.
+
 ## File providers and backups
 
 If you choose a file in iCloud Drive or another provider, that provider may

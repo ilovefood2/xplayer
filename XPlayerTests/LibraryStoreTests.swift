@@ -198,4 +198,18 @@ final class LibraryStoreTests: XCTestCase {
         XCTAssertThrowsError(try library.delete([VideoEntry(path: "", isFolder: true)]))
     }
 
+    @MainActor func testMatroskaImportPreservesBytesAndFolderPlacement() async throws {
+        let library = store()
+        let source = temporary.appendingPathComponent("Matroska")
+        try FileManager.default.createDirectory(at: source, withIntermediateDirectories: true)
+        let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "clip", withExtension: "mkv"))
+        try FileManager.default.copyItem(at: fixture, to: source.appendingPathComponent("sample.MKV"))
+        await library.importVideos([source])
+        XCTAssertEqual(library.notice, "Imported 1 video.")
+        XCTAssertEqual(library.videos().map(\.path), ["Matroska/sample.MKV"])
+        XCTAssertEqual(try Data(contentsOf: library.fileURL("Matroska/sample.MKV")), try Data(contentsOf: fixture))
+        try library.toggleFavorite("Matroska/sample.MKV")
+        XCTAssertEqual(store().favorites, ["Matroska/sample.MKV"])
+    }
+
 }

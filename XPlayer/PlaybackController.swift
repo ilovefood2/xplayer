@@ -1,10 +1,18 @@
 // SPDX-License-Identifier: MIT
 import AVKit
 import SwiftUI
+import MobileVLCKit
 
 @MainActor
-final class PlaybackController: ObservableObject {
+final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelegate {
     let player = AVPlayer()
+    let vlcVideoView = UIView()
+    @Published private(set) var vlcPlayer: VLCMediaPlayer?
+    @Published private(set) var vlcIsPlaying = false
+    @Published private(set) var vlcPosition: Float = 0
+    @Published private(set) var vlcTime: Double = 0
+    @Published private(set) var vlcDuration: Double = 0
+    @Published private(set) var vlcSeekable = false
     @Published var isPresented = false
     @Published private(set) var paths: [String] = []
     @Published private(set) var index = 0
@@ -67,6 +75,8 @@ final class PlaybackController: ObservableObject {
     private func loadCurrent() {
         removeObservers()
         player.pause()
+        player.replaceCurrentItem(with: nil)
+        stopVLC()
         error = nil
         guard paths.indices.contains(index) else { return }
         do {
@@ -76,12 +86,24 @@ final class PlaybackController: ObservableObject {
             if let remoteURL { url = remoteURL }
             else if let root { url = try LibraryFiles.url(paths[index], root: root) }
             else { return }
+            if url.pathExtension.lowercased() == "mkv" {
+                startVLC(url)
+                return
+            }
             let item = AVPlayerItem(url: url)
             failureObserver = item.observe(\.status, options: [.new]) { [weak self] item, _ in
                 guard item.status == .failed else { return }
                 let detail = item.error?.localizedDescription ?? "This video codec is not supported by iOS."
                 Task { @MainActor [weak self] in
                     guard self?.player.currentItem === item else { return }
+                    if let self, self.remoteURL != nil {
+                        // Extensionless network endpoints can serve Matroska too.
+                        self.player.pause()
+                        self.player.replaceCurrentItem(with: nil)
+                        self.removeObservers()
+                        self.startVLC(url)
+                        return
+                    }
                     self?.error = self?.remoteURL == nil
                         ? "Unable to play this video. \(detail) Try an H.264 or HEVC video in MP4, M4V, or MOV format."
                         : "Unable to play this network video. Check the direct link, server access, connection, and supported format. If it is on your local network, allow access in Settings."
@@ -104,9 +126,71 @@ final class PlaybackController: ObservableObject {
         failureObserver = nil
     }
 
-    func pause() { player.pause() }
+    private func startVLC(_ url: URL) {
+        let vlc = VLCMediaPlayer(options: ["--no-video-title-show", "--quiet", "--no-metadata-network-access"])
+        vlc.drawable = vlcVideoView
+        vlc.delegate = self
+        vlc.media = VLCMedia(url: url)
+        vlcPlayer = vlc
+        vlcIsPlaying = true
+        vlc.play()
+    }
+
+    private func stopVLC() {
+        let previous = vlcPlayer
+        vlcPlayer = nil
+        previous?.delegate = nil
+        previous?.stop()
+        previous?.drawable = nil
+        vlcIsPlaying = false
+        vlcPosition = 0
+        vlcTime = 0
+        vlcDuration = 0
+        vlcSeekable = false
+    }
+
+    nonisolated func mediaPlayerStateChanged(_ notification: Notification) {
+        guard let vlc = notification.object as? VLCMediaPlayer else { return }
+        let state = vlc.state
+        Task { @MainActor [weak self] in
+            guard let self, self.vlcPlayer === vlc else { return }
+            self.updateVLCProgress(vlc)
+            if state == .error {
+                self.error = "Unable to play this video. Check that the file or network link is accessible and is not damaged or DRM-protected."
+            } else if state == .ended { self.next() }
+        }
+    }
+
+    nonisolated func mediaPlayerTimeChanged(_ notification: Notification) {
+        guard let vlc = notification.object as? VLCMediaPlayer else { return }
+        Task { @MainActor [weak self] in
+            guard let self, self.vlcPlayer === vlc else { return }
+            self.updateVLCProgress(vlc)
+        }
+    }
+
+    private func updateVLCProgress(_ vlc: VLCMediaPlayer) {
+        vlcIsPlaying = vlc.isPlaying
+        vlcPosition = max(0, min(1, vlc.position))
+        vlcTime = max(0, Double(vlc.time.intValue) / 1000)
+        vlcDuration = max(0, Double(vlc.media?.length.intValue ?? 0) / 1000)
+        vlcSeekable = vlc.isSeekable
+    }
+
+    func toggleVLCPlayback() {
+        guard let vlcPlayer else { return }
+        if vlcPlayer.isPlaying { vlcPlayer.pause() } else { vlcPlayer.play() }
+    }
+
+    func seekVLC(to position: Float) {
+        guard let vlcPlayer, vlcPlayer.isSeekable, position.isFinite else { return }
+        vlcPlayer.position = max(0, min(1, position))
+    }
+
+    func pause() { player.pause(); vlcPlayer?.pause() }
 
     func stop() {
+        stopVLC()
         player.pause()
         player.replaceCurrentItem(with: nil)
         removeObservers()
@@ -130,7 +214,12 @@ struct PlayerScreen: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                NativeVideoPlayer(player: playback.player)
+                if playback.vlcPlayer != nil {
+                    VLCVideoPlayer(playback: playback)
+                    VLCPlaybackControls(playback: playback)
+                } else {
+                    NativeVideoPlayer(player: playback.player)
+                }
                 if let error = playback.error {
                     Text(error).font(.callout).foregroundStyle(.orange).padding().accessibilityIdentifier("playbackError")
                 }
@@ -153,5 +242,40 @@ struct PlayerScreen: View {
         }
         .onAppear { UIApplication.shared.isIdleTimerDisabled = true }
         .onDisappear { UIApplication.shared.isIdleTimerDisabled = false; playback.stop() }
+    }
+}
+
+struct VLCVideoPlayer: UIViewRepresentable {
+    let playback: PlaybackController
+    func makeUIView(context: Context) -> UIView { playback.vlcVideoView }
+    func updateUIView(_ view: UIView, context: Context) {}
+}
+
+struct VLCPlaybackControls: View {
+    @ObservedObject var playback: PlaybackController
+    @State private var scrubbing = false
+    @State private var position: Float = 0
+    var body: some View {
+        VStack(spacing: 12) {
+            Slider(value: Binding(get: { scrubbing ? position : playback.vlcPosition }, set: { position = $0 }), in: 0...1) { editing in
+                scrubbing = editing
+                if !editing { playback.seekVLC(to: position) }
+            }
+            .disabled(!playback.vlcSeekable)
+            .accessibilityLabel("Playback position")
+            HStack {
+                Text(time(playback.vlcTime)).monospacedDigit()
+                Spacer()
+                Button(action: playback.toggleVLCPlayback) {
+                    Label(playback.vlcIsPlaying ? "Pause" : "Play", systemImage: playback.vlcIsPlaying ? "pause.fill" : "play.fill")
+                }.labelStyle(.iconOnly).font(.title2).accessibilityIdentifier("vlcPlayPause")
+                Spacer()
+                Text(time(playback.vlcDuration)).monospacedDigit()
+            }
+        }.padding(.horizontal, 24).padding(.vertical, 12)
+    }
+    private func time(_ seconds: Double) -> String {
+        let value = Int(seconds)
+        return String(format: "%d:%02d:%02d", value / 3600, value / 60 % 60, value % 60)
     }
 }

@@ -43,6 +43,7 @@ struct ImportPicker: UIViewControllerRepresentable {
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
         var videoTypes: [UTType] = [.mpeg4Movie, .quickTimeMovie]
         if let m4v = UTType(filenameExtension: "m4v") { videoTypes.append(m4v) }
+        videoTypes.append(UTType(importedAs: "org.matroska.mkv", conformingTo: .movie))
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: folder ? [.folder] : videoTypes, asCopy: false)
         picker.allowsMultipleSelection = true
         picker.delegate = context.coordinator
@@ -100,7 +101,7 @@ struct FolderScreen: View {
                 ContentUnavailableView {
                     Label(query.isEmpty ? "Add your videos" : "No matches", systemImage: "folder.badge.plus")
                 } description: {
-                    Text(query.isEmpty ? "Import videos or an entire folder from Files. Subfolders stay organized. MP4, M4V, and MOV are supported." : "Try another name.")
+                    Text(query.isEmpty ? "Import videos or an entire folder from Files. Subfolders stay organized. MP4, M4V, MOV, and MKV are supported." : "Try another name.")
                 } actions: {
                     if query.isEmpty {
                         Button("Import Videos") { importSelection = .videos }.buttonStyle(.borderedProminent).foregroundStyle(.black)

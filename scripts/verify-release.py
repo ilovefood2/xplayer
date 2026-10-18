@@ -33,7 +33,7 @@ reasons = {item['NSPrivacyAccessedAPIType']: set(item['NSPrivacyAccessedAPITypeR
 check(reasons.get('NSPrivacyAccessedAPICategoryFileTimestamp') == {'C617.1', '3B52.1'}, 'File metadata reason declarations do not match the audited use.')
 check((ROOT / 'LICENSE').read_bytes() == (source / 'Resources/License.txt').read_bytes(), 'Bundled MIT license differs from the source license.')
 check((ROOT / 'THIRD_PARTY_NOTICES.md').read_bytes() == (source / 'Resources/ThirdPartyNotices.md').read_bytes(), 'Bundled third-party notices differ.')
-for name in ['PrivacyPolicy.md', 'Support.md', 'License.txt', 'ThirdPartyNotices.md']:
+for name in ['PrivacyPolicy.md', 'Support.md', 'License.txt', 'ThirdPartyNotices.md', 'MobileVLCKit-LGPL.txt']:
     text = (source / 'Resources' / name).read_text()
     check(len(text) > 100, f'Missing or incomplete document: {name}')
     check(not any(marker in text for marker in ['TODO', 'example.com', '<your', 'TBD']), f'Placeholder in public document: {name}')
@@ -55,10 +55,15 @@ if args.app:
     check(built.get('CFBundleIdentifier') == 'com.ilovefood2.xplayer', 'Built bundle identifier differs.')
     check(built.get('CFBundleDisplayName') == 'xplayer', 'Built display name differs.')
     check(built.get('CFBundleShortVersionString') == package['version'], 'Built application version differs.')
-    for name in ['PrivacyInfo.xcprivacy', 'PrivacyPolicy.md', 'Support.md', 'License.txt', 'ThirdPartyNotices.md']:
+    for name in ['PrivacyInfo.xcprivacy', 'PrivacyPolicy.md', 'Support.md', 'License.txt', 'ThirdPartyNotices.md', 'MobileVLCKit-LGPL.txt']:
         check((args.app / name).is_file(), f'Required resource absent from app: {name}')
-    check(not list(args.app.rglob('*.mp4')), 'Test video must not ship in the production app.')
-    check(not (args.app / 'Frameworks').exists(), 'Bundled frameworks need a fresh dependency/license audit.')
+    check(not any(list(args.app.rglob(pattern)) for pattern in ['*.mp4', '*.mkv', '*.ts']), 'Test media must not ship in the production app.')
+    frameworks = args.app / 'Frameworks'
+    check(frameworks.is_dir() and {p.name for p in frameworks.iterdir()} == {'MobileVLCKit.framework'}, 'Unexpected or missing bundled framework.')
+    vlc_info = frameworks / 'MobileVLCKit.framework/Info.plist'
+    if vlc_info.is_file():
+        check(plistlib.loads(vlc_info.read_bytes()).get('CFBundleIdentifier') == 'org.videolan.mobilevlckit', 'Unexpected decoder bundle identifier.')
+    check((args.app / 'MobileVLCKit-LGPL.txt').read_bytes() == (source / 'Resources/MobileVLCKit-LGPL.txt').read_bytes(), 'Decoder license differs from the bundled notice.')
 
 if args.check_urls:
     metadata = json.loads((ROOT / 'metadata/app-privacy.json').read_text())

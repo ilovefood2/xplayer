@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 import AVFoundation
 import Combine
-import Network
 import UIKit
+import MobileVLCKit
 import XCTest
 @testable import XPlayer
 
@@ -34,6 +34,87 @@ final class PlaybackTests: XCTestCase {
         XCTAssertNil(playback.player.currentItem)
         withExtendedLifetime(observation) {}
     }
+    @MainActor func testMatroskaDecodesAudioAndVideoSeeksAndAdvancesToMP4() async throws {
+        let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: temporary) }
+        let library = LibraryStore(root: temporary.appendingPathComponent("Videos"), metadata: temporary.appendingPathComponent("playlists.json"))
+        for ext in ["mkv", "mp4"] {
+            let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "clip", withExtension: ext))
+            try FileManager.default.copyItem(at: fixture, to: library.root.appendingPathComponent("clip." + ext))
+        }
+        library.refresh()
+        let playback = PlaybackController()
+        let window = try XCTUnwrap((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first)
+        playback.vlcVideoView.frame = window.bounds
+        window.addSubview(playback.vlcVideoView)
+        defer { playback.stop(); playback.vlcVideoView.removeFromSuperview() }
+        playback.play(["clip.mkv", "clip.mp4"], library: library)
+        let vlc = try XCTUnwrap(playback.vlcPlayer)
+        try await waitUntil { vlc.media?.statistics.decodedVideo ?? 0 > 0 && vlc.media?.statistics.decodedAudio ?? 0 > 0 && vlc.media?.statistics.displayedPictures ?? 0 > 0 && playback.vlcTime > 0 }
+        XCTAssertGreaterThan(vlc.videoSize.width, 0)
+        XCTAssertTrue(playback.vlcSeekable)
+        playback.pause()
+        try await waitUntil { !vlc.isPlaying }
+        playback.seekVLC(to: 0.65)
+        playback.toggleVLCPlayback()
+        try await waitUntil { playback.vlcTime > 3 }
+        let advanced = expectation(description: "MKV advanced to native MP4")
+        let observation = playback.$index.dropFirst().first { $0 == 1 }.sink { _ in advanced.fulfill() }
+        await fulfillment(of: [advanced], timeout: 15)
+        XCTAssertNil(playback.error)
+        XCTAssertNil(playback.vlcPlayer)
+        XCTAssertNotNil(playback.player.currentItem)
+        playback.previous()
+        XCTAssertNotNil(playback.vlcPlayer)
+        XCTAssertNil(playback.player.currentItem)
+        playback.stop()
+        XCTAssertNil(playback.vlcPlayer)
+        withExtendedLifetime(observation) {}
+    }
+
+    @MainActor func testNetworkMatroskaWithAndWithoutExtension() async throws {
+        let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "clip", withExtension: "mkv"))
+        let bytes = try Data(contentsOf: fixture)
+        let server = try VideoHTTPServer(files: ["/clip.mkv": bytes, "/download": bytes])
+        defer { server.stop() }
+        let ready = expectation(description: "Matroska HTTP server ready")
+        server.start { ready.fulfill() }
+        await fulfillment(of: [ready], timeout: 5)
+        let playback = PlaybackController()
+        let window = try XCTUnwrap((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first)
+        playback.vlcVideoView.frame = window.bounds
+        window.addSubview(playback.vlcVideoView)
+        defer { playback.stop(); playback.vlcVideoView.removeFromSuperview() }
+        for path in ["clip.mkv", "download"] {
+            playback.playNetwork(try PlaybackController.networkURL("http://127.0.0.1:\(try XCTUnwrap(server.port))/\(path)"))
+            try await waitUntil { playback.vlcPlayer?.media?.statistics.decodedVideo ?? 0 > 0 }
+            XCTAssertNil(playback.error)
+            playback.stop()
+        }
+    }
+
+    @MainActor func testDamagedMatroskaReportsAnErrorAndStops() async throws {
+        let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: temporary) }
+        let library = LibraryStore(root: temporary.appendingPathComponent("Videos"), metadata: temporary.appendingPathComponent("playlists.json"))
+        try Data("not a video".utf8).write(to: library.root.appendingPathComponent("broken.mkv"))
+        library.refresh()
+        let playback = PlaybackController()
+        defer { playback.stop() }
+        playback.play(["broken.mkv"], library: library)
+        try await waitUntil { playback.error != nil }
+        playback.stop()
+        XCTAssertNil(playback.vlcPlayer)
+    }
+
+    @MainActor private func waitUntil(_ condition: () -> Bool) async throws {
+        for _ in 0..<150 {
+            if condition() { return }
+            try await Task.sleep(for: .milliseconds(100))
+        }
+        XCTFail("Playback did not reach the expected state within 15 seconds")
+    }
+
     @MainActor func testNetworkURLValidationPreservesSignedQueries() throws {
         let address = "https://media.example.invalid/movie.mp4?token=a%2Fb&expires=123"
         XCTAssertEqual(try PlaybackController.networkURL(" \(address)\n").absoluteString, address)
@@ -93,53 +174,4 @@ final class PlaybackTests: XCTestCase {
         XCTAssertTrue((playback.player.currentItem?.asset as? AVURLAsset)?.url.isFileURL == true)
     }
 
-}
-
-// A loopback-only server exercises AVPlayer's real HTTP byte-range requests without an external service.
-private final class VideoHTTPServer {
-    private let listener: NWListener
-    private let files: [String: Data]
-    private let queue = DispatchQueue(label: "xplayer.tests.http")
-    var port: UInt16? { listener.port?.rawValue }
-    init(files: [String: Data]) throws {
-        self.files = files
-        let parameters = NWParameters.tcp
-        parameters.requiredLocalEndpoint = .hostPort(host: "127.0.0.1", port: .any)
-        listener = try NWListener(using: parameters)
-    }
-    func start(ready: @escaping () -> Void) {
-        listener.stateUpdateHandler = { if case .ready = $0 { ready() } }
-        listener.newConnectionHandler = { [weak self] connection in
-            guard let self else { connection.cancel(); return }
-            connection.start(queue: self.queue)
-            self.receive(connection, header: Data())
-        }
-        listener.start(queue: queue)
-    }
-    func stop() { listener.cancel() }
-    private func receive(_ connection: NWConnection, header: Data) {
-        connection.receive(minimumIncompleteLength: 1, maximumLength: 8192) { [weak self] bytes, _, complete, error in
-            guard let self, let bytes, error == nil else { connection.cancel(); return }
-            let header = header + bytes
-            guard header.count <= 16384 else { connection.cancel(); return }
-            guard let text = String(data: header, encoding: .utf8), text.contains("\r\n\r\n") else {
-                if complete { connection.cancel() } else { self.receive(connection, header: header) }
-                return
-            }
-            guard let target = text.components(separatedBy: "\r\n").first?.split(separator: " ").dropFirst().first,
-                  let path = URLComponents(string: String(target))?.path,
-                  let data = self.files[path] else { connection.cancel(); return }
-            let type = path.hasSuffix(".m3u8") ? "application/vnd.apple.mpegurl" : (path.hasSuffix(".ts") ? "video/mp2t" : "video/mp4")
-            let range = text.components(separatedBy: "\r\n").first { $0.lowercased().hasPrefix("range: bytes=") }
-            let values = range?.split(separator: "=", maxSplits: 1).last?.split(separator: "-", omittingEmptySubsequences: false)
-            let start = values?.first.flatMap { Int($0) } ?? 0
-            let end = min(values?.last.flatMap { Int($0) } ?? (data.count - 1), data.count - 1)
-            guard start >= 0, start <= end else { connection.cancel(); return }
-            let body = data.subdata(in: start..<(end + 1))
-            var response = "HTTP/1.1 \(range == nil ? "200 OK" : "206 Partial Content")\r\nContent-Type: \(type)\r\nAccept-Ranges: bytes\r\nContent-Length: \(body.count)\r\nConnection: close\r\n"
-            if range != nil { response += "Content-Range: bytes \(start)-\(end)/\(data.count)\r\n" }
-            response += "\r\n"
-            connection.send(content: Data(response.utf8) + body, completion: .contentProcessed { _ in connection.cancel() })
-        }
-    }
 }

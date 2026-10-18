@@ -15,8 +15,8 @@ download videos from websites, or share user content with other users.
 7. About contains offline privacy, support, MIT license, and third-party notices,
    plus public privacy/support links.
 
-Supported containers are MP4, M4V, and MOV; the device's AVKit codec support
-applies. Backgrounding pauses playback. File access is granted through the
+Supported containers are MP4, M4V, MOV, and MKV. MKV uses MobileVLCKit;
+other supported formats use native AVKit playback when possible. Backgrounding pauses playback. File access is granted through the
 system document picker; the app does not request Photo Library, camera,
 microphone, location, contacts, or tracking permissions. Local Network permission
 is requested by iOS when connecting to a user-entered local server URL.
@@ -44,3 +44,13 @@ This exception needs Apple's review; local validation does not establish approva
 
 Apple documents the media-specific exception at
 https://developer.apple.com/documentation/bundleresources/information-property-list/nsapptransportsecurity/nsallowsarbitraryloadsformedia.
+
+## MKV support in 4.11.136
+
+Import a Matroska (.mkv) file using Files, play it from Library or a playlist,
+and use Play/Pause or the seek slider. A synthetic H.264/AAC clip.mkv is in the
+test fixtures, not the shipped app. Direct network MKV URLs are supported too.
+MobileVLCKit 3.7.3 is embedded as an unmodified dynamic framework. Its license
+is readable offline in About, and source/build links are in Third-Party Notices.
+Review SDK privacy requirements and codec/export obligations before submission;
+build/test success is not App Store approval.
