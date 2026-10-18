@@ -24,7 +24,10 @@ was replaced before this extraction. The current icon was generated without a
 reference image; see AppIcon.md for the prompt and provenance. The upstream
 icon is not included in xplayer's source tree or application bundle. The test
 video is a synthetic FFmpeg test pattern, not a third-party film or recording,
-and is included in the test bundle only.
+and is included in the test bundle only. The HLS fixture `stream.ts` is eight
+repetitions of that same pattern, remuxed with
+`ffmpeg -stream_loop 7 -i clip.mp4 -c copy -f mpegts stream.ts`.
+FFmpeg is a fixture-generation tool, not an application dependency.
 
 ## What is not relicensed
 

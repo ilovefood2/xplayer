@@ -10,15 +10,44 @@ final class PlaybackController: ObservableObject {
     @Published private(set) var index = 0
     @Published var error: String?
     private var root: URL?
+    private var remoteURL: URL?
     private var endObserver: NSObjectProtocol?
     private var failureObserver: NSKeyValueObservation?
-    var title: String { paths.indices.contains(index) ? (paths[index] as NSString).lastPathComponent : "xplayer" }
+    var title: String {
+        if let remoteURL { return remoteURL.lastPathComponent.isEmpty ? "Network Video" : remoteURL.lastPathComponent }
+        return paths.indices.contains(index) ? (paths[index] as NSString).lastPathComponent : "xplayer"
+    }
 
     func play(_ paths: [String], startingAt path: String? = nil, library: LibraryStore) {
         self.paths = paths.filter(library.exists)
         guard !self.paths.isEmpty else { library.notice = "No playable files were found. Import videos into the library first."; return }
+        remoteURL = nil
         root = library.root
         index = path.flatMap { self.paths.firstIndex(of: $0) } ?? 0
+        isPresented = true
+        loadCurrent()
+    }
+
+    static func networkURL(_ address: String) throws -> URL {
+        let value = address.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !value.unicodeScalars.contains(where: { CharacterSet.controlCharacters.contains($0) }),
+              let components = URLComponents(string: value),
+              let scheme = components.scheme?.lowercased(), ["http", "https"].contains(scheme),
+              let host = components.host, !host.isEmpty,
+              components.user == nil, components.password == nil,
+              components.port.map({ (1...65535).contains($0) }) ?? true,
+              let url = components.url else {
+            throw LibraryError(message: "Enter a full HTTP or HTTPS video URL without an embedded username or password.")
+        }
+        return url
+    }
+
+    func playNetwork(_ url: URL) {
+        do { remoteURL = try Self.networkURL(url.absoluteString) }
+        catch { self.error = error.localizedDescription; return }
+        root = nil
+        paths = [url.absoluteString]
+        index = 0
         isPresented = true
         loadCurrent()
     }
@@ -39,17 +68,23 @@ final class PlaybackController: ObservableObject {
         removeObservers()
         player.pause()
         error = nil
-        guard let root, paths.indices.contains(index) else { return }
+        guard paths.indices.contains(index) else { return }
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
             try AVAudioSession.sharedInstance().setActive(true)
-            let item = AVPlayerItem(url: try LibraryFiles.url(paths[index], root: root))
+            let url: URL
+            if let remoteURL { url = remoteURL }
+            else if let root { url = try LibraryFiles.url(paths[index], root: root) }
+            else { return }
+            let item = AVPlayerItem(url: url)
             failureObserver = item.observe(\.status, options: [.new]) { [weak self] item, _ in
                 guard item.status == .failed else { return }
                 let detail = item.error?.localizedDescription ?? "This video codec is not supported by iOS."
                 Task { @MainActor [weak self] in
                     guard self?.player.currentItem === item else { return }
-                    self?.error = "Unable to play this video. \(detail) Try an H.264 or HEVC video in MP4, M4V, or MOV format."
+                    self?.error = self?.remoteURL == nil
+                        ? "Unable to play this video. \(detail) Try an H.264 or HEVC video in MP4, M4V, or MOV format."
+                        : "Unable to play this network video. Check the direct link, server access, connection, and supported format. If it is on your local network, allow access in Settings."
                 }
             }
             endObserver = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: item, queue: .main) { [weak self] _ in

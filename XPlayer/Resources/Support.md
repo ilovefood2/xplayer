@@ -24,9 +24,36 @@ or add its videos to a playlist. Folders can also be renamed. In Playlists,
 create a list, add videos from any folder, and use Edit to reorder or remove
 entries. Play All advances to the next video automatically.
 
-Moving files within xplayer updates playlists. If you move or rename a file
+Moving files within xplayer updates playlists and favorites. If you move or rename a file
 outside the app, remove its missing playlist entry and add the file again.
 Removing a playlist entry does not delete the video.
+
+## Select and delete multiple items
+
+Tap Select in Library or a folder, tap the files or folders you want to remove,
+and tap Delete Selected. Confirm Delete from Library to remove the local copies
+and their playlist/favorite references. Selected folders include all their
+contents. Cancel keeps the files. Select All applies to the visible results;
+changing the search clears the selection. Original imported files are unchanged.
+
+## Favorites
+
+Long-press a video and choose Add to Favorites. Open the Favorites tab to play
+individual favorites or Play All. Long-press a favorite or swipe it to remove
+it from Favorites without deleting the video. Favorites persist on your device.
+
+## Network videos
+
+In Library, tap + → Open Network Video, enter a direct HTTP or HTTPS video URL,
+and tap Play. MP4, M4V, MOV, and HLS (.m3u8) streams work when their codecs are
+supported by Apple playback. Website pages, SMB shares, embedded username/password
+URLs, and DRM-protected streams are not supported. Links are not saved or imported.
+The server receives your IP address and URL; HTTP is unencrypted, so prefer HTTPS.
+
+For a server on your Wi-Fi network, allow Local Network access when iOS asks.
+If playback fails, check the address, server access, network connection, and codec.
+An expired signed link needs a fresh URL. If local access was denied, enable it
+for xplayer in Settings. Network playback requires a reachable server.
 
 ## Playback
 

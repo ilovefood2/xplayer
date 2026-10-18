@@ -9,6 +9,12 @@ Create folders, move videos, and rename folders. You can also transfer files wit
 BUILD YOUR PLAYLISTS
 Combine videos from different folders into named playlists. Reorder or remove entries and play videos in sequence with previous and next controls.
 
+FAVORITES AND QUICK CLEANUP
+Mark videos as favorites and play them from the Favorites tab. Select multiple files or folders and confirm deletion of their local copies.
+
+OPEN NETWORK VIDEOS
+Play direct HTTP or HTTPS video links and HLS streams. Network playback requires a reachable server and supported codecs. Website pages, SMB shares, and DRM streams are not supported. Links are not saved; the server receives your IP address and requested URL. Prefer HTTPS.
+
 PRIVATE BY DESIGN
 No account, ads, or tracking SDKs. Your videos and playlists are stored locally and are not uploaded to the developer.
 

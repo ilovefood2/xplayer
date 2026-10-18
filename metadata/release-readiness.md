@@ -72,3 +72,27 @@ validation or review, and do not certify trademark or legal clearance.
 - https://developer.apple.com/documentation/bundleresources/app-privacy-configuration/nsprivacyaccessedapitypes/nsprivacyaccessedapitypereasons
 - https://www.gnu.org/licenses/gpl-faq.en.html#ReleaseUnderGPLAndNF
 - https://www.gnu.org/licenses/gpl-faq.en.html#MereAggregation
+
+## Verification of 4.11.135
+
+- Added multiple selection with confirmed batch deletion, persistent favorites,
+  and direct HTTP/HTTPS video and HLS playback.
+- Existing playlist arrays are read without modification and upgraded to the
+  combined playlist/favorites metadata on the next successful write.
+- Batch deletion stages selected files, updates metadata atomically, and restores
+  the files if staging or metadata writing fails. Parent/child selections are
+  deduplicated. Moves and deletion update favorite references too.
+- Physical iPhone: all 18 core/resource/playback tests passed, including the
+  aliased-container import regression and real loopback MP4/HLS playback.
+- Fresh iPhone simulator and iPad simulator: all 22 core and UI tests passed on
+  each. UI coverage includes deletion
+  cancellation/confirmation, persistence, invalid URLs, and network failure UI.
+- A fresh signed Release build passed bundle/resource validation and codesign
+  verification. Device inventory confirms xplayer 4.11.135 (135) installed on the
+  iPhone 16 Pro Max. Final automatic relaunch was blocked by the locked screen.
+- Network URLs are not persisted. HTTP support uses the AVFoundation-only ATS
+  exception; HTTPS is recommended. SMB, website extraction, and DRM are excluded.
+- Updated public-site sources are in this branch's docs/. GitHub Pages previously
+  served main/docs; deployment of these revised pages is not verified here.
+  App Store submission still requires the existing account/name/privacy checks,
+  updated screenshots, and review of the media transport exception.

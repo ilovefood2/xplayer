@@ -19,6 +19,11 @@ struct Playlist: Codable, Identifiable, Equatable {
     var paths: [String] = []
 }
 
+private struct LibraryMetadata: Codable {
+    var playlists: [Playlist]
+    var favorites: Set<String>
+}
+
 struct LibraryError: LocalizedError {
     let message: String
     var errorDescription: String? { message }
@@ -168,6 +173,7 @@ enum LibraryFiles {
 final class LibraryStore: ObservableObject {
     @Published private(set) var entries: [VideoEntry] = []
     @Published private(set) var playlists: [Playlist] = []
+    @Published private(set) var favorites: Set<String> = []
     @Published private(set) var isImporting = false
     @Published var notice: String?
     let root: URL
@@ -182,8 +188,18 @@ final class LibraryStore: ObservableObject {
             try fm.createDirectory(at: self.root, withIntermediateDirectories: true)
             try fm.createDirectory(at: self.metadata.deletingLastPathComponent(), withIntermediateDirectories: true)
             if fm.fileExists(atPath: self.metadata.path) {
-                do { playlists = try JSONDecoder().decode([Playlist].self, from: Data(contentsOf: self.metadata)) }
-                catch { metadataReadable = false; throw LibraryError(message: "Saved playlists could not be read. The original file has been preserved. \(error.localizedDescription)") }
+                do {
+                    let data = try Data(contentsOf: self.metadata)
+                    let decoder = JSONDecoder()
+                    if let legacy = try? decoder.decode([Playlist].self, from: data) {
+                        playlists = legacy
+                    } else {
+                        let saved = try decoder.decode(LibraryMetadata.self, from: data)
+                        playlists = saved.playlists
+                        favorites = saved.favorites
+                    }
+                }
+                catch { metadataReadable = false; throw LibraryError(message: "Saved playlists and favorites could not be read. The original file has been preserved. \(error.localizedDescription)") }
             }
         } catch { notice = error.localizedDescription }
         refresh()
@@ -201,12 +217,21 @@ final class LibraryStore: ObservableObject {
     func exists(_ path: String) -> Bool { entries.contains { $0.path == path && !$0.isFolder } }
     func fileURL(_ path: String) throws -> URL { try LibraryFiles.url(path, root: root) }
 
-    private func save(_ value: [Playlist]) throws {
-        guard metadataReadable else { throw LibraryError(message: "Playlist changes are disabled because the saved library could not be read. Restore playlists.json before editing.") }
+    private func save(_ value: [Playlist], favorites: Set<String>? = nil) throws {
+        guard metadataReadable else { throw LibraryError(message: "Library changes are disabled because the saved library could not be read. Restore playlists.json before editing.") }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        try encoder.encode(value).write(to: metadata, options: .atomic)
-        playlists = value
+        let saved = LibraryMetadata(playlists: value, favorites: favorites ?? self.favorites)
+        try encoder.encode(saved).write(to: metadata, options: .atomic)
+        playlists = saved.playlists
+        self.favorites = saved.favorites
+    }
+
+    func toggleFavorite(_ path: String) throws {
+        guard exists(path) else { throw LibraryError(message: "This video is no longer in the library.") }
+        var updated = favorites
+        if updated.contains(path) { updated.remove(path) } else { updated.insert(path) }
+        try save(playlists, favorites: updated)
     }
 
     @discardableResult func createPlaylist(_ name: String, paths: [String] = []) throws -> UUID {
@@ -252,16 +277,16 @@ final class LibraryStore: ObservableObject {
         let source = try fileURL(entry.path)
         let target = try fileURL(newPath)
         guard !FileManager.default.fileExists(atPath: target.path) else { throw LibraryError(message: "A file or folder with that name already exists.") }
-        var updated = playlists
-        for index in updated.indices {
-            updated[index].paths = updated[index].paths.map { path in
-                if path == entry.path { return newPath }
-                if entry.isFolder && path.hasPrefix(entry.path + "/") { return newPath + path.dropFirst(entry.path.count) }
-                return path
-            }
+        func relocated(_ path: String) -> String {
+            if path == entry.path { return newPath }
+            if entry.isFolder && path.hasPrefix(entry.path + "/") { return newPath + path.dropFirst(entry.path.count) }
+            return path
         }
+        var updated = playlists
+        for index in updated.indices { updated[index].paths = updated[index].paths.map(relocated) }
+        let updatedFavorites = Set(favorites.map(relocated))
         try FileManager.default.moveItem(at: source, to: target)
-        do { try save(updated) }
+        do { try save(updated, favorites: updatedFavorites) }
         catch {
             try FileManager.default.moveItem(at: target, to: source)
             throw error
@@ -269,21 +294,55 @@ final class LibraryStore: ObservableObject {
         refresh()
     }
 
-    func delete(_ entry: VideoEntry) throws {
-        let source = try fileURL(entry.path)
-        let staged = root.appendingPathComponent(".deleted-" + UUID().uuidString)
-        var updated = playlists
-        for index in updated.indices {
-            updated[index].paths.removeAll { $0 == entry.path || (entry.isFolder && $0.hasPrefix(entry.path + "/")) }
+    func delete(_ entry: VideoEntry) throws { try delete([entry]) }
+
+    func delete(_ requested: [VideoEntry]) throws {
+        guard !requested.isEmpty else { return }
+        // Use the current inventory, and stage each parent only once when search selects descendants too.
+        let paths = Set(requested.map(\.path))
+        guard !paths.contains(""), paths.allSatisfy({ path in entries.contains { $0.path == path } }) else {
+            throw LibraryError(message: "The selection changed. Refresh the library and select again.")
         }
-        try FileManager.default.moveItem(at: source, to: staged)
-        do { try save(updated) }
-        catch {
-            try FileManager.default.moveItem(at: staged, to: source)
+        let selected = entries.filter { entry in
+            paths.contains(entry.path) && !entries.contains {
+                $0.isFolder && paths.contains($0.path) && entry.path.hasPrefix($0.path + "/")
+            }
+        }
+        func removed(_ path: String) -> Bool {
+            selected.contains { path == $0.path || ($0.isFolder && path.hasPrefix($0.path + "/")) }
+        }
+        var updated = playlists
+        for index in updated.indices { updated[index].paths.removeAll(where: removed) }
+        var staged: [(source: URL, temporary: URL)] = []
+        do {
+            for entry in selected {
+                let source = try fileURL(entry.path)
+                let temporary = root.appendingPathComponent(".deleted-" + UUID().uuidString)
+                try FileManager.default.moveItem(at: source, to: temporary)
+                staged.append((source, temporary))
+            }
+            try save(updated, favorites: favorites.filter { !removed($0) })
+        } catch {
+            var rollbackErrors: [String] = []
+            for item in staged.reversed() {
+                do { try FileManager.default.moveItem(at: item.temporary, to: item.source) }
+                catch { rollbackErrors.append("\(item.source.lastPathComponent): \(error.localizedDescription)") }
+            }
+            refresh()
+            if !rollbackErrors.isEmpty {
+                throw LibraryError(message: "Deletion failed. Some files remain in hidden .deleted- folders for recovery. " + rollbackErrors.joined(separator: "\n"))
+            }
             throw error
         }
         defer { refresh() }
-        try FileManager.default.removeItem(at: staged)
+        var cleanupErrors: [String] = []
+        for item in staged {
+            do { try FileManager.default.removeItem(at: item.temporary) }
+            catch { cleanupErrors.append(error.localizedDescription) }
+        }
+        if !cleanupErrors.isEmpty {
+            throw LibraryError(message: "Removed from the library, but some storage could not be reclaimed: " + cleanupErrors.joined(separator: "\n"))
+        }
     }
 
     func importVideos(_ urls: [URL], into folder: String = "") async {

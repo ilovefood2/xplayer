@@ -39,7 +39,7 @@ p{margin:18px 0}footer{border-top:1px solid #254054;margin-top:48px;padding-top:
 def write_page(filename, title, body):
     page = f'''<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>{html.escape(title)} · xplayer</title><meta name="description" content="xplayer offline video player: privacy, support, and license information.">
+<title>{html.escape(title)} · xplayer</title><meta name="description" content="xplayer video player: privacy, support, and license information.">
 <link rel="icon" href="icon.png"><style>{STYLE}</style></head><body>
 <nav aria-label="Main navigation"><a href="index.html">xplayer</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a><a href="license.html">License</a></nav>
 <main>{body}</main><footer>© 2026 xplayer contributors · <a href="mailto:a@ikel.ca">a@ikel.ca</a> · <a href="https://github.com/ilovefood2/xplayer">Source code</a> · <a href="https://github.com/ilovefood2/xplayer/issues">Issues</a></footer>
@@ -48,8 +48,8 @@ def write_page(filename, title, body):
 
 write_page('index.html', 'Offline videos, organized', '''<img class="icon" src="icon.png" alt="xplayer app icon">
 <h1>Your videos.<br>Your folders.<br>Your playlists.</h1>
-<p>xplayer is a native offline video library for iPhone and iPad running iOS 17 or later.</p>
-<p>Import your own videos or folder trees from Files, organize them into folders, and create playlists that play in sequence.</p>
+<p>xplayer is a native local and network video player for iPhone and iPad running iOS 17 or later.</p>
+<p>Import your own videos or folder trees from Files, organize them into folders, and create playlists that play in sequence. Favorite videos, delete multiple items, or open a direct HTTP/HTTPS video or HLS link.</p>
 <p><strong>No account. No ads. No tracking SDKs.</strong> Your videos and playlists are stored locally and are not uploaded to the developer.</p>
 <p>Supports MP4, M4V, and MOV with the codecs available on your device. MKV, AVI, and protected/DRM content are not supported.</p>
 <p><a href="support.html">Read the user guide</a> or <a href="privacy.html">read the privacy policy</a>.</p>''')

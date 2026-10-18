@@ -1,8 +1,8 @@
 {
   "name": "xplayer-ios",
-  "version": "4.11.134",
+  "version": "4.11.135",
   "private": true,
-  "description": "An offline iPhone and iPad video library with folders and playlists",
+  "description": "An iPhone and iPad video player with folders, playlists, favorites, and network playback",
   "license": "MIT",
   "repository": {
     "type": "git",

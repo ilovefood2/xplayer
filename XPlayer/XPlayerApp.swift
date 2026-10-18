@@ -12,6 +12,8 @@ struct XPlayerApp: App {
             TabView {
                 NavigationStack { FolderScreen(folder: "") }
                     .tabItem { Label("Library", systemImage: "folder.fill") }
+                NavigationStack { FavoritesScreen() }
+                    .tabItem { Label("Favorites", systemImage: "heart.fill") }
                 NavigationStack { PlaylistsScreen() }
                     .tabItem { Label("Playlists", systemImage: "text.line.first.and.arrowtriangle.forward") }
                 NavigationStack { AboutView() }

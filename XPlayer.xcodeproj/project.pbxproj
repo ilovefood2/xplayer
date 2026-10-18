@@ -14,6 +14,7 @@
 		3EA32FCF0CF8C8ED7DC0D08B /* XPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F116935A655A1171FB88C5 /* XPlayerApp.swift */; };
 		495DCB609C785CF0805CBBBF /* LibraryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177D62AC15D24379180A2A42 /* LibraryViews.swift */; };
 		4FE3F73C69B62D2A5C5E1242 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = E4D0A792D65910FEBD9C7956 /* License.txt */; };
+		77B82C8C206BF4F264B68F64 /* stream.ts in Resources */ = {isa = PBXBuildFile; fileRef = 04FD6885E45D991CCF86073D /* stream.ts */; };
 		7890DC95312D9E7A643C0766 /* PlaybackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BD5905938CAC51EBB7BC87 /* PlaybackTests.swift */; };
 		944FA0223DF8F7C78BE8532C /* clip.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 7A25B2379F2AE2B7B88B0F28 /* clip.mp4 */; };
 		996B8546FAC585FC062B2F4D /* ThirdPartyNotices.md in Resources */ = {isa = PBXBuildFile; fileRef = 0218B0A16761F19D26D4D5D5 /* ThirdPartyNotices.md */; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		0218B0A16761F19D26D4D5D5 /* ThirdPartyNotices.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ThirdPartyNotices.md; sourceTree = "<group>"; };
+		04FD6885E45D991CCF86073D /* stream.ts */ = {isa = PBXFileReference; path = stream.ts; sourceTree = "<group>"; };
 		10D0C25E094FF06E930EB315 /* PlaylistViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViews.swift; sourceTree = "<group>"; };
 		13A9F9BFBA5E04E41F678DA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		177D62AC15D24379180A2A42 /* LibraryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViews.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				7A25B2379F2AE2B7B88B0F28 /* clip.mp4 */,
+				04FD6885E45D991CCF86073D /* stream.ts */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -249,6 +252,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				944FA0223DF8F7C78BE8532C /* clip.mp4 in Resources */,
+				77B82C8C206BF4F264B68F64 /* stream.ts in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,7 +439,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 134;
+				CURRENT_PROJECT_VERSION = 135;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -454,7 +458,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.134;
+				MARKETING_VERSION = 4.11.135;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -502,7 +506,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 134;
+				CURRENT_PROJECT_VERSION = 135;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -515,7 +519,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.134;
+				MARKETING_VERSION = 4.11.135;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

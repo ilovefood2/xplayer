@@ -1,11 +1,13 @@
 # xplayer
 
-An offline video library for iPhone and iPad, with nested folders and saved
-playlists. Requires iOS 17 or later. Native SwiftUI / AVKit, with no third-party
+A local and network video player for iPhone and iPad, with nested folders and saved
+playlists and favorites. Requires iOS 17 or later. Native SwiftUI / AVKit, with no third-party
 runtime dependencies, ads, accounts, or analytics.
 
 - Import MP4, M4V, and MOV videos or entire folder trees through Files.
 - Create, move, rename, and delete folders; combine videos into playlists.
+- Select multiple library files or folders and confirm batch deletion.
+- Favorite videos and play direct HTTP/HTTPS video or HLS links.
 - Reorder playlists and play them in sequence using native playback controls.
 - Read privacy, support, and license documents offline in About.
 

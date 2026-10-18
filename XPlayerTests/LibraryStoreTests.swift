@@ -137,4 +137,65 @@ final class LibraryStoreTests: XCTestCase {
         XCTAssertTrue(library.entries.isEmpty)
         XCTAssertTrue(try FileManager.default.contentsOfDirectory(atPath: library.root.path).isEmpty)
     }
+    @MainActor func testLegacyPlaylistsUpgradeAndFavoritesFollowMoves() throws {
+        let library = store()
+        try video("Trip/one.mp4", root: library.root)
+        try video("Trip2/two.mp4", root: library.root)
+        let legacy = Playlist(name: "Original", paths: ["Trip/one.mp4"])
+        try JSONEncoder().encode([legacy]).write(to: temporary.appendingPathComponent("playlists.json"))
+        let upgraded = store()
+        XCTAssertEqual(upgraded.playlists, [legacy])
+        try upgraded.toggleFavorite("Trip/one.mp4")
+        try upgraded.toggleFavorite("Trip2/two.mp4")
+        try upgraded.relocate(VideoEntry(path: "Trip", isFolder: true), to: "", name: "Holiday")
+        XCTAssertEqual(store().favorites, ["Holiday/one.mp4", "Trip2/two.mp4"])
+        XCTAssertEqual(store().playlists[0].paths, ["Holiday/one.mp4"])
+        try upgraded.toggleFavorite("Holiday/one.mp4")
+        XCTAssertEqual(store().favorites, ["Trip2/two.mp4"])
+        XCTAssertThrowsError(try upgraded.toggleFavorite("missing.mp4"))
+    }
+
+    @MainActor func testBatchDeleteDeduplicatesParentsAndPreservesUnselectedFiles() throws {
+        let library = store()
+        for path in ["Trip/one.mp4", "Trip2/two.mp4", "three.mov"] { try video(path, root: library.root) }
+        library.refresh()
+        try library.createPlaylist("All", paths: library.videos().map(\.path))
+        for entry in library.videos() { try library.toggleFavorite(entry.path) }
+        try library.delete([
+            VideoEntry(path: "Trip", isFolder: true), VideoEntry(path: "Trip/one.mp4", isFolder: false),
+            VideoEntry(path: "three.mov", isFolder: false), VideoEntry(path: "three.mov", isFolder: false)
+        ])
+        let reopened = store()
+        XCTAssertEqual(reopened.videos().map(\.path), ["Trip2/two.mp4"])
+        XCTAssertEqual(reopened.favorites, ["Trip2/two.mp4"])
+        XCTAssertEqual(reopened.playlists[0].paths, ["Trip2/two.mp4"])
+        XCTAssertFalse(try FileManager.default.contentsOfDirectory(atPath: library.root.path).contains { $0.hasPrefix(".deleted-") })
+    }
+
+    @MainActor func testBatchDeleteRollsBackAllFilesWhenMetadataWriteFails() throws {
+        let library = store()
+        for path in ["one.mp4", "two.mp4"] { try video(path, root: library.root) }
+        library.refresh()
+        try library.toggleFavorite("one.mp4")
+        let metadata = temporary.appendingPathComponent("playlists.json")
+        try FileManager.default.removeItem(at: metadata)
+        try FileManager.default.createDirectory(at: metadata, withIntermediateDirectories: false)
+        XCTAssertThrowsError(try library.delete(library.videos()))
+        XCTAssertEqual(library.videos().map(\.path), ["one.mp4", "two.mp4"])
+        XCTAssertEqual(library.favorites, ["one.mp4"])
+        for entry in library.videos() { XCTAssertEqual(try Data(contentsOf: library.fileURL(entry.path)), Data("test video bytes".utf8)) }
+    }
+
+    @MainActor func testBatchDeleteRollsBackWhenASelectedFileDisappears() throws {
+        let library = store()
+        for path in ["one.mp4", "two.mp4"] { try video(path, root: library.root) }
+        library.refresh()
+        try library.toggleFavorite("one.mp4")
+        try FileManager.default.removeItem(at: library.fileURL("two.mp4"))
+        XCTAssertThrowsError(try library.delete(library.videos()))
+        XCTAssertEqual(try Data(contentsOf: library.fileURL("one.mp4")), Data("test video bytes".utf8))
+        XCTAssertEqual(store().favorites, ["one.mp4"])
+        XCTAssertThrowsError(try library.delete([VideoEntry(path: "", isFolder: true)]))
+    }
+
 }

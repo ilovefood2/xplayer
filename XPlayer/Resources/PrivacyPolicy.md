@@ -4,9 +4,9 @@ Effective date: October 18, 2026
 
 ## Your video library
 
-xplayer is an offline video player. It copies the video files and folders you
+xplayer plays local videos and network links you choose. It copies the video files and folders you
 choose into its own storage on your device. Video names, folder paths, and
-playlist order are saved locally so the app can organize and play your files.
+playlist order, and favorites are saved locally so the app can organize and play your files.
 The app does not upload these files or library details to the developer.
 
 ## Data collection
@@ -17,6 +17,16 @@ developer. It does not access your contacts, location, microphone, or camera.
 It only accesses external files or folders you select through the system
 Files picker or explicitly open with the app.
 
+## Network playback
+
+When you enter a network video URL and tap Play, xplayer connects to that
+server and may follow its redirects to stream the media. The server receives
+your IP address and requested URL, including any access token in the link,
+and handles these requests under its own privacy policy. HTTP links are
+unencrypted; prefer HTTPS. Local-server playback may prompt for Local Network
+permission. The app does not scan for servers. Network links are not saved in
+your library or a playback history; the system may temporarily buffer media.
+
 ## File providers and backups
 
 If you choose a file in iCloud Drive or another provider, that provider may
@@ -26,9 +36,10 @@ diagnostics you choose to share are governed by their providers' policies.
 
 ## Keeping and deleting data
 
-Your imported files and playlists remain on your device until you delete them
+Your imported files, playlists, and favorites remain on your device until you delete them
 or delete the app. Long-press a file or folder in Library to delete the local
-copy. Deleting a playlist removes its list of entries but keeps the videos.
+copy, or tap Select to delete multiple items after confirmation. Removing a
+favorite keeps the video. Deleting a playlist removes its list of entries but keeps the videos.
 Deleting a local imported copy does not delete the file at its original
 source. Removing the app through iOS deletes its local app data; offloading an
 app may preserve data, according to iOS settings. Backups can have separate
