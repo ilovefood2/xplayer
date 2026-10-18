@@ -161,6 +161,10 @@ validation or review, and do not certify trademark or legal clearance.
   outside Git in build/ui138/screenshots/.
 - The fresh signed Release app passed source/bundle and deep codesign validation.
   Device inventory confirms 4.11.138 (138) installed on the physical iPhone.
-  The phone was locked, so the redesigned screens were not reviewed on-device.
+- Follow-up on October 18, 2026: all three selected UI checks passed on the
+  unlocked iPhone 16 Pro Max: main-screen layout/navigation, MKV controls, and
+  Help/privacy/license navigation. Captured Library, Favorites, and Playlists
+  layouts were visually reviewed; private device screenshots remain local.
+  The signed Release app was restored and successfully launched after testing.
 - Library data structures and persistence were not changed. App Store screenshots
   and live support-site publication remain separate release tasks.
