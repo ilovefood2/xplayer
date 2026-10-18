@@ -173,6 +173,36 @@ final class PlaybackTests: XCTestCase {
         }
     }
 
+
+    @MainActor func testFinderTransportStreamsDecodeAudioVideoAndSeek() async throws {
+        let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: temporary) }
+        let library = LibraryStore(root: temporary.appendingPathComponent("Documents"), metadata: temporary.appendingPathComponent("playlists.json"))
+        for ext in ["ts", "mts", "m2ts"] {
+            let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "finder", withExtension: ext == "ts" ? "ts" : "m2ts"))
+            try FileManager.default.copyItem(at: fixture, to: library.root.appendingPathComponent("Finder." + ext.uppercased()))
+        }
+        library.refresh()
+        let playback = PlaybackController()
+        let window = try XCTUnwrap((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first)
+        playback.vlcVideoView.frame = window.bounds
+        window.addSubview(playback.vlcVideoView)
+        defer { playback.stop(); playback.vlcVideoView.removeFromSuperview() }
+        for ext in ["ts", "mts", "m2ts"] {
+            playback.play(["Finder." + ext.uppercased()], library: library)
+            let vlc = try XCTUnwrap(playback.vlcPlayer)
+            try await waitUntil {
+                (vlc.media?.statistics.decodedVideo ?? 0) > 0 &&
+                (vlc.media?.statistics.decodedAudio ?? 0) > 0 &&
+                (vlc.media?.statistics.displayedPictures ?? 0) > 0 && playback.vlcSeekable
+            }
+            playback.seekVLC(to: 0.6)
+            try await waitUntil { playback.vlcTime > 2 }
+            XCTAssertNil(playback.error)
+            playback.stop()
+        }
+    }
+
     @MainActor private func waitUntil(_ condition: () -> Bool) async throws {
         for _ in 0..<150 {
             if condition() { return }

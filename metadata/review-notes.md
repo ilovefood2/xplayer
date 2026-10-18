@@ -15,7 +15,7 @@ download videos from websites, or share user content with other users.
 7. Library → … → Help & About contains offline privacy, support, MIT license, and third-party notices,
    plus public privacy/support links.
 
-Supported containers are MP4, M4V, MOV, MKV, AVI, and WebM. MKV, AVI, and WebM use MobileVLCKit;
+Supported containers are MP4, M4V, MOV, MKV, AVI, WebM, and MPEG-TS. MKV, AVI, WebM, and MPEG-TS use MobileVLCKit;
 other supported formats use native AVKit playback when possible. Backgrounding pauses playback. File access is granted through the
 system document picker; the app does not request Photo Library, camera,
 microphone, location, contacts, or tracking permissions. Local Network permission
@@ -62,3 +62,15 @@ file sharing or direct network URLs. They use the existing MobileVLCKit decoder
 and retain playback controls, playlists, and favorites. The framework version
 and license are unchanged; no DRM integration was added. Codec/patent and
 App Store distribution review remains separate from these functionality checks.
+
+## Finder sharing in 4.11.140
+
+The library now scans the app's Documents directory, which is Finder's file
+sharing destination. Existing Documents/Videos files stay in place and appear
+inside Videos. Legacy playlist/favorite references are backed up locally and
+prefixed once with Videos/ in metadata schema version 2. Metadata upgrade errors
+preserve the original and disable edits rather than binding references to a
+same-named Finder file. The system Inbox is excluded from the library.
+
+MPEG-TS (.ts, .mts, .m2ts) is enabled through MobileVLCKit. Wait for Finder copies
+to complete; reopen the app or pull to refresh when transfers occur while open.

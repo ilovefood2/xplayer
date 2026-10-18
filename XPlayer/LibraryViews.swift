@@ -41,10 +41,11 @@ struct ImportPicker: UIViewControllerRepresentable {
     let completion: ([URL]) -> Void
     func makeCoordinator() -> Coordinator { Coordinator(completion: completion) }
     func makeUIViewController(context: Context) -> UIDocumentPickerViewController {
-        var videoTypes: [UTType] = [.mpeg4Movie, .quickTimeMovie, .avi]
+        var videoTypes: [UTType] = [.mpeg4Movie, .quickTimeMovie, .avi, .mpeg2TransportStream]
         if let m4v = UTType(filenameExtension: "m4v") { videoTypes.append(m4v) }
         videoTypes.append(UTType(importedAs: "org.matroska.mkv", conformingTo: .movie))
         videoTypes.append(UTType(importedAs: "org.webmproject.webm", conformingTo: .movie))
+        videoTypes.append(UTType(importedAs: "public.avchd-mpeg-2-transport-stream", conformingTo: .mpeg2TransportStream))
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: folder ? [.folder] : videoTypes, asCopy: false)
         picker.allowsMultipleSelection = true
         picker.delegate = context.coordinator

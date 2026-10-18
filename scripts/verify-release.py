@@ -57,7 +57,7 @@ if args.app:
     check(built.get('CFBundleShortVersionString') == package['version'], 'Built application version differs.')
     for name in ['PrivacyInfo.xcprivacy', 'PrivacyPolicy.md', 'Support.md', 'License.txt', 'ThirdPartyNotices.md', 'MobileVLCKit-LGPL.txt']:
         check((args.app / name).is_file(), f'Required resource absent from app: {name}')
-    check(not any(list(args.app.rglob(pattern)) for pattern in ['*.mp4', '*.mkv', '*.ts', '*.avi', '*.webm']), 'Test media must not ship in the production app.')
+    check(not any(list(args.app.rglob(pattern)) for pattern in ['*.mp4', '*.mkv', '*.ts', '*.avi', '*.webm', '*.mts', '*.m2ts']), 'Test media must not ship in the production app.')
     frameworks = args.app / 'Frameworks'
     check(frameworks.is_dir() and {p.name for p in frameworks.iterdir()} == {'MobileVLCKit.framework'}, 'Unexpected or missing bundled framework.')
     vlc_info = frameworks / 'MobileVLCKit.framework/Info.plist'

@@ -4,7 +4,7 @@ IMPORT YOUR LIBRARY
 Choose videos or entire folders from Files, including supported file providers. Folder imports preserve nested folders and create local copies for offline playback.
 
 ORGANIZE BY FOLDER
-Create folders, move videos, and rename folders. You can also transfer files with Finder or the Files app.
+Create folders, move videos, and rename folders. You can also transfer videos directly to xplayer with Finder or the Files app; reopen the app or pull to refresh after the transfer.
 
 BUILD YOUR PLAYLISTS
 Combine videos from different folders into named playlists. Reorder or remove entries and play videos in sequence with previous and next controls.
@@ -19,4 +19,4 @@ PRIVATE BY DESIGN
 No account, ads, or tracking SDKs. Your videos and playlists are stored locally and are not uploaded to the developer.
 
 SUPPORTED FORMATS
-MP4, M4V, and MOV use Apple playback, typically H.264 or HEVC. MKV (Matroska), AVI, and WebM use the bundled MobileVLCKit decoder, with play/pause and seeking. Support depends on the encoded media; damaged files or unsupported codecs may not play. DRM-protected media is not supported. You provide your own video files; the app does not include a streaming catalog or download videos from websites.
+MP4, M4V, and MOV use Apple playback, typically H.264 or HEVC. MKV (Matroska), AVI, WebM, and MPEG-TS (.ts, .mts, .m2ts) use the bundled MobileVLCKit decoder, with play/pause and seeking. Support depends on the encoded media; damaged files or unsupported codecs may not play. DRM-protected media is not supported. You provide your own video files; the app does not include a streaming catalog or download videos from websites.

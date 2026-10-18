@@ -3,7 +3,7 @@
 ## MobileVLCKit 3.7.3 / libVLC
 
 xplayer includes the unmodified MobileVLCKit 3.7.3 dynamic framework from
-VideoLAN to decode Matroska (MKV), AVI, and WebM videos. Copyright © VideoLAN and the VLCKit,
+VideoLAN to decode Matroska (MKV), AVI, WebM, and MPEG-TS videos. Copyright © VideoLAN and the VLCKit,
 VLC, and contributing codec-library authors. MobileVLCKit and libVLC are
 licensed under the GNU Lesser General Public License, version 2.1 or later.
 Their code is not relicensed under xplayer's MIT license.

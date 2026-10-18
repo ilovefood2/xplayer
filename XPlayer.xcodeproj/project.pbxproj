@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A8739EAEFACF78A7D7CDDA9 /* finder.ts in Resources */ = {isa = PBXBuildFile; fileRef = DB2CBDCE3860552264CD54EE /* finder.ts */; };
 		113C00475C3A859EAAEBEB13 /* clip.mkv in Resources */ = {isa = PBXBuildFile; fileRef = F3A315C1F102C35A569FC2B5 /* clip.mkv */; };
 		13C9AD804B70BDCBE4962474 /* XPlayerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4475D9061D50F492B7A8DE06 /* XPlayerUITests.swift */; };
 		19370F8EB2BFE18AA1022627 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = A583B79A37F4D19894F41171 /* PrivacyInfo.xcprivacy */; };
@@ -29,6 +30,7 @@
 		9AD29850C7860F47E6375EBE /* MobileVLCKit.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B6D2E4D476A7E78B754019D /* MobileVLCKit.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A3FE0E366E66800D362D4CD7 /* Support.md in Resources */ = {isa = PBXBuildFile; fileRef = 549DE771ECEF0CE37832A5A1 /* Support.md */; };
 		A88335CDAA0E48C526C9521C /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B653AC7D19150C69805B9408 /* AboutView.swift */; };
+		AD7E6CB885002D6B997B5329 /* finder.m2ts in Resources */ = {isa = PBXBuildFile; fileRef = 545014A6BECDBC1705FE3AA8 /* finder.m2ts */; };
 		CD23427B0A8CDE6F890204B0 /* LibraryStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FAF32AE412EBBBA1E145780 /* LibraryStore.swift */; };
 		D1DE9DD0F56BAAF743106113 /* controls.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 5EB1BF2AF54DC1EE28FC7370 /* controls.mp4 */; };
 		D9C219AA5336F76D483A01C6 /* clip.webm in Resources */ = {isa = PBXBuildFile; fileRef = 1DB974E975D904784961DD64 /* clip.webm */; };
@@ -82,6 +84,7 @@
 		4DB87782A76CFA73E7FB25CB /* av1.webm */ = {isa = PBXFileReference; path = av1.webm; sourceTree = "<group>"; };
 		4FAF32AE412EBBBA1E145780 /* LibraryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStore.swift; sourceTree = "<group>"; };
 		51BD5905938CAC51EBB7BC87 /* PlaybackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackTests.swift; sourceTree = "<group>"; };
+		545014A6BECDBC1705FE3AA8 /* finder.m2ts */ = {isa = PBXFileReference; path = finder.m2ts; sourceTree = "<group>"; };
 		549DE771ECEF0CE37832A5A1 /* Support.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Support.md; sourceTree = "<group>"; };
 		5EB1BF2AF54DC1EE28FC7370 /* controls.mp4 */ = {isa = PBXFileReference; path = controls.mp4; sourceTree = "<group>"; };
 		6CA5B4B2D6CA1DC81FA48196 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -98,6 +101,7 @@
 		D6D2307CA45323107A477AC7 /* MobileVLCKit-LGPL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "MobileVLCKit-LGPL.txt"; sourceTree = "<group>"; };
 		D80FA91F15FBCD800AAAB587 /* PlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackController.swift; sourceTree = "<group>"; };
 		DA503BABDD8543D51F68B5EA /* LibraryStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStoreTests.swift; sourceTree = "<group>"; };
+		DB2CBDCE3860552264CD54EE /* finder.ts */ = {isa = PBXFileReference; path = finder.ts; sourceTree = "<group>"; };
 		E39A8FB179B3EEEFB222126A /* ReleaseResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseResourcesTests.swift; sourceTree = "<group>"; };
 		E42802D81AE239E03C92FBF8 /* PrivacyPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
 		E4D0A792D65910FEBD9C7956 /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 				F3A315C1F102C35A569FC2B5 /* clip.mkv */,
 				7A25B2379F2AE2B7B88B0F28 /* clip.mp4 */,
 				1DB974E975D904784961DD64 /* clip.webm */,
+				545014A6BECDBC1705FE3AA8 /* finder.m2ts */,
+				DB2CBDCE3860552264CD54EE /* finder.ts */,
 				04FD6885E45D991CCF86073D /* stream.ts */,
 				C921324F14BF19943AA54130 /* vp9.webm */,
 			);
@@ -330,6 +336,8 @@
 				113C00475C3A859EAAEBEB13 /* clip.mkv in Resources */,
 				944FA0223DF8F7C78BE8532C /* clip.mp4 in Resources */,
 				D9C219AA5336F76D483A01C6 /* clip.webm in Resources */,
+				AD7E6CB885002D6B997B5329 /* finder.m2ts in Resources */,
+				0A8739EAEFACF78A7D7CDDA9 /* finder.ts in Resources */,
 				77B82C8C206BF4F264B68F64 /* stream.ts in Resources */,
 				31BB2EEE592920D4CC5BD0EB /* vp9.webm in Resources */,
 			);
@@ -538,7 +546,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 139;
+				CURRENT_PROJECT_VERSION = 140;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -557,7 +565,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.139;
+				MARKETING_VERSION = 4.11.140;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -605,7 +613,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 139;
+				CURRENT_PROJECT_VERSION = 140;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -618,7 +626,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.139;
+				MARKETING_VERSION = 4.11.140;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

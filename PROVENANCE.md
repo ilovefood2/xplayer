@@ -67,3 +67,7 @@ and Vorbis; vp9.webm uses VP9 and Opus; av1.webm uses AV1 and Opus. Encoding too
 are not shipped in the app. AVI/WebM playback uses the same pinned, unmodified
 MobileVLCKit framework introduced for MKV; no additional runtime dependency
 or artwork from the SPlayer desktop project was imported.
+
+The Finder-sharing regression fixtures finder.ts and finder.m2ts are remuxes
+of the same synthetic clip: H.264/AAC in MPEG-TS and H.264/AC-3 in M2TS.
+No personal video is included in these fixtures or the application bundle.

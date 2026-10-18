@@ -20,6 +20,7 @@ struct Playlist: Codable, Identifiable, Equatable {
 }
 
 private struct LibraryMetadata: Codable {
+    var version: Int?
     var playlists: [Playlist]
     var favorites: Set<String>
 }
@@ -30,7 +31,7 @@ struct LibraryError: LocalizedError {
 }
 
 enum LibraryFiles {
-    static let extensions: Set<String> = ["mp4", "m4v", "mov", "mkv", "avi", "webm"]
+    static let extensions: Set<String> = ["mp4", "m4v", "mov", "mkv", "avi", "webm", "ts", "mts", "m2ts"]
 
     static func validName(_ raw: String) throws -> String {
         let name = raw.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -48,6 +49,9 @@ enum LibraryFiles {
         guard path.isEmpty || (!path.hasPrefix("/") && path.split(separator: "/").allSatisfy {
             $0 != ".." && $0 != "." && !$0.hasPrefix(".")
         }) else { throw LibraryError(message: "Invalid library path.") }
+        guard path.split(separator: "/").first?.lowercased() != "inbox" else {
+            throw LibraryError(message: "Inbox is managed by iOS. Import its videos using Files, or choose another folder name.")
+        }
         // Resolving a non-existent leaf does not reliably resolve its symlink parents.
         var componentURL = base
         for component in path.split(separator: "/") {
@@ -77,6 +81,7 @@ enum LibraryFiles {
             for item in items {
                 let values = try item.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey, .isRegularFileKey])
                 if values.isSymbolicLink == true { continue }
+                if folder.path.isEmpty && item.lastPathComponent.lowercased() == "inbox" { continue }
                 // Build relative paths from child names; iOS can rewrite absolute container URL prefixes.
                 let path = folder.path.isEmpty ? item.lastPathComponent : folder.path + "/" + item.lastPathComponent
                 if values.isDirectory == true {
@@ -93,14 +98,14 @@ enum LibraryFiles {
         }
     }
 
-    static func uniqueDestination(_ source: URL, in folder: URL) -> URL {
+    static func uniqueDestination(_ source: URL, in folder: URL, reservingInbox: Bool) -> URL {
         let fm = FileManager.default
         var target = folder.appendingPathComponent(source.lastPathComponent)
         let isFolder = (try? source.resourceValues(forKeys: [.isDirectoryKey]).isDirectory) == true
         let stem = isFolder ? source.lastPathComponent : source.deletingPathExtension().lastPathComponent
         let suffix = isFolder || source.pathExtension.isEmpty ? "" : "." + source.pathExtension
         var number = 2
-        while fm.fileExists(atPath: target.path) {
+        while fm.fileExists(atPath: target.path) || (reservingInbox && target.lastPathComponent.lowercased() == "inbox") {
             target = folder.appendingPathComponent("\(stem) (\(number))\(suffix)")
             number += 1
         }
@@ -108,7 +113,7 @@ enum LibraryFiles {
     }
 
     // Copies each selection atomically; a failed selection never leaves a partial video.
-    static func importVideos(_ sources: [URL], into folder: URL) -> String {
+    static func importVideos(_ sources: [URL], into folder: URL, reservingInbox: Bool = true) -> String {
         let fm = FileManager.default
         var imported = 0
         var skipped = 0
@@ -138,7 +143,7 @@ enum LibraryFiles {
                 if let coordinationError { throw coordinationError }
                 if let copyError { throw copyError }
                 if fm.fileExists(atPath: staging.path) {
-                    try fm.moveItem(at: staging, to: uniqueDestination(source, in: folder))
+                    try fm.moveItem(at: staging, to: uniqueDestination(source, in: folder, reservingInbox: reservingInbox))
                 }
                 imported += count
                 skipped += ignored
@@ -148,7 +153,7 @@ enum LibraryFiles {
             }
         }
         var summary = "Imported \(imported) video\(imported == 1 ? "" : "s")."
-        if skipped > 0 { summary += " Skipped \(skipped) unsupported files or links. Supported containers: MP4, M4V, MOV, MKV, AVI, WebM." }
+        if skipped > 0 { summary += " Skipped \(skipped) unsupported files or links. Supported containers: MP4, M4V, MOV, MKV, AVI, WebM, TS, MTS, M2TS." }
         if !failures.isEmpty { summary += "\n" + failures.joined(separator: "\n") }
         return summary
     }
@@ -182,7 +187,7 @@ final class LibraryStore: ObservableObject {
 
     init(root: URL? = nil, metadata: URL? = nil) {
         let fm = FileManager.default
-        self.root = root ?? fm.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("Videos")
+        self.root = root ?? fm.urls(for: .documentDirectory, in: .userDomainMask)[0]
         self.metadata = metadata ?? fm.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("playlists.json")
         do {
             try fm.createDirectory(at: self.root, withIntermediateDirectories: true)
@@ -191,17 +196,39 @@ final class LibraryStore: ObservableObject {
                 do {
                     let data = try Data(contentsOf: self.metadata)
                     let decoder = JSONDecoder()
+                    let saved: LibraryMetadata
                     if let legacy = try? decoder.decode([Playlist].self, from: data) {
-                        playlists = legacy
+                        saved = LibraryMetadata(version: nil, playlists: legacy, favorites: [])
                     } else {
-                        let saved = try decoder.decode(LibraryMetadata.self, from: data)
+                        saved = try decoder.decode(LibraryMetadata.self, from: data)
+                    }
+                    guard saved.version == nil || saved.version == 2 else {
+                        throw LibraryError(message: "This library was saved by an unsupported app version.")
+                    }
+                    if saved.version == nil {
+                        // Earlier versions stored every reference relative to Documents/Videos.
+                        let updated = saved.playlists.map { playlist in
+                            var playlist = playlist
+                            playlist.paths = playlist.paths.map { "Videos/" + $0 }
+                            return playlist
+                        }
+                        let backup = self.metadata.appendingPathExtension("before-documents-root")
+                        if fm.fileExists(atPath: backup.path) {
+                            guard try Data(contentsOf: backup) == data else {
+                                throw LibraryError(message: "A different saved-library backup already exists. Both files have been preserved.")
+                            }
+                        } else {
+                            try data.write(to: backup, options: .withoutOverwriting)
+                        }
+                        try save(updated, favorites: Set(saved.favorites.map { "Videos/" + $0 }))
+                    } else {
                         playlists = saved.playlists
                         favorites = saved.favorites
                     }
                 }
-                catch { metadataReadable = false; throw LibraryError(message: "Saved playlists and favorites could not be read. The original file has been preserved. \(error.localizedDescription)") }
+                catch { metadataReadable = false; throw LibraryError(message: "Saved playlists and favorites could not be loaded or upgraded. The original data has been preserved. \(error.localizedDescription)") }
             }
-        } catch { notice = error.localizedDescription }
+        } catch { metadataReadable = false; notice = error.localizedDescription }
         refresh()
     }
 
@@ -221,7 +248,7 @@ final class LibraryStore: ObservableObject {
         guard metadataReadable else { throw LibraryError(message: "Library changes are disabled because the saved library could not be read. Restore playlists.json before editing.") }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        let saved = LibraryMetadata(playlists: value, favorites: favorites ?? self.favorites)
+        let saved = LibraryMetadata(version: 2, playlists: value, favorites: favorites ?? self.favorites)
         try encoder.encode(saved).write(to: metadata, options: .atomic)
         playlists = saved.playlists
         self.favorites = saved.favorites
@@ -261,7 +288,8 @@ final class LibraryStore: ObservableObject {
     func deletePlaylist(_ id: UUID) throws { try save(playlists.filter { $0.id != id }) }
 
     func createFolder(_ name: String, in parent: String) throws {
-        let url = try fileURL(parent).appendingPathComponent(LibraryFiles.validName(name))
+        let name = try LibraryFiles.validName(name)
+        let url = try fileURL(parent.isEmpty ? name : parent + "/" + name)
         guard !FileManager.default.fileExists(atPath: url.path) else { throw LibraryError(message: "A file or folder with that name already exists.") }
         try FileManager.default.createDirectory(at: url, withIntermediateDirectories: false)
         refresh()
@@ -355,7 +383,7 @@ final class LibraryStore: ObservableObject {
             isImporting = true
             defer { isImporting = false }
             notice = await Task.detached(priority: .userInitiated) {
-                LibraryFiles.importVideos(urls, into: target)
+                LibraryFiles.importVideos(urls, into: target, reservingInbox: folder.isEmpty)
             }.value
             refresh()
         } catch { notice = error.localizedDescription }

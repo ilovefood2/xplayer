@@ -29,7 +29,7 @@ your library or a playback history; the system may temporarily buffer media.
 
 ## Media decoding
 
-MKV, AVI, and WebM playback use the bundled VideoLAN MobileVLCKit library. Other network media
+MKV, AVI, WebM, and MPEG-TS playback use the bundled VideoLAN MobileVLCKit library. Other network media
 may also use it when native playback cannot open the link. It decodes media on
 your device; xplayer does not add analytics, tracking, or a developer-operated
 media service. Network playback connects to the media source you choose as

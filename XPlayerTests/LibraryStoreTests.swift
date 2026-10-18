@@ -137,21 +137,25 @@ final class LibraryStoreTests: XCTestCase {
         XCTAssertTrue(library.entries.isEmpty)
         XCTAssertTrue(try FileManager.default.contentsOfDirectory(atPath: library.root.path).isEmpty)
     }
+
     @MainActor func testLegacyPlaylistsUpgradeAndFavoritesFollowMoves() throws {
         let library = store()
-        try video("Trip/one.mp4", root: library.root)
-        try video("Trip2/two.mp4", root: library.root)
+        try video("Videos/Trip/one.mp4", root: library.root)
+        try video("Videos/Trip2/two.mp4", root: library.root)
         let legacy = Playlist(name: "Original", paths: ["Trip/one.mp4"])
-        try JSONEncoder().encode([legacy]).write(to: temporary.appendingPathComponent("playlists.json"))
+        let original = try JSONEncoder().encode([legacy])
+        try original.write(to: temporary.appendingPathComponent("playlists.json"))
         let upgraded = store()
-        XCTAssertEqual(upgraded.playlists, [legacy])
-        try upgraded.toggleFavorite("Trip/one.mp4")
-        try upgraded.toggleFavorite("Trip2/two.mp4")
-        try upgraded.relocate(VideoEntry(path: "Trip", isFolder: true), to: "", name: "Holiday")
-        XCTAssertEqual(store().favorites, ["Holiday/one.mp4", "Trip2/two.mp4"])
+        XCTAssertEqual(upgraded.playlists[0].id, legacy.id)
+        XCTAssertEqual(upgraded.playlists[0].paths, ["Videos/Trip/one.mp4"])
+        XCTAssertEqual(try Data(contentsOf: temporary.appendingPathComponent("playlists.json.before-documents-root")), original)
+        try upgraded.toggleFavorite("Videos/Trip/one.mp4")
+        try upgraded.toggleFavorite("Videos/Trip2/two.mp4")
+        try upgraded.relocate(VideoEntry(path: "Videos/Trip", isFolder: true), to: "", name: "Holiday")
+        XCTAssertEqual(store().favorites, ["Holiday/one.mp4", "Videos/Trip2/two.mp4"])
         XCTAssertEqual(store().playlists[0].paths, ["Holiday/one.mp4"])
         try upgraded.toggleFavorite("Holiday/one.mp4")
-        XCTAssertEqual(store().favorites, ["Trip2/two.mp4"])
+        XCTAssertEqual(store().favorites, ["Videos/Trip2/two.mp4"])
         XCTAssertThrowsError(try upgraded.toggleFavorite("missing.mp4"))
     }
 
@@ -237,6 +241,102 @@ final class LibraryStoreTests: XCTestCase {
         let reopened = store()
         XCTAssertEqual(reopened.favorites, Set(paths))
         XCTAssertEqual(reopened.playlists[0].paths, paths)
+    }
+
+    @MainActor func testDefaultRootIsFinderDocumentsFolder() {
+        let expected = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        XCTAssertEqual(LibraryStore().root.resolvingSymlinksInPath().standardizedFileURL,
+                       expected.resolvingSymlinksInPath().standardizedFileURL)
+    }
+
+    @MainActor func testFinderRootFilesAndLegacyReferencesCoexistWithoutMovingVideos() throws {
+        let documents = temporary.appendingPathComponent("Documents")
+        let metadata = temporary.appendingPathComponent("playlists.json")
+        try video("Videos/same.mp4", root: documents)
+        try video("same.mp4", root: documents)
+        let originalVideo = Data("existing library video".utf8)
+        try originalVideo.write(to: documents.appendingPathComponent("Videos/same.mp4"))
+        let old = Playlist(name: "Keep", paths: ["same.mp4"])
+        struct OldMetadata: Encodable { let playlists: [Playlist]; let favorites: [String] }
+        let originalMetadata = try JSONEncoder().encode(OldMetadata(playlists: [old], favorites: ["same.mp4"]))
+        try originalMetadata.write(to: metadata)
+        try originalMetadata.write(to: metadata.appendingPathExtension("before-documents-root"))
+        let library = LibraryStore(root: documents, metadata: metadata)
+        XCTAssertNil(library.notice)
+        XCTAssertEqual(library.playlists[0].paths, ["Videos/same.mp4"])
+        XCTAssertEqual(library.favorites, ["Videos/same.mp4"])
+        XCTAssertEqual(try Data(contentsOf: library.fileURL(library.playlists[0].paths[0])), originalVideo)
+        XCTAssertEqual(try Data(contentsOf: library.fileURL("same.mp4")), Data("test video bytes".utf8))
+        try video("finder.TS", root: documents)
+        try video("From Finder/Nested/clip.M2TS", root: documents)
+        library.refresh()
+        XCTAssertTrue(library.exists("finder.TS"))
+        XCTAssertTrue(library.exists("From Finder/Nested/clip.M2TS"))
+        try library.createPlaylist("Finder", paths: ["finder.TS"])
+        let reopened = LibraryStore(root: documents, metadata: metadata)
+        XCTAssertEqual(reopened.playlists.map(\.paths), [["Videos/same.mp4"], ["finder.TS"]])
+        XCTAssertEqual(reopened.favorites, ["Videos/same.mp4"])
+        XCTAssertEqual(try Data(contentsOf: metadata.appendingPathExtension("before-documents-root")), originalMetadata)
+        XCTAssertEqual(try Data(contentsOf: documents.appendingPathComponent("Videos/same.mp4")), originalVideo)
+        let saved = try XCTUnwrap(JSONSerialization.jsonObject(with: Data(contentsOf: metadata)) as? [String: Any])
+        XCTAssertEqual(saved["version"] as? Int, 2)
+    }
+
+    @MainActor func testMigrationFailurePreservesMetadataAndBlocksReferenceEdits() throws {
+        let documents = temporary.appendingPathComponent("Documents")
+        let metadata = temporary.appendingPathComponent("playlists.json")
+        try video("Videos/same.mp4", root: documents)
+        try video("same.mp4", root: documents)
+        let original = try JSONEncoder().encode([Playlist(name: "Old", paths: ["same.mp4"])])
+        try original.write(to: metadata)
+        let backup = Data("existing backup must not be overwritten".utf8)
+        try backup.write(to: metadata.appendingPathExtension("before-documents-root"))
+        let library = LibraryStore(root: documents, metadata: metadata)
+        XCTAssertNotNil(library.notice)
+        XCTAssertTrue(library.playlists.isEmpty)
+        XCTAssertTrue(library.favorites.isEmpty)
+        XCTAssertThrowsError(try library.createPlaylist("New"))
+        XCTAssertThrowsError(try library.delete(VideoEntry(path: "same.mp4", isFolder: false)))
+        XCTAssertEqual(try Data(contentsOf: metadata), original)
+        XCTAssertEqual(try Data(contentsOf: metadata.appendingPathExtension("before-documents-root")), backup)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: documents.appendingPathComponent("same.mp4").path))
+    }
+
+    @MainActor func testUnknownMetadataVersionIsPreserved() throws {
+        let metadata = temporary.appendingPathComponent("playlists.json")
+        let original = Data(#"{"version":999,"playlists":[],"favorites":[]}"#.utf8)
+        try original.write(to: metadata)
+        let library = store()
+        XCTAssertNotNil(library.notice)
+        XCTAssertThrowsError(try library.createPlaylist("New"))
+        XCTAssertEqual(try Data(contentsOf: metadata), original)
+    }
+
+    @MainActor func testSystemInboxIsExcludedButCanBeImportedAndNestedInboxIsAllowed() async throws {
+        let library = store()
+        try video("Inbox/incoming.mp4", root: library.root)
+        try video("Trip/Inbox/clip.mp4", root: library.root)
+        library.refresh()
+        XCTAssertFalse(library.entries.contains { $0.path == "Inbox" })
+        XCTAssertFalse(library.exists("Inbox/incoming.mp4"))
+        XCTAssertTrue(library.exists("Trip/Inbox/clip.mp4"))
+        XCTAssertThrowsError(try library.fileURL("Inbox/incoming.mp4"))
+        XCTAssertThrowsError(try library.createFolder("inbox", in: ""))
+        await library.importVideos([library.root.appendingPathComponent("Inbox/incoming.mp4")])
+        XCTAssertEqual(library.notice, "Imported 1 video.")
+        XCTAssertTrue(library.exists("incoming.mp4"))
+    }
+
+    @MainActor func testImportedInboxFolderIsRenamedOnlyAtLibraryRoot() async throws {
+        let library = store()
+        let source = temporary.appendingPathComponent("Source/Inbox")
+        try video("clip.mp4", root: source)
+        await library.importVideos([source])
+        XCTAssertEqual(library.notice, "Imported 1 video.")
+        XCTAssertTrue(library.exists("Inbox (2)/clip.mp4"))
+        try library.createFolder("Trip", in: "")
+        await library.importVideos([source], into: "Trip")
+        XCTAssertTrue(library.exists("Trip/Inbox/clip.mp4"))
     }
 
 }

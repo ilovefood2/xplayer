@@ -7,18 +7,25 @@ the iOS Files picker. Folder imports preserve nested folders. Imports copy
 files, so enough free device storage is needed. Keep xplayer open until the
 copy finishes. Duplicate names receive a numbered suffix.
 
-You can also use Files or Finder file sharing to copy videos into
-On My iPhone or On My iPad → xplayer → Videos. Pull down in Library to refresh.
+In Finder, select your iPhone or iPad → Files → xplayer and drag videos or
+folders into the app. In Files, use On My iPhone or On My iPad → xplayer.
+These transfers appear directly in Library. Wait for the transfer to finish,
+then reopen xplayer or pull down in Library to refresh if it is already open.
+
+Videos imported with earlier versions remain in the Videos folder. Open that
+folder in Library to find them; their playlists and favorites are preserved.
+The update does not move your video files. The system-managed Inbox folder is
+hidden; use Import Videos or Import Folder to copy content from it.
 
 ## Supported videos
 
 xplayer supports MP4, M4V, and MOV containers with codecs supported by your
 device's Apple media player, typically H.264 and HEVC. A filename extension
-alone does not guarantee its codec is supported. MKV (Matroska), AVI, and WebM files use the
+alone does not guarantee its codec is supported. MKV (Matroska), AVI, WebM, and MPEG-TS (.ts, .mts, .m2ts) files use the
 bundled MobileVLCKit decoder. Damaged files, unsupported codecs, and protected/DRM
 content may not play. DRM-protected playback is not supported.
 
-Import MKV, AVI, or WebM files or folders through Files, or copy them into xplayer → Videos.
+Import these files or folders through Files, or copy them into xplayer using Finder.
 These videos work with playlists, favorites, moves, and batch deletion. Their
 player has Play/Pause and a seek slider for seekable files; system volume buttons
 control audio. Video decoding may consume more battery than native playback.
@@ -55,8 +62,8 @@ it from Favorites without deleting the video. Favorites persist on your device.
 ## Network videos
 
 In Library, tap … → Open Network Video, enter a direct HTTP or HTTPS video URL,
-and tap Play. MP4, M4V, MOV, MKV, AVI, WebM, and HLS (.m3u8) streams are supported subject to their codecs.
-MKV, AVI, and WebM use MobileVLCKit; other links start with Apple playback and can fall back
+and tap Play. MP4, M4V, MOV, MKV, AVI, WebM, MPEG-TS, and HLS (.m3u8) streams are supported subject to their codecs.
+MKV, AVI, WebM, and MPEG-TS use MobileVLCKit; other links start with Apple playback and can fall back
 to MobileVLCKit if the system player cannot open them. Website pages, SMB shares, embedded username/password
 URLs, and DRM-protected streams are not supported. Links are not saved or imported.
 The server receives your IP address and URL; HTTP is unencrypted, so prefer HTTPS.

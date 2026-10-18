@@ -187,3 +187,33 @@ validation or review, and do not certify trademark or legal clearance.
 - The decoder dependency and its license are unchanged. DRM support was not
   added. These checks do not establish exhaustive codec/profile compatibility,
   high-resolution performance, patent clearance, or App Store approval.
+
+## Verification of 4.11.140
+
+- Fixed Finder sharing by scanning Documents, the file-sharing destination,
+  instead of only Documents/Videos. Existing media stays in place. Old playlist
+  and favorite paths are prefixed once with Videos/ and saved as schema version 2,
+  after retaining an exact local backup of the original metadata. Conflicting
+  backups, invalid metadata, and unknown schema versions preserve existing data
+  and disable reference edits. System Inbox content is excluded from the library.
+- Enabled MPEG-TS (.ts, .mts, .m2ts) in file registration, import, scanning, and
+  the existing MobileVLCKit playback route. Added synthetic H.264/AAC TS and
+  H.264/AC-3 M2TS fixtures; the MTS alias is covered too.
+- The default Documents-root regression failed against the previous code.
+  All 31 core/resource/playback simulator checks then passed; the subsequent
+  reserved-Inbox-folder import regression passed separately (32 total checks).
+  Coverage includes retained video bytes, same-named Finder and legacy files,
+  playlist/favorite migration and reopen, rollback, type registration, decoded
+  audio/video, displayed pictures, and seeking.
+- A fresh signed Release build passed source/bundle validation and deep signature
+  verification, with synthetic test media excluded from the application.
+- Physical Finder-library verification is pending device unlock. A read-only
+  inventory found three TS files at Documents root and one existing MKV under
+  Videos. The original playlist/favorite metadata was backed up privately before
+  the update. No private media or device backup is included in Git.
+- Version 4.11.140 (140) was installed on the physical iPhone. A second read-only
+  inventory confirmed that all four video paths, sizes, and modification dates
+  were unchanged. Launch, on-device tests, and visual confirmation still require
+  the phone to be unlocked.
+- Wait for Finder transfers to finish, then reopen xplayer or pull to refresh.
+  Live playback during a transfer and exhaustive codec profiles are not covered.
