@@ -55,8 +55,9 @@ accounts, or paid features, review licenses and privacy declarations again.
   current team has no permission to create iOS App Store profiles and the
   account has no App Store Connect provider. No App Store submission occurred.
 - Migration from the former development bundle could not proceed because
-  that bundle was absent from the device when checked. The migration stopped
-  before copying or overwriting data. This is separate from the passing import
+  that bundle was absent from the device when checked; the account holder
+  confirmed manually uninstalling it. The migration stopped before copying
+  or overwriting data. This is separate from the passing import
   and playlist tests; no claim of successful old-library recovery is made.
 
 The local checks are reproducible with scripts/verify-release.py, the Xcode
