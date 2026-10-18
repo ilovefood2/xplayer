@@ -258,6 +258,10 @@ validation or review, and do not certify trademark or legal clearance.
   simulator-runner preflight error. The speed popovers were visually reviewed
   on iPhone and iPad with synthetic test videos.
 - The fresh signed Release build passed source/bundle and deep signature checks.
-  Version 4.11.142 was installed on the physical iPhone. Physical test startup
-  remains unverified after the phone relocked during Xcode preflight; the waiting
-  test run was cancelled and the signed Release app was restored.
+- Physical iPhone follow-up: all 34 core/resource/playback checks and all four
+  selected UI checks passed. The first UI runner timed out enabling automation;
+  rerunning the UI checks alone succeeded without app changes. Native and VLC
+  double taps, slider adjustments, paused seeking, and existing auto-hide behavior
+  are verified on the device. Tests used synthetic videos.
+- The signed Release app, version 4.11.142 (142), was restored and successfully
+  launched on the iPhone after testing.
