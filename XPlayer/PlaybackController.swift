@@ -1,7 +1,32 @@
 // SPDX-License-Identifier: MIT
 import AVKit
 import SwiftUI
-import MobileVLCKit
+@preconcurrency import MobileVLCKit
+
+@MainActor
+private final class VLCShutdown {
+    private let player: VLCMediaPlayer
+    private var observer: NSObjectProtocol?
+
+    init(_ player: VLCMediaPlayer) {
+        self.player = player
+        observer = NotificationCenter.default.addObserver(
+            forName: Notification.Name(VLCMediaPlayerStateChanged), object: player, queue: .main
+        ) { [self] _ in
+            MainActor.assumeIsolated { finishIfStopped() }
+        }
+        player.stop()
+    }
+
+    private func finishIfStopped() {
+        guard player.state == .stopped else { return }
+        // Backend teardown can wait for rendering work on the main thread.
+        let player = player
+        DispatchQueue.global(qos: .userInitiated).async { player.drawable = nil }
+        if let observer { NotificationCenter.default.removeObserver(observer) }
+        observer = nil
+    }
+}
 
 @MainActor
 final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelegate {
@@ -21,6 +46,7 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
     private var remoteURL: URL?
     private var endObserver: NSObjectProtocol?
     private var failureObserver: NSKeyValueObservation?
+    private var ownsAudioSession = false
     var title: String {
         if let remoteURL { return remoteURL.lastPathComponent.isEmpty ? "Network Video" : remoteURL.lastPathComponent }
         return paths.indices.contains(index) ? (paths[index] as NSString).lastPathComponent : "xplayer"
@@ -80,8 +106,6 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
         error = nil
         guard paths.indices.contains(index) else { return }
         do {
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
-            try AVAudioSession.sharedInstance().setActive(true)
             let url: URL
             if let remoteURL { url = remoteURL }
             else if let root { url = try LibraryFiles.url(paths[index], root: root) }
@@ -90,6 +114,9 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
                 startVLC(url)
                 return
             }
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            ownsAudioSession = true
             let item = AVPlayerItem(url: url)
             failureObserver = item.observe(\.status, options: [.new]) { [weak self] item, _ in
                 guard item.status == .failed else { return }
@@ -127,6 +154,8 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
     }
 
     private func startVLC(_ url: URL) {
+        // VLC activates and releases its own audio session as its audio output starts and stops.
+        ownsAudioSession = false
         let vlc = VLCMediaPlayer(options: ["--no-video-title-show", "--quiet", "--no-metadata-network-access"])
         vlc.drawable = vlcVideoView
         vlc.delegate = self
@@ -140,8 +169,10 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
         let previous = vlcPlayer
         vlcPlayer = nil
         previous?.delegate = nil
-        previous?.stop()
-        previous?.drawable = nil
+        if let previous {
+            // VLC stops asynchronously; retain its player and drawable until shutdown finishes.
+            _ = VLCShutdown(previous)
+        }
         vlcIsPlaying = false
         vlcPosition = 0
         vlcTime = 0
@@ -190,11 +221,14 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
     func pause() { player.pause(); vlcPlayer?.pause() }
 
     func stop() {
-        stopVLC()
         player.pause()
         player.replaceCurrentItem(with: nil)
         removeObservers()
-        try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        stopVLC()
+        if ownsAudioSession {
+            ownsAudioSession = false
+            try? AVAudioSession.sharedInstance().setActive(false, options: .notifyOthersOnDeactivation)
+        }
     }
 }
 

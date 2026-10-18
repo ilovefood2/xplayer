@@ -190,7 +190,7 @@ final class PlaybackTests: XCTestCase {
         defer { playback.stop(); playback.vlcVideoView.removeFromSuperview() }
         for ext in ["ts", "mts", "m2ts"] {
             playback.play(["Finder." + ext.uppercased()], library: library)
-            let vlc = try XCTUnwrap(playback.vlcPlayer)
+            let vlc = try XCTUnwrap(playback.vlcPlayer, playback.error ?? "VLC player was not created")
             try await waitUntil {
                 (vlc.media?.statistics.decodedVideo ?? 0) > 0 &&
                 (vlc.media?.statistics.decodedAudio ?? 0) > 0 &&
@@ -200,6 +200,31 @@ final class PlaybackTests: XCTestCase {
             try await waitUntil { playback.vlcTime > 2 }
             XCTAssertNil(playback.error)
             playback.stop()
+        }
+    }
+
+    @MainActor func testVLCShutdownReleasesImmediateAndPlayingDecoders() async throws {
+        let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: temporary) }
+        let library = LibraryStore(root: temporary.appendingPathComponent("Documents"), metadata: temporary.appendingPathComponent("playlists.json"))
+        let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "finder", withExtension: "ts"))
+        try FileManager.default.copyItem(at: fixture, to: library.root.appendingPathComponent("clip.ts"))
+        library.refresh()
+        let playback = PlaybackController()
+        let window = try XCTUnwrap((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first)
+        playback.vlcVideoView.frame = window.bounds
+        window.addSubview(playback.vlcVideoView)
+        defer { playback.stop(); playback.vlcVideoView.removeFromSuperview() }
+        for waitForVideo in [false, true] {
+            playback.play(["clip.ts"], library: library)
+            weak var decoder = playback.vlcPlayer
+            XCTAssertNotNil(decoder, playback.error ?? "VLC player was not created")
+            if waitForVideo {
+                try await waitUntil { (decoder?.media?.statistics.displayedPictures ?? 0) > 0 }
+            }
+            playback.stop()
+            XCTAssertNil(playback.vlcPlayer)
+            try await waitUntil { decoder == nil }
         }
     }
 

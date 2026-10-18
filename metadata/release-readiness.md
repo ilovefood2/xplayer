@@ -207,13 +207,34 @@ validation or review, and do not certify trademark or legal clearance.
   audio/video, displayed pictures, and seeking.
 - A fresh signed Release build passed source/bundle validation and deep signature
   verification, with synthetic test media excluded from the application.
-- Physical Finder-library verification is pending device unlock. A read-only
-  inventory found three TS files at Documents root and one existing MKV under
-  Videos. The original playlist/favorite metadata was backed up privately before
-  the update. No private media or device backup is included in Git.
-- Version 4.11.140 (140) was installed on the physical iPhone. A second read-only
-  inventory confirmed that all four video paths, sizes, and modification dates
-  were unchanged. Launch, on-device tests, and visual confirmation still require
-  the phone to be unlocked.
+- Physical iPhone: all 21 library checks passed, and the Library screenshot
+  confirmed all three Finder-transferred TS files plus Videos containing the
+  older MKV. The metadata upgraded to version 2, and the app-created backup
+  matched the privately saved original byte-for-byte. Read-only inventories
+  confirmed all four video paths, sizes, and modification dates stayed unchanged.
+  No private media, screenshots, or device backup is included in Git.
+- The physical run passed 32 of 33 checks. Rapid TS/MTS/M2TS switching exposed
+  a VLC shutdown/audio-session race, addressed in the 4.11.141 follow-up below.
 - Wait for Finder transfers to finish, then reopen xplayer or pull to refresh.
   Live playback during a transfer and exhaustive codec profiles are not covered.
+
+## Verification of 4.11.141
+
+- VLC playback now uses the decoder's own audio-session activation/deactivation;
+  native AVKit playback retains explicit audio-session handling. Deactivating
+  audio on the main thread while VLC was still stopping could stall playback.
+- Retain each retired VLC player and its drawable until the stopped notification,
+  then detach the backend on a background queue. This follows the pinned
+  [VLCKit asynchronous-stop lifecycle](https://raw.githubusercontent.com/videolan/vlckit/3.7.3/Sources/VLCMediaPlayer.m)
+  and avoids duplicating its [iOS audio-output shutdown](https://raw.githubusercontent.com/videolan/vlc/79128878/modules/audio_output/audiounit_ios.m).
+- The original rapid TS/MTS/M2TS decode/seek/reopen check passed on the physical
+  iPhone without adding sleeps. A new check confirms that immediate and playing
+  decoders are released after stopping, including their shutdown observers.
+- All 33 core/resource/playback checks passed on both the iPhone simulator and
+  physical iPhone. Three additional physical UI checks passed: Library/Favorites/
+  Playlists layout, MKV controls, and native controls hiding and returning.
+- A fresh signed Release build passed source/bundle and deep signature checks.
+  Version 4.11.141 (141) was installed and launched on the iPhone. The final
+  file inventory again matched all four original video paths, sizes, and
+  modification dates. Personal video contents were not copied or fully played;
+  playback verification used synthetic fixtures.
