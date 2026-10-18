@@ -14,14 +14,18 @@ On My iPhone or On My iPad → xplayer → Videos. Pull down in Library to refre
 
 xplayer supports MP4, M4V, and MOV containers with codecs supported by your
 device's Apple media player, typically H.264 and HEVC. A filename extension
-alone does not guarantee its codec is supported. MKV (Matroska) files use the
+alone does not guarantee its codec is supported. MKV (Matroska), AVI, and WebM files use the
 bundled MobileVLCKit decoder. Damaged files, unsupported codecs, and protected/DRM
-content may not play. AVI importing is not supported.
+content may not play. DRM-protected playback is not supported.
 
-Import MKV files or folders through Files, or copy them into xplayer → Videos.
-MKV videos work with playlists, favorites, moves, and batch deletion. The MKV
+Import MKV, AVI, or WebM files or folders through Files, or copy them into xplayer → Videos.
+These videos work with playlists, favorites, moves, and batch deletion. Their
 player has Play/Pause and a seek slider for seekable files; system volume buttons
 control audio. Video decoding may consume more battery than native playback.
+
+AVI and WebM compatibility checks include MPEG-4 Part 2/MP3 in AVI and
+VP8/Vorbis, VP9/Opus, and AV1/Opus in WebM. These checks do not cover every
+codec/profile, damaged file, high-resolution stream, or subtitle combination.
 
 ## Folders and playlists
 
@@ -51,8 +55,8 @@ it from Favorites without deleting the video. Favorites persist on your device.
 ## Network videos
 
 In Library, tap … → Open Network Video, enter a direct HTTP or HTTPS video URL,
-and tap Play. MP4, M4V, MOV, MKV, and HLS (.m3u8) streams are supported subject to their codecs.
-MKV uses MobileVLCKit; other links start with Apple playback and can fall back
+and tap Play. MP4, M4V, MOV, MKV, AVI, WebM, and HLS (.m3u8) streams are supported subject to their codecs.
+MKV, AVI, and WebM use MobileVLCKit; other links start with Apple playback and can fall back
 to MobileVLCKit if the system player cannot open them. Website pages, SMB shares, embedded username/password
 URLs, and DRM-protected streams are not supported. Links are not saved or imported.
 The server receives your IP address and URL; HTTP is unencrypted, so prefer HTTPS.
@@ -65,7 +69,7 @@ for xplayer in Settings. Network playback requires a reachable server.
 ## Playback
 
 Tap a video to play it. Playback controls hide automatically while playing;
-tap the video to show them again. MKV controls stay visible while paused,
+tap the video to show them again. VLC playback controls stay visible while paused,
 seeking, showing an error, or using VoiceOver. Apple playback retains its native
 transport controls; the app's title and queue buttons also hide during playback.
 Previous and Next appear when playing more than one video. The × button

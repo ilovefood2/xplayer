@@ -36,7 +36,9 @@ final class VideoHTTPServer {
             guard let target = text.components(separatedBy: "\r\n").first?.split(separator: " ").dropFirst().first,
                   let path = URLComponents(string: String(target))?.path,
                   let data = self.files[path] else { connection.cancel(); return }
-            let type = path.hasSuffix(".m3u8") ? "application/vnd.apple.mpegurl" : (path.hasSuffix(".ts") ? "video/mp2t" : (path.hasSuffix(".mp4") ? "video/mp4" : "video/x-matroska"))
+            let types = ["m3u8": "application/vnd.apple.mpegurl", "ts": "video/mp2t",
+                        "mp4": "video/mp4", "avi": "video/x-msvideo", "webm": "video/webm"]
+            let type = types[(path as NSString).pathExtension.lowercased()] ?? "video/x-matroska"
             let range = text.components(separatedBy: "\r\n").first { $0.lowercased().hasPrefix("range: bytes=") }
             let values = range?.split(separator: "=", maxSplits: 1).last?.split(separator: "-", omittingEmptySubsequences: false)
             let start = values?.first.flatMap { Int($0) } ?? 0

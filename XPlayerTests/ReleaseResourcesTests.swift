@@ -10,7 +10,9 @@ final class ReleaseResourcesTests: XCTestCase {
         XCTAssertTrue(try AppInformation.document("License", extension: "txt").contains("MIT License"))
         XCTAssertTrue(try AppInformation.document("ThirdPartyNotices").contains("MobileVLCKit 3.7.3"))
         XCTAssertTrue(try AppInformation.document("MobileVLCKit-LGPL", extension: "txt").contains("GNU LESSER GENERAL PUBLIC LICENSE"))
-        XCTAssertTrue(UTType(filenameExtension: "mkv")?.conforms(to: .movie) == true)
+        for ext in ["mkv", "avi", "webm"] {
+            XCTAssertTrue(UTType(filenameExtension: ext)?.conforms(to: .movie) == true, ext)
+        }
         let url = try XCTUnwrap(Bundle.main.url(forResource: "PrivacyInfo", withExtension: "xcprivacy"))
         let data = try Data(contentsOf: url)
         let manifest = try XCTUnwrap(PropertyListSerialization.propertyList(from: data, format: nil) as? [String: Any])

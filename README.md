@@ -1,18 +1,18 @@
 # xplayer
 
 A local and network video player for iPhone and iPad, with nested folders and saved
-playlists and favorites. Requires iOS 17 or later. Native SwiftUI / AVKit with MobileVLCKit for MKV playback; no ads, accounts,
+playlists and favorites. Requires iOS 17 or later. Native SwiftUI / AVKit with MobileVLCKit for MKV, AVI, and WebM playback; no ads, accounts,
 or analytics.
 
-- Import MP4, M4V, MOV, and MKV videos or entire folder trees through Files.
+- Import MP4, M4V, MOV, MKV, AVI, and WebM videos or entire folder trees through Files.
 - Create, move, rename, and delete folders; combine videos into playlists.
 - Select multiple library files or folders and confirm batch deletion.
 - Favorite videos and play direct HTTP/HTTPS video or HLS links.
 - Reorder playlists and play them in sequence using native playback controls.
 - Read privacy, support, and license documents offline in Library → … → Help & About.
 
-Apple codecs apply to native playback; MKV uses the bundled MobileVLCKit decoder.
-AVI imports, DRM-protected content, and website downloads are not supported.
+Apple codecs apply to native playback; MKV, AVI, and WebM use the bundled MobileVLCKit decoder.
+DRM-protected content and website downloads are not supported.
 
 ## Source and license
 

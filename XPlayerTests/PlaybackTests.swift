@@ -93,18 +93,84 @@ final class PlaybackTests: XCTestCase {
         }
     }
 
-    @MainActor func testDamagedMatroskaReportsAnErrorAndStops() async throws {
+    @MainActor func testDamagedVLCFormatsReportAnErrorAndStop() async throws {
         let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
         defer { try? FileManager.default.removeItem(at: temporary) }
         let library = LibraryStore(root: temporary.appendingPathComponent("Videos"), metadata: temporary.appendingPathComponent("playlists.json"))
-        try Data("not a video".utf8).write(to: library.root.appendingPathComponent("broken.mkv"))
-        library.refresh()
         let playback = PlaybackController()
         defer { playback.stop() }
-        playback.play(["broken.mkv"], library: library)
-        try await waitUntil { playback.error != nil }
-        playback.stop()
+        for ext in ["mkv", "avi", "webm"] {
+            let name = "broken." + ext
+            try Data("not a video".utf8).write(to: library.root.appendingPathComponent(name))
+            library.refresh()
+            playback.play([name], library: library)
+            try await waitUntil { playback.error != nil }
+            playback.stop()
+            XCTAssertNil(playback.vlcPlayer)
+        }
+    }
+
+
+    @MainActor func testAVIAndWebMDecodeSeekAndAdvanceInMixedQueue() async throws {
+        let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: temporary) }
+        let library = LibraryStore(root: temporary.appendingPathComponent("Videos"), metadata: temporary.appendingPathComponent("playlists.json"))
+        let names = ["clip.avi", "clip.webm", "vp9.webm", "av1.webm", "clip.mp4"]
+        for name in names {
+            let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: name, withExtension: nil))
+            try FileManager.default.copyItem(at: fixture, to: library.root.appendingPathComponent(name))
+        }
+        library.refresh()
+        let playback = PlaybackController()
+        let window = try XCTUnwrap((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first)
+        playback.vlcVideoView.frame = window.bounds
+        window.addSubview(playback.vlcVideoView)
+        defer { playback.stop(); playback.vlcVideoView.removeFromSuperview() }
+        playback.play(names, library: library)
+        for index in 0..<4 {
+            XCTAssertEqual(playback.index, index)
+            let vlc = try XCTUnwrap(playback.vlcPlayer)
+            try await waitUntil {
+                (vlc.media?.statistics.decodedVideo ?? 0) > 0 &&
+                (vlc.media?.statistics.decodedAudio ?? 0) > 0 &&
+                (vlc.media?.statistics.displayedPictures ?? 0) > 0 && playback.vlcSeekable
+            }
+            playback.seekVLC(to: 0.65)
+            try await waitUntil { playback.vlcTime > 3 }
+            try await waitUntil { playback.index == index + 1 }
+            XCTAssertNil(playback.error)
+        }
         XCTAssertNil(playback.vlcPlayer)
+        XCTAssertNotNil(playback.player.currentItem)
+    }
+
+    @MainActor func testAVIAndWebMNetworkPlaybackDecodesAudioAndVideo() async throws {
+        let names = ["clip.avi", "clip.webm", "vp9.webm", "av1.webm"]
+        var files: [String: Data] = [:]
+        for name in names {
+            let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: name, withExtension: nil))
+            files["/" + name] = try Data(contentsOf: fixture)
+        }
+        let server = try VideoHTTPServer(files: files)
+        defer { server.stop() }
+        let ready = expectation(description: "AVI and WebM HTTP fixture server ready")
+        server.start { ready.fulfill() }
+        await fulfillment(of: [ready], timeout: 5)
+        let playback = PlaybackController()
+        let window = try XCTUnwrap((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first)
+        playback.vlcVideoView.frame = window.bounds
+        window.addSubview(playback.vlcVideoView)
+        defer { playback.stop(); playback.vlcVideoView.removeFromSuperview() }
+        for name in names {
+            playback.playNetwork(try PlaybackController.networkURL("http://127.0.0.1:\(try XCTUnwrap(server.port))/\(name)"))
+            let vlc = try XCTUnwrap(playback.vlcPlayer)
+            try await waitUntil {
+                (vlc.media?.statistics.decodedVideo ?? 0) > 0 &&
+                (vlc.media?.statistics.decodedAudio ?? 0) > 0
+            }
+            XCTAssertNil(playback.error)
+            playback.stop()
+        }
     }
 
     @MainActor private func waitUntil(_ condition: () -> Bool) async throws {

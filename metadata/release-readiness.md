@@ -168,3 +168,22 @@ validation or review, and do not certify trademark or legal clearance.
   The signed Release app was restored and successfully launched after testing.
 - Library data structures and persistence were not changed. App Store screenshots
   and live support-site publication remain separate release tasks.
+
+## Verification of 4.11.139
+
+- AVI and WebM are accepted by the Files picker, document-type registration,
+  library scan, and folder imports. Local and network playback routes these
+  containers through the existing MobileVLCKit 3.7.3 framework.
+- Synthetic fixtures verified MPEG-4 Part 2/MP3 in AVI, VP8/Vorbis in WebM,
+  VP9/Opus in WebM, and AV1/Opus in WebM. Tests check decoded audio/video and
+  displayed pictures, seeking, automatic mixed-format queue advancement, HTTP
+  playback, uppercase extensions, nested imports, favorites and playlist records.
+- The 25-check core/resource/playback suite passed on both the iPhone simulator
+  and physical iPhone 16 Pro Max. An expanded corrupt MKV/AVI/WebM error-handling
+  check subsequently passed on the physical iPhone as well.
+- A fresh signed Release build passed source/bundle checks and deep signature
+  verification, with test media excluded from the application. Version 4.11.139
+  (139) was installed on the iPhone; it relocked before the final automatic launch.
+- The decoder dependency and its license are unchanged. DRM support was not
+  added. These checks do not establish exhaustive codec/profile compatibility,
+  high-resolution performance, patent clearance, or App Store approval.

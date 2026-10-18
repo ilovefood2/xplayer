@@ -51,7 +51,7 @@ write_page('index.html', 'Offline videos, organized', '''<img class="icon" src="
 <p>xplayer is a native local and network video player for iPhone and iPad running iOS 17 or later.</p>
 <p>Import your own videos or folder trees from Files, organize them into folders, and create playlists that play in sequence. Favorite videos, delete multiple items, or open a direct HTTP/HTTPS video or HLS link.</p>
 <p><strong>No account. No ads. No tracking SDKs.</strong> Your videos and playlists are stored locally and are not uploaded to the developer.</p>
-<p>Supports MP4, M4V, and MOV with native Apple playback, and MKV with MobileVLCKit. AVI imports and protected/DRM content are not supported.</p>
+<p>Supports MP4, M4V, and MOV with native Apple playback, and MKV, AVI, and WebM with MobileVLCKit. Protected/DRM content is not supported.</p>
 <p><a href="support.html">Read the user guide</a> or <a href="privacy.html">read the privacy policy</a>.</p>''')
 for name, filename in [('PrivacyPolicy', 'privacy.html'), ('Support', 'support.html')]:
     text = (ROOT / 'XPlayer/Resources' / (name + '.md')).read_text()

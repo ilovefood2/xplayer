@@ -57,3 +57,13 @@ The name xplayer is user-selected. Similar names exist in public app listings;
 this document does not establish trademark clearance or App Store name
 availability. Apple review and any professional legal opinion remain separate
 from the source/build checks in this project.
+
+## Additional format test fixtures
+
+The AVI and WebM fixtures added in 4.11.139 are six-second FFmpeg testsrc2 color
+patterns with generated sine audio, not recordings or third-party media:
+clip.avi uses MPEG-4 Part 2 with an XVID tag and MP3 audio; clip.webm uses VP8
+and Vorbis; vp9.webm uses VP9 and Opus; av1.webm uses AV1 and Opus. Encoding tools
+are not shipped in the app. AVI/WebM playback uses the same pinned, unmodified
+MobileVLCKit framework introduced for MKV; no additional runtime dependency
+or artwork from the SPlayer desktop project was imported.

@@ -212,4 +212,31 @@ final class LibraryStoreTests: XCTestCase {
         XCTAssertEqual(store().favorites, ["Matroska/sample.MKV"])
     }
 
+    @MainActor func testAVIAndWebMFolderImportPreservesBytesAndLibraryReferences() async throws {
+        let library = store()
+        let source = temporary.appendingPathComponent("New Formats")
+        let samples = ["clip.AVI", "Nested/clip.WEBM"]
+        for name in samples {
+            let ext = (name as NSString).pathExtension.lowercased()
+            let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "clip", withExtension: ext))
+            let destination = source.appendingPathComponent(name)
+            try FileManager.default.createDirectory(at: destination.deletingLastPathComponent(), withIntermediateDirectories: true)
+            try FileManager.default.copyItem(at: fixture, to: destination)
+        }
+        await library.importVideos([source])
+        XCTAssertEqual(library.notice, "Imported 2 videos.")
+        let paths = samples.map { "New Formats/" + $0 }
+        XCTAssertEqual(Set(library.videos().map(\.path)), Set(paths))
+        for path in paths {
+            let ext = (path as NSString).pathExtension.lowercased()
+            let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "clip", withExtension: ext))
+            XCTAssertEqual(try Data(contentsOf: library.fileURL(path)), try Data(contentsOf: fixture))
+            try library.toggleFavorite(path)
+        }
+        try library.createPlaylist("Added formats", paths: paths)
+        let reopened = store()
+        XCTAssertEqual(reopened.favorites, Set(paths))
+        XCTAssertEqual(reopened.playlists[0].paths, paths)
+    }
+
 }

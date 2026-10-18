@@ -86,7 +86,7 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
             if let remoteURL { url = remoteURL }
             else if let root { url = try LibraryFiles.url(paths[index], root: root) }
             else { return }
-            if url.pathExtension.lowercased() == "mkv" {
+            if ["mkv", "avi", "webm"].contains(url.pathExtension.lowercased()) {
                 startVLC(url)
                 return
             }

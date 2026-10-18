@@ -15,7 +15,7 @@ download videos from websites, or share user content with other users.
 7. Library → … → Help & About contains offline privacy, support, MIT license, and third-party notices,
    plus public privacy/support links.
 
-Supported containers are MP4, M4V, MOV, and MKV. MKV uses MobileVLCKit;
+Supported containers are MP4, M4V, MOV, MKV, AVI, and WebM. MKV, AVI, and WebM use MobileVLCKit;
 other supported formats use native AVKit playback when possible. Backgrounding pauses playback. File access is granted through the
 system document picker; the app does not request Photo Library, camera,
 microphone, location, contacts, or tracking permissions. Local Network permission
@@ -54,3 +54,11 @@ MobileVLCKit 3.7.3 is embedded as an unmodified dynamic framework. Its license
 is readable offline in About, and source/build links are in Third-Party Notices.
 Review SDK privacy requirements and codec/export obligations before submission;
 build/test success is not App Store approval.
+
+## AVI and WebM support in 4.11.139
+
+AVI and WebM can be imported through Files or folder imports and opened using
+file sharing or direct network URLs. They use the existing MobileVLCKit decoder
+and retain playback controls, playlists, and favorites. The framework version
+and license are unchanged; no DRM integration was added. Codec/patent and
+App Store distribution review remains separate from these functionality checks.

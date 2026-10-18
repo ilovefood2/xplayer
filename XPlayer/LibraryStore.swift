@@ -30,7 +30,7 @@ struct LibraryError: LocalizedError {
 }
 
 enum LibraryFiles {
-    static let extensions: Set<String> = ["mp4", "m4v", "mov", "mkv"]
+    static let extensions: Set<String> = ["mp4", "m4v", "mov", "mkv", "avi", "webm"]
 
     static func validName(_ raw: String) throws -> String {
         let name = raw.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -148,7 +148,7 @@ enum LibraryFiles {
             }
         }
         var summary = "Imported \(imported) video\(imported == 1 ? "" : "s")."
-        if skipped > 0 { summary += " Skipped \(skipped) unsupported files or links. Supported containers: MP4, M4V, MOV, MKV." }
+        if skipped > 0 { summary += " Skipped \(skipped) unsupported files or links. Supported containers: MP4, M4V, MOV, MKV, AVI, WebM." }
         if !failures.isEmpty { summary += "\n" + failures.joined(separator: "\n") }
         return summary
     }
