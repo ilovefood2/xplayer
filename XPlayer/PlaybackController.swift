@@ -38,6 +38,7 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
     @Published private(set) var vlcTime: Double = 0
     @Published private(set) var vlcDuration: Double = 0
     @Published private(set) var vlcSeekable = false
+    @Published private(set) var playbackSpeed: Float = 1
     @Published var isPresented = false
     @Published private(set) var paths: [String] = []
     @Published private(set) var index = 0
@@ -118,6 +119,7 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
             try AVAudioSession.sharedInstance().setActive(true)
             ownsAudioSession = true
             let item = AVPlayerItem(url: url)
+            item.audioTimePitchAlgorithm = .timeDomain
             failureObserver = item.observe(\.status, options: [.new]) { [weak self] item, _ in
                 guard item.status == .failed else { return }
                 let detail = item.error?.localizedDescription ?? "This video codec is not supported by iOS."
@@ -160,6 +162,7 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
         vlc.drawable = vlcVideoView
         vlc.delegate = self
         vlc.media = VLCMedia(url: url)
+        vlc.rate = playbackSpeed
         vlcPlayer = vlc
         vlcIsPlaying = true
         vlc.play()
@@ -215,7 +218,41 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
 
     func seekVLC(to position: Float) {
         guard let vlcPlayer, vlcPlayer.isSeekable, position.isFinite else { return }
-        vlcPlayer.position = max(0, min(1, position))
+        let position = max(0, min(1, position))
+        vlcPlayer.position = position
+        // VLC's time notifications pause too; keep the requested position usable for another skip.
+        vlcPosition = position
+        vlcTime = Double(vlcPlayer.media?.length.intValue ?? 0) / 1000 * Double(position)
+    }
+
+    @discardableResult func skip(seconds: Double) -> Bool {
+        guard seconds.isFinite else { return false }
+        if let vlcPlayer {
+            let duration = Double(vlcPlayer.media?.length.intValue ?? 0) / 1000
+            guard vlcPlayer.isSeekable, duration > 0 else { return false }
+            let target = max(0, min(duration, vlcTime + seconds))
+            seekVLC(to: Float(target / duration))
+        } else {
+            guard let item = player.currentItem, item.status == .readyToPlay else { return false }
+            let current = player.currentTime().seconds
+            guard current.isFinite,
+                  let range = item.seekableTimeRanges.map(\.timeRangeValue).first(where: {
+                      current >= $0.start.seconds && current <= CMTimeRangeGetEnd($0).seconds
+                  }) else { return false }
+            let target = max(range.start.seconds, min(CMTimeRangeGetEnd(range).seconds, current + seconds))
+            player.seek(to: CMTime(seconds: target, preferredTimescale: 600), toleranceBefore: .zero, toleranceAfter: .zero)
+        }
+        return true
+    }
+
+    var speedLabel: String { String(format: "%g×", playbackSpeed) }
+
+    func setPlaybackSpeed(_ speed: Float) {
+        guard speed.isFinite else { return }
+        playbackSpeed = min(2, max(0.25, speed))
+        player.defaultRate = playbackSpeed
+        if player.rate != 0 { player.rate = playbackSpeed }
+        vlcPlayer?.rate = playbackSpeed
     }
 
     func pause() { player.pause(); vlcPlayer?.pause() }
@@ -235,7 +272,8 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
 struct NativeVideoPlayer: UIViewControllerRepresentable {
     let player: AVPlayer
     let onInteraction: () -> Void
-    func makeCoordinator() -> Coordinator { Coordinator(onInteraction: onInteraction) }
+    let onSkip: (Double) -> Void
+    func makeCoordinator() -> Coordinator { Coordinator(onInteraction: onInteraction, onSkip: onSkip) }
     func makeUIViewController(context: Context) -> AVPlayerViewController {
         let controller = AVPlayerViewController()
         controller.player = player
@@ -244,17 +282,44 @@ struct NativeVideoPlayer: UIViewControllerRepresentable {
         let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.tapped))
         tap.cancelsTouchesInView = false
         tap.delegate = context.coordinator
+        let doubleTap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.doubleTapped(_:)))
+        doubleTap.numberOfTapsRequired = 2
+        doubleTap.delegate = context.coordinator
+        tap.require(toFail: doubleTap)
         controller.view.addGestureRecognizer(tap)
+        controller.view.addGestureRecognizer(doubleTap)
         return controller
     }
     func updateUIViewController(_ controller: AVPlayerViewController, context: Context) {
         context.coordinator.onInteraction = onInteraction
+        context.coordinator.onSkip = onSkip
     }
     final class Coordinator: NSObject, UIGestureRecognizerDelegate {
         var onInteraction: () -> Void
-        init(onInteraction: @escaping () -> Void) { self.onInteraction = onInteraction }
+        var onSkip: (Double) -> Void
+        init(onInteraction: @escaping () -> Void, onSkip: @escaping (Double) -> Void) {
+            self.onInteraction = onInteraction
+            self.onSkip = onSkip
+        }
         @objc func tapped() { onInteraction() }
-        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool { true }
+        @objc func doubleTapped(_ tap: UITapGestureRecognizer) {
+            guard let view = tap.view else { return }
+            onSkip(tap.location(in: view).x < view.bounds.midX ? -15 : 15)
+        }
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+            var view = touch.view
+            while let current = view, current !== gestureRecognizer.view {
+                if current is UIControl || current.accessibilityTraits.contains(.button) { return false }
+                view = current.superview
+            }
+            return !UIAccessibility.isVoiceOverRunning
+        }
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldBeRequiredToFailBy otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+            (gestureRecognizer as? UITapGestureRecognizer)?.numberOfTapsRequired == 2 && otherGestureRecognizer is UITapGestureRecognizer
+        }
+        func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+            (gestureRecognizer as? UITapGestureRecognizer)?.numberOfTapsRequired != 2
+        }
     }
 }
 
@@ -265,6 +330,9 @@ struct PlayerScreen: View {
     @State private var nativePlaying = false
     @State private var scrubbing = false
     @State private var interaction = UUID()
+    @State private var showingSpeed = false
+    @State private var seekFeedback: Double?
+    @State private var seekInteraction = UUID()
     private var playing: Bool { playback.vlcPlayer != nil ? playback.vlcIsPlaying : nativePlaying }
     var body: some View {
         NavigationStack {
@@ -273,15 +341,21 @@ struct PlayerScreen: View {
                     ZStack(alignment: .bottom) {
                         VLCVideoPlayer(playback: playback)
                             .overlay {
-                                Button {
-                                    if controlsVisible && playing && !voiceOverEnabled {
-                                        withAnimation { controlsVisible = false }
-                                        interaction = UUID()
-                                    } else { showControls() }
-                                } label: { Color.clear.contentShape(Rectangle()) }
-                                .buttonStyle(.plain)
-                                .accessibilityIdentifier("playerVideo")
-                                .accessibilityLabel(controlsVisible && playing && !voiceOverEnabled ? "Hide playback controls" : "Show playback controls")
+                                GeometryReader { geometry in
+                                    Color.clear.contentShape(Rectangle())
+                                        .gesture(SpatialTapGesture(count: 2).exclusively(before: SpatialTapGesture()).onEnded { tap in
+                                            switch tap {
+                                            case .first(let value): skip(value.location.x < geometry.size.width / 2 ? -15 : 15)
+                                            case .second: toggleControls()
+                                            }
+                                        })
+                                        .accessibilityRepresentation {
+                                            Button(controlsVisible && playing && !voiceOverEnabled ? "Hide playback controls" : "Show playback controls", action: toggleControls)
+                                                .accessibilityIdentifier("playerVideo")
+                                                .accessibilityAction(named: "Skip back 15 seconds") { skip(-15) }
+                                                .accessibilityAction(named: "Skip forward 15 seconds") { skip(15) }
+                                        }
+                                }
                             }
                         if controlsVisible {
                             VLCPlaybackControls(playback: playback) { editing in
@@ -293,7 +367,7 @@ struct PlayerScreen: View {
                         }
                     }
                 } else {
-                    NativeVideoPlayer(player: playback.player, onInteraction: showControls)
+                    NativeVideoPlayer(player: playback.player, onInteraction: showControls, onSkip: skip)
                 }
                 if let error = playback.error {
                     Text(error).font(.callout).foregroundStyle(.orange).padding().accessibilityIdentifier("playbackError")
@@ -310,6 +384,14 @@ struct PlayerScreen: View {
                     }.labelStyle(.iconOnly).font(.body).padding(.horizontal, 24).padding(.vertical, 12)
                 }
             }
+            .overlay(alignment: (seekFeedback ?? 15) < 0 ? .leading : .trailing) {
+                if let seekFeedback {
+                    Label("15 seconds", systemImage: seekFeedback < 0 ? "gobackward.15" : "goforward.15")
+                        .font(.headline).padding().background(.ultraThinMaterial, in: Capsule()).padding(24)
+                        .allowsHitTesting(false).accessibilityIdentifier("seekFeedback")
+                        .accessibilityLabel(seekFeedback < 0 ? "Back 15 seconds" : "Forward 15 seconds")
+                }
+            }
             .ignoresSafeArea(edges: controlsVisible ? [] : .all)
             .background(.black)
             .navigationTitle(playback.title)
@@ -317,6 +399,22 @@ struct PlayerScreen: View {
             .toolbar(controlsVisible ? .visible : .hidden, for: .navigationBar)
             .toolbar {
                 ToolbarItem(placement: .topBarLeading) { Button("Done", systemImage: "xmark") { playback.isPresented = false }.labelStyle(.iconOnly) }
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button(playback.speedLabel) { showingSpeed = true; showControls() }
+                        .accessibilityLabel("Playback speed, \(playback.speedLabel)")
+                        .accessibilityIdentifier("playbackSpeed")
+                        .accessibilityAction(named: "Skip back 15 seconds") { skip(-15) }
+                        .accessibilityAction(named: "Skip forward 15 seconds") { skip(15) }
+                        .popover(isPresented: $showingSpeed) {
+                            VStack(spacing: 16) {
+                                HStack { Text("Playback speed"); Spacer(); Text(playback.speedLabel).monospacedDigit() }
+                                Slider(value: Binding(get: { playback.playbackSpeed }, set: playback.setPlaybackSpeed), in: 0.25...2, step: 0.25)
+                                    .accessibilityLabel("Playback speed")
+                                    .accessibilityValue(playback.speedLabel)
+                                HStack { Text("0.25×"); Spacer(); Text("2×") }.font(.caption).foregroundStyle(.secondary)
+                            }.padding(20).frame(width: 280).presentationCompactAdaptation(.popover)
+                        }
+                }
             }
         }
         .statusBarHidden(!controlsVisible)
@@ -325,8 +423,14 @@ struct PlayerScreen: View {
         .onChange(of: playback.index) { _, _ in showControls() }
         .onChange(of: playback.error) { _, _ in showControls() }
         .onChange(of: voiceOverEnabled) { _, _ in showControls() }
+        .onChange(of: showingSpeed) { _, _ in showControls() }
+        .task(id: seekInteraction) {
+            guard seekFeedback != nil else { return }
+            do { try await Task.sleep(for: .seconds(1)) } catch { return }
+            seekFeedback = nil
+        }
         .task(id: interaction) {
-            guard controlsVisible, playing, !scrubbing, !voiceOverEnabled, playback.error == nil else { return }
+            guard controlsVisible, playing, !scrubbing, !showingSpeed, !voiceOverEnabled, playback.error == nil else { return }
             let currentInteraction = interaction
             do { try await Task.sleep(for: .seconds(3)) } catch { return }
             guard !Task.isCancelled, interaction == currentInteraction else { return }
@@ -337,6 +441,18 @@ struct PlayerScreen: View {
     }
     private func showControls() {
         withAnimation { controlsVisible = true }
+        interaction = UUID()
+    }
+    private func toggleControls() {
+        if controlsVisible && playing && !voiceOverEnabled {
+            withAnimation { controlsVisible = false }
+            interaction = UUID()
+        } else { showControls() }
+    }
+    private func skip(_ seconds: Double) {
+        guard playback.skip(seconds: seconds) else { return }
+        seekFeedback = seconds
+        seekInteraction = UUID()
         interaction = UUID()
     }
 }

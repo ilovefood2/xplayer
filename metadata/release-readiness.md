@@ -238,3 +238,26 @@ validation or review, and do not certify trademark or legal clearance.
   file inventory again matched all four original video paths, sizes, and
   modification dates. Personal video contents were not copied or fully played;
   playback verification used synthetic fixtures.
+
+## Verification of 4.11.142
+
+- Double-tap the left/right half of the video to seek backward/forward 15 seconds
+  with brief feedback. Native and VLC playback retain single-tap controls;
+  native buttons/sliders do not trigger the double-tap seek gesture. Seek targets
+  stay within the available timeline, and paused VLC seeks update their displayed
+  position immediately while the backend's clock notifications are paused.
+- The speed button opens a compact 0.25x–2x slider in 0.25x steps. Speed changes
+  preserve pause state and carry over to subsequent videos during the app session.
+  The popover keeps controls visible while adjusting, and VoiceOver skip actions
+  are available on the speed button without adding permanent video overlays.
+- All 38 unique iPhone-simulator checks passed: 34 core/resource/playback checks,
+  the two new native/VLC gesture-and-speed UI checks, and both existing auto-hide
+  UI checks. Tests cover seek bounds, paused/resumed seeking, speed bounds and
+  carryover, single/double tap separation, both slider extremes, and popover lifetime.
+- Both new UI checks passed on the iPad simulator after retrying an initial
+  simulator-runner preflight error. The speed popovers were visually reviewed
+  on iPhone and iPad with synthetic test videos.
+- The fresh signed Release build passed source/bundle and deep signature checks.
+  Version 4.11.142 was installed on the physical iPhone. Physical test startup
+  remains unverified after the phone relocked during Xcode preflight; the waiting
+  test run was cancelled and the signed Release app was restored.

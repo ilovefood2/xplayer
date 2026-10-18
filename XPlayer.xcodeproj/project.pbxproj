@@ -15,13 +15,17 @@
 		1DF23E3BE3AD342A236D4831 /* LibraryStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA503BABDD8543D51F68B5EA /* LibraryStoreTests.swift */; };
 		31ACAEFAAA5FF3D83AA18E4C /* PlaylistViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 10D0C25E094FF06E930EB315 /* PlaylistViews.swift */; };
 		31BB2EEE592920D4CC5BD0EB /* vp9.webm in Resources */ = {isa = PBXBuildFile; fileRef = C921324F14BF19943AA54130 /* vp9.webm */; };
+		33567DBBCD4B19449DCC3B2C /* seek.mkv in Resources */ = {isa = PBXBuildFile; fileRef = B1ECFE7E6A0F863B60B38E00 /* seek.mkv */; };
+		3A2B16651BF260F6AD4BAB74 /* seek.mkv in Resources */ = {isa = PBXBuildFile; fileRef = B1ECFE7E6A0F863B60B38E00 /* seek.mkv */; };
 		3D935FAB2FD7E1E24E098A07 /* MobileVLCKit.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B6D2E4D476A7E78B754019D /* MobileVLCKit.xcframework */; };
 		3EA32FCF0CF8C8ED7DC0D08B /* XPlayerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4F116935A655A1171FB88C5 /* XPlayerApp.swift */; };
 		495DCB609C785CF0805CBBBF /* LibraryViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 177D62AC15D24379180A2A42 /* LibraryViews.swift */; };
 		4FE3F73C69B62D2A5C5E1242 /* License.txt in Resources */ = {isa = PBXBuildFile; fileRef = E4D0A792D65910FEBD9C7956 /* License.txt */; };
 		510E893C514B3C08755D837E /* clip.mkv in Resources */ = {isa = PBXBuildFile; fileRef = F3A315C1F102C35A569FC2B5 /* clip.mkv */; };
+		51649EEFB39A812F2C4BE77B /* seek.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D5C9DCF94FE645DF172DA4DA /* seek.mp4 */; };
 		58289B33F0FD4D1E555AE348 /* av1.webm in Resources */ = {isa = PBXBuildFile; fileRef = 4DB87782A76CFA73E7FB25CB /* av1.webm */; };
 		5BF089078C8D86125BDFEDBF /* clip.avi in Resources */ = {isa = PBXBuildFile; fileRef = C74D2B9AD21A99AFCFA929A8 /* clip.avi */; };
+		5CD5608949EA9B690AD843BF /* seek.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D5C9DCF94FE645DF172DA4DA /* seek.mp4 */; };
 		65200DFEB331A3D565365015 /* VideoHTTPServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A8BA13245045940F6CDC57 /* VideoHTTPServer.swift */; };
 		77B82C8C206BF4F264B68F64 /* stream.ts in Resources */ = {isa = PBXBuildFile; fileRef = 04FD6885E45D991CCF86073D /* stream.ts */; };
 		7890DC95312D9E7A643C0766 /* PlaybackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51BD5905938CAC51EBB7BC87 /* PlaybackTests.swift */; };
@@ -92,12 +96,14 @@
 		90A8BA13245045940F6CDC57 /* VideoHTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHTTPServer.swift; sourceTree = "<group>"; };
 		A583B79A37F4D19894F41171 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A85C9DFF45E557986EF913A2 /* XPlayerTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = XPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1ECFE7E6A0F863B60B38E00 /* seek.mkv */ = {isa = PBXFileReference; path = seek.mkv; sourceTree = "<group>"; };
 		B4F116935A655A1171FB88C5 /* XPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPlayerApp.swift; sourceTree = "<group>"; };
 		B653AC7D19150C69805B9408 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		BA4D2BC923A96646AA2DD7C0 /* XPlayer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = XPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74D2B9AD21A99AFCFA929A8 /* clip.avi */ = {isa = PBXFileReference; lastKnownFileType = video.avi; path = clip.avi; sourceTree = "<group>"; };
 		C921324F14BF19943AA54130 /* vp9.webm */ = {isa = PBXFileReference; path = vp9.webm; sourceTree = "<group>"; };
 		D5566507F342C642E2B7F7EF /* XPlayerUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = XPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5C9DCF94FE645DF172DA4DA /* seek.mp4 */ = {isa = PBXFileReference; path = seek.mp4; sourceTree = "<group>"; };
 		D6D2307CA45323107A477AC7 /* MobileVLCKit-LGPL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "MobileVLCKit-LGPL.txt"; sourceTree = "<group>"; };
 		D80FA91F15FBCD800AAAB587 /* PlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackController.swift; sourceTree = "<group>"; };
 		DA503BABDD8543D51F68B5EA /* LibraryStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStoreTests.swift; sourceTree = "<group>"; };
@@ -206,6 +212,8 @@
 				1DB974E975D904784961DD64 /* clip.webm */,
 				545014A6BECDBC1705FE3AA8 /* finder.m2ts */,
 				DB2CBDCE3860552264CD54EE /* finder.ts */,
+				B1ECFE7E6A0F863B60B38E00 /* seek.mkv */,
+				D5C9DCF94FE645DF172DA4DA /* seek.mp4 */,
 				04FD6885E45D991CCF86073D /* stream.ts */,
 				C921324F14BF19943AA54130 /* vp9.webm */,
 			);
@@ -338,6 +346,8 @@
 				D9C219AA5336F76D483A01C6 /* clip.webm in Resources */,
 				AD7E6CB885002D6B997B5329 /* finder.m2ts in Resources */,
 				0A8739EAEFACF78A7D7CDDA9 /* finder.ts in Resources */,
+				33567DBBCD4B19449DCC3B2C /* seek.mkv in Resources */,
+				5CD5608949EA9B690AD843BF /* seek.mp4 in Resources */,
 				77B82C8C206BF4F264B68F64 /* stream.ts in Resources */,
 				31BB2EEE592920D4CC5BD0EB /* vp9.webm in Resources */,
 			);
@@ -349,6 +359,8 @@
 			files = (
 				510E893C514B3C08755D837E /* clip.mkv in Resources */,
 				D1DE9DD0F56BAAF743106113 /* controls.mp4 in Resources */,
+				3A2B16651BF260F6AD4BAB74 /* seek.mkv in Resources */,
+				51649EEFB39A812F2C4BE77B /* seek.mp4 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -546,7 +558,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 141;
+				CURRENT_PROJECT_VERSION = 142;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -565,7 +577,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.141;
+				MARKETING_VERSION = 4.11.142;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -613,7 +625,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 141;
+				CURRENT_PROJECT_VERSION = 142;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -626,7 +638,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.141;
+				MARKETING_VERSION = 4.11.142;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

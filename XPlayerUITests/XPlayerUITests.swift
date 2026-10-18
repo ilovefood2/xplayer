@@ -187,6 +187,65 @@ final class XPlayerUITests: XCTestCase {
         XCTAssertTrue(app.navigationBars["Library"].waitForExistence(timeout: 5))
     }
 
+    @MainActor func testNativeDoubleTapSeekingAndSpeedSlider() async throws {
+        try await checkSeekingAndSpeed(extension: "mp4")
+    }
+
+    @MainActor func testVLCDoubleTapSeekingAndSpeedSlider() async throws {
+        try await checkSeekingAndSpeed(extension: "mkv")
+    }
+
+    @MainActor private func checkSeekingAndSpeed(extension ext: String) async throws {
+        let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "seek", withExtension: ext))
+        let server = try VideoHTTPServer(files: ["/seek.\(ext)": Data(contentsOf: fixture)])
+        defer { server.stop() }
+        let ready = expectation(description: "Seek/speed fixture ready")
+        server.start { ready.fulfill() }
+        await fulfillment(of: [ready], timeout: 5)
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Library actions"].tap()
+        app.buttons["Open Network Video"].tap()
+        let field = app.textFields["networkURL"]
+        XCTAssertTrue(field.waitForExistence(timeout: 5))
+        field.tap()
+        field.typeText("http://127.0.0.1:\(try XCTUnwrap(server.port))/seek.\(ext)")
+        app.buttons["Play"].tap()
+        let speedButton = app.buttons["playbackSpeed"]
+        XCTAssertTrue(speedButton.waitForExistence(timeout: 5))
+        let hidden = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: app.buttons["Done"])
+        await fulfillment(of: [hidden], timeout: 8)
+        let video = ext == "mkv" ? app.buttons["playerVideo"] : app.otherElements["nativeVideo"]
+        XCTAssertTrue(video.exists)
+        let feedback = app.descendants(matching: .any).matching(identifier: "seekFeedback").firstMatch
+        for (x, label) in [(0.75, "Forward 15 seconds"), (0.25, "Back 15 seconds")] {
+            video.coordinate(withNormalizedOffset: CGVector(dx: x, dy: 0.4)).doubleTap()
+            XCTAssertTrue(feedback.exists)
+            XCTAssertEqual(feedback.label, label)
+            XCTAssertFalse(app.buttons["Done"].exists)
+        }
+        video.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.4)).tap()
+        XCTAssertTrue(speedButton.waitForExistence(timeout: 3))
+        speedButton.tap()
+        let slider = app.sliders["Playback speed"]
+        XCTAssertTrue(slider.waitForExistence(timeout: 3))
+        slider.adjust(toNormalizedSliderPosition: 0)
+        XCTAssertEqual(slider.value as? String, "0.25×")
+        slider.adjust(toNormalizedSliderPosition: 1)
+        XCTAssertEqual(slider.value as? String, "2×")
+        let screenshot = XCTAttachment(screenshot: app.screenshot())
+        screenshot.name = "\(ext.uppercased()) speed slider"
+        screenshot.lifetime = .keepAlways
+        add(screenshot)
+        let remainsVisible = expectation(for: NSPredicate(format: "exists == false"), evaluatedWith: slider)
+        remainsVisible.isInverted = true
+        await fulfillment(of: [remainsVisible], timeout: 4)
+        video.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.4)).tap()
+        XCTAssertTrue(speedButton.label.contains("2×"))
+        XCTAssertFalse(app.staticTexts["playbackError"].exists)
+        app.buttons["Done"].tap()
+    }
+
     @MainActor func testNativePlaybackHidesAndRestoresAppControls() async throws {
         let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "controls", withExtension: "mp4"))
         let server = try VideoHTTPServer(files: ["/controls.mp4": Data(contentsOf: fixture)])

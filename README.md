@@ -9,6 +9,7 @@ or analytics.
 - Create, move, rename, and delete folders; combine videos into playlists.
 - Select multiple library files or folders and confirm batch deletion.
 - Favorite videos and play direct HTTP/HTTPS video or HLS links.
+- Double-tap left/right to skip 15 seconds; adjust playback speed from 0.25× to 2×.
 - Reorder playlists and play them in sequence using native playback controls.
 - Read privacy, support, and license documents offline in Library → … → Help & About.
 

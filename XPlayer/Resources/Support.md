@@ -34,6 +34,18 @@ AVI and WebM compatibility checks include MPEG-4 Part 2/MP3 in AVI and
 VP8/Vorbis, VP9/Opus, and AV1/Opus in WebM. These checks do not cover every
 codec/profile, damaged file, high-resolution stream, or subtitle combination.
 
+## Playback controls
+
+Double-tap the left half of the video to go back 15 seconds, or the right half
+to go forward 15 seconds. A single tap shows or hides controls. Seeking stays
+within the video's available timeline; live streams may not allow seeking.
+
+Tap the speed button (initially 1×) in the upper-right corner to open a slider.
+Choose 0.25× to 2× in quarter-speed steps. Changing speed keeps a paused video
+paused, and the selected speed carries over to the next video. These controls
+work with native and MobileVLCKit playback. VoiceOver users can also choose the
+15-second skip actions on the speed button.
+
 ## Folders and playlists
 
 Use … → New Folder to create a folder. Long-press a file or folder to move it

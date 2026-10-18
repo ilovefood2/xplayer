@@ -228,12 +228,62 @@ final class PlaybackTests: XCTestCase {
         }
     }
 
-    @MainActor private func waitUntil(_ condition: () -> Bool) async throws {
+    @MainActor func testSkipAndSpeedForNativeAndVLCPlayback() async throws {
+        let temporary = FileManager.default.temporaryDirectory.appendingPathComponent(UUID().uuidString)
+        defer { try? FileManager.default.removeItem(at: temporary) }
+        let library = LibraryStore(root: temporary.appendingPathComponent("Documents"), metadata: temporary.appendingPathComponent("playlists.json"))
+        for ext in ["mp4", "mkv"] {
+            let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "seek", withExtension: ext))
+            try FileManager.default.copyItem(at: fixture, to: library.root.appendingPathComponent("seek." + ext))
+        }
+        library.refresh()
+        let playback = PlaybackController()
+        let window = try XCTUnwrap((UIApplication.shared.connectedScenes.first as? UIWindowScene)?.windows.first)
+        playback.vlcVideoView.frame = window.bounds
+        window.addSubview(playback.vlcVideoView)
+        defer { playback.stop(); playback.vlcVideoView.removeFromSuperview() }
+        XCTAssertFalse(playback.skip(seconds: 15))
+        playback.setPlaybackSpeed(.nan)
+        XCTAssertEqual(playback.playbackSpeed, 1)
+        playback.setPlaybackSpeed(10)
+        XCTAssertEqual(playback.playbackSpeed, 2)
+        playback.setPlaybackSpeed(-1)
+        XCTAssertEqual(playback.playbackSpeed, 0.25)
+        playback.setPlaybackSpeed(1.5)
+        for ext in ["mp4", "mkv"] {
+            playback.play(["seek." + ext], library: library)
+            func time() -> Double {
+                playback.vlcPlayer.map { Double($0.time.intValue) / 1000 } ?? playback.player.currentTime().seconds
+            }
+            try await waitUntil { time() > 0 && (playback.vlcPlayer?.isSeekable ?? !(playback.player.currentItem?.seekableTimeRanges.isEmpty ?? true)) }
+            XCTAssertEqual(playback.vlcPlayer?.rate ?? playback.player.rate, playback.playbackSpeed, accuracy: 0.01)
+            playback.pause()
+            try await waitUntil { playback.vlcPlayer.map { !$0.isPlaying } ?? (playback.player.rate == 0) }
+            playback.setPlaybackSpeed(0.75)
+            XCTAssertFalse(playback.vlcPlayer?.isPlaying ?? (playback.player.rate != 0))
+            XCTAssertFalse(playback.skip(seconds: .infinity))
+            for (offset, expected) in [(-1000.0, 0.0), (15.0, 15.0), (-15.0, 0.0)] {
+                XCTAssertTrue(playback.skip(seconds: offset))
+                XCTAssertFalse(playback.vlcPlayer?.isPlaying ?? (playback.player.rate != 0))
+                if playback.vlcPlayer != nil { playback.toggleVLCPlayback() }
+                else { playback.player.play() }
+                try await waitUntil { abs(time() - expected) < 1 }
+                playback.pause()
+                try await waitUntil { playback.vlcPlayer.map { !$0.isPlaying } ?? (playback.player.rate == 0) }
+            }
+            XCTAssertTrue(playback.skip(seconds: 1000))
+            try await waitUntil { playback.vlcPlayer != nil ? playback.vlcPosition == 1 : time() > 88 }
+            if let vlc = playback.vlcPlayer { XCTAssertEqual(vlc.rate, 0.75, accuracy: 0.01) }
+            else { XCTAssertEqual(playback.player.defaultRate, 0.75, accuracy: 0.01) }
+        }
+    }
+
+    @MainActor private func waitUntil(file: StaticString = #filePath, line: UInt = #line, _ condition: () -> Bool) async throws {
         for _ in 0..<150 {
             if condition() { return }
             try await Task.sleep(for: .milliseconds(100))
         }
-        XCTFail("Playback did not reach the expected state within 15 seconds")
+        XCTFail("Playback did not reach the expected state within 15 seconds", file: file, line: line)
     }
 
     @MainActor func testNetworkURLValidationPreservesSignedQueries() throws {

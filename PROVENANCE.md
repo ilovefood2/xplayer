@@ -71,3 +71,6 @@ or artwork from the SPlayer desktop project was imported.
 The Finder-sharing regression fixtures finder.ts and finder.m2ts are remuxes
 of the same synthetic clip: H.264/AAC in MPEG-TS and H.264/AC-3 in M2TS.
 No personal video is included in these fixtures or the application bundle.
+
+The seek.mp4 and seek.mkv gesture/speed fixtures are 90-second loops/remuxes of
+the existing synthetic controls.mp4 test pattern. They ship in test bundles only.

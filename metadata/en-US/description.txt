@@ -15,6 +15,9 @@ Mark videos as favorites and play them from the Favorites tab. Select multiple f
 OPEN NETWORK VIDEOS
 Play direct HTTP or HTTPS video links and HLS streams. Network playback requires a reachable server and supported codecs. Website pages, SMB shares, and DRM streams are not supported. Links are not saved; the server receives your IP address and requested URL. Prefer HTTPS.
 
+WATCH AT YOUR PACE
+Double-tap the left or right side of the video to skip back or forward 15 seconds. Tap the speed button and move the slider to choose 0.25× to 2× playback. Seeking depends on the video's available timeline.
+
 PRIVATE BY DESIGN
 No account, ads, or tracking SDKs. Your videos and playlists are stored locally and are not uploaded to the developer.
 
