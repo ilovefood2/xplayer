@@ -135,8 +135,11 @@ validation or review, and do not certify trademark or legal clearance.
   both playback-control UI tests. Longer synthetic fixtures exercise visibility
   without the video ending before the controls can be tested.
 - A fresh signed Release build passed source/bundle validation and deep signature
-  verification. Physical test execution was blocked by the locked iPhone, and
-  the waiting run was cancelled. Device inventory confirmed 4.11.137 (137)
-  installed; automatic launch was blocked by the lock screen.
+  verification. The initial physical run was blocked by the locked iPhone.
+- Follow-up on October 18, 2026: both playback-control UI tests passed on the
+  unlocked physical iPhone 16 Pro Max (MKV: 34.848 seconds; native: 25.687 seconds).
+  They verified hiding, tap-to-reveal, and visibility while paused. The signed
+  4.11.137 Release app was reinstalled after testing; the phone relocked before
+  the final automatic launch, so it must be opened manually.
 - VoiceOver behavior was preserved in code but not manually exercised with
   VoiceOver enabled. Live support-site deployment was not changed.
