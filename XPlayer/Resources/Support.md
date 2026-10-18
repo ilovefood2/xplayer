@@ -37,7 +37,7 @@ audio output or any device-mirroring session on your Mac.
 
 ## Report a problem
 
-Open https://github.com/ilovefood2/xplayer/issues and describe the problem,
+Email a@ikel.ca or open https://github.com/ilovefood2/xplayer/issues and describe the problem,
 your device model, iOS version, app version, and steps to reproduce it.
 For playback issues, include the container and codec if known. Do not attach
 private videos or personal information to a public issue. The application

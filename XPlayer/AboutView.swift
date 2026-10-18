@@ -5,6 +5,7 @@ enum AppInformation {
     static let privacyURL = URL(string: "https://ilovefood2.github.io/xplayer/privacy.html")!
     static let supportURL = URL(string: "https://ilovefood2.github.io/xplayer/support.html")!
     static let issuesURL = URL(string: "https://github.com/ilovefood2/xplayer/issues")!
+    static let emailURL = URL(string: "mailto:a@ikel.ca?subject=xplayer%20support")!
 
     static func document(_ name: String, extension suffix: String = "md") throws -> String {
         guard let url = Bundle.main.url(forResource: name, withExtension: suffix) else {
@@ -28,6 +29,7 @@ struct AboutView: View {
             Section("Help") {
                 NavigationLink("Help & Supported Formats") { AppDocumentView(title: "Help", resource: "Support", website: AppInformation.supportURL) }
                 Link("Support Website", destination: AppInformation.supportURL)
+                Link("Email Support", destination: AppInformation.emailURL)
                 Link("Report a Problem", destination: AppInformation.issuesURL)
             }
             Section {

@@ -42,7 +42,12 @@ own privacy policy. A public support issue is visible to others. Do not include
 private videos, filenames, account credentials, or other sensitive information.
 The app never attaches your videos or library data to a support request.
 
+If you choose to email a@ikel.ca, the maintainer receives your email address,
+message, and any attachments you choose to send. That information is used to
+respond to your request and retained only as needed for support or applicable
+legal obligations. You can request deletion of support correspondence by email.
+
 ## Changes and contact
 
 Updates to this policy will appear here with a revised effective date.
-Contact the maintainer through https://github.com/ilovefood2/xplayer/issues.
+Contact the maintainer at a@ikel.ca or through https://github.com/ilovefood2/xplayer/issues.

@@ -42,7 +42,7 @@ def write_page(filename, title, body):
 <title>{html.escape(title)} · xplayer</title><meta name="description" content="xplayer offline video player: privacy, support, and license information.">
 <link rel="icon" href="icon.png"><style>{STYLE}</style></head><body>
 <nav aria-label="Main navigation"><a href="index.html">xplayer</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a><a href="license.html">License</a></nav>
-<main>{body}</main><footer>© 2026 xplayer contributors · <a href="https://github.com/ilovefood2/xplayer">Source code</a> · <a href="https://github.com/ilovefood2/xplayer/issues">Contact &amp; issues</a></footer>
+<main>{body}</main><footer>© 2026 xplayer contributors · <a href="mailto:a@ikel.ca">a@ikel.ca</a> · <a href="https://github.com/ilovefood2/xplayer">Source code</a> · <a href="https://github.com/ilovefood2/xplayer/issues">Issues</a></footer>
 </body></html>'''
     (DOCS / filename).write_text(page)
 

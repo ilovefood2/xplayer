@@ -2,10 +2,17 @@
 import XCTest
 
 final class XPlayerUITests: XCTestCase {
+    @MainActor private func selectTab(_ name: String, in app: XCUIApplication) {
+        // iPad exposes floating tabs as cells instead of a TabBar.
+        let tab = app.descendants(matching: .any).matching(identifier: name).firstMatch
+        XCTAssertTrue(tab.waitForExistence(timeout: 5))
+        tab.tap()
+    }
+
     @MainActor func testPrivacyAndLicenseAreReadableInApp() throws {
         let app = XCUIApplication()
         app.launch()
-        app.tabBars.buttons["About"].tap()
+        selectTab("About", in: app)
         app.buttons["Privacy Policy"].tap()
         XCTAssertTrue(app.navigationBars["Privacy Policy"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["Your video library"].exists)
@@ -41,7 +48,7 @@ final class XPlayerUITests: XCTestCase {
         name.typeText("Day One")
         app.buttons["Save"].tap()
         XCTAssertTrue(app.staticTexts["Day One"].waitForExistence(timeout: 5))
-        app.tabBars.buttons["Playlists"].tap()
+        selectTab("Playlists", in: app)
         app.buttons["Create playlist"].tap()
         XCTAssertTrue(name.waitForExistence(timeout: 5))
         name.tap()
@@ -53,7 +60,7 @@ final class XPlayerUITests: XCTestCase {
         XCTAssertTrue(app.staticTexts[folder].waitForExistence(timeout: 5))
         app.staticTexts[folder].tap()
         XCTAssertTrue(app.staticTexts["Day One"].waitForExistence(timeout: 5))
-        app.tabBars.buttons["Playlists"].tap()
+        selectTab("Playlists", in: app)
         XCTAssertTrue(app.staticTexts[playlist].waitForExistence(timeout: 5))
         app.staticTexts[playlist].tap()
         XCTAssertTrue(app.buttons["Add Videos"].waitForExistence(timeout: 5))

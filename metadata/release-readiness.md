@@ -21,12 +21,13 @@ Prepared on 2026-10-18 for xplayer, bundle ID `com.ilovefood2.xplayer`.
 
 These are not claims of completed Apple approval:
 
-1. Confirm an active paid Apple Developer membership and distribution signing.
+1. Paid Apple Developer membership is not active, as confirmed by the account
+   holder on 2026-10-18. App Store distribution signing and submission remain blocked.
 2. Create the App Store Connect app record and verify store-name availability.
    Similar XPlayer/X Player names already appear in public Canadian listings.
    The requested display name remains xplayer; trademark clearance is unresolved.
-3. Confirm the public publisher/contact details. The current support contact is
-   the maintainer's public GitHub issue tracker; no personal email is published.
+3. The account holder approved a@ikel.ca as the public support email on
+   2026-10-18. The seller name will be determined by the enrolled Apple account.
 4. Verify the public policy/support URLs return the final documents before upload.
 5. Complete age-rating, pricing/availability, content-rights, and export-compliance
    forms using the actual app behavior. No custom/non-exempt encryption is used.

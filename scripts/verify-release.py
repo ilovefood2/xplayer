@@ -67,7 +67,8 @@ if args.check_urls:
             request = urllib.request.Request(metadata[field], headers={'User-Agent': 'xplayer-release-check'})
             with urllib.request.urlopen(request, timeout=20) as response:
                 body = response.read().decode()
-                check(response.status == 200 and 'xplayer' in body and len(body) > 300, f'Public page not ready: {metadata[field]}')
+                local = ROOT / 'docs' / ('privacy.html' if field == 'privacyPolicyURL' else 'support.html')
+                check(response.status == 200 and body.strip() == local.read_text().strip(), f'Public page does not match the bundled policy/support version: {metadata[field]}')
         except Exception as error:
             errors.append(f'Public page unreachable: {metadata[field]}: {error}')
 
