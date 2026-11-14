@@ -115,9 +115,10 @@ final class PlaybackController: NSObject, ObservableObject, VLCMediaPlayerDelega
                 startVLC(url)
                 return
             }
-            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
-            try AVAudioSession.sharedInstance().setActive(true)
-            ownsAudioSession = true
+            // Audio is not a reason to refuse the video: activation fails while a
+            // phone call or another app holds the audio session.
+            try? AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
+            ownsAudioSession = (try? AVAudioSession.sharedInstance().setActive(true)) != nil
             let item = AVPlayerItem(url: url)
             item.audioTimePitchAlgorithm = .timeDomain
             failureObserver = item.observe(\.status, options: [.new]) { [weak self] item, _ in

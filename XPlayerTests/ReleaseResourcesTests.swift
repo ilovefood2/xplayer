@@ -29,6 +29,12 @@ final class ReleaseResourcesTests: XCTestCase {
         let manifest = try XCTUnwrap(PropertyListSerialization.propertyList(from: data, format: nil) as? [String: Any])
         XCTAssertEqual(manifest["NSPrivacyTracking"] as? Bool, false)
         XCTAssertEqual((manifest["NSPrivacyCollectedDataTypes"] as? [Any])?.count, 0)
+        // MobileVLCKit ships no manifest; App Store Connect requires reasons for its API use.
+        let declared = Set((manifest["NSPrivacyAccessedAPITypes"] as? [[String: Any]] ?? []).compactMap { $0["NSPrivacyAccessedAPIType"] as? String })
+        XCTAssertEqual(declared, [
+            "NSPrivacyAccessedAPICategoryFileTimestamp", "NSPrivacyAccessedAPICategorySystemBootTime",
+            "NSPrivacyAccessedAPICategoryDiskSpace", "NSPrivacyAccessedAPICategoryUserDefaults",
+        ])
         XCTAssertEqual(Bundle.main.bundleIdentifier, "com.ilovefood2.xplayer")
         XCTAssertEqual(Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String, "xplayer")
     }

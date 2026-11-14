@@ -32,6 +32,11 @@ check(privacy.get('NSPrivacyTracking') is False, 'Unexpected tracking declaratio
 check(privacy.get('NSPrivacyCollectedDataTypes') == [], 'Review data collection before release.')
 reasons = {item['NSPrivacyAccessedAPIType']: set(item['NSPrivacyAccessedAPITypeReasons']) for item in privacy['NSPrivacyAccessedAPITypes']}
 check(reasons.get('NSPrivacyAccessedAPICategoryFileTimestamp') == {'C617.1', '3B52.1'}, 'File metadata reason declarations do not match the audited use.')
+# MobileVLCKit has no privacy manifest of its own; its binary calls mach_absolute_time,
+# fstatfs, and NSUserDefaults, which App Store Connect rejects without a declared reason.
+check(reasons.get('NSPrivacyAccessedAPICategorySystemBootTime') == {'35F9.1'}, 'Declare the decoder clock (system boot time) reason.')
+check(reasons.get('NSPrivacyAccessedAPICategoryDiskSpace') == {'E174.1'}, 'Declare the decoder file-system (disk space) reason.')
+check(reasons.get('NSPrivacyAccessedAPICategoryUserDefaults') == {'CA92.1'}, 'Declare the decoder settings (UserDefaults) reason.')
 check((ROOT / 'LICENSE').read_bytes() == (source / 'Resources/License.txt').read_bytes(), 'Bundled MIT license differs from the source license.')
 check((ROOT / 'THIRD_PARTY_NOTICES.md').read_bytes() == (source / 'Resources/ThirdPartyNotices.md').read_bytes(), 'Bundled third-party notices differ.')
 notices = subprocess.run([sys.executable, str(ROOT / 'metadata/dependencies/collect-licenses.py'), '--check'], capture_output=True, text=True)

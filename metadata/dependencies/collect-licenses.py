@@ -11,7 +11,9 @@ HERE = Path(__file__).resolve().parent
 ROOT = HERE.parent.parent
 MANIFEST = HERE / 'mobilevlckit-3.7.3.json'
 RESOURCE = ROOT / 'XPlayer/Resources/ThirdPartyLicenses.txt'
-HEADER = '''Third-party copyright and license notices
+# The release tag follows the app version, so a version bump only needs --render.
+VERSION = json.loads((ROOT / 'package.json').read_text())['version']
+HEADER = f'''Third-party copyright and license notices
 
 MobileVLCKit includes the libraries listed below. These notices are reproduced
 from their exact corresponding source archives, including notices for optional
@@ -27,7 +29,7 @@ This product includes software developed by Niels Provos.
 This software is based in part on the work of the Independent JPEG Group.
 
 Matching sources, patches and build instructions:
-https://github.com/ilovefood2/xplayer/releases/tag/ios-v4.11.143
+https://github.com/ilovefood2/xplayer/releases/tag/ios-v{VERSION}
 '''
 
 
@@ -116,18 +118,22 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--archives', type=Path, help='Regenerate from the pinned source archive directory')
     parser.add_argument('--check', action='store_true', help='Verify collected notice hashes and bundled text')
+    parser.add_argument('--render', action='store_true', help='Rewrite the bundled text from the collected notices (offline)')
     args = parser.parse_args()
     manifest = json.loads(MANIFEST.read_text())
     if manifest.get('unresolved') or not manifest.get('dependencies'):
         raise ValueError('Dependency inventory is incomplete')
     if args.archives:
         collect(manifest, args.archives)
+    elif args.render:
+        RESOURCE.write_bytes(render(manifest))
+        print('Rendered ' + str(RESOURCE.relative_to(ROOT)))
     elif args.check:
         if RESOURCE.read_bytes() != render(manifest):
             raise ValueError('Bundled dependency licenses differ from the collected notices')
         print(f"PASS: {len(manifest['dependencies'])} dependency notice sets match their manifest and app resource.")
     else:
-        parser.error('Specify --archives or --check')
+        parser.error('Specify --archives, --render, or --check')
 
 
 if __name__ == '__main__':

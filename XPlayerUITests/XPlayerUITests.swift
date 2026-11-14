@@ -256,6 +256,73 @@ final class XPlayerUITests: XCTestCase {
         app.buttons["Done"].tap()
     }
 
+    @MainActor private func capture(_ name: String, from app: XCUIApplication) {
+        let attachment = XCTAttachment(screenshot: app.screenshot())
+        attachment.name = name
+        attachment.lifetime = .keepAlways
+        add(attachment)
+    }
+
+    /// Every tab and both players (Apple and VLC) in landscape, on iPhone and iPad.
+    @MainActor func testLandscapeLibraryAndPlayback() async throws {
+        let server = try VideoHTTPServer(files: [
+            "/seek.mp4": Data(contentsOf: try XCTUnwrap(Bundle(for: Self.self).url(forResource: "seek", withExtension: "mp4"))),
+            "/clip.mkv": Data(contentsOf: try XCTUnwrap(Bundle(for: Self.self).url(forResource: "clip", withExtension: "mkv"))),
+        ])
+        defer { server.stop() }
+        let ready = expectation(description: "Landscape fixture server ready")
+        server.start { ready.fulfill() }
+        await fulfillment(of: [ready], timeout: 5)
+        let app = XCUIApplication()
+        app.launch()
+        XCUIDevice.shared.orientation = .landscapeLeft
+        defer { XCUIDevice.shared.orientation = .portrait }
+
+        let actions = app.buttons["Library actions"]
+        XCTAssertTrue(actions.waitForExistence(timeout: 5))
+        XCTAssertTrue(actions.isHittable)
+        let window = app.windows.firstMatch.frame
+        XCTAssertGreaterThan(window.width, window.height, "The interface did not rotate to landscape: \(window)")
+        capture("Landscape library", from: app)
+        selectTab("Favorites", in: app)
+        XCTAssertTrue(app.navigationBars["Favorites"].waitForExistence(timeout: 5))
+        capture("Landscape favorites", from: app)
+        selectTab("Playlists", in: app)
+        XCTAssertTrue(app.navigationBars["Playlists"].waitForExistence(timeout: 5))
+        capture("Landscape playlists", from: app)
+        selectTab("Library", in: app)
+
+        for (file, vlc) in [("seek.mp4", false), ("clip.mkv", true)] {
+            XCTAssertTrue(actions.waitForExistence(timeout: 5))
+            actions.tap()
+            app.buttons["Open Network Video"].tap()
+            let field = app.textFields["networkURL"]
+            XCTAssertTrue(field.waitForExistence(timeout: 5))
+            field.tap()
+            field.typeText("http://127.0.0.1:\(try XCTUnwrap(server.port))/\(file)")
+            app.buttons["Play"].tap()
+            let done = app.buttons["Done"]
+            XCTAssertTrue(done.waitForExistence(timeout: 5))
+            XCTAssertTrue(done.isHittable, "\(file): Done must be reachable in landscape")
+            let playerWindow = app.windows.firstMatch.frame
+            XCTAssertGreaterThan(playerWindow.width, playerWindow.height, "\(file): player did not rotate: \(playerWindow)")
+            XCTAssertTrue(app.buttons["playbackSpeed"].isHittable, "\(file): speed must be reachable in landscape")
+            if vlc {
+                XCTAssertTrue(app.buttons["vlcPlayPause"].isHittable)
+                XCTAssertTrue(app.sliders["Playback position"].isHittable)
+            }
+            try await Task.sleep(for: .seconds(1))
+            XCTAssertFalse(app.staticTexts["playbackError"].exists, "\(file) failed to play in landscape")
+            capture("Landscape \(file) player", from: app)
+            // Controls auto-hide after 3 seconds; reveal them again if they did.
+            let video = vlc ? app.buttons["playerVideo"] : app.otherElements["nativeVideo"]
+            for _ in 0..<3 where !(done.waitForExistence(timeout: 1) && done.isHittable) { video.tap() }
+            XCTAssertTrue(done.isHittable)
+            done.tap()
+            XCTAssertTrue(app.navigationBars["Library"].waitForExistence(timeout: 5))
+        }
+    }
+
     @MainActor func testNativePlaybackHidesAndRestoresAppControls() async throws {
         let fixture = try XCTUnwrap(Bundle(for: Self.self).url(forResource: "controls", withExtension: "mp4"))
         let server = try VideoHTTPServer(files: ["/controls.mp4": Data(contentsOf: fixture)])

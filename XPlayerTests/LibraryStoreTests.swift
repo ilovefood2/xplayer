@@ -129,6 +129,41 @@ final class LibraryStoreTests: XCTestCase {
         XCTAssertTrue(try FileManager.default.contentsOfDirectory(atPath: library.root.path).isEmpty)
     }
 
+    @MainActor func testInterruptedImportStagingIsReclaimedButDeletionStagingIsKept() throws {
+        let root = temporary.appendingPathComponent("Videos")
+        try video("Trip/.import-\(UUID().uuidString)/half-copied.mkv", root: root)
+        let recovery = ".deleted-\(UUID().uuidString)"
+        try video("\(recovery)/only-copy.mp4", root: root)
+        try video("keep.mp4", root: root)
+        let library = store()
+        XCTAssertTrue(try FileManager.default.contentsOfDirectory(atPath: root.appendingPathComponent("Trip").path).isEmpty)
+        XCTAssertTrue(FileManager.default.fileExists(atPath: root.appendingPathComponent("\(recovery)/only-copy.mp4").path))
+        XCTAssertEqual(library.videos().map(\.path), ["keep.mp4"])
+    }
+
+    @MainActor func testOpeningALibraryVideoPlaysItInsteadOfDuplicatingIt() async throws {
+        let library = store()
+        try video("Shows/episode.mkv", root: library.root)
+        let playback = PlaybackController()
+        defer { playback.stop() }
+        await library.open(library.root.appendingPathComponent("Shows/episode.mkv"), playback: playback)
+        XCTAssertEqual(playback.paths, ["Shows/episode.mkv"])
+        XCTAssertTrue(playback.isPresented)
+        XCTAssertEqual(library.videos().map(\.path), ["Shows/episode.mkv"])
+    }
+
+    @MainActor func testVideoSentFromAnotherAppLeavesNoInboxCopy() async throws {
+        let library = store()
+        try video("attachment.mov", root: library.inbox)
+        let shared = library.inbox.appendingPathComponent("attachment.mov")
+        let playback = PlaybackController()
+        await library.open(shared, playback: playback)
+        XCTAssertEqual(library.notice, "Imported 1 video.")
+        XCTAssertEqual(library.videos().map(\.path), ["attachment.mov"])
+        XCTAssertFalse(FileManager.default.fileExists(atPath: shared.path))
+        XCTAssertFalse(playback.isPresented)
+    }
+
     @MainActor func testRemoteURLsAreRejectedWithoutCreatingFiles() async throws {
         let library = store()
         await library.importVideos([URL(string: "https://example.invalid/private.mp4")!])

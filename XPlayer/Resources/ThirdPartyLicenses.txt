@@ -14,7 +14,7 @@ This product includes software developed by Niels Provos.
 This software is based in part on the work of the Independent JPEG Group.
 
 Matching sources, patches and build instructions:
-https://github.com/ilovefood2/xplayer/releases/tag/ios-v4.11.143
+https://github.com/ilovefood2/xplayer/releases/tag/ios-v4.11.144
 
 
 === aom 3.5.0 ===

@@ -10,6 +10,15 @@
     "NSPrivacyAccessedAPICategoryFileTimestamp": [
       "C617.1",
       "3B52.1"
+    ],
+    "NSPrivacyAccessedAPICategorySystemBootTime": [
+      "35F9.1"
+    ],
+    "NSPrivacyAccessedAPICategoryDiskSpace": [
+      "E174.1"
+    ],
+    "NSPrivacyAccessedAPICategoryUserDefaults": [
+      "CA92.1"
     ]
   },
   "explanation": "File metadata is used for local library safety and user-selected file imports. Media, filenames, folder paths, and playlists are not transmitted to the developer. Optional support links open external GitHub-hosted pages; the app sends no logs or attachments. Optional support email opens the system mail app without attaching media or library data. User-initiated network playback sends the requested URL and IP address to the chosen media server and any redirect targets. URLs are not saved by the app. Local Network permission supports user-entered local server links; there is no server discovery.",

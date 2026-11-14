@@ -36,7 +36,7 @@ struct XPlayerApp: App {
                     }
                 }
             }
-            .onOpenURL { url in Task { await library.importVideos([url]) } }
+            .onOpenURL { url in Task { await library.open(url, playback: playback) } }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active && !library.isImporting { library.refresh() }
                 if phase == .background { playback.pause() }

@@ -21,15 +21,20 @@ Prepared on 2026-10-18 for xplayer, bundle ID `com.ilovefood2.xplayer`.
 
 These are not claims of completed Apple approval:
 
-1. Paid Apple Developer membership is not active, as confirmed by the account
-   holder on 2026-10-18. App Store distribution signing and submission remain blocked.
+1. Paid Apple Developer membership: inactive on 2026-10-18. On 2026-11-14
+   team 468U2JDYD3 created an Apple Distribution certificate and App Store
+   profile for com.ilovefood2.xplayer, so distribution signing works.
 2. Create the App Store Connect app record and verify store-name availability.
+   An upload on 2026-11-14 failed: no app record exists for the bundle ID.
    Similar XPlayer/X Player names already appear in public Canadian listings.
    The requested display name remains xplayer; trademark clearance is unresolved.
 3. The account holder approved a@ikel.ca as the public support email on
    2026-10-18. The seller name will be determined by the enrolled Apple account.
-4. Public policy/support URLs have been deployed and verified byte-for-byte
-   against the current bundled-document website output. Recheck before upload.
+4. Public policy/support/license pages are published by GitHub Pages from
+   main/docs. As of 4.11.144 they do not match this branch's bundled documents;
+   merge this branch's docs to main, then pass verify-release.py --check-urls.
+   The bundled notices link to tag ios-v4.11.144 and its decoder-source release
+   asset; create both before distributing this build.
 5. Complete age-rating, pricing/availability, content-rights, and export-compliance
    forms using the actual app behavior. No custom/non-exempt encryption is used.
 6. Supply actual review contact details in App Store Connect. Six screenshots
@@ -265,3 +270,24 @@ validation or review, and do not certify trademark or legal clearance.
   are verified on the device. Tests used synthetic videos.
 - The signed Release app, version 4.11.142 (142), was restored and successfully
   launched on the iPhone after testing.
+
+## Verification of 4.11.144
+
+- Opening a library video from Files plays it instead of importing a duplicate.
+  Videos sent with "Open in xplayer" no longer leave a copy in Inbox. Partial
+  copies from an interrupted import are reclaimed at launch; `.deleted-`
+  recovery folders are kept. Native playback starts even when the audio session
+  cannot be activated (for example during a call).
+- The privacy manifest now declares the system boot time (35F9.1), disk space
+  (E174.1), and UserDefaults (CA92.1) APIs that MobileVLCKit's binary calls
+  (mach_absolute_time, fstatfs, NSUserDefaults); it ships no manifest of its own.
+- New landscape UI check: every tab and both players rotate, and Done, speed,
+  play/pause, and the position slider stay reachable while a video plays.
+- Physical iPad Pro 13-inch (M5): 46 tests passed (37 core/resource/playback,
+  9 UI including landscape). Physical iPhone 16 Pro Max: 37 core checks and
+  all 9 UI checks passed; the UI runner needed a rerun after an authentication
+  prompt was dismissed. The relaunch UI check ran on simulators only, so test
+  folders were not left in the device libraries. Tests used synthetic videos.
+- iPad Air 13-inch and iPhone 17e simulators passed the landscape check.
+- The signed Release app, version 4.11.144 (144), was installed and launched on
+  both devices after testing.

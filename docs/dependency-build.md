@@ -6,12 +6,12 @@ dependencies. The app includes the LGPL text and component notices in Help &
 About. Source versions, archive checksums, license files, and binary inventory
 evidence are recorded in `metadata/dependencies/mobilevlckit-3.7.3.json`.
 
-## Sources for xplayer 4.11.143
+## Sources for xplayer 4.11.144
 
 The release publishes two separate source downloads:
 
-- [App source and build configuration](https://github.com/ilovefood2/xplayer/archive/refs/tags/ios-v4.11.143.tar.gz), tag `ios-v4.11.143`.
-- [Decoder and dependency sources](https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.143/xplayer-decoder-sources-3.7.3.tar.xz) and its [SHA-256 checksum](https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.143/xplayer-decoder-sources-3.7.3.tar.xz.sha256).
+- [App source and build configuration](https://github.com/ilovefood2/xplayer/archive/refs/tags/ios-v4.11.144.tar.gz), tag `ios-v4.11.144`.
+- [Decoder and dependency sources](https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.144/xplayer-decoder-sources-3.7.3.tar.xz) and its [SHA-256 checksum](https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.144/xplayer-decoder-sources-3.7.3.tar.xz.sha256).
 
 The decoder package contains:
 

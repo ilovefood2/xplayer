@@ -114,10 +114,19 @@ enum LibraryFiles {
 
     // Copies each selection atomically; a failed selection never leaves a partial video.
     static func importVideos(_ sources: [URL], into folder: URL, reservingInbox: Bool = true) -> String {
+        importVideosReportingSources(sources, into: folder, reservingInbox: reservingInbox).summary
+    }
+
+    /// Also returns the selections that were copied in full, so a caller can
+    /// clean up temporary copies (such as Documents/Inbox) only on success.
+    static func importVideosReportingSources(
+        _ sources: [URL], into folder: URL, reservingInbox: Bool = true
+    ) -> (summary: String, copied: [URL]) {
         let fm = FileManager.default
         var imported = 0
         var skipped = 0
         var failures: [String] = []
+        var copied: [URL] = []
         for source in sources {
             guard source.isFileURL else {
                 failures.append("Only local files selected in Files can be imported.")
@@ -147,6 +156,7 @@ enum LibraryFiles {
                 }
                 imported += count
                 skipped += ignored
+                if count > 0 { copied.append(source) }
             } catch {
                 try? fm.removeItem(at: staging)
                 failures.append("\(source.lastPathComponent): \(error.localizedDescription)")
@@ -155,7 +165,33 @@ enum LibraryFiles {
         var summary = "Imported \(imported) video\(imported == 1 ? "" : "s")."
         if skipped > 0 { summary += " Skipped \(skipped) unsupported files or links. Supported containers: MP4, M4V, MOV, MKV, AVI, WebM, TS, MTS, M2TS." }
         if !failures.isEmpty { summary += "\n" + failures.joined(separator: "\n") }
-        return summary
+        return (summary, copied)
+    }
+
+    /// Removes partial copies left by an import that was interrupted (the app
+    /// was closed or crashed). They are hidden, so nothing else ever reclaims
+    /// their storage, and the original is still in its source location.
+    /// `.deleted-` folders are kept: they may hold the only copy of a video.
+    static func removeAbandonedImports(in root: URL) {
+        let fm = FileManager.default
+        guard let enumerator = fm.enumerator(at: root, includingPropertiesForKeys: nil) else { return }
+        var abandoned: [URL] = []
+        for case let url as URL in enumerator {
+            let name = url.lastPathComponent
+            guard name.hasPrefix(".import-"), UUID(uuidString: String(name.dropFirst(".import-".count))) != nil else { continue }
+            abandoned.append(url)
+            enumerator.skipDescendants()
+        }
+        abandoned.forEach { try? fm.removeItem(at: $0) }
+    }
+
+    /// The library path of `url` when it points inside `root`, otherwise nil.
+    static func relativePath(of url: URL, root: URL) -> String? {
+        guard url.isFileURL else { return nil }
+        let base = root.standardizedFileURL.resolvingSymlinksInPath().path
+        let target = url.standardizedFileURL.resolvingSymlinksInPath().path
+        guard target.hasPrefix(base + "/") else { return nil }
+        return String(target.dropFirst(base.count + 1))
     }
 
     private static func copyVideos(_ source: URL, to target: URL, count: inout Int, skipped: inout Int) throws {
@@ -182,6 +218,8 @@ final class LibraryStore: ObservableObject {
     @Published private(set) var isImporting = false
     @Published var notice: String?
     let root: URL
+    /// Where iOS puts copies of files another app sends with "Open in xplayer".
+    var inbox: URL { root.appendingPathComponent("Inbox") }
     private let metadata: URL
     private var metadataReadable = true
 
@@ -189,6 +227,7 @@ final class LibraryStore: ObservableObject {
         let fm = FileManager.default
         self.root = root ?? fm.urls(for: .documentDirectory, in: .userDomainMask)[0]
         self.metadata = metadata ?? fm.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0].appendingPathComponent("playlists.json")
+        LibraryFiles.removeAbandonedImports(in: self.root)
         do {
             try fm.createDirectory(at: self.root, withIntermediateDirectories: true)
             try fm.createDirectory(at: self.metadata.deletingLastPathComponent(), withIntermediateDirectories: true)
@@ -382,11 +421,29 @@ final class LibraryStore: ObservableObject {
             let target = try fileURL(folder)
             isImporting = true
             defer { isImporting = false }
-            notice = await Task.detached(priority: .userInitiated) {
-                LibraryFiles.importVideos(urls, into: target, reservingInbox: folder.isEmpty)
+            let result = await Task.detached(priority: .userInitiated) {
+                LibraryFiles.importVideosReportingSources(urls, into: target, reservingInbox: folder.isEmpty)
             }.value
+            notice = result.summary
+            // The library now holds its own copy; the system's Inbox copy would
+            // otherwise stay in Files under xplayer/Inbox, doubling the storage.
+            for source in result.copied where LibraryFiles.relativePath(of: source, root: inbox) != nil {
+                try? FileManager.default.removeItem(at: source)
+            }
             refresh()
         } catch { notice = error.localizedDescription }
+    }
+
+    /// Handles a video opened from another app or from the Files app.
+    func open(_ url: URL, playback: PlaybackController) async {
+        refresh()
+        // A video that is already in the library (for example opened from
+        // Files → xplayer) plays in place instead of being imported again.
+        if let path = LibraryFiles.relativePath(of: url, root: root), exists(path) {
+            playback.play([path], library: self)
+            return
+        }
+        await importVideos([url])
     }
 
     func perform(_ work: () throws -> Void) {
