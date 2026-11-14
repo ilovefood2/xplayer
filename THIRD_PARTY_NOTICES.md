@@ -16,14 +16,14 @@ are available under MIT so you can rebuild it against a modified library.
 These open-source permissions, including modification and reverse engineering
 for debugging library modifications, are not limited by other app terms.
 
-Source for xplayer 4.11.144:
-https://github.com/ilovefood2/xplayer/tree/ios-v4.11.144
+Source for xplayer 4.11.145:
+https://github.com/ilovefood2/xplayer/tree/ios-v4.11.145
 
 Downloadable application source:
-https://github.com/ilovefood2/xplayer/archive/refs/tags/ios-v4.11.144.tar.gz
+https://github.com/ilovefood2/xplayer/archive/refs/tags/ios-v4.11.145.tar.gz
 
 Matching decoder source, patches, dependency archives, and rebuild instructions:
-https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.144/xplayer-decoder-sources-3.7.3.tar.xz
+https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.145/xplayer-decoder-sources-3.7.3.tar.xz
 
 Official binary:
 https://download.videolan.org/pub/cocoapods/prod/MobileVLCKit-3.7.3-319ed2c0-79128878.tar.xz

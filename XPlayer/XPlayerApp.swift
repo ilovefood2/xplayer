@@ -5,6 +5,8 @@ import SwiftUI
 struct XPlayerApp: App {
     @StateObject private var library = LibraryStore()
     @StateObject private var playback = PlaybackController()
+    @StateObject private var mediaInfo = MediaInfoStore()
+    @StateObject private var network = NetworkStore()
     @Environment(\.scenePhase) private var scenePhase
 
     var body: some Scene {
@@ -16,11 +18,17 @@ struct XPlayerApp: App {
                     .tabItem { Label("Favorites", systemImage: "heart.fill") }
                 NavigationStack { PlaylistsScreen() }
                     .tabItem { Label("Playlists", systemImage: "text.line.first.and.arrowtriangle.forward") }
+                NavigationStack { NetworkScreen() }
+                    .tabItem { Label("Network", systemImage: "network") }
             }
             .tint(.teal)
             .environmentObject(library)
             .environmentObject(playback)
-            .fullScreenCover(isPresented: $playback.isPresented) { PlayerScreen(playback: playback).preferredColorScheme(.dark).tint(.mint) }
+            .environmentObject(mediaInfo)
+            .environmentObject(network)
+            .fullScreenCover(isPresented: $playback.isPresented) {
+                PlayerScreen(playback: playback).preferredColorScheme(.dark).tint(.mint).environmentObject(network)
+            }
             .alert("xplayer", isPresented: Binding(get: { library.notice != nil }, set: { if !$0 { library.notice = nil } })) {
                 Button("OK", role: .cancel) { library.notice = nil }
             } message: { Text(library.notice ?? "") }
@@ -39,7 +47,8 @@ struct XPlayerApp: App {
             .onOpenURL { url in Task { await library.open(url, playback: playback) } }
             .onChange(of: scenePhase) { _, phase in
                 if phase == .active && !library.isImporting { library.refresh() }
-                if phase == .background { playback.pause() }
+                if phase == .active { playback.enterForeground() }
+                if phase == .background { playback.enterBackground() }
             }
         }
     }

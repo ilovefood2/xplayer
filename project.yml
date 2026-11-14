@@ -8,8 +8,9 @@ settings:
     SWIFT_VERSION: "5.0"
     TARGETED_DEVICE_FAMILY: "1,2"
     CODE_SIGN_STYLE: Automatic
-    MARKETING_VERSION: "4.11.144"
-    CURRENT_PROJECT_VERSION: "144"
+    DEVELOPMENT_TEAM: 468U2JDYD3
+    MARKETING_VERSION: "4.11.145"
+    CURRENT_PROJECT_VERSION: "145"
 targets:
   XPlayer:
     type: application
@@ -44,6 +45,8 @@ targets:
       - path: XPlayerTests/Fixtures/seek.mp4
         buildPhase: resources
       - path: XPlayerTests/Fixtures/seek.mkv
+        buildPhase: resources
+      - path: XPlayerTests/Fixtures/tracks.mp4
         buildPhase: resources
     dependencies:
       - target: XPlayer

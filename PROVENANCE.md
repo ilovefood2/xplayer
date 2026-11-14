@@ -74,3 +74,11 @@ No personal video is included in these fixtures or the application bundle.
 
 The seek.mp4 and seek.mkv gesture/speed fixtures are 90-second loops/remuxes of
 the existing synthetic controls.mp4 test pattern. They ship in test bundles only.
+
+## Track-selection test fixtures
+
+tracks.mkv and tracks.mp4 (added in 4.11.145) are six-second FFmpeg testsrc2
+color bars at 320x180 with two generated sine tones as English (440 Hz) and
+Japanese (660 Hz) AAC audio tracks, plus one generated English subtitle line
+(SRT in Matroska, mov_text in MP4). They were made with FFmpeg's lavfi sources
+only, contain no third-party media, and are bundled in the test targets only.

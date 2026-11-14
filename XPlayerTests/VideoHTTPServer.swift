@@ -6,10 +6,16 @@ import Network
 final class VideoHTTPServer {
     private let listener: NWListener
     private let files: [String: Data]
+    /// WebDAV PROPFIND responses by folder path.
+    private let listings: [String: String]
+    /// When set, every request must carry this Authorization header.
+    private let authorization: String?
     private let queue = DispatchQueue(label: "xplayer.tests.http")
     var port: UInt16? { listener.port?.rawValue }
-    init(files: [String: Data]) throws {
+    init(files: [String: Data], listings: [String: String] = [:], authorization: String? = nil) throws {
         self.files = files
+        self.listings = listings
+        self.authorization = authorization
         let parameters = NWParameters.tcp
         parameters.requiredLocalEndpoint = .hostPort(host: "127.0.0.1", port: .any)
         listener = try NWListener(using: parameters)
@@ -33,7 +39,22 @@ final class VideoHTTPServer {
                 if complete { connection.cancel() } else { self.receive(connection, header: header) }
                 return
             }
-            guard let target = text.components(separatedBy: "\r\n").first?.split(separator: " ").dropFirst().first,
+            let lines = text.components(separatedBy: "\r\n")
+            let requestLine = lines.first?.split(separator: " ") ?? []
+            if let authorization = self.authorization,
+               !lines.contains(where: { $0.lowercased() == "authorization: \(authorization)".lowercased() }) {
+                let denied = "HTTP/1.1 401 Unauthorized\r\nWWW-Authenticate: Basic realm=\"xplayer\"\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"
+                connection.send(content: Data(denied.utf8), completion: .contentProcessed { _ in connection.cancel() })
+                return
+            }
+            if requestLine.first == "PROPFIND", let target = requestLine.dropFirst().first,
+               let path = URLComponents(string: String(target))?.path, let listing = self.listings[path] {
+                let body = Data(listing.utf8)
+                let head = "HTTP/1.1 207 Multi-Status\r\nContent-Type: application/xml; charset=utf-8\r\nContent-Length: \(body.count)\r\nConnection: close\r\n\r\n"
+                connection.send(content: Data(head.utf8) + body, completion: .contentProcessed { _ in connection.cancel() })
+                return
+            }
+            guard let target = requestLine.dropFirst().first,
                   let path = URLComponents(string: String(target))?.path,
                   let data = self.files[path] else { connection.cancel(); return }
             let types = ["m3u8": "application/vnd.apple.mpegurl", "ts": "video/mp2t", "mts": "video/mp2t", "m2ts": "video/mp2t",

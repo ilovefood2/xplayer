@@ -1,1 +1,1 @@
-Play local and network videos, organize folders and playlists, and keep favorites close at hand. Includes playback speed controls, double-tap seeking, Finder file sharing, and offline privacy, support, and open-source license information.
+Browse and play SMB and WebDAV network shares. Resume where you stopped, choose subtitles and audio language, and repeat or shuffle. Keep listening in the background with lock-screen controls and Picture in Picture. See thumbnails, durations, and watch progress, sort your library, rename videos, and share them.

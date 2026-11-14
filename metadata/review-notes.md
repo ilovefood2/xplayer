@@ -16,7 +16,8 @@ download videos from websites, or share user content with other users.
    plus public privacy/support links.
 
 Supported containers are MP4, M4V, MOV, MKV, AVI, WebM, and MPEG-TS. MKV, AVI, WebM, and MPEG-TS use MobileVLCKit;
-other supported formats use native AVKit playback when possible. Backgrounding pauses playback. File access is granted through the
+other supported formats use native AVKit playback when possible. Audio continues in the background
+unless turned off in Help & About (see "New in 4.11.145"). File access is granted through the
 system document picker; the app does not request Photo Library, camera,
 microphone, location, contacts, or tracking permissions. Local Network permission
 is requested by iOS when connecting to a user-entered local server URL.
@@ -74,3 +75,19 @@ same-named Finder file. The system Inbox is excluded from the library.
 
 MPEG-TS (.ts, .mts, .m2ts) is enabled through MobileVLCKit. Wait for Finder copies
 to complete; reopen the app or pull to refresh when transfers occur while open.
+
+## New in 4.11.145
+
+- Network tab: add an SMB or WebDAV share (address, optional user name and
+  password) and browse its folders; tapping a video streams it from the share.
+  Reviewing this needs a reachable share; any NAS, Mac File Sharing, or WebDAV
+  server works. Passwords are stored in the Keychain and sent only to that server.
+- Background audio (UIBackgroundModes: audio): a playing video keeps its sound
+  when the app leaves the screen or the device locks, with lock-screen and
+  Control Center controls. It can be turned off in Library → … → Help & About.
+  Apple-format videos also support Picture in Picture.
+- NSAllowsLocalNetworking lets WebDAV folder listings reach HTTP servers on
+  the user's local network; other non-media loads still require HTTPS.
+- Resume position, subtitles (sidecar SRT/WebVTT/ASS/SSA and embedded tracks),
+  audio-track choice, repeat/shuffle, sorting, thumbnails, video rename, and the
+  system share sheet. Recent network links are kept on the device and can be cleared.

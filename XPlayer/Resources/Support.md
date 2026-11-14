@@ -48,14 +48,56 @@ work with native and MobileVLCKit playback. VoiceOver users can also choose the
 
 ## Folders and playlists
 
-Use … → New Folder to create a folder. Long-press a file or folder to move it
-or add its videos to a playlist. Folders can also be renamed. In Playlists,
+Use … → New Folder to create a folder. Long-press a file or folder to move it,
+rename it, share a video, or add its videos to a playlist. Renaming a video keeps
+its file extension and renames its subtitle files too. In Playlists,
 create a list, add videos from any folder, and use Edit to reorder or remove
 entries. Play All advances to the next video automatically.
 
 Moving files within xplayer updates playlists and favorites. If you move or rename a file
 outside the app, remove its missing playlist entry and add the file again.
 Removing a playlist entry does not delete the video.
+
+## Sorting, thumbnails, and progress
+
+Library rows show a thumbnail, duration, and size for each video. Use … →
+Sort By to order by name, date added, date modified, or size, in either
+direction; folders stay at the top. A bar under the thumbnail shows how much
+of a video you have watched.
+
+## Resume, subtitles, and audio
+
+xplayer remembers where you stopped each library video and continues from
+there; tap Start Over in the banner to begin again. Videos you finished, or
+stopped in the first few seconds, start from the beginning.
+
+Subtitle files with the same name as the video (Movie.srt, Movie.en.srt,
+Movie.zh.ass) are shown automatically. SRT, WebVTT, ASS, and SSA are supported,
+including Chinese (GB18030/Big5) and Japanese (Shift JIS) files. Import subtitle
+files together with their videos, or copy them into the same folder. While
+playing, tap the … button to choose subtitles, switch the audio language, set
+Repeat (All or One), turn on Shuffle, or share the video.
+
+## Background, Picture in Picture, and AirPlay
+
+By default, audio keeps playing when you leave xplayer or lock the screen; turn
+this off in Help & About → Play Audio in Background. Apple-format videos (MP4,
+M4V, MOV) can continue in Picture in Picture, and the lock screen and Control
+Center show play/pause, skip, and the timeline. Apple-format videos support
+AirPlay from the player controls. For MKV, AVI, WebM, and MPEG-TS, the AirPlay
+button sends audio to AirPlay speakers; use Screen Mirroring to show the video.
+
+## Network shares
+
+Open the Network tab and tap + → Add Share. Choose SMB for shared folders on a
+Mac, Windows PC, or NAS (for example nas.local or smb://192.168.1.10/Videos),
+or WebDAV for an HTTP or HTTPS share. Enter a user name and password, or leave
+them blank for guest access; use DOMAIN\user for a Windows domain. Browse the
+folders and tap a video to play it; playback continues through the folder.
+Passwords are stored in this device's Keychain. Videos play directly from the
+share and are not copied into your library. Allow Local Network access when iOS
+asks. If a share does not open, check its address, sign-in, and that your
+device is on the same network.
 
 ## Select and delete multiple items
 
@@ -76,9 +118,11 @@ it from Favorites without deleting the video. Favorites persist on your device.
 In Library, tap … → Open Network Video, enter a direct HTTP or HTTPS video URL,
 and tap Play. MP4, M4V, MOV, MKV, AVI, WebM, MPEG-TS, and HLS (.m3u8) streams are supported subject to their codecs.
 MKV, AVI, WebM, and MPEG-TS use MobileVLCKit; other links start with Apple playback and can fall back
-to MobileVLCKit if the system player cannot open them. Website pages, SMB shares, embedded username/password
-URLs, and DRM-protected streams are not supported. Links are not saved or imported.
-The server receives your IP address and URL; HTTP is unencrypted, so prefer HTTPS.
+to MobileVLCKit if the system player cannot open them. Website pages, embedded username/password
+URLs, and DRM-protected streams are not supported; use the Network tab for shares that need a password.
+Your 20 most recent links are listed for quick access and kept only on this device; swipe one to
+remove it, or tap Clear Recent Links. The server receives your IP address and URL; HTTP is
+unencrypted, so prefer HTTPS.
 
 For a server on your Wi-Fi network, allow Local Network access when iOS asks.
 If playback fails, check the address, server access, network connection, and codec.
@@ -92,8 +136,8 @@ tap the video to show them again. VLC playback controls stay visible while pause
 seeking, showing an error, or using VoiceOver. Apple playback retains its native
 transport controls; the app's title and queue buttons also hide during playback.
 Previous and Next appear when playing more than one video. The × button
-closes playback. Backgrounding
-the app pauses playback. If audio plays on another device, check the system
+closes playback. Audio continues in the background unless you turn that off in
+Help & About. If audio plays on another device, check the system
 audio output or any device-mirroring session on your Mac.
 
 ## Help and appearance

@@ -46,6 +46,8 @@ struct ImportPicker: UIViewControllerRepresentable {
         videoTypes.append(UTType(importedAs: "org.matroska.mkv", conformingTo: .movie))
         videoTypes.append(UTType(importedAs: "org.webmproject.webm", conformingTo: .movie))
         videoTypes.append(UTType(importedAs: "public.avchd-mpeg-2-transport-stream", conformingTo: .mpeg2TransportStream))
+        // Subtitle files can be imported next to their videos.
+        for ext in ["srt", "vtt", "ass", "ssa"] { if let type = UTType(filenameExtension: ext) { videoTypes.append(type) } }
         let picker = UIDocumentPickerViewController(forOpeningContentTypes: folder ? [.folder] : videoTypes, asCopy: false)
         picker.allowsMultipleSelection = true
         picker.delegate = context.coordinator
@@ -69,6 +71,9 @@ struct FolderScreen: View {
     let folder: String
     @EnvironmentObject private var library: LibraryStore
     @EnvironmentObject private var playback: PlaybackController
+    @EnvironmentObject private var mediaInfo: MediaInfoStore
+    @AppStorage("librarySort") private var sort = LibrarySort.name
+    @AppStorage("librarySortAscending") private var ascending = true
     @State private var query = ""
     @State private var nameRequest: NameRequest?
     @State private var importSelection: ImportSelection?
@@ -82,10 +87,10 @@ struct FolderScreen: View {
     @State private var adding: VideoEntry?
     private var title: String { folder.isEmpty ? "Library" : (folder as NSString).lastPathComponent }
     private var visible: [VideoEntry] {
-        if query.isEmpty { return library.children(of: folder) }
-        return library.entries.filter {
+        let matches = query.isEmpty ? library.children(of: folder) : library.entries.filter {
             (folder.isEmpty || $0.path.hasPrefix(folder + "/")) && $0.name.localizedCaseInsensitiveContains(query)
         }
+        return sort.sorted(matches, ascending: ascending)
     }
     var body: some View {
         List {
@@ -117,10 +122,14 @@ struct FolderScreen: View {
                                 }
                                 Button { adding = entry } label: { Label("Add to Playlist", systemImage: "text.badge.plus") }
                                 Button { moving = entry } label: { Label("Move to Folder", systemImage: "folder") }
-                                if entry.isFolder {
-                                    Button("Rename Folder", systemImage: "pencil") {
-                                        nameRequest = NameRequest(title: "Rename Folder", value: entry.name) { try library.relocate(entry, to: entry.parent, name: $0) }
+                                Button(entry.isFolder ? "Rename Folder" : "Rename", systemImage: "pencil") {
+                                    nameRequest = NameRequest(title: entry.isFolder ? "Rename Folder" : "Rename Video",
+                                                              value: entry.isFolder ? entry.name : (entry.name as NSString).deletingPathExtension) {
+                                        try library.rename(entry, to: $0)
                                     }
+                                }
+                                if !entry.isFolder, let url = try? library.fileURL(entry.path) {
+                                    ShareLink(item: url) { Label("Share", systemImage: "square.and.arrow.up") }
                                 }
                                 if !entry.isFolder {
                                     Button(library.favorites.contains(entry.path) ? "Remove from Favorites" : "Add to Favorites", systemImage: "heart") {
@@ -174,6 +183,16 @@ struct FolderScreen: View {
                         Button("New Folder", systemImage: "folder.fill.badge.plus") {
                             nameRequest = NameRequest(title: "New Folder") { try library.createFolder($0, in: folder) }
                         }
+                        Divider()
+                        Menu {
+                            Picker("Sort By", selection: $sort) {
+                                ForEach(LibrarySort.allCases) { Text($0.title).tag($0) }
+                            }
+                            Picker("Order", selection: $ascending) {
+                                Text(sort == .name ? "A to Z" : (sort == .size ? "Smallest First" : "Oldest First")).tag(true)
+                                Text(sort == .name ? "Z to A" : (sort == .size ? "Largest First" : "Newest First")).tag(false)
+                            }
+                        } label: { Label("Sort By: \(sort.title)", systemImage: "arrow.up.arrow.down") }
                         Divider()
                         Button("Open Network Video", systemImage: "network") { networkVideo = true }
                         Button("Play All", systemImage: "play.fill") { playback.play(library.videos(in: folder).map(\.path), library: library) }
@@ -231,7 +250,14 @@ struct FolderScreen: View {
         let count = entry.isFolder ? library.videos(in: entry.path).count : 0
         return LibraryEntryRow(entry: entry,
                         subtitle: entry.isFolder ? "\(count) video\(count == 1 ? "" : "s")" : (query.isEmpty ? nil : entry.parent),
-                        favorite: library.favorites.contains(entry.path))
+                        favorite: library.favorites.contains(entry.path),
+                        progress: progress(of: entry))
+    }
+
+    private func progress(of entry: VideoEntry) -> Double? {
+        guard let position = library.resumePosition(for: entry.path),
+              let duration = mediaInfo.info(for: entry)?.duration, duration > 0 else { return nil }
+        return min(1, position / duration)
     }
 }
 
@@ -239,16 +265,25 @@ struct LibraryEntryRow: View {
     let entry: VideoEntry
     let subtitle: String?
     var favorite = false
+    /// How much of the video has been watched, from 0 to 1.
+    var progress: Double?
+    @EnvironmentObject private var library: LibraryStore
+    @EnvironmentObject private var mediaInfo: MediaInfoStore
     var body: some View {
         HStack(spacing: 12) {
-            Image(systemName: entry.isFolder ? "folder.fill" : "play.rectangle")
-                .font(.title3)
-                .foregroundStyle(entry.isFolder ? Color.teal : Color.secondary)
-                .frame(width: 28)
+            if entry.isFolder {
+                Image(systemName: "folder.fill").font(.title3).foregroundStyle(Color.teal).frame(width: 28)
+            } else {
+                thumbnail
+            }
             VStack(alignment: .leading, spacing: 3) {
                 Text(entry.name).font(.body).foregroundStyle(.primary).lineLimit(2)
                 if let subtitle, !subtitle.isEmpty {
                     Text(subtitle).font(.caption).foregroundStyle(.secondary).lineLimit(1)
+                }
+                if !entry.isFolder, entry.size > 0 {
+                    Text(ByteCountFormatter.string(fromByteCount: entry.size, countStyle: .file))
+                        .font(.caption2).foregroundStyle(.tertiary)
                 }
             }
             Spacer(minLength: 4)
@@ -256,6 +291,39 @@ struct LibraryEntryRow: View {
                 Image(systemName: "heart.fill").font(.caption).foregroundStyle(Color.teal).accessibilityLabel("Favorite")
             }
         }.padding(.vertical, 6).frame(minHeight: 44)
+    }
+
+    private var thumbnail: some View {
+        let info = mediaInfo.info(for: entry)
+        return ZStack(alignment: .bottomTrailing) {
+            Group {
+                if let image = info?.thumbnail {
+                    Image(uiImage: image).resizable().scaledToFill()
+                } else {
+                    Image(systemName: "play.rectangle").font(.title3).foregroundStyle(Color.secondary)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity).background(Color.secondary.opacity(0.12))
+                }
+            }
+            .frame(width: 80, height: 45).clipShape(RoundedRectangle(cornerRadius: 6))
+            if let duration = info?.duration {
+                Text(DurationText.format(duration))
+                    .font(.caption2.monospacedDigit().weight(.semibold)).foregroundStyle(.white)
+                    .padding(.horizontal, 4).padding(.vertical, 1)
+                    .background(.black.opacity(0.65), in: RoundedRectangle(cornerRadius: 3)).padding(3)
+                    .accessibilityLabel("Duration \(DurationText.format(duration))")
+            }
+            if let progress {
+                GeometryReader { geometry in
+                    Rectangle().fill(Color.teal).frame(width: geometry.size.width * progress, height: 3)
+                        .frame(maxHeight: .infinity, alignment: .bottom)
+                }.frame(width: 80, height: 45).clipShape(RoundedRectangle(cornerRadius: 6))
+                .accessibilityLabel("Watched \(Int(progress * 100)) percent")
+            }
+        }
+        .frame(width: 80, height: 45)
+        .task(id: MediaInfoStore.key(for: entry)) {
+            if let url = try? library.fileURL(entry.path) { mediaInfo.request(entry, url: url) }
+        }
     }
 }
 
@@ -316,43 +384,5 @@ struct FavoritesScreen: View {
                 }
             }
         }
-    }
-}
-
-struct NetworkVideoSheet: View {
-    @EnvironmentObject private var playback: PlaybackController
-    @Environment(\.dismiss) private var dismiss
-    @State private var address = ""
-    @State private var error: String?
-    @State private var pendingURL: URL?
-    var body: some View {
-        NavigationStack {
-            Form {
-                Section {
-                    TextField("https://host/video.mp4", text: $address)
-                        .keyboardType(.URL).textInputAutocapitalization(.never).autocorrectionDisabled()
-                        .accessibilityIdentifier("networkURL")
-                        .submitLabel(.go).onSubmit(openVideo)
-                } header: { Text("Video link") } footer: {
-                    Text("Direct video or HLS link. Links aren’t saved. The server receives your IP address and URL; prefer HTTPS.")
-                }
-                if let error { Text(error).foregroundStyle(.red) }
-            }
-            .navigationTitle("Open Network Video").navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) { Button("Cancel") { dismiss() } }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("Play", action: openVideo).disabled(address.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
-                }
-            }
-        }
-        .presentationDetents([.medium, .large])
-        .onDisappear {
-            if let pendingURL { playback.playNetwork(pendingURL) }
-        }
-    }
-    private func openVideo() {
-        do { pendingURL = try PlaybackController.networkURL(address); dismiss() }
-        catch { self.error = error.localizedDescription }
     }
 }

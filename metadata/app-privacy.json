@@ -21,7 +21,7 @@
       "CA92.1"
     ]
   },
-  "explanation": "File metadata is used for local library safety and user-selected file imports. Media, filenames, folder paths, and playlists are not transmitted to the developer. Optional support links open external GitHub-hosted pages; the app sends no logs or attachments. Optional support email opens the system mail app without attaching media or library data. User-initiated network playback sends the requested URL and IP address to the chosen media server and any redirect targets. URLs are not saved by the app. Local Network permission supports user-entered local server links; there is no server discovery.",
+  "explanation": "File metadata is used for local library safety, sorting by date and size, and user-selected file imports. Media, filenames, folder paths, playlists, favorites, playback positions, thumbnails, recent links, and saved share details stay on the device and are not transmitted to the developer. Share passwords are stored in the iOS Keychain and sent only to the share's own server. Optional support links open external GitHub-hosted pages; the app sends no logs or attachments. Optional support email opens the system mail app without attaching media or library data. User-initiated network playback and share browsing send requests, the requested URL, and the IP address to the chosen server and any redirect targets. Local Network permission supports user-entered local servers and shares; there is no server discovery.",
   "privacyPolicyURL": "https://ilovefood2.github.io/xplayer/privacy.html",
   "supportURL": "https://ilovefood2.github.io/xplayer/support.html",
   "supportEmail": "a@ikel.ca"

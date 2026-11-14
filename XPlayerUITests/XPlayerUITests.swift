@@ -256,6 +256,23 @@ final class XPlayerUITests: XCTestCase {
         app.buttons["Done"].tap()
     }
 
+    /// Taps once the element is on screen and not mid-transition, dismissing
+    /// iOS's optional "Save Password?" prompt if it covers the screen.
+    @MainActor private func tapWhenReady(_ element: XCUIElement, file: StaticString = #filePath, line: UInt = #line) {
+        let app = XCUIApplication()
+        for _ in 0..<40 {
+            if app.buttons["Not Now"].exists { app.buttons["Not Now"].tap() }
+            if element.exists && element.isHittable { element.tap(); return }
+            Thread.sleep(forTimeInterval: 0.25)
+        }
+        XCTFail("\(element) never became tappable", file: file, line: line)
+    }
+
+    /// Picture in Picture adds an empty window, so measure the largest one.
+    @MainActor private func largestWindow(_ app: XCUIApplication) -> CGRect {
+        app.windows.allElementsBoundByIndex.map(\.frame).max { $0.width * $0.height < $1.width * $1.height } ?? .zero
+    }
+
     @MainActor private func capture(_ name: String, from app: XCUIApplication) {
         let attachment = XCTAttachment(screenshot: app.screenshot())
         attachment.name = name
@@ -281,7 +298,7 @@ final class XPlayerUITests: XCTestCase {
         let actions = app.buttons["Library actions"]
         XCTAssertTrue(actions.waitForExistence(timeout: 5))
         XCTAssertTrue(actions.isHittable)
-        let window = app.windows.firstMatch.frame
+        let window = largestWindow(app)
         XCTAssertGreaterThan(window.width, window.height, "The interface did not rotate to landscape: \(window)")
         capture("Landscape library", from: app)
         selectTab("Favorites", in: app)
@@ -304,7 +321,7 @@ final class XPlayerUITests: XCTestCase {
             let done = app.buttons["Done"]
             XCTAssertTrue(done.waitForExistence(timeout: 5))
             XCTAssertTrue(done.isHittable, "\(file): Done must be reachable in landscape")
-            let playerWindow = app.windows.firstMatch.frame
+            let playerWindow = largestWindow(app)
             XCTAssertGreaterThan(playerWindow.width, playerWindow.height, "\(file): player did not rotate: \(playerWindow)")
             XCTAssertTrue(app.buttons["playbackSpeed"].isHittable, "\(file): speed must be reachable in landscape")
             if vlc {
@@ -321,6 +338,105 @@ final class XPlayerUITests: XCTestCase {
             done.tap()
             XCTAssertTrue(app.navigationBars["Library"].waitForExistence(timeout: 5))
         }
+    }
+
+    private static func davListing(_ base: String, _ entries: [(String, Bool)]) -> String {
+        let responses = ([(base, true)] + entries).map { href, folder in
+            "<d:response><d:href>\(href)</d:href><d:propstat><d:prop>\(folder ? "<d:resourcetype><d:collection/></d:resourcetype>" : "<d:resourcetype/>")</d:prop></d:propstat></d:response>"
+        }.joined()
+        return #"<?xml version="1.0"?><d:multistatus xmlns:d="DAV:">"# + responses + "</d:multistatus>"
+    }
+
+    @MainActor func testWebDAVShareBrowseAndPlay() async throws {
+        let header = "Basic " + Data("kai:pw".utf8).base64EncodedString()
+        let video = try Data(contentsOf: XCTUnwrap(Bundle(for: Self.self).url(forResource: "seek", withExtension: "mp4")))
+        let server = try VideoHTTPServer(
+            files: ["/dav/Show/episode.mp4": video],
+            listings: ["/dav/": Self.davListing("/dav/", [("/dav/Show/", true)]),
+                       "/dav/Show/": Self.davListing("/dav/Show/", [("/dav/Show/episode.mp4", false)])],
+            authorization: header)
+        defer { server.stop() }
+        let ready = expectation(description: "WebDAV UI fixture ready")
+        server.start { ready.fulfill() }
+        await fulfillment(of: [ready], timeout: 5)
+        let app = XCUIApplication()
+        app.launch()
+        selectTab("Network", in: app)
+        if app.buttons["addShareEmpty"].waitForExistence(timeout: 2) {
+            app.buttons["addShareEmpty"].tap()
+        } else {
+            app.buttons["Network actions"].tap()
+            app.buttons["Add Share"].firstMatch.tap()
+        }
+        let name = "DAV " + String(UUID().uuidString.prefix(6))
+        app.buttons["shareKind"].tap()
+        app.buttons["WebDAV (HTTP/HTTPS)"].tap()
+        for (field, text) in [("shareAddress", "http://127.0.0.1:\(try XCTUnwrap(server.port))/dav"), ("shareName", name), ("shareUser", "kai")] {
+            let element = app.textFields[field]
+            XCTAssertTrue(element.waitForExistence(timeout: 5))
+            element.tap()
+            element.typeText(text)
+        }
+        app.secureTextFields["sharePassword"].tap()
+        app.secureTextFields["sharePassword"].typeText("pw")
+        app.buttons["Save"].tap()
+        XCTAssertTrue(app.staticTexts[name].waitForExistence(timeout: 5))
+        capture("Network shares", from: app)
+        tapWhenReady(app.staticTexts[name])
+        tapWhenReady(app.staticTexts["Show"])
+        tapWhenReady(app.staticTexts["episode.mp4"])
+        let done = app.buttons["Done"]
+        XCTAssertTrue(done.waitForExistence(timeout: 10))
+        try await Task.sleep(for: .seconds(2))
+        XCTAssertFalse(app.staticTexts["playbackError"].exists)
+        capture("Share playback", from: app)
+        for _ in 0..<3 where !(done.waitForExistence(timeout: 1) && done.isHittable) { app.otherElements["nativeVideo"].tap() }
+        done.tap()
+        app.navigationBars.buttons.firstMatch.tap()
+        app.navigationBars.buttons.firstMatch.tap()
+        XCTAssertTrue(app.staticTexts[name].waitForExistence(timeout: 5))
+        if app.buttons["Not Now"].exists { app.buttons["Not Now"].tap() }
+        app.staticTexts[name].press(forDuration: 1.2)
+        app.buttons["Remove"].tap()
+        app.alerts.buttons["Remove"].tap()
+        XCTAssertFalse(app.staticTexts[name].waitForExistence(timeout: 2))
+    }
+
+    @MainActor func testAudioAndSubtitleChoicesInPlayer() async throws {
+        let video = try Data(contentsOf: XCTUnwrap(Bundle(for: Self.self).url(forResource: "tracks", withExtension: "mp4")))
+        let server = try VideoHTTPServer(files: ["/tracks.mp4": video])
+        defer { server.stop() }
+        let ready = expectation(description: "Track fixture ready")
+        server.start { ready.fulfill() }
+        await fulfillment(of: [ready], timeout: 5)
+        let app = XCUIApplication()
+        app.launch()
+        app.buttons["Library actions"].tap()
+        app.buttons["Open Network Video"].tap()
+        let field = app.textFields["networkURL"]
+        XCTAssertTrue(field.waitForExistence(timeout: 5))
+        field.tap()
+        field.typeText("http://127.0.0.1:\(try XCTUnwrap(server.port))/tracks.mp4")
+        app.buttons["Play"].tap()
+        let options = app.buttons["playerOptions"]
+        XCTAssertTrue(options.waitForExistence(timeout: 10))
+        options.tap()
+        let japanese = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] 'Japan' OR label CONTAINS[c] '日本'")).firstMatch
+        XCTAssertTrue(japanese.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Subtitles"].exists || app.otherElements["Subtitles"].exists)
+        japanese.tap()
+        XCTAssertTrue(japanese.isSelected)
+        // The panel stays open while choosing, even though playback continues.
+        try await Task.sleep(for: .seconds(4))
+        XCTAssertTrue(japanese.exists, "The options panel closed while it was in use")
+        capture("Audio and subtitle choices", from: app)
+        let english = app.buttons.matching(NSPredicate(format: "label CONTAINS[c] 'English' OR label CONTAINS[c] '英'")).element(boundBy: 1)
+        if english.exists { english.tap() }
+        XCTAssertFalse(app.staticTexts["playbackError"].exists)
+        app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.05)).tap()
+        let done = app.buttons["Done"]
+        for _ in 0..<3 where !(done.waitForExistence(timeout: 1) && done.isHittable) { app.otherElements["nativeVideo"].tap() }
+        done.tap()
     }
 
     @MainActor func testNativePlaybackHidesAndRestoresAppControls() async throws {

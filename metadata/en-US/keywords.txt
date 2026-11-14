@@ -1,1 +1,1 @@
-offline,video,player,playlist,folders,local,mov,mp4,organize,mkv,matroska,avi,webm
+offline,video,player,playlist,folders,mp4,mkv,avi,webm,subtitle,smb,webdav,nas,resume

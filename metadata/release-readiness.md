@@ -26,15 +26,17 @@ These are not claims of completed Apple approval:
    profile for com.ilovefood2.xplayer, so distribution signing works.
 2. Create the App Store Connect app record and verify store-name availability.
    An upload on 2026-11-14 failed: no app record exists for the bundle ID.
-   Similar XPlayer/X Player names already appear in public Canadian listings.
-   The requested display name remains xplayer; trademark clearance is unresolved.
+   Creating the record as "xplayer" the same day failed because the App Store
+   name is already in use. A different store name (up to 30 characters) is
+   needed; the home-screen name can stay xplayer. Similar XPlayer/X Player
+   names already appear in public Canadian listings; trademark clearance is
+   unresolved.
 3. The account holder approved a@ikel.ca as the public support email on
    2026-10-18. The seller name will be determined by the enrolled Apple account.
 4. Public policy/support/license pages are published by GitHub Pages from
-   main/docs. As of 4.11.144 they do not match this branch's bundled documents;
-   merge this branch's docs to main, then pass verify-release.py --check-urls.
-   The bundled notices link to tag ios-v4.11.144 and its decoder-source release
-   asset; create both before distributing this build.
+   main/docs. For 4.11.145 this branch is merged to main, and the bundled
+   notices link to tag ios-v4.11.145 and its decoder-source release asset.
+   Re-run verify-release.py --check-urls before each submission.
 5. Complete age-rating, pricing/availability, content-rights, and export-compliance
    forms using the actual app behavior. No custom/non-exempt encryption is used.
 6. Supply actual review contact details in App Store Connect. Six screenshots
@@ -290,4 +292,30 @@ validation or review, and do not certify trademark or legal clearance.
   folders were not left in the device libraries. Tests used synthetic videos.
 - iPad Air 13-inch and iPhone 17e simulators passed the landscape check.
 - The signed Release app, version 4.11.144 (144), was installed and launched on
+  both devices after testing.
+
+## Verification of 4.11.145
+
+- New features: subtitles (sidecar SRT/WebVTT/ASS/SSA with legacy Chinese,
+  Japanese, and Korean encodings, plus embedded tracks), audio-language
+  switching, resume with Start Over, repeat and shuffle, background audio with
+  lock-screen controls (can be turned off), Picture in Picture and AirPlay for
+  Apple formats, AirPlay audio for VLC formats, library thumbnails, durations,
+  sizes, watch progress, sorting, video rename (subtitles follow), Share, a
+  Network tab for SMB and WebDAV shares (passwords in the Keychain), and
+  remembered network links that can be cleared.
+- Fixed while testing: releasing a VLC player on the main thread could
+  deadlock against the video output; the last reference is now handed to a
+  background queue. The player options panel no longer closes when the
+  controls auto-hide. Same-date videos stay A to Z in either sort direction.
+- iPhone 17e and iPad Air 13-inch simulators: 63 tests passed on each.
+- Physical iPad Pro 13-inch (M5): 62 tests passed. Physical iPhone 16 Pro Max:
+  57 passed in the first run; the 5 failures were caused by the phone locking
+  and all 5 passed on rerun. The relaunch UI check ran on simulators only.
+  Tests used synthetic videos and a local test WebDAV server; test links and
+  shares were removed from both devices afterwards.
+- SMB was checked against a real NAS as guest: the share list loaded and
+  opening a share that needs a login was refused. Signed-in SMB browsing was
+  not tested with real credentials.
+- The signed Release app, version 4.11.145 (145), was installed and launched on
   both devices after testing.

@@ -8,7 +8,12 @@ or analytics.
 - Finder transfers appear directly in Library; earlier imports remain in Videos.
 - Create, move, rename, and delete folders; combine videos into playlists.
 - Select multiple library files or folders and confirm batch deletion.
-- Favorite videos and play direct HTTP/HTTPS video or HLS links.
+- Favorite videos and play direct HTTP/HTTPS video or HLS links; recent links stay on the device.
+- Browse and play SMB (Mac, PC, NAS) and WebDAV shares; passwords are kept in the Keychain.
+- Thumbnails, durations, sizes, and watch progress; sort by name, date added or modified, or size.
+- Resume where you stopped; subtitles from SRT/WebVTT/ASS/SSA files or embedded tracks; switch audio language.
+- Repeat or shuffle; background audio with lock-screen controls; Picture in Picture and AirPlay for Apple formats.
+- Rename videos (subtitle files follow) and share them through the system share sheet.
 - Double-tap left/right to skip 15 seconds; adjust playback speed from 0.25× to 2×.
 - Reorder playlists and play them in sequence using native playback controls.
 - Read privacy, support, and license documents offline in Library → … → Help & About.

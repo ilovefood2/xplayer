@@ -21,7 +21,7 @@ case "${XPLAYER_MODE}" in
   test)
     : "${XPLAYER_SIMULATOR_ID:?Set XPLAYER_SIMULATOR_ID to an available iOS simulator UUID.}"
     xcodebuild "${XPLAYER_OPTIONS[@]}" -destination "platform=iOS Simulator,id=${XPLAYER_SIMULATOR_ID}" \
-      -parallel-testing-enabled NO -collect-test-diagnostics never CODE_SIGNING_ALLOWED=NO test
+      -parallel-testing-enabled NO -collect-test-diagnostics never test
     ;;
   build|install)
     XPLAYER_DESTINATION='generic/platform=iOS'

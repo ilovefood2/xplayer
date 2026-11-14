@@ -12,11 +12,17 @@ Combine videos from different folders into named playlists. Reorder or remove en
 FAVORITES AND QUICK CLEANUP
 Mark videos as favorites and play them from the Favorites tab. Select multiple files or folders and confirm deletion of their local copies.
 
-OPEN NETWORK VIDEOS
-Play direct HTTP or HTTPS video links and HLS streams. Network playback requires a reachable server and supported codecs. Website pages, SMB shares, and DRM streams are not supported. Links are not saved; the server receives your IP address and requested URL. Prefer HTTPS.
+NETWORK SHARES AND LINKS
+Browse SMB shares on a Mac, PC, or NAS and WebDAV folders, then play videos straight from the share. Passwords stay in your device's Keychain. Play direct HTTP or HTTPS video links and HLS streams, and reopen recent links kept on your device. Network playback requires a reachable server and supported codecs; website pages and DRM streams are not supported. Prefer HTTPS.
 
 WATCH AT YOUR PACE
-Double-tap the left or right side of the video to skip back or forward 15 seconds. Tap the speed button and move the slider to choose 0.25× to 2× playback. Seeking depends on the video's available timeline.
+Pick up where you left off in every video. Choose subtitles (SRT, WebVTT, ASS, SSA, and embedded tracks) and switch the audio language. Repeat or shuffle a folder or playlist. Double-tap the left or right side of the video to skip back or forward 15 seconds, and choose 0.25× to 2× playback speed.
+
+KEEP LISTENING
+Audio continues in the background, with lock-screen and Control Center controls. Apple-format videos play in Picture in Picture and over AirPlay.
+
+SEE YOUR LIBRARY AT A GLANCE
+Thumbnails, durations, sizes, and watch progress for every video. Sort by name, date, or size, rename videos and folders, and share a video with other apps.
 
 PRIVATE BY DESIGN
 No account, ads, or tracking SDKs. Your videos and playlists are stored locally and are not uploaded to the developer.

@@ -25,8 +25,14 @@ enum AppInformation {
 struct AboutView: View {
     @Environment(\.dismiss) private var dismiss
     private var version: String { Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String ?? "" }
+    @AppStorage(PlaybackController.backgroundAudioKey) private var backgroundAudio = true
     var body: some View {
         List {
+            Section {
+                Toggle("Play Audio in Background", isOn: $backgroundAudio).accessibilityIdentifier("backgroundAudio")
+            } header: { Text("Playback") } footer: {
+                Text("Keeps the sound playing when you leave xplayer or lock the screen. Apple-format videos can also continue in Picture in Picture.")
+            }
             Section("Help") {
                 NavigationLink("Help & Supported Formats") { AppDocumentView(title: "Help", resource: "Support", website: AppInformation.supportURL) }
                 Link("Email Support", destination: AppInformation.emailURL)

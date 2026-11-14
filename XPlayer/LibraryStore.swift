@@ -6,10 +6,49 @@ struct VideoEntry: Identifiable, Hashable {
     var id: String { path }
     let path: String
     let isFolder: Bool
+    var size: Int64 = 0
+    var added: Date = .distantPast
+    var modified: Date = .distantPast
     var name: String { (path as NSString).lastPathComponent }
     var parent: String {
         let value = (path as NSString).deletingLastPathComponent
         return value == "." ? "" : value
+    }
+}
+
+enum LibrarySort: String, CaseIterable, Identifiable {
+    case name, added, modified, size
+    var id: String { rawValue }
+    var title: String {
+        switch self {
+        case .name: return "Name"
+        case .added: return "Date Added"
+        case .modified: return "Date Modified"
+        case .size: return "Size"
+        }
+    }
+
+    /// Folders first, then the chosen key; names break ties so the order is stable.
+    func sorted(_ entries: [VideoEntry], ascending: Bool) -> [VideoEntry] {
+        entries.sorted { lhs, rhs in
+            if lhs.isFolder != rhs.isFolder { return lhs.isFolder }
+            let byName = lhs.name.localizedStandardCompare(rhs.name)
+            let order: ComparisonResult
+            switch self {
+            case .name: order = byName
+            case .added: order = Self.compare(lhs.added, rhs.added)
+            case .modified: order = Self.compare(lhs.modified, rhs.modified)
+            case .size: order = Self.compare(lhs.size, rhs.size)
+            }
+            if order != .orderedSame { return ascending ? order == .orderedAscending : order == .orderedDescending }
+            // Ties stay in name order (A to Z) whichever direction is chosen.
+            if self != .name && byName != .orderedSame { return byName == .orderedAscending }
+            return lhs.path < rhs.path
+        }
+    }
+
+    private static func compare<T: Comparable>(_ lhs: T, _ rhs: T) -> ComparisonResult {
+        lhs == rhs ? .orderedSame : (lhs < rhs ? .orderedAscending : .orderedDescending)
     }
 }
 
@@ -23,6 +62,8 @@ private struct LibraryMetadata: Codable {
     var version: Int?
     var playlists: [Playlist]
     var favorites: Set<String>
+    /// Seconds to resume each video from. Optional so earlier saves still load.
+    var positions: [String: Double]?
 }
 
 struct LibraryError: LocalizedError {
@@ -32,6 +73,12 @@ struct LibraryError: LocalizedError {
 
 enum LibraryFiles {
     static let extensions: Set<String> = ["mp4", "m4v", "mov", "mkv", "avi", "webm", "ts", "mts", "m2ts"]
+    /// Subtitle files are imported and moved with their videos but not listed.
+    static let subtitleExtensions: Set<String> = ["srt", "vtt", "ass", "ssa"]
+    static let resourceKeys: [URLResourceKey] = [
+        .isDirectoryKey, .isSymbolicLinkKey, .isRegularFileKey, .fileSizeKey,
+        .contentModificationDateKey, .creationDateKey, .addedToDirectoryDateKey,
+    ]
 
     static func validName(_ raw: String) throws -> String {
         let name = raw.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -75,20 +122,21 @@ enum LibraryFiles {
         var pending = [(url: root, path: "")]
         while let folder = pending.popLast() {
             let items = try FileManager.default.contentsOfDirectory(
-                at: folder.url, includingPropertiesForKeys: [.isDirectoryKey, .isSymbolicLinkKey, .isRegularFileKey],
-                options: [.skipsHiddenFiles]
+                at: folder.url, includingPropertiesForKeys: resourceKeys, options: [.skipsHiddenFiles]
             )
             for item in items {
-                let values = try item.resourceValues(forKeys: [.isDirectoryKey, .isSymbolicLinkKey, .isRegularFileKey])
+                let values = try item.resourceValues(forKeys: Set(resourceKeys))
                 if values.isSymbolicLink == true { continue }
                 if folder.path.isEmpty && item.lastPathComponent.lowercased() == "inbox" { continue }
                 // Build relative paths from child names; iOS can rewrite absolute container URL prefixes.
                 let path = folder.path.isEmpty ? item.lastPathComponent : folder.path + "/" + item.lastPathComponent
+                let modified = values.contentModificationDate ?? .distantPast
+                let added = values.addedToDirectoryDate ?? values.creationDate ?? modified
                 if values.isDirectory == true {
-                    entries.append(VideoEntry(path: path, isFolder: true))
+                    entries.append(VideoEntry(path: path, isFolder: true, added: added, modified: modified))
                     pending.append((url: item, path: path))
                 } else if values.isRegularFile == true && extensions.contains(item.pathExtension.lowercased()) {
-                    entries.append(VideoEntry(path: path, isFolder: false))
+                    entries.append(VideoEntry(path: path, isFolder: false, size: Int64(values.fileSize ?? 0), added: added, modified: modified))
                 }
             }
         }
@@ -206,6 +254,9 @@ enum LibraryFiles {
         } else if values.isRegularFile == true && extensions.contains(source.pathExtension.lowercased()) {
             try fm.copyItem(at: source, to: target)
             count += 1
+        } else if values.isRegularFile == true && subtitleExtensions.contains(source.pathExtension.lowercased()) {
+            // Sidecar subtitles travel with their videos; they are not counted as videos.
+            try fm.copyItem(at: source, to: target)
         } else { skipped += 1 }
     }
 }
@@ -215,6 +266,7 @@ final class LibraryStore: ObservableObject {
     @Published private(set) var entries: [VideoEntry] = []
     @Published private(set) var playlists: [Playlist] = []
     @Published private(set) var favorites: Set<String> = []
+    @Published private(set) var positions: [String: Double] = [:]
     @Published private(set) var isImporting = false
     @Published var notice: String?
     let root: URL
@@ -244,6 +296,7 @@ final class LibraryStore: ObservableObject {
                     guard saved.version == nil || saved.version == 2 else {
                         throw LibraryError(message: "This library was saved by an unsupported app version.")
                     }
+                    positions = saved.positions ?? [:]
                     if saved.version == nil {
                         // Earlier versions stored every reference relative to Documents/Videos.
                         let updated = saved.playlists.map { playlist in
@@ -283,14 +336,33 @@ final class LibraryStore: ObservableObject {
     func exists(_ path: String) -> Bool { entries.contains { $0.path == path && !$0.isFolder } }
     func fileURL(_ path: String) throws -> URL { try LibraryFiles.url(path, root: root) }
 
-    private func save(_ value: [Playlist], favorites: Set<String>? = nil) throws {
+    private func save(_ value: [Playlist], favorites: Set<String>? = nil, positions: [String: Double]? = nil) throws {
         guard metadataReadable else { throw LibraryError(message: "Library changes are disabled because the saved library could not be read. Restore playlists.json before editing.") }
         let encoder = JSONEncoder()
         encoder.outputFormatting = [.prettyPrinted, .sortedKeys]
-        let saved = LibraryMetadata(version: 2, playlists: value, favorites: favorites ?? self.favorites)
+        let saved = LibraryMetadata(version: 2, playlists: value, favorites: favorites ?? self.favorites,
+                                    positions: positions ?? self.positions)
         try encoder.encode(saved).write(to: metadata, options: .atomic)
         playlists = saved.playlists
         self.favorites = saved.favorites
+        self.positions = saved.positions ?? [:]
+    }
+
+    /// Where to resume `path`, or nil to start from the beginning.
+    func resumePosition(for path: String) -> Double? { positions[path] }
+
+    /// Remembers how far a video was watched. The first seconds and the last
+    /// stretch of a video are not worth resuming, so they clear the position.
+    func recordPosition(_ seconds: Double, duration: Double, for path: String) {
+        guard exists(path), seconds.isFinite else { return }
+        var updated = positions
+        if seconds < 5 || (duration.isFinite && duration > 0 && duration - seconds < 10) {
+            guard updated.removeValue(forKey: path) != nil else { return }
+        } else {
+            guard abs((updated[path] ?? -100) - seconds) >= 1 else { return }
+            updated[path] = seconds.rounded()
+        }
+        try? save(playlists, positions: updated)
     }
 
     func toggleFavorite(_ path: String) throws {
@@ -352,13 +424,50 @@ final class LibraryStore: ObservableObject {
         var updated = playlists
         for index in updated.indices { updated[index].paths = updated[index].paths.map(relocated) }
         let updatedFavorites = Set(favorites.map(relocated))
+        let updatedPositions = Dictionary(positions.map { (relocated($0.key), $0.value) }, uniquingKeysWith: { first, _ in first })
         try FileManager.default.moveItem(at: source, to: target)
-        do { try save(updated, favorites: updatedFavorites) }
+        do { try save(updated, favorites: updatedFavorites, positions: updatedPositions) }
         catch {
             try FileManager.default.moveItem(at: target, to: source)
             throw error
         }
+        if !entry.isFolder { moveSidecars(of: source, to: target) }
         refresh()
+    }
+
+    /// Renames a video or folder. A video keeps its extension even if the new
+    /// name leaves it out, so it stays playable and listed.
+    func rename(_ entry: VideoEntry, to raw: String) throws {
+        var name = try LibraryFiles.validName(raw)
+        if !entry.isFolder {
+            let ext = (entry.name as NSString).pathExtension
+            if !ext.isEmpty && (name as NSString).pathExtension.lowercased() != ext.lowercased() { name += "." + ext }
+            name = try LibraryFiles.validName(name)
+        }
+        try relocate(entry, to: entry.parent, name: name)
+    }
+
+    /// Subtitle files next to a video ("Movie.srt", "Movie.en.srt").
+    static func sidecars(of video: URL) -> [URL] {
+        let folder = video.deletingLastPathComponent()
+        let stem = video.deletingPathExtension().lastPathComponent
+        let items = (try? FileManager.default.contentsOfDirectory(at: folder, includingPropertiesForKeys: nil, options: [.skipsHiddenFiles])) ?? []
+        return items.filter { item in
+            guard LibraryFiles.subtitleExtensions.contains(item.pathExtension.lowercased()) else { return false }
+            let name = item.deletingPathExtension().lastPathComponent
+            return name == stem || name.hasPrefix(stem + ".")
+        }.sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }
+    }
+
+    private func moveSidecars(of source: URL, to target: URL) {
+        let oldStem = source.deletingPathExtension().lastPathComponent
+        let newStem = target.deletingPathExtension().lastPathComponent
+        for sidecar in Self.sidecars(of: source) {
+            let suffix = String(sidecar.lastPathComponent.dropFirst(oldStem.count))
+            let destination = target.deletingLastPathComponent().appendingPathComponent(newStem + suffix)
+            guard !FileManager.default.fileExists(atPath: destination.path) else { continue }
+            try? FileManager.default.moveItem(at: sidecar, to: destination)
+        }
     }
 
     func delete(_ entry: VideoEntry) throws { try delete([entry]) }
@@ -388,7 +497,7 @@ final class LibraryStore: ObservableObject {
                 try FileManager.default.moveItem(at: source, to: temporary)
                 staged.append((source, temporary))
             }
-            try save(updated, favorites: favorites.filter { !removed($0) })
+            try save(updated, favorites: favorites.filter { !removed($0) }, positions: positions.filter { !removed($0.key) })
         } catch {
             var rollbackErrors: [String] = []
             for item in staged.reversed() {
@@ -402,6 +511,10 @@ final class LibraryStore: ObservableObject {
             throw error
         }
         defer { refresh() }
+        for (entry, item) in zip(selected, staged) where !entry.isFolder {
+            // The video is gone, so its subtitle files are of no further use.
+            for sidecar in Self.sidecars(of: item.source) { try? FileManager.default.removeItem(at: sidecar) }
+        }
         var cleanupErrors: [String] = []
         for item in staged {
             do { try FileManager.default.removeItem(at: item.temporary) }

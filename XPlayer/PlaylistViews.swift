@@ -63,7 +63,7 @@ struct PlaylistScreen: View {
                         ForEach(Array(playlist.paths.enumerated()), id: \.offset) { offset, path in
                             Button { playback.play(playlist.paths, startingAt: path, library: library) } label: {
                                 HStack {
-                                    LibraryEntryRow(entry: VideoEntry(path: path, isFolder: false),
+                                    LibraryEntryRow(entry: library.entries.first { $0.path == path && !$0.isFolder } ?? VideoEntry(path: path, isFolder: false),
                                                     subtitle: library.exists(path) ? (path as NSString).deletingLastPathComponent : "File unavailable")
                                     if !library.exists(path) { Image(systemName: "exclamationmark.triangle").foregroundStyle(.orange) }
                                 }
