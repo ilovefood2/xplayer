@@ -96,7 +96,7 @@
 		30D2B037FF044FD968C476E6 /* MediaInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaInfo.swift; sourceTree = "<group>"; };
 		35F969DCAF6C9605000E2D52 /* tracks.mp4 */ = {isa = PBXFileReference; path = tracks.mp4; sourceTree = "<group>"; };
 		4475D9061D50F492B7A8DE06 /* XPlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPlayerUITests.swift; sourceTree = "<group>"; };
-		4B6D2E4D476A7E78B754019D /* MobileVLCKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileVLCKit.xcframework; path = Vendor/MobileVLCKit/MobileVLCKit.xcframework; sourceTree = "<group>"; };
+		4B6D2E4D476A7E78B754019D /* MobileVLCKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileVLCKit.xcframework; path = "Vendor/MobileVLCKit-NoZVBI/MobileVLCKit.xcframework"; sourceTree = "<group>"; };
 		4BECDF906911E3B1A40F16C4 /* NetworkShares.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkShares.swift; sourceTree = "<group>"; };
 		4DB87782A76CFA73E7FB25CB /* av1.webm */ = {isa = PBXFileReference; path = av1.webm; sourceTree = "<group>"; };
 		4FAF32AE412EBBBA1E145780 /* LibraryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStore.swift; sourceTree = "<group>"; };
@@ -508,7 +508,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"Vendor/MobileVLCKit\"",
+					"\"Vendor/MobileVLCKit-NoZVBI\"",
 				);
 				INFOPLIST_FILE = XPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -529,7 +529,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"Vendor/MobileVLCKit\"",
+					"\"Vendor/MobileVLCKit-NoZVBI\"",
 				);
 				INFOPLIST_FILE = XPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -595,7 +595,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 145;
+				CURRENT_PROJECT_VERSION = 146;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 468U2JDYD3;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -615,7 +615,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.145;
+				MARKETING_VERSION = 4.11.146;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -663,7 +663,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 145;
+				CURRENT_PROJECT_VERSION = 146;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 468U2JDYD3;
 				ENABLE_NS_ASSERTIONS = NO;
@@ -677,7 +677,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.145;
+				MARKETING_VERSION = 4.11.146;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

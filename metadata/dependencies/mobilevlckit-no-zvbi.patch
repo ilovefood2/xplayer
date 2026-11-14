@@ -1,0 +1,76 @@
+--- a/VLCKit/buildMobileVLCKit.sh
++++ b/VLCKit/buildMobileVLCKit.sh
+@@ -283,7 +283,8 @@
+                -scheme "$target" \
+                -archivePath build/"$target"-$PLATFORM$SDK.xcarchive \
+                ARCHS="${architectures}" \
+-               IPHONEOS_DEPLOYMENT_TARGET=${SDK_MIN} \
++               IPHONEOS_DEPLOYMENT_TARGET=17.0 \
++               CODE_SIGNING_ALLOWED=NO \
+                ${bitcodeflag} \
+                SKIP_INSTALL=no \
+                > ${out}
+@@ -546,7 +547,7 @@
+         --disable-sdl \
+         --disable-SDL_image \
+         --disable-iconv \
+-        --enable-zvbi \
++        --disable-zvbi \
+         --disable-kate \
+         --disable-caca \
+         --disable-gettext \
+@@ -593,6 +594,7 @@
+ 
+     rm -f config.mak
+     echo "EXTRA_CFLAGS += ${EXTRA_CFLAGS}" >> config.mak
++    echo "CFLAGS += -std=gnu17" >> config.mak
+     echo "EXTRA_LDFLAGS += ${EXTRA_LDFLAGS}" >> config.mak
+     make fetch -j$MAKE_JOBS
+     make -j$MAKE_JOBS > ${out}
+@@ -630,11 +632,11 @@
+     if [ "$DEBUG" = "yes" ]; then
+         DEBUGFLAG="--enable-debug"
+     else
+-        export CFLAGS="${EXTRA_CFLAGS} -DNDEBUG"
++        export CFLAGS="${EXTRA_CFLAGS} -std=gnu17 -DNDEBUG"
+     fi
+ 
+     if [ "$SCARY" = "yes" ]; then
+-        SCARYFLAG="--enable-dvbpsi --enable-avcodec"
++        SCARYFLAG="--enable-dvbpsi --enable-avcodec --disable-zvbi --disable-ncurses --disable-x264 --disable-x26410b --disable-x265"
+     else
+         SCARYFLAG="--disable-dca --disable-dvbpsi --disable-avcodec --disable-avformat --disable-zvbi --enable-vpx"
+     fi
+--- a/VLCKit/libvlc/vlc/m4/dolt.m4
++++ b/VLCKit/libvlc/vlc/m4/dolt.m4
+@@ -14,7 +14,7 @@
+ # Josh Triplett <josh@freedesktop.org>
+ AC_PATH_PROG([DOLT_BASH], [bash])
+ AC_MSG_CHECKING([if dolt supports this host])
+-dolt_supported=yes
++dolt_supported=no
+ AS_IF([test x$DOLT_BASH = x], [dolt_supported=no])
+ AS_IF([test x$GCC != xyes], [dolt_supported=no])
+ 
+--- a/VLCKit/libvlc/vlc/contrib/src/mpg123/rules.mak
++++ b/VLCKit/libvlc/vlc/contrib/src/mpg123/rules.mak
+@@ -9,7 +9,7 @@
+ 
+ MPG123_CFLAGS := $(CFLAGS)
+ # Same forced value as in VLC
+-MPG123_CFLAGS += -D_FILE_OFFSET_BITS=64
++MPG123_CFLAGS += -D_FILE_OFFSET_BITS=64 -std=gnu17
+ 
+ MPG123CONF =
+ MPG123CONF += --with-default-audio=dummy --enable-buffer=no --enable-modules=no --disable-network
+--- a/VLCKit/libvlc/vlc/contrib/src/live555/rules.mak
++++ b/VLCKit/libvlc/vlc/contrib/src/live555/rules.mak
+@@ -17,7 +17,7 @@
+ 
+ .sum-live555: $(LIVE555_FILE)
+ 
+-LIVE_EXTRA_CFLAGS := $(EXTRA_CFLAGS) -fexceptions -DNO_OPENSSL=1 $(CFLAGS)
++LIVE_EXTRA_CFLAGS := $(EXTRA_CFLAGS) -fexceptions -DNO_OPENSSL=1 $(filter-out -std=gnu17,$(CFLAGS))
+ 
+ LIVE_TARGET = $(error live555 target not defined!)
+ ifdef HAVE_LINUX

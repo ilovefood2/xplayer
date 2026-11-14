@@ -9,15 +9,15 @@ settings:
     TARGETED_DEVICE_FAMILY: "1,2"
     CODE_SIGN_STYLE: Automatic
     DEVELOPMENT_TEAM: 468U2JDYD3
-    MARKETING_VERSION: "4.11.145"
-    CURRENT_PROJECT_VERSION: "145"
+    MARKETING_VERSION: "4.11.146"
+    CURRENT_PROJECT_VERSION: "146"
 targets:
   XPlayer:
     type: application
     platform: iOS
     sources: [XPlayer]
     dependencies:
-      - framework: Vendor/MobileVLCKit/MobileVLCKit.xcframework
+      - framework: Vendor/MobileVLCKit-NoZVBI/MobileVLCKit.xcframework
         embed: true
     settings:
       base:

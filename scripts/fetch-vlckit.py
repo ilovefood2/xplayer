@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Fetch the pinned official MobileVLCKit binary; keep downloaded code out of Git."""
+"""Fetch the pinned rebuilt MobileVLCKit binary; keep downloaded code out of Git."""
 import hashlib
 import plistlib
 import shutil
@@ -9,10 +9,10 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = '3.7.3'
-SHA256 = '0d04059906962ddc9a7bd1ebaa12e1f9ae85eb2466116a97a2f46886dd27a0a9'
-URL = 'https://download.videolan.org/pub/cocoapods/prod/MobileVLCKit-3.7.3-319ed2c0-79128878.tar.xz'
-DESTINATION = ROOT / 'Vendor' / 'MobileVLCKit'
+VERSION = '3.7.3-no-zvbi'
+SHA256 = 'a085d35016167144070ef5ed7aca446ac6101dd6c8e54d89e838c60be38ecc83'
+URL = 'https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.146/MobileVLCKit-3.7.3-no-zvbi.tar.xz'
+DESTINATION = ROOT / 'Vendor' / 'MobileVLCKit-NoZVBI'
 ARCHIVE = ROOT / 'build' / 'dependencies' / f'MobileVLCKit-{VERSION}.tar.xz'
 
 if not DESTINATION.exists():

@@ -40,8 +40,7 @@ application is not an official SPlayer release.
 
 Requires Xcode, an iOS SDK, Python 3.12 or later, and an installed simulator runtime.
 Run `python3 scripts/fetch-vlckit.py` once before opening the checked-in Xcode
-project. The build script runs this automatically. It downloads the official
-MobileVLCKit 3.7.3 archive (~264 MB) and verifies the registry-published SHA-256.
+project. The build script runs this automatically. It downloads the release-pinned MobileVLCKit 3.7.3 rebuild without ZVBI and verifies its SHA-256.
 The extracted framework stays in ignored `Vendor/`. See
 [decoder build and licensing](docs/dependency-build.md). XcodeGen is only needed after
 editing `project.yml` (`xcodegen generate`). No Node dependencies are installed;

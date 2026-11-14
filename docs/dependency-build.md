@@ -1,17 +1,17 @@
 # MobileVLCKit sources and rebuilding
 
-xplayer uses the official **MobileVLCKit 3.7.3** dynamic XCFramework. The app's
+xplayer uses a dynamic XCFramework rebuilt from **MobileVLCKit 3.7.3** without ZVBI. The app's
 MIT license does not replace the licenses of MobileVLCKit, libVLC, or their
 dependencies. The app includes the LGPL text and component notices in Help &
 About. Source versions, archive checksums, license files, and binary inventory
 evidence are recorded in `metadata/dependencies/mobilevlckit-3.7.3.json`.
 
-## Sources for xplayer 4.11.145
+## Sources for xplayer 4.11.146
 
 The release publishes two separate source downloads:
 
-- [App source and build configuration](https://github.com/ilovefood2/xplayer/archive/refs/tags/ios-v4.11.145.tar.gz), tag `ios-v4.11.145`.
-- [Decoder and dependency sources](https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.145/xplayer-decoder-sources-3.7.3.tar.xz) and its [SHA-256 checksum](https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.145/xplayer-decoder-sources-3.7.3.tar.xz.sha256).
+- [App source and build configuration](https://github.com/ilovefood2/xplayer/archive/refs/tags/ios-v4.11.146.tar.gz), tag `ios-v4.11.146`.
+- [Decoder and dependency sources](https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.146/xplayer-decoder-sources-3.7.3.tar.xz) and its [SHA-256 checksum](https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.146/xplayer-decoder-sources-3.7.3.tar.xz.sha256).
 
 The decoder package contains:
 
@@ -41,7 +41,7 @@ file inventory and every dependency archive without extracting files. Git
 histories, credentials, provisioning profiles, personal media, and build
 products are excluded from the source package.
 
-## Build the app with the official decoder
+## Build the app with the pinned decoder
 
 1. Install Xcode and Python 3.12 or newer. A device build also needs your own
    Apple signing identity; a simulator build does not.
@@ -51,12 +51,8 @@ products are excluded from the source package.
 3. Run `scripts/build.sh build`, or open `XPlayer.xcodeproj`. `project.yml` is the
    XcodeGen source of truth when regenerating the project.
 
-The official binary archive is
-https://download.videolan.org/pub/cocoapods/prod/MobileVLCKit-3.7.3-319ed2c0-79128878.tar.xz,
-with SHA-256
-`0d04059906962ddc9a7bd1ebaa12e1f9ae85eb2466116a97a2f46886dd27a0a9`.
-The corresponding registry specification is
-https://trunk.cocoapods.org/api/v1/pods/MobileVLCKit/specs/3.7.3.
+The release-pinned framework archive is `MobileVLCKit-3.7.3-no-zvbi.tar.xz`
+on the iOS release. The fetch script verifies its SHA-256 before extraction.
 
 ## Modify and relink the decoder
 
@@ -65,16 +61,25 @@ Xcode's command-line tools. Work in a path without spaces. From the extracted
 decoder package, make your library changes and run:
 
 ```sh
-cd xplayer-decoder-sources-3.7.3/VLCKit
+cd xplayer-decoder-sources-3.7.3
+patch -p1 < /path/to/xplayer/metadata/dependencies/mobilevlckit-no-zvbi.patch
+cd VLCKit
 ./buildMobileVLCKit.sh -n -f -a aarch64
 ```
 
 `-n` preserves the already patched VLC checkout instead of fetching and resetting
 it. It is not a guarantee of an offline build: upstream's build-tool setup and
 any dependencies selected by a different platform/toolchain can still need
-downloads. The supplied contrib archives retain the filenames expected by the
+downloads. The patch disables ZVBI, unused terminal UI and x264/x265 encoders, and adapts the legacy C and libtool invocation for Xcode 27.2. The supplied contrib archives retain the filenames expected by the
 upstream fetch/checksum rules. `-f -a aarch64` selects the device and Apple
 Silicon simulator dynamic framework, produced at `build/MobileVLCKit.xcframework`.
+With the upstream script's arm64-only selection, archive the simulator framework
+separately with `xcodebuild archive -project MobileVLCKit.xcodeproj -scheme
+MobileVLCKit -sdk iphonesimulator -destination 'generic/platform=iOS Simulator'
+-configuration Release -archivePath build/MobileVLCKit-iphonesimulator.xcarchive
+ARCHS=arm64 IPHONEOS_DEPLOYMENT_TARGET=17.0 CODE_SIGNING_ALLOWED=NO SKIP_INSTALL=no`.
+Combine that archive and the device archive with `xcodebuild -create-xcframework`.
+
 Other architectures are available through the upstream script's `-a` option.
 
 In the app source, change the `framework` dependency in `project.yml` to the

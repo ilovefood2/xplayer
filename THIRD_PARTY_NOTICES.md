@@ -2,8 +2,8 @@
 
 ## MobileVLCKit 3.7.3 / libVLC
 
-xplayer includes the unmodified MobileVLCKit 3.7.3 dynamic framework from
-VideoLAN to decode Matroska (MKV), AVI, WebM, and MPEG-TS videos. Copyright © VideoLAN and the VLCKit,
+xplayer includes a dynamic framework rebuilt from VideoLAN MobileVLCKit 3.7.3
+without ZVBI to decode Matroska (MKV), AVI, WebM, and MPEG-TS videos. Copyright © VideoLAN and the VLCKit,
 VLC, and contributing codec-library authors. MobileVLCKit and libVLC are
 licensed under the GNU Lesser General Public License, version 2.1 or later.
 Their code is not relicensed under xplayer's MIT license.
@@ -16,19 +16,21 @@ are available under MIT so you can rebuild it against a modified library.
 These open-source permissions, including modification and reverse engineering
 for debugging library modifications, are not limited by other app terms.
 
-Source for xplayer 4.11.145:
-https://github.com/ilovefood2/xplayer/tree/ios-v4.11.145
+Source for xplayer 4.11.146:
+https://github.com/ilovefood2/xplayer/tree/ios-v4.11.146
 
 Downloadable application source:
-https://github.com/ilovefood2/xplayer/archive/refs/tags/ios-v4.11.145.tar.gz
+https://github.com/ilovefood2/xplayer/archive/refs/tags/ios-v4.11.146.tar.gz
 
 Matching decoder source, patches, dependency archives, and rebuild instructions:
-https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.145/xplayer-decoder-sources-3.7.3.tar.xz
+https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.146/xplayer-decoder-sources-3.7.3.tar.xz
 
-Official binary:
-https://download.videolan.org/pub/cocoapods/prod/MobileVLCKit-3.7.3-319ed2c0-79128878.tar.xz
+Release binary (rebuilt without ZVBI):
+https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.146/MobileVLCKit-3.7.3-no-zvbi.tar.xz
 
-SHA-256: 0d04059906962ddc9a7bd1ebaa12e1f9ae85eb2466116a97a2f46886dd27a0a9
+SHA-256: a085d35016167144070ef5ed7aca446ac6101dd6c8e54d89e838c60be38ecc83
+
+The app source includes the decoder rebuild patch at metadata/dependencies/mobilevlckit-no-zvbi.patch.
 
 Corresponding VLCKit source and build scripts (tag 3.7.3, commit 319ed2c0):
 https://code.videolan.org/videolan/VLCKit/-/tree/3.7.3
