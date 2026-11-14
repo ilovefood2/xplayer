@@ -12,6 +12,14 @@ enum AppInformation {
         }
         return try String(contentsOf: url, encoding: .utf8)
     }
+
+    static func dependencyNotices() throws -> [(title: String, text: String)] {
+        try document("ThirdPartyLicenses", extension: "txt").components(separatedBy: "\n=== ").enumerated().map { index, section in
+            if index == 0 { return ("Acknowledgements", section) }
+            let lines = section.split(separator: "\n", maxSplits: 1, omittingEmptySubsequences: false)
+            return (String(lines[0]).replacingOccurrences(of: " ===", with: ""), lines.count > 1 ? String(lines[1]) : "")
+        }
+    }
 }
 
 struct AboutView: View {
@@ -28,6 +36,7 @@ struct AboutView: View {
                 NavigationLink("Open Source License") { AppDocumentView(title: "MIT License", resource: "License", suffix: "txt") }
                 NavigationLink("MobileVLCKit License") { AppDocumentView(title: "LGPL 2.1", resource: "MobileVLCKit-LGPL", suffix: "txt") }
                 NavigationLink("Third-Party Notices") { AppDocumentView(title: "Notices", resource: "ThirdPartyNotices") }
+                NavigationLink("Third-Party Licenses") { DependencyLicensesView() }
             } header: {
                 Text("Privacy & Licenses")
             } footer: {
@@ -39,28 +48,51 @@ struct AboutView: View {
     }
 }
 
+struct DependencyLicensesView: View {
+    @State private var notices: [(title: String, text: String)] = []
+    @State private var error: String?
+
+    var body: some View {
+        List {
+            if let error { Text(error) }
+            ForEach(notices.indices, id: \.self) { index in
+                NavigationLink(notices[index].title) {
+                    AppDocumentView(title: notices[index].title, resource: "", suffix: "txt", contents: notices[index].text)
+                }
+            }
+        }
+        .navigationTitle("Third-Party Licenses")
+        .navigationBarTitleDisplayMode(.inline)
+        .task {
+            do { notices = try AppInformation.dependencyNotices() }
+            catch { self.error = error.localizedDescription }
+        }
+    }
+}
+
 struct AppDocumentView: View {
     let title: String
     let resource: String
     var suffix = "md"
     var website: URL?
+    var contents: String?
 
     private var paragraphs: [String] {
         let text: String
-        do { text = try AppInformation.document(resource, extension: suffix) }
+        do { text = try contents ?? AppInformation.document(resource, extension: suffix) }
         catch { text = error.localizedDescription }
         return text.components(separatedBy: "\n\n").filter { !$0.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty }
     }
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 18) {
+            LazyVStack(alignment: .leading, spacing: 18) {
                 ForEach(Array(paragraphs.enumerated()), id: \.offset) { _, paragraph in
                     if paragraph.hasPrefix("#") {
                         Text(paragraph.drop(while: { $0 == "#" || $0 == " " }))
                             .font(.headline).accessibilityAddTraits(.isHeader)
                     } else {
-                        Text(paragraph.replacingOccurrences(of: "\n", with: " "))
+                        Text(suffix == "txt" ? paragraph : paragraph.replacingOccurrences(of: "\n", with: " "))
                             .font(.body).textSelection(.enabled)
                     }
                 }

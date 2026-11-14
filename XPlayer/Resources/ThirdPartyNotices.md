@@ -9,10 +9,21 @@ licensed under the GNU Lesser General Public License, version 2.1 or later.
 Their code is not relicensed under xplayer's MIT license.
 
 The complete LGPL 2.1 text is bundled as MobileVLCKit-LGPL.txt and is readable
-in About → MobileVLCKit License. You may modify and redistribute these libraries
+in Library → … → Help & About → MobileVLCKit License. You may modify and redistribute these libraries
 under their licenses, and reverse-engineer this application's use of them for
 debugging your modifications. xplayer's complete source and build configuration
 are available under MIT so you can rebuild it against a modified library.
+These open-source permissions, including modification and reverse engineering
+for debugging library modifications, are not limited by other app terms.
+
+Source for xplayer 4.11.143:
+https://github.com/ilovefood2/xplayer/tree/ios-v4.11.143
+
+Downloadable application source:
+https://github.com/ilovefood2/xplayer/archive/refs/tags/ios-v4.11.143.tar.gz
+
+Matching decoder source, patches, dependency archives, and rebuild instructions:
+https://github.com/ilovefood2/xplayer/releases/download/ios-v4.11.143/xplayer-decoder-sources-3.7.3.tar.xz
 
 Official binary:
 https://download.videolan.org/pub/cocoapods/prod/MobileVLCKit-3.7.3-319ed2c0-79128878.tar.xz
@@ -25,10 +36,21 @@ https://code.videolan.org/videolan/VLCKit/-/tree/3.7.3
 libVLC source used by that release (commit 79128878):
 https://code.videolan.org/videolan/vlc/-/tree/79128878
 
-The upstream source tree includes patches, build scripts, and contrib recipes
-for its codec dependencies. Their original copyright and license notices
-continue to apply. See docs/dependency-build.md in xplayer's source repository
-for fetching the pinned binary and rebuilding/relinking from source.
+The framework also incorporates FFmpeg and other libraries with their own
+licenses. The complete collected notices are bundled as ThirdPartyLicenses.txt,
+readable offline in Help & About → Third-Party Licenses, and published at:
+https://ilovefood2.github.io/xplayer/license.html
+
+The release source contains a versioned dependency inventory with upstream
+archive hashes and verbatim license files in metadata/dependencies. It also
+contains the patches, build recipes, and instructions needed to rebuild and
+relink the decoder. See docs/dependency-build.md at the release source link
+above. The source package includes the original notices; the application's
+MIT license does not replace any dependency license or grant codec patent rights.
+
+This product includes software developed by Niels Provos. Portions of this
+software are based in part on the work of the FreeType Team (https://freetype.org/).
+This software is based in part on the work of the Independent JPEG Group.
 
 ## Apple resources and development tools
 

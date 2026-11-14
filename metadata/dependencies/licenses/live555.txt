@@ -1,0 +1,2298 @@
+
+--- live/COPYING ---
+
+		  GNU LESSER GENERAL PUBLIC LICENSE
+		       Version 2.1, February 1999
+
+Copyright (C) 1991, 1999 Free Software Foundation, Inc.
+51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
+Everyone is permitted to copy and distribute verbatim copies
+of this license document, but changing it is not allowed.
+
+[This is the first released version of the Lesser GPL.  It also counts
+ as the successor of the GNU Library Public License, version 2, hence
+ the version number 2.1.]
+
+			    Preamble
+
+  The licenses for most software are designed to take away your
+freedom to share and change it.  By contrast, the GNU General Public
+Licenses are intended to guarantee your freedom to share and change
+free software--to make sure the software is free for all its users.
+
+  This license, the Lesser General Public License, applies to some
+specially designated software packages--typically libraries--of the
+Free Software Foundation and other authors who decide to use it.  You
+can use it too, but we suggest you first think carefully about whether
+this license or the ordinary General Public License is the better
+strategy to use in any particular case, based on the explanations below.
+
+  When we speak of free software, we are referring to freedom of use,
+not price.  Our General Public Licenses are designed to make sure that
+you have the freedom to distribute copies of free software (and charge
+for this service if you wish); that you receive source code or can get
+it if you want it; that you can change the software and use pieces of
+it in new free programs; and that you are informed that you can do
+these things.
+
+  To protect your rights, we need to make restrictions that forbid
+distributors to deny you these rights or to ask you to surrender these
+rights.  These restrictions translate to certain responsibilities for
+you if you distribute copies of the library or if you modify it.
+
+  For example, if you distribute copies of the library, whether gratis
+or for a fee, you must give the recipients all the rights that we gave
+you.  You must make sure that they, too, receive or can get the source
+code.  If you link other code with the library, you must provide
+complete object files to the recipients, so that they can relink them
+with the library after making changes to the library and recompiling
+it.  And you must show them these terms so they know their rights.
+
+  We protect your rights with a two-step method: (1) we copyright the
+library, and (2) we offer you this license, which gives you legal
+permission to copy, distribute and/or modify the library.
+
+  To protect each distributor, we want to make it very clear that
+there is no warranty for the free library.  Also, if the library is
+modified by someone else and passed on, the recipients should know
+that what they have is not the original version, so that the original
+author's reputation will not be affected by problems that might be
+introduced by others.
+
+  Finally, software patents pose a constant threat to the existence of
+any free program.  We wish to make sure that a company cannot
+effectively restrict the users of a free program by obtaining a
+restrictive license from a patent holder.  Therefore, we insist that
+any patent license obtained for a version of the library must be
+consistent with the full freedom of use specified in this license.
+
+  Most GNU software, including some libraries, is covered by the
+ordinary GNU General Public License.  This license, the GNU Lesser
+General Public License, applies to certain designated libraries, and
+is quite different from the ordinary General Public License.  We use
+this license for certain libraries in order to permit linking those
+libraries into non-free programs.
+
+  When a program is linked with a library, whether statically or using
+a shared library, the combination of the two is legally speaking a
+combined work, a derivative of the original library.  The ordinary
+General Public License therefore permits such linking only if the
+entire combination fits its criteria of freedom.  The Lesser General
+Public License permits more lax criteria for linking other code with
+the library.
+
+  We call this license the "Lesser" General Public License because it
+does Less to protect the user's freedom than the ordinary General
+Public License.  It also provides other free software developers Less
+of an advantage over competing non-free programs.  These disadvantages
+are the reason we use the ordinary General Public License for many
+libraries.  However, the Lesser license provides advantages in certain
+special circumstances.
+
+  For example, on rare occasions, there may be a special need to
+encourage the widest possible use of a certain library, so that it becomes
+a de-facto standard.  To achieve this, non-free programs must be
+allowed to use the library.  A more frequent case is that a free
+library does the same job as widely used non-free libraries.  In this
+case, there is little to gain by limiting the free library to free
+software only, so we use the Lesser General Public License.
+
+  In other cases, permission to use a particular library in non-free
+programs enables a greater number of people to use a large body of
+free software.  For example, permission to use the GNU C Library in
+non-free programs enables many more people to use the whole GNU
+operating system, as well as its variant, the GNU/Linux operating
+system.
+
+  Although the Lesser General Public License is Less protective of the
+users' freedom, it does ensure that the user of a program that is
+linked with the Library has the freedom and the wherewithal to run
+that program using a modified version of the Library.
+
+  The precise terms and conditions for copying, distribution and
+modification follow.  Pay close attention to the difference between a
+"work based on the library" and a "work that uses the library".  The
+former contains code derived from the library, whereas the latter must
+be combined with the library in order to run.
+
+		  GNU LESSER GENERAL PUBLIC LICENSE
+   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
+
+  0. This License Agreement applies to any software library or other
+program which contains a notice placed by the copyright holder or
+other authorized party saying it may be distributed under the terms of
+this Lesser General Public License (also called "this License").
+Each licensee is addressed as "you".
+
+  A "library" means a collection of software functions and/or data
+prepared so as to be conveniently linked with application programs
+(which use some of those functions and data) to form executables.
+
+  The "Library", below, refers to any such software library or work
+which has been distributed under these terms.  A "work based on the
+Library" means either the Library or any derivative work under
+copyright law: that is to say, a work containing the Library or a
+portion of it, either verbatim or with modifications and/or translated
+straightforwardly into another language.  (Hereinafter, translation is
+included without limitation in the term "modification".)
+
+  "Source code" for a work means the preferred form of the work for
+making modifications to it.  For a library, complete source code means
+all the source code for all modules it contains, plus any associated
+interface definition files, plus the scripts used to control compilation
+and installation of the library.
+
+  Activities other than copying, distribution and modification are not
+covered by this License; they are outside its scope.  The act of
+running a program using the Library is not restricted, and output from
+such a program is covered only if its contents constitute a work based
+on the Library (independent of the use of the Library in a tool for
+writing it).  Whether that is true depends on what the Library does
+and what the program that uses the Library does.
+  
+  1. You may copy and distribute verbatim copies of the Library's
+complete source code as you receive it, in any medium, provided that
+you conspicuously and appropriately publish on each copy an
+appropriate copyright notice and disclaimer of warranty; keep intact
+all the notices that refer to this License and to the absence of any
+warranty; and distribute a copy of this License along with the
+Library.
+
+  You may charge a fee for the physical act of transferring a copy,
+and you may at your option offer warranty protection in exchange for a
+fee.
+
+  2. You may modify your copy or copies of the Library or any portion
+of it, thus forming a work based on the Library, and copy and
+distribute such modifications or work under the terms of Section 1
+above, provided that you also meet all of these conditions:
+
+    a) The modified work must itself be a software library.
+
+    b) You must cause the files modified to carry prominent notices
+    stating that you changed the files and the date of any change.
+
+    c) You must cause the whole of the work to be licensed at no
+    charge to all third parties under the terms of this License.
+
+    d) If a facility in the modified Library refers to a function or a
+    table of data to be supplied by an application program that uses
+    the facility, other than as an argument passed when the facility
+    is invoked, then you must make a good faith effort to ensure that,
+    in the event an application does not supply such function or
+    table, the facility still operates, and performs whatever part of
+    its purpose remains meaningful.
+
+    (For example, a function in a library to compute square roots has
+    a purpose that is entirely well-defined independent of the
+    application.  Therefore, Subsection 2d requires that any
+    application-supplied function or table used by this function must
+    be optional: if the application does not supply it, the square
+    root function must still compute square roots.)
+
+These requirements apply to the modified work as a whole.  If
+identifiable sections of that work are not derived from the Library,
+and can be reasonably considered independent and separate works in
+themselves, then this License, and its terms, do not apply to those
+sections when you distribute them as separate works.  But when you
+distribute the same sections as part of a whole which is a work based
+on the Library, the distribution of the whole must be on the terms of
+this License, whose permissions for other licensees extend to the
+entire whole, and thus to each and every part regardless of who wrote
+it.
+
+Thus, it is not the intent of this section to claim rights or contest
+your rights to work written entirely by you; rather, the intent is to
+exercise the right to control the distribution of derivative or
+collective works based on the Library.
+
+In addition, mere aggregation of another work not based on the Library
+with the Library (or with a work based on the Library) on a volume of
+a storage or distribution medium does not bring the other work under
+the scope of this License.
+
+  3. You may opt to apply the terms of the ordinary GNU General Public
+License instead of this License to a given copy of the Library.  To do
+this, you must alter all the notices that refer to this License, so
+that they refer to the ordinary GNU General Public License, version 2,
+instead of to this License.  (If a newer version than version 2 of the
+ordinary GNU General Public License has appeared, then you can specify
+that version instead if you wish.)  Do not make any other change in
+these notices.
+
+  Once this change is made in a given copy, it is irreversible for
+that copy, so the ordinary GNU General Public License applies to all
+subsequent copies and derivative works made from that copy.
+
+  This option is useful when you wish to copy part of the code of
+the Library into a program that is not a library.
+
+  4. You may copy and distribute the Library (or a portion or
+derivative of it, under Section 2) in object code or executable form
+under the terms of Sections 1 and 2 above provided that you accompany
+it with the complete corresponding machine-readable source code, which
+must be distributed under the terms of Sections 1 and 2 above on a
+medium customarily used for software interchange.
+
+  If distribution of object code is made by offering access to copy
+from a designated place, then offering equivalent access to copy the
+source code from the same place satisfies the requirement to
+distribute the source code, even though third parties are not
+compelled to copy the source along with the object code.
+
+  5. A program that contains no derivative of any portion of the
+Library, but is designed to work with the Library by being compiled or
+linked with it, is called a "work that uses the Library".  Such a
+work, in isolation, is not a derivative work of the Library, and
+therefore falls outside the scope of this License.
+
+  However, linking a "work that uses the Library" with the Library
+creates an executable that is a derivative of the Library (because it
+contains portions of the Library), rather than a "work that uses the
+library".  The executable is therefore covered by this License.
+Section 6 states terms for distribution of such executables.
+
+  When a "work that uses the Library" uses material from a header file
+that is part of the Library, the object code for the work may be a
+derivative work of the Library even though the source code is not.
+Whether this is true is especially significant if the work can be
+linked without the Library, or if the work is itself a library.  The
+threshold for this to be true is not precisely defined by law.
+
+  If such an object file uses only numerical parameters, data
+structure layouts and accessors, and small macros and small inline
+functions (ten lines or less in length), then the use of the object
+file is unrestricted, regardless of whether it is legally a derivative
+work.  (Executables containing this object code plus portions of the
+Library will still fall under Section 6.)
+
+  Otherwise, if the work is a derivative of the Library, you may
+distribute the object code for the work under the terms of Section 6.
+Any executables containing that work also fall under Section 6,
+whether or not they are linked directly with the Library itself.
+
+  6. As an exception to the Sections above, you may also combine or
+link a "work that uses the Library" with the Library to produce a
+work containing portions of the Library, and distribute that work
+under terms of your choice, provided that the terms permit
+modification of the work for the customer's own use and reverse
+engineering for debugging such modifications.
+
+  You must give prominent notice with each copy of the work that the
+Library is used in it and that the Library and its use are covered by
+this License.  You must supply a copy of this License.  If the work
+during execution displays copyright notices, you must include the
+copyright notice for the Library among them, as well as a reference
+directing the user to the copy of this License.  Also, you must do one
+of these things:
+
+    a) Accompany the work with the complete corresponding
+    machine-readable source code for the Library including whatever
+    changes were used in the work (which must be distributed under
+    Sections 1 and 2 above); and, if the work is an executable linked
+    with the Library, with the complete machine-readable "work that
+    uses the Library", as object code and/or source code, so that the
+    user can modify the Library and then relink to produce a modified
+    executable containing the modified Library.  (It is understood
+    that the user who changes the contents of definitions files in the
+    Library will not necessarily be able to recompile the application
+    to use the modified definitions.)
+
+    b) Use a suitable shared library mechanism for linking with the
+    Library.  A suitable mechanism is one that (1) uses at run time a
+    copy of the library already present on the user's computer system,
+    rather than copying library functions into the executable, and (2)
+    will operate properly with a modified version of the library, if
+    the user installs one, as long as the modified version is
+    interface-compatible with the version that the work was made with.
+
+    c) Accompany the work with a written offer, valid for at
+    least three years, to give the same user the materials
+    specified in Subsection 6a, above, for a charge no more
+    than the cost of performing this distribution.
+
+    d) If distribution of the work is made by offering access to copy
+    from a designated place, offer equivalent access to copy the above
+    specified materials from the same place.
+
+    e) Verify that the user has already received a copy of these
+    materials or that you have already sent this user a copy.
+
+  For an executable, the required form of the "work that uses the
+Library" must include any data and utility programs needed for
+reproducing the executable from it.  However, as a special exception,
+the materials to be distributed need not include anything that is
+normally distributed (in either source or binary form) with the major
+components (compiler, kernel, and so on) of the operating system on
+which the executable runs, unless that component itself accompanies
+the executable.
+
+  It may happen that this requirement contradicts the license
+restrictions of other proprietary libraries that do not normally
+accompany the operating system.  Such a contradiction means you cannot
+use both them and the Library together in an executable that you
+distribute.
+
+  7. You may place library facilities that are a work based on the
+Library side-by-side in a single library together with other library
+facilities not covered by this License, and distribute such a combined
+library, provided that the separate distribution of the work based on
+the Library and of the other library facilities is otherwise
+permitted, and provided that you do these two things:
+
+    a) Accompany the combined library with a copy of the same work
+    based on the Library, uncombined with any other library
+    facilities.  This must be distributed under the terms of the
+    Sections above.
+
+    b) Give prominent notice with the combined library of the fact
+    that part of it is a work based on the Library, and explaining
+    where to find the accompanying uncombined form of the same work.
+
+  8. You may not copy, modify, sublicense, link with, or distribute
+the Library except as expressly provided under this License.  Any
+attempt otherwise to copy, modify, sublicense, link with, or
+distribute the Library is void, and will automatically terminate your
+rights under this License.  However, parties who have received copies,
+or rights, from you under this License will not have their licenses
+terminated so long as such parties remain in full compliance.
+
+  9. You are not required to accept this License, since you have not
+signed it.  However, nothing else grants you permission to modify or
+distribute the Library or its derivative works.  These actions are
+prohibited by law if you do not accept this License.  Therefore, by
+modifying or distributing the Library (or any work based on the
+Library), you indicate your acceptance of this License to do so, and
+all its terms and conditions for copying, distributing or modifying
+the Library or works based on it.
+
+  10. Each time you redistribute the Library (or any work based on the
+Library), the recipient automatically receives a license from the
+original licensor to copy, distribute, link with or modify the Library
+subject to these terms and conditions.  You may not impose any further
+restrictions on the recipients' exercise of the rights granted herein.
+You are not responsible for enforcing compliance by third parties with
+this License.
+
+  11. If, as a consequence of a court judgment or allegation of patent
+infringement or for any other reason (not limited to patent issues),
+conditions are imposed on you (whether by court order, agreement or
+otherwise) that contradict the conditions of this License, they do not
+excuse you from the conditions of this License.  If you cannot
+distribute so as to satisfy simultaneously your obligations under this
+License and any other pertinent obligations, then as a consequence you
+may not distribute the Library at all.  For example, if a patent
+license would not permit royalty-free redistribution of the Library by
+all those who receive copies directly or indirectly through you, then
+the only way you could satisfy both it and this License would be to
+refrain entirely from distribution of the Library.
+
+If any portion of this section is held invalid or unenforceable under any
+particular circumstance, the balance of the section is intended to apply,
+and the section as a whole is intended to apply in other circumstances.
+
+It is not the purpose of this section to induce you to infringe any
+patents or other property right claims or to contest validity of any
+such claims; this section has the sole purpose of protecting the
+integrity of the free software distribution system which is
+implemented by public license practices.  Many people have made
+generous contributions to the wide range of software distributed
+through that system in reliance on consistent application of that
+system; it is up to the author/donor to decide if he or she is willing
+to distribute software through any other system and a licensee cannot
+impose that choice.
+
+This section is intended to make thoroughly clear what is believed to
+be a consequence of the rest of this License.
+
+  12. If the distribution and/or use of the Library is restricted in
+certain countries either by patents or by copyrighted interfaces, the
+original copyright holder who places the Library under this License may add
+an explicit geographical distribution limitation excluding those countries,
+so that distribution is permitted only in or among countries not thus
+excluded.  In such case, this License incorporates the limitation as if
+written in the body of this License.
+
+  13. The Free Software Foundation may publish revised and/or new
+versions of the Lesser General Public License from time to time.
+Such new versions will be similar in spirit to the present version,
+but may differ in detail to address new problems or concerns.
+
+Each version is given a distinguishing version number.  If the Library
+specifies a version number of this License which applies to it and
+"any later version", you have the option of following the terms and
+conditions either of that version or of any later version published by
+the Free Software Foundation.  If the Library does not specify a
+license version number, you may choose any version ever published by
+the Free Software Foundation.
+
+  14. If you wish to incorporate parts of the Library into other free
+programs whose distribution conditions are incompatible with these,
+write to the author to ask for permission.  For software which is
+copyrighted by the Free Software Foundation, write to the Free
+Software Foundation; we sometimes make exceptions for this.  Our
+decision will be guided by the two goals of preserving the free status
+of all derivatives of our free software and of promoting the sharing
+and reuse of software generally.
+
+			    NO WARRANTY
+
+  15. BECAUSE THE LIBRARY IS LICENSED FREE OF CHARGE, THERE IS NO
+WARRANTY FOR THE LIBRARY, TO THE EXTENT PERMITTED BY APPLICABLE LAW.
+EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR
+OTHER PARTIES PROVIDE THE LIBRARY "AS IS" WITHOUT WARRANTY OF ANY
+KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE
+LIBRARY IS WITH YOU.  SHOULD THE LIBRARY PROVE DEFECTIVE, YOU ASSUME
+THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+  16. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
+WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY
+AND/OR REDISTRIBUTE THE LIBRARY AS PERMITTED ABOVE, BE LIABLE TO YOU
+FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR
+CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE
+LIBRARY (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
+RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
+FAILURE OF THE LIBRARY TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
+SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
+DAMAGES.
+
+		     END OF TERMS AND CONDITIONS
+
+
+--- live/WindowsAudioInputDevice/showAudioInputPorts.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A program that prints out this computer's audio input ports
+
+
+--- live/WindowsAudioInputDevice/WindowsAudioInputDevice_common.cpp ---
+
+// Copyright (c) 2001-2004 Live Networks, Inc.  All rights reserved.
+// Windows implementation of a generic audio input device
+// Base class for both library versions:
+//     One that uses Windows' built-in software mixer; another that doesn't.
+// Implementation
+
+
+--- live/WindowsAudioInputDevice/WindowsAudioInputDevice_mixer.cpp ---
+
+// Copyright (c) 2001-2004 Live Networks, Inc.  All rights reserved.
+// Windows implementation of a generic audio input device
+// This version uses Windows' built-in software mixer.
+// Implementation
+
+
+--- live/WindowsAudioInputDevice/WindowsAudioInputDevice_noMixer.cpp ---
+
+// Copyright (c) 2001-2004 Live Networks, Inc.  All rights reserved.
+// Windows implementation of a generic audio input device
+// This version does not use Windows' built-in software mixer.
+// Implementation
+
+
+--- live/proxyServer/live555ProxyServer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// LIVE555 Proxy Server
+// main program
+
+
+--- live/mediaServer/DynamicRTSPServer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A subclass of "RTSPServer" that creates "ServerMediaSession"s on demand,
+// based on whether or not the specified stream name exists as a file
+// Implementation
+
+
+--- live/mediaServer/live555MediaServer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// LIVE555 Media Server
+// main program
+
+
+--- live/testProgs/MPEG2TransportStreamIndexer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A program that reads an existing MPEG-2 Transport Stream file,
+// and generates a separate index file that can be used - by our RTSP server
+// implementation - to support 'trick play' operations when streaming the
+// Transport Stream file.
+// main program
+
+
+--- live/testProgs/openRTSP.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A RTSP client application that opens a RTSP URL argument,
+// and extracts and records the data from each incoming RTP stream.
+//
+// NOTE: If you want to develop your own RTSP client application (or embed RTSP client functionality into your own application),
+// then we don't recommend using this code as a model, because it is too complex (with many options).
+// Instead, we recommend using the "testRTSPClient" application code as a model.
+
+
+--- live/testProgs/playCommon.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A common framework, used for the "openRTSP" and "playSIP" applications
+// Implementation
+//
+// NOTE: If you want to develop your own RTSP client application (or embed RTSP client functionality into your own application),
+// then we don't recommend using this code as a model, because it is too complex (with many options).
+// Instead, we recommend using the "testRTSPClient" application code as a model.
+
+
+--- live/testProgs/playSIP.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A SIP client test program that opens a SIP URL argument,
+// and extracts the data from each incoming RTP stream.
+
+
+--- live/testProgs/registerRTSPStream.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A demonstration application that uses our custom RTSP "REGISTER" command to register a stream
+// (given by "rtsp://" URL) with a RTSP client or proxy server
+// main program
+
+
+--- live/testProgs/sapWatch.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A program that receives and prints SDP/SAP announcements
+// (on the default SDP/SAP directory: 224.2.127.254/9875)
+
+
+--- live/testProgs/testAMRAudioStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads an AMR audio file (as defined in RFC 3267)
+// and streams it using RTP
+// main program
+
+
+--- live/testProgs/testDVVideoStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a DV Video Elementary Stream file,
+// and streams it using RTP
+// main program
+
+
+--- live/testProgs/testGSMStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that streams GSM audio via RTP/RTCP
+// main program
+
+
+--- live/testProgs/testH264VideoStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a H.264 Elementary Stream video file
+// and streams it using RTP
+// main program
+//
+// NOTE: For this application to work, the H.264 Elementary Stream video file *must* contain SPS and PPS NAL units,
+// ideally at or near the start of the file.  These SPS and PPS NAL units are used to specify 'configuration' information
+// that is set in the output stream's SDP description (by the RTSP server that is built in to this application).
+// Note also that - unlike some other "*Streamer" demo applications - the resulting stream can be received only using a
+// RTSP client (such as "openRTSP")
+
+
+--- live/testProgs/testH264VideoToTransportStream.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A program that converts a H.264 (Elementary Stream) video file into a Transport Stream file.
+// main program
+
+
+--- live/testProgs/testMKVStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a ".mkv" (i.e., Matroska) file, demultiplexes each track
+// (video, audio, subtitles), and streams each track using RTP multicast.
+// main program
+
+
+--- live/testProgs/testOggStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a ".ogg" (i.e., Ogg) file, demultiplexes each track
+// (audio and/or video), and streams each track using RTP multicast.
+// main program
+
+
+--- live/testProgs/testH265VideoToTransportStream.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A program that converts a H.265 (Elementary Stream) video file into a Transport Stream file.
+// main program
+
+
+--- live/testProgs/testMP3Receiver.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that receives a RTP/RTCP multicast MP3 stream,
+// and outputs the resulting MP3 file stream to 'stdout'
+// main program
+
+
+--- live/testProgs/testMP3Streamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that streams a MP3 file via RTP/RTCP
+// main program
+
+
+--- live/testProgs/testMPEG1or2AudioVideoStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a MPEG-1 or 2 Program Stream file,
+// splits it into Audio and Video Elementary Streams,
+// and streams both using RTP
+// main program
+
+
+--- live/testProgs/testMPEG1or2ProgramToTransportStream.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A program that converts a MPEG-1 or 2 Program Stream file into
+// a Transport Stream file.
+// main program
+
+
+--- live/testProgs/testMPEG1or2Splitter.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that splits a MPEG-1 or 2 Program Stream file into
+// video and audio output files.
+// main program
+
+
+--- live/testProgs/testMPEG1or2VideoReceiver.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that receives a RTP/RTCP multicast MPEG video stream,
+// and outputs the resulting MPEG file stream to 'stdout'
+// main program
+
+
+--- live/testProgs/testMPEG1or2VideoStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a MPEG-1 or 2 Video Elementary Stream file,
+// and streams it using RTP
+// main program
+
+
+--- live/testProgs/testRelay.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that receives a UDP multicast stream
+// and retransmits it to another (multicast or unicast) address & port
+// main program
+
+
+--- live/testProgs/testMPEG2TransportReceiver.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that receives a RTP/RTCP multicast MPEG-2 Transport Stream,
+// and outputs the resulting Transport Stream data to 'stdout'
+// main program
+
+
+--- live/testProgs/testMPEG2TransportStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a MPEG-2 Transport Stream file,
+// and streams it using RTP
+// main program
+
+
+--- live/testProgs/testMPEG2TransportStreamTrickPlay.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A program that tests 'trick mode' operations on a MPEG-2 Transport Stream file,
+// by generating a new Transport Stream file that represents the result of the
+// 'trick mode' operation (seeking and/or fast forward/reverse play).
+// For this to work, there must also be an index file present, in the same directory
+// as the Transport Stream file, and with the same name prefix.  (The Transport
+// Stream file has name suffix ".ts"; the index file has name suffix ".tsx".)
+// main program
+
+
+--- live/testProgs/testMPEG4VideoStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a MPEG-4 Video Elementary Stream file,
+// and streams it using RTP
+// main program
+
+
+--- live/testProgs/testOnDemandRTSPServer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that demonstrates how to stream - via unicast RTP
+// - various kinds of file on demand, using a built-in RTSP server.
+// main program
+
+
+--- live/testProgs/testReplicator.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A demo application that receives a UDP multicast stream, replicates it (using the "StreamReplicator" class),
+// and retransmits one replica stream to another (multicast or unicast) address & port,
+// and writes the other replica stream to a file.
+//
+// main program
+
+
+--- live/testProgs/testRTSPClient.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A demo application, showing how to create and run a RTSP client (that can potentially receive multiple streams concurrently).
+//
+// NOTE: This code - although it builds a running application - is intended only to illustrate how to develop your own RTSP
+// client application.  For a full-featured RTSP client application - with much more functionality, and many options - see
+// "openRTSP": http://www.live555.com/openRTSP/
+
+
+--- live/testProgs/testWAVAudioStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that streams a WAV audio file via RTP/RTCP
+// main program
+
+
+--- live/testProgs/vobStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a VOB file
+// splits it into Audio (AC3) and Video (MPEG) Elementary Streams,
+// and streams both using RTP.
+// main program
+
+
+--- live/testProgs/testH265VideoStreamer.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// A test program that reads a H.265 Elementary Stream video file
+// and streams it using RTP
+// main program
+//
+// NOTE: For this application to work, the H.265 Elementary Stream video file *must* contain
+// VPS, SPS and PPS NAL units, ideally at or near the start of the file.
+// These VPS, SPS and PPS NAL units are used to specify 'configuration' information that is set in
+// the output stream's SDP description (by the RTSP server that is built in to this application).
+// Note also that - unlike some other "*Streamer" demo applications - the resulting stream can be
+// received only using a RTSP client (such as "openRTSP")
+
+
+--- live/BasicUsageEnvironment/BasicHashTable.cpp ---
+
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Basic Hash Table implementation
+// Implementation
+
+
+--- live/BasicUsageEnvironment/BasicTaskScheduler.cpp ---
+
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Basic Usage Environment: for a simple, non-scripted, console application
+// Implementation
+
+
+--- live/BasicUsageEnvironment/DelayQueue.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+//	Help by Carlo Bonamico to get working for Windows
+// Delay queue
+// Implementation
+
+
+--- live/UsageEnvironment/HashTable.cpp ---
+
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Generic Hash Table
+// Implementation
+
+
+--- live/UsageEnvironment/strDup.cpp ---
+
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A C++ equivalent to the standard C routine "strdup()".
+// This generates a char* that can be deleted using "delete[]"
+// Implementation
+
+
+--- live/UsageEnvironment/UsageEnvironment.cpp ---
+
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Usage Environment
+// Implementation
+
+
+--- live/groupsock/GroupEId.cpp ---
+
+// Copyright (c) 1996-2016, Live Networks, Inc.  All rights reserved
+// "Group Endpoint Id"
+// Implementation
+
+
+--- live/groupsock/Groupsock.cpp ---
+
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// 'Group sockets'
+// Implementation
+
+
+--- live/groupsock/GroupsockHelper.cpp ---
+
+// "mTunnel" multicast access service
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Helper routines to implement 'group sockets'
+// Implementation
+
+
+--- live/groupsock/IOHandlers.cpp ---
+
+// "mTunnel" multicast access service
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// IO event handlers
+// Implementation
+
+
+--- live/groupsock/NetAddress.cpp ---
+
+// "mTunnel" multicast access service
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Network Addresses
+// Implementation
+
+
+--- live/groupsock/NetInterface.cpp ---
+
+// "mTunnel" multicast access service
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Network Interfaces
+// Implementation
+
+
+--- live/groupsock/include/NetCommon.h ---
+
+/* "groupsock" interface
+ * Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+ * Common include files, typically used for networking
+ */
+
+--- live/liveMedia/AC3AudioFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from an AC3 audio file.
+// Implementation
+
+
+--- live/liveMedia/AC3AudioRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for AC3 audio
+// Implementation
+
+
+--- live/liveMedia/AC3AudioRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// AC3 Audio RTP Sources
+// Implementation
+
+
+--- live/liveMedia/AC3AudioStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that breaks up an AC3 audio elementary stream into frames
+// Implementation
+
+
+--- live/liveMedia/ADTSAudioFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from an AAC audio file in ADTS format
+// Implementation
+
+
+--- live/liveMedia/ADTSAudioFileSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A source object for AAC audio files in ADTS format
+// Implementation
+
+
+--- live/liveMedia/AMRAudioFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from an AMR audio file.
+// Implementation
+
+
+--- live/liveMedia/AMRAudioFileSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// AMR Audio File sinks
+// Implementation
+
+
+--- live/liveMedia/AMRAudioFileSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A source object for AMR audio files (as defined in RFC 4867, section 5)
+// Implementation
+
+
+--- live/liveMedia/AMRAudioRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for AMR audio (RFC 4867)
+// Implementation
+
+
+--- live/liveMedia/AMRAudioRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// AMR Audio RTP Sources (RFC 4867)
+// Implementation
+
+
+--- live/liveMedia/AMRAudioSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A source object for AMR audio sources
+// Implementation
+
+
+--- live/liveMedia/AudioInputDevice.cpp ---
+
+// Copyright (c) 2001-2003 Live Networks, Inc.  All rights reserved.
+// Generic audio input device (such as a microphone, or an input sound card)
+// Implementation
+
+
+--- live/liveMedia/AudioRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A generic RTP sink for audio codecs (abstract base class)
+// Implementation
+
+
+--- live/liveMedia/AVIFileSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A sink that generates an AVI file from a composite media session
+// Implementation
+
+
+--- live/liveMedia/Base64.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Base64 encoding and decoding
+// implementation
+
+
+--- live/liveMedia/BasicUDPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A simple UDP sink (i.e., without RTP or other headers added); one frame per packet
+// Implementation
+
+
+--- live/liveMedia/BasicUDPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A simple UDP source, where every UDP payload is a complete frame
+// Implementation
+
+
+--- live/liveMedia/BitVector.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Bit Vector data structure
+// Implementation
+
+
+--- live/liveMedia/ByteStreamFileSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A file source that is a plain byte stream (rather than frames)
+// Implementation
+
+
+--- live/liveMedia/ByteStreamMemoryBufferSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A class for streaming data from a (static) memory buffer, as if it were a file.
+// Implementation
+
+
+--- live/liveMedia/ByteStreamMultiFileSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A source that consists of multiple byte-stream files, read sequentially
+// Implementation
+
+
+--- live/liveMedia/DeviceSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A template for a MediaSource encapsulating an audio/video input device
+//
+// NOTE: Sections of this code labeled "%%% TO BE WRITTEN %%%" are incomplete, and need to be written by the programmer
+// (depending on the features of the particular device).
+// Implementation
+
+
+--- live/liveMedia/DigestAuthentication.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A class used for digest authentication.
+// Implementation
+
+
+--- live/liveMedia/DVVideoFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a DV video file.
+// Implementation
+
+
+--- live/liveMedia/DVVideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for DV video (RFC 3189)
+// (Thanks to Ben Hutchings for prototyping this.)
+// Implementation
+
+
+--- live/liveMedia/DVVideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// DV Video RTP Sources
+// Implementation
+
+
+--- live/liveMedia/DVVideoStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that parses a DV input stream into DV frames to deliver to the downstream object
+// Implementation
+// (Thanks to Ben Hutchings for his help, including a prototype implementation.)
+
+
+--- live/liveMedia/EBMLNumber.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// EBML numbers (ids and sizes)
+// Implementation
+
+
+--- live/liveMedia/FileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a file.
+// Implementation
+
+
+--- live/liveMedia/FileSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// File sinks
+// Implementation
+
+
+--- live/liveMedia/FramedFileSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Framed File Sources
+// Implementation
+
+
+--- live/liveMedia/FramedFilter.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Framed Filters
+// Implementation
+
+
+--- live/liveMedia/FramedSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Framed Sources
+// Implementation
+
+
+--- live/liveMedia/GSMAudioRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for GSM audio
+// Implementation
+
+
+--- live/liveMedia/H261VideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// H.261 Video RTP Sources
+// Implementation
+
+
+--- live/liveMedia/H263plusVideoFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a H263 video file.
+// Implementation
+
+
+--- live/liveMedia/H263plusVideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for H.263+ video (RFC 4629)
+// Implementation
+
+
+--- live/liveMedia/H263plusVideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// H.263+ Video RTP Sources
+// Implementation
+
+
+--- live/liveMedia/H263plusVideoStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Author Bernhard Feiten
+// A filter that breaks up an H.263plus video stream into frames.
+//
+
+
+--- live/liveMedia/H263plusVideoStreamParser.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Author Bernhard Feiten
+// A filter that breaks up an H.263plus video stream into frames.
+// Based on MPEG4IP/mp4creator/h263.c
+
+
+--- live/liveMedia/H264or5VideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for H.264 or H.265 video
+// Implementation
+
+
+--- live/liveMedia/H264or5VideoFileSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// H.264 or H.265 Video File sinks
+// Implementation
+
+
+--- live/liveMedia/H264or5VideoStreamDiscreteFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A simplified version of "H264or5VideoStreamFramer" that takes only complete,
+// discrete frames (rather than an arbitrary byte stream) as input.
+// This avoids the parsing and data copying overhead of the full
+// "H264or5VideoStreamFramer".
+// Implementation
+
+
+--- live/liveMedia/H264or5VideoStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that breaks up a H.264 or H.265 Video Elementary Stream into NAL units.
+// Implementation
+
+
+--- live/liveMedia/H264VideoFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a H264 video file.
+// Implementation
+
+
+--- live/liveMedia/H264VideoFileSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// H.264 Video File sinks
+// Implementation
+
+
+--- live/liveMedia/H264VideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for H.264 video (RFC 3984)
+// Implementation
+
+
+--- live/liveMedia/H264VideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// H.264 Video RTP Sources
+// Implementation
+
+
+--- live/liveMedia/H264VideoStreamDiscreteFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A simplified version of "H264VideoStreamFramer" that takes only complete,
+// discrete frames (rather than an arbitrary byte stream) as input.
+// This avoids the parsing and data copying overhead of the full
+// "H264VideoStreamFramer".
+// Implementation
+
+
+--- live/liveMedia/H264VideoStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that breaks up a H.264 Video Elementary Stream into NAL units.
+// Implementation
+
+
+--- live/liveMedia/H265VideoFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a H265 video file.
+// Implementation
+
+
+--- live/liveMedia/H265VideoFileSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// H.265 Video File sinks
+// Implementation
+
+
+--- live/liveMedia/H265VideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for H.265 video
+// Implementation
+
+
+--- live/liveMedia/Locale.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Support for temporarily setting the locale (e.g., to "C" or "POSIX") for (e.g.) parsing or printing
+// floating-point numbers in protocol headers, or calling toupper()/tolower() on human-input strings.
+// Implementation
+
+
+--- live/liveMedia/H265VideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// H.265 Video RTP Sources
+// Implementation
+
+
+--- live/liveMedia/H265VideoStreamDiscreteFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A simplified version of "H265VideoStreamFramer" that takes only complete,
+// discrete frames (rather than an arbitrary byte stream) as input.
+// This avoids the parsing and data copying overhead of the full
+// "H265VideoStreamFramer".
+// Implementation
+
+
+--- live/liveMedia/H265VideoStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that breaks up a H.265 Video Elementary Stream into NAL units.
+// Implementation
+
+
+--- live/liveMedia/InputFile.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Common routines for opening/closing named input files
+// Implementation
+
+
+--- live/liveMedia/JPEGVideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for JPEG video (RFC 2435)
+// Implementation
+
+
+--- live/liveMedia/JPEGVideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// JPEG Video (RFC 2435) RTP Sources
+// Implementation
+
+
+--- live/liveMedia/JPEGVideoSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// JPEG video sources
+// Implementation
+
+
+--- live/liveMedia/MatroskaDemuxedTrack.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A media track, demultiplexed from a Matroska file
+// Implementation
+
+
+--- live/liveMedia/MatroskaFile.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A class that encapsulates a Matroska file.
+// Implementation
+
+
+--- live/liveMedia/MatroskaFileParser.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A parser for a Matroska file.
+// Implementation
+
+
+--- live/liveMedia/MatroskaFileServerDemux.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A server demultiplexor for a Matroska file
+// Implementation
+
+
+--- live/liveMedia/Media.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Media
+// Implementation
+
+
+--- live/liveMedia/MediaSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Media Sinks
+// Implementation
+
+
+--- live/liveMedia/MatroskaFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a track within a Matroska file.
+// Implementation
+
+
+--- live/liveMedia/MediaSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Media Sources
+// Implementation
+
+
+--- live/liveMedia/MP3ADU.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// 'ADU' MP3 streams (for improved loss-tolerance)
+// Implementation
+
+
+--- live/liveMedia/MP3ADUdescriptor.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Descriptor preceding frames of 'ADU' MP3 streams (for improved loss-tolerance)
+// Implementation
+
+
+--- live/liveMedia/MP3ADUinterleaving.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Interleaving of MP3 ADUs
+// Implementation
+
+
+--- live/liveMedia/MP3ADURTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for 'ADUized' MP3 frames ("mpa-robust")
+// Implementation
+
+
+--- live/liveMedia/MP3ADURTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP source for 'ADUized' MP3 frames ("mpa-robust")
+// Implementation
+
+
+--- live/liveMedia/MP3ADUTranscoder.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Transcoder for ADUized MP3 frames
+// Implementation
+
+
+--- live/liveMedia/MP3AudioFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a MP3 audio file.
+// (Actually, any MPEG-1 or MPEG-2 audio file should work.)
+// Implementation
+
+
+--- live/liveMedia/MP3AudioMatroskaFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from an MP3 audio track within a Matroska file.
+// (Actually, MPEG-1 or MPEG-2 audio file should also work.)
+// Implementation
+
+
+--- live/liveMedia/MP3FileSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MP3 File Sources
+// Implementation
+
+
+--- live/liveMedia/ProxyServerMediaSession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A subclass of "ServerMediaSession" that can be used to create a (unicast) RTSP servers that acts as a 'proxy' for
+// another (unicast or multicast) RTSP/RTP stream.
+// Implementation
+
+
+--- live/liveMedia/MP3Internals.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MP3 internal implementation details
+// Implementation
+
+
+--- live/liveMedia/MP3InternalsHuffman.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MP3 internal implementation details (Huffman encoding)
+// Implementation
+
+
+--- live/liveMedia/MP3InternalsHuffmanTable.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MP3 internal implementation details (Huffman encoding)
+// Table
+
+
+--- live/liveMedia/MP3StreamState.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A class encapsulating the state of a MP3 stream
+// Implementation
+
+
+--- live/liveMedia/MP3Transcoder.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MP3 Transcoder
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2AudioRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for MPEG audio (RFC 2250)
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2AudioRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MPEG-1 or MPEG-2 Audio RTP Sources
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2AudioStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that breaks up an MPEG (1,2) audio elementary stream into frames
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2Demux.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Demultiplexer for a MPEG 1 or 2 Program Stream
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2DemuxedElementaryStream.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A MPEG 1 or 2 Elementary Stream, demultiplexed from a Program Stream
+// Implementation
+
+
+--- live/liveMedia/MPEG4ESVideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for MPEG-4 Elementary Stream video (RFC 3016)
+// Implementation
+
+
+--- live/liveMedia/OggFile.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A class that encapsulates an Ogg file.
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2DemuxedServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a MPEG-1 or 2 demuxer.
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2FileServerDemux.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A server demultiplexer for a MPEG 1 or 2 Program Stream
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2VideoFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a MPEG-1 or 2 Elementary Stream video file.
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2VideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for MPEG video (RFC 2250)
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2VideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MPEG-1 or MPEG-2 Video RTP Sources
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2VideoStreamDiscreteFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A simplified version of "MPEG1or2VideoStreamFramer" that takes only
+// complete, discrete frames (rather than an arbitrary byte stream) as input.
+// This avoids the parsing and data copying overhead of the full
+// "MPEG1or2VideoStreamFramer".
+// Implementation
+
+
+--- live/liveMedia/MPEG1or2VideoStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that breaks up an MPEG 1 or 2 video elementary stream into
+//   frames for: Video_Sequence_Header, GOP_Header, Picture_Header
+// Implementation
+
+
+--- live/liveMedia/MPEG2IndexFromTransportStream.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that produces a sequence of I-frame indices from a MPEG-2 Transport Stream
+// Implementation
+
+
+--- live/liveMedia/MPEG2TransportFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a MPEG-2 Transport Stream file.
+// Implementation
+
+
+--- live/liveMedia/MPEG2TransportStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that passes through (unchanged) chunks that contain an integral number
+// of MPEG-2 Transport Stream packets, but returning (in "fDurationInMicroseconds")
+// an updated estimate of the time gap between chunks.
+// Implementation
+
+
+--- live/liveMedia/MPEG2TransportStreamFromESSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter for converting one or more MPEG Elementary Streams
+// to a MPEG-2 Transport Stream
+// Implementation
+
+
+--- live/liveMedia/OggDemuxedTrack.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A media track, demultiplexed from an Ogg file
+// Implementation
+
+
+--- live/liveMedia/MPEG2TransportStreamFromPESSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter for converting a stream of MPEG PES packets to a MPEG-2 Transport Stream
+// Implementation
+
+
+--- live/liveMedia/MPEG2TransportStreamIndexFile.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A class that encapsulates MPEG-2 Transport Stream 'index files'/
+// These index files are used to implement 'trick play' operations
+// (seek-by-time, fast forward, reverse play) on Transport Stream files.
+//
+// Implementation
+
+
+--- live/liveMedia/MPEG2TransportStreamMultiplexor.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A class for generating MPEG-2 Transport Stream from one or more input
+// Elementary Stream data sources
+// Implementation
+
+
+--- live/liveMedia/MPEG2TransportStreamTrickModeFilter.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that converts a MPEG Transport Stream file - with corresponding index file
+// - to a corresponding Video Elementary Stream.  It also uses a "scale" parameter
+// to implement 'trick mode' (fast forward or reverse play, using I-frames) on
+// the video stream.
+// Implementation
+
+
+--- live/liveMedia/MPEG2TransportUDPServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from an incoming UDP (or RTP/UDP) MPEG-2 Transport Stream
+// Implementation
+
+
+--- live/liveMedia/MPEG4ESVideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MP4V-ES video RTP stream sources
+// Implementation
+
+
+--- live/liveMedia/MPEG4GenericRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MPEG4-GENERIC ("audio", "video", or "application") RTP stream sinks
+// Implementation
+
+
+--- live/liveMedia/MPEG4GenericRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MPEG4-GENERIC ("audio", "video", or "application") RTP stream sources
+// Implementation
+
+
+--- live/liveMedia/MPEG4LATMAudioRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for MPEG-4 audio, using LATM multiplexing (RFC 3016)
+// Implementation
+
+
+--- live/liveMedia/MPEG4LATMAudioRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// MPEG-4 audio, using LATM multiplexing
+// Implementation
+
+
+--- live/liveMedia/MPEG4VideoFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a MPEG-4 video file.
+// Implementation
+
+
+--- live/liveMedia/MPEG4VideoStreamDiscreteFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A simplified version of "MPEG4VideoStreamFramer" that takes only complete,
+// discrete frames (rather than an arbitrary byte stream) as input.
+// This avoids the parsing and data copying overhead of the full
+// "MPEG4VideoStreamFramer".
+// Implementation
+
+
+--- live/liveMedia/MPEG4VideoStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that breaks up an MPEG-4 video elementary stream into
+//   frames for:
+// - Visual Object Sequence (VS) Header + Visual Object (VO) Header
+//   + Video Object Layer (VOL) Header
+// - Group of VOP (GOV) Header
+// - VOP frame
+// Implementation
+
+
+--- live/liveMedia/MPEGVideoStreamFramer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A filter that breaks up an MPEG video elementary stream into
+//   headers and frames
+// Implementation
+
+
+--- live/liveMedia/MPEGVideoStreamParser.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// An abstract parser for MPEG video streams
+// Implementation
+
+
+--- live/liveMedia/MultiFramedRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP source for a common kind of payload format: Those that pack multiple,
+// complete codec frames (as many as possible) into each RTP packet.
+// Implementation
+
+
+--- live/liveMedia/OggFileParser.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A parser for an Ogg file.
+// Implementation
+
+
+--- live/liveMedia/OggFileServerDemux.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A server demultiplexor for a Ogg file
+// Implementation
+
+
+--- live/liveMedia/OggFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from a track within an Ogg file.
+// Implementation
+
+
+--- live/liveMedia/OggFileSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// 'Ogg' File Sink (recording a single media track only)
+// Implementation
+
+
+--- live/liveMedia/ourMD5.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Because MD5 may not be implemented (at least, with the same interface) on all systems,
+// we have our own implementation.
+// Implementation
+
+
+--- live/liveMedia/OutputFile.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Common routines for opening/closing named output files
+// Implementation
+
+
+--- live/liveMedia/PassiveServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that represents an existing
+// 'RTPSink', rather than one that creates new 'RTPSink's on demand.
+// Implementation
+
+
+--- live/liveMedia/RTCP.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTCP
+// Implementation
+
+
+--- live/liveMedia/QCELPAudioRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Qualcomm "PureVoice" (aka. "QCELP") Audio RTP Sources
+// Implementation
+
+
+--- live/liveMedia/QuickTimeFileSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A sink that generates a QuickTime file from a composite media session
+// Implementation
+
+
+--- live/liveMedia/QuickTimeGenericRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP Sources containing generic QuickTime stream data, as defined in
+//     <http://developer.apple.com/quicktime/icefloe/dispatch026.html>
+// Implementation
+
+
+--- live/liveMedia/RTPInterface.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// An abstraction of a network interface used for RTP (or RTCP).
+// (This allows the RTP-over-TCP hack (RFC 2326, section 10.12) to
+// be implemented transparently.)
+// Implementation
+
+
+--- live/liveMedia/RTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP Sinks
+// Implementation
+
+
+--- live/liveMedia/RTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP Sources
+// Implementation
+
+
+--- live/liveMedia/RTSPClient.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A generic RTSP client
+// Implementation
+
+
+--- live/liveMedia/RTSPCommon.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Common routines used by both RTSP clients and servers
+// Implementation
+
+
+--- live/liveMedia/RTSPRegisterSender.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Special objects which, when created, sends a custom RTSP "REGISTER" (or "DEREGISTER") command
+// to a specified client.
+// Implementation
+
+
+--- live/liveMedia/RTSPServer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A RTSP server
+// Implementation
+
+
+--- live/liveMedia/ServerMediaSession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A data structure that represents a session that consists of
+// potentially multiple (audio and/or video) sub-sessions
+// (This data structure is used for media *streamers* - i.e., servers.
+//  For media receivers, use "MediaSession" instead.)
+// Implementation
+
+
+--- live/liveMedia/RTSPServerSupportingHTTPStreaming.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A server that supports both RTSP, and HTTP streaming (using Apple's "HTTP Live Streaming" protocol)
+// Implementation
+
+
+--- live/liveMedia/SimpleRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A simple RTP sink that packs frames into each outgoing
+//     packet, without any fragmentation or special headers.
+// Implementation
+
+
+--- live/liveMedia/SimpleRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A RTP source for a simple RTP payload format that
+//     - doesn't have any special headers following the RTP header
+//     - doesn't have any special framing apart from the packet data itself
+// Implementation
+
+
+--- live/liveMedia/SIPClient.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A generic SIP client
+// Implementation
+
+
+--- live/liveMedia/StreamParser.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Abstract class for parsing a byte stream
+// Implementation
+
+
+--- live/liveMedia/StreamReplicator.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// An class that can be used to create (possibly multiple) 'replicas' of an incoming stream.
+// Implementation.
+
+
+--- live/liveMedia/T140TextRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for T.140 text (RFC 2793)
+// Implementation
+
+
+--- live/liveMedia/TCPStreamSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A sink representing a TCP output stream
+// Implementation
+
+
+--- live/liveMedia/TextRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A generic RTP sink for text codecs (abstract base class)
+// Implementation
+
+
+--- live/liveMedia/TheoraVideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for Theora video
+// Implementation
+
+
+--- live/liveMedia/TheoraVideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Theora Video RTP Sources
+// Implementation
+
+
+--- live/liveMedia/uLawAudioFilter.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Filters for converting between raw PCM audio and uLaw
+// Implementation
+
+
+--- live/liveMedia/VideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A generic RTP sink for video codecs (abstract base class)
+// Implementation
+
+
+--- live/liveMedia/VorbisAudioRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for Vorbis audio
+// Implementation
+
+
+--- live/liveMedia/VorbisAudioRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Vorbis Audio RTP Sources
+// Implementation
+
+
+--- live/liveMedia/VP8VideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for VP8 video
+// Implementation
+
+
+--- live/liveMedia/VP8VideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// VP8 Video RTP Sources
+// Implementation
+
+
+--- live/liveMedia/VP9VideoRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for VP9 video
+// Implementation
+
+
+--- live/liveMedia/VP9VideoRTPSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// VP9 Video RTP Sources
+// Implementation
+
+
+--- live/liveMedia/WAVAudioFileSource.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A WAV audio file source
+// Implementation
+
+
+--- live/liveMedia/GenericMediaServer.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A generic media server class, used to implement a RTSP server, and any other server that uses
+//  "ServerMediaSession" objects to describe media to be served.
+// Implementation
+
+
+--- live/liveMedia/OnDemandServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand.
+// Implementation
+
+
+--- live/liveMedia/MediaSession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A data structure that represents a session that consists of
+// potentially multiple (audio and/or video) sub-sessions
+// Implementation
+
+
+--- live/liveMedia/MultiFramedRTPSink.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// RTP sink for a common kind of payload format: Those which pack multiple,
+// complete codec frames (as many as possible) into each RTP packet.
+// Implementation
+
+
+--- live/liveMedia/RTSPServerRegister.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A RTSP server
+// Implementation of functionality related to the "REGISTER" and "DEREGISTER" commands
+
+
+--- live/liveMedia/MPEG2TransportStreamAccumulator.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// Collects a stream of incoming MPEG Transport Stream packets into
+//  a chunk sufficiently large to send in a single outgoing (RTP or UDP) packet.
+// Implementation
+
+
+--- live/liveMedia/WAVAudioFileServerMediaSubsession.cpp ---
+
+// "liveMedia"
+// Copyright (c) 1996-2016 Live Networks, Inc.  All rights reserved.
+// A 'ServerMediaSubsession' object that creates new, unicast, "RTPSink"s
+// on demand, from an WAV audio file.
+// Implementation
+

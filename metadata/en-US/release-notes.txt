@@ -1,1 +1,1 @@
-Organize your local videos with folders and playlists. Import from Files, play videos in sequence, and read privacy and support information directly in the app.
+Play local and network videos, organize folders and playlists, and keep favorites close at hand. Includes playback speed controls, double-tap seeking, Finder file sharing, and offline privacy, support, and open-source license information.

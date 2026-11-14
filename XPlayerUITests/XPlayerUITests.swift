@@ -33,6 +33,10 @@ final class XPlayerUITests: XCTestCase {
         app.launch()
         app.buttons["Library actions"].tap()
         app.buttons["Help & About"].tap()
+        let help = XCTAttachment(screenshot: app.screenshot())
+        help.name = "Help and licenses"
+        help.lifetime = .keepAlways
+        add(help)
         app.buttons["Privacy Policy"].tap()
         XCTAssertTrue(app.navigationBars["Privacy Policy"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["Your video library"].exists)
@@ -40,6 +44,12 @@ final class XPlayerUITests: XCTestCase {
         app.buttons["Open Source License"].tap()
         XCTAssertTrue(app.navigationBars["MIT License"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.staticTexts["MIT License"].exists)
+        app.navigationBars.buttons.firstMatch.tap()
+        app.buttons["Third-Party Licenses"].tap()
+        XCTAssertTrue(app.navigationBars["Third-Party Licenses"].waitForExistence(timeout: 5))
+        app.buttons["Acknowledgements"].tap()
+        XCTAssertTrue(app.staticTexts["Third-party copyright and license notices"].waitForExistence(timeout: 5))
+        app.navigationBars.buttons.firstMatch.tap()
         app.navigationBars.buttons.firstMatch.tap()
         app.buttons["Help & Supported Formats"].tap()
         XCTAssertTrue(app.staticTexts["Import videos and folders"].waitForExistence(timeout: 5))

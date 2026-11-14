@@ -1,0 +1,752 @@
+{
+  "aom": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build",
+      "/_build/config/aom_config.c",
+      "/aom/src/aom_codec.c",
+      "/aom/src/aom_decoder.c",
+      "/aom/src/aom_image.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build",
+      "/_build/config/aom_config.c",
+      "/aom/src/aom_codec.c",
+      "/aom/src/aom_decoder.c",
+      "/aom/src/aom_image.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build",
+      "/_build/config/aom_config.c",
+      "/aom/src/aom_codec.c",
+      "/aom/src/aom_decoder.c",
+      "/aom/src/aom_image.c"
+    ]
+  },
+  "dav1d": {
+    "iPhoneOS-armv7": [
+      "/build"
+    ],
+    "iPhoneOS-armv7s": [
+      "/build"
+    ],
+    "iPhoneOS-aarch64": [
+      "/build"
+    ]
+  },
+  "ebml": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build",
+      "/src/EbmlBinary.cpp",
+      "/src/EbmlContexts.cpp",
+      "/src/EbmlCrc32.cpp",
+      "/src/EbmlDate.cpp"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build",
+      "/src/EbmlBinary.cpp",
+      "/src/EbmlContexts.cpp",
+      "/src/EbmlCrc32.cpp",
+      "/src/EbmlDate.cpp"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build",
+      "/src/EbmlBinary.cpp",
+      "/src/EbmlContexts.cpp",
+      "/src/EbmlCrc32.cpp",
+      "/src/EbmlDate.cpp"
+    ]
+  },
+  "ffmpeg": {
+    "iPhoneOS-armv7": [
+      ""
+    ],
+    "iPhoneOS-armv7s": [
+      ""
+    ],
+    "iPhoneOS-aarch64": [
+      ""
+    ]
+  },
+  "flac": {
+    "iPhoneOS-armv7": [
+      "/src/libFLAC"
+    ],
+    "iPhoneOS-armv7s": [
+      "/src/libFLAC"
+    ],
+    "iPhoneOS-aarch64": [
+      "/src/libFLAC"
+    ]
+  },
+  "freetype": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build",
+      "/builds/unix/ftsystem.c",
+      "/src/autofit/autofit.c",
+      "/src/base/ftbase.c",
+      "/src/base/ftbitmap.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build",
+      "/builds/unix/ftsystem.c",
+      "/src/autofit/autofit.c",
+      "/src/base/ftbase.c",
+      "/src/base/ftbitmap.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build",
+      "/builds/unix/ftsystem.c",
+      "/src/autofit/autofit.c",
+      "/src/base/ftbase.c",
+      "/src/base/ftbitmap.c"
+    ]
+  },
+  "fribidi": {
+    "iPhoneOS-armv7": [
+      "/build"
+    ],
+    "iPhoneOS-armv7s": [
+      "/build"
+    ],
+    "iPhoneOS-aarch64": [
+      "/build"
+    ]
+  },
+  "gcrypt": {
+    "iPhoneOS-armv7": [
+      "/cipher",
+      "/compat",
+      "/mpi",
+      "/random",
+      "/src"
+    ],
+    "iPhoneOS-armv7s": [
+      "/cipher",
+      "/compat",
+      "/mpi",
+      "/random",
+      "/src"
+    ],
+    "iPhoneOS-aarch64": [
+      "/cipher",
+      "/compat",
+      "/mpi",
+      "/random",
+      "/src"
+    ]
+  },
+  "gsm": {
+    "iPhoneOS-armv7": [
+      ""
+    ],
+    "iPhoneOS-armv7s": [
+      ""
+    ],
+    "iPhoneOS-aarch64": [
+      ""
+    ]
+  },
+  "harfbuzz": {
+    "iPhoneOS-armv7": [
+      "/build"
+    ],
+    "iPhoneOS-armv7s": [
+      "/build"
+    ],
+    "iPhoneOS-aarch64": [
+      "/build"
+    ]
+  },
+  "lame": {
+    "iPhoneOS-armv7": [
+      "/libmp3lame"
+    ],
+    "iPhoneOS-armv7s": [
+      "/libmp3lame"
+    ],
+    "iPhoneOS-aarch64": [
+      "/libmp3lame"
+    ]
+  },
+  "libarchive": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build/libarchive",
+      "/libarchive/archive_acl.c",
+      "/libarchive/archive_blake2s_ref.c",
+      "/libarchive/archive_blake2sp_ref.c",
+      "/libarchive/archive_check_magic.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build/libarchive",
+      "/libarchive/archive_acl.c",
+      "/libarchive/archive_blake2s_ref.c",
+      "/libarchive/archive_blake2sp_ref.c",
+      "/libarchive/archive_check_magic.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build/libarchive",
+      "/libarchive/archive_acl.c",
+      "/libarchive/archive_blake2s_ref.c",
+      "/libarchive/archive_blake2sp_ref.c",
+      "/libarchive/archive_check_magic.c"
+    ]
+  },
+  "libass": {
+    "iPhoneOS-armv7": [
+      ""
+    ],
+    "iPhoneOS-armv7s": [
+      ""
+    ],
+    "iPhoneOS-aarch64": [
+      ""
+    ]
+  },
+  "libdsm": {
+    "iPhoneOS-armv7": [
+      "/build"
+    ],
+    "iPhoneOS-armv7s": [
+      "/build"
+    ],
+    "iPhoneOS-aarch64": [
+      "/build"
+    ]
+  },
+  "libdvbpsi": {
+    "iPhoneOS-armv7": [
+      "/src"
+    ],
+    "iPhoneOS-armv7s": [
+      "/src"
+    ],
+    "iPhoneOS-aarch64": [
+      "/src"
+    ]
+  },
+  "libebur128": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build/ebur128",
+      "/ebur128/ebur128.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build/ebur128",
+      "/ebur128/ebur128.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build/ebur128",
+      "/ebur128/ebur128.c"
+    ]
+  },
+  "libgpg-error": {
+    "iPhoneOS-armv7": [
+      "/src"
+    ],
+    "iPhoneOS-armv7s": [
+      "/src"
+    ],
+    "iPhoneOS-aarch64": [
+      "/src"
+    ]
+  },
+  "libmodplug": {
+    "iPhoneOS-armv7": [
+      "/src"
+    ],
+    "iPhoneOS-armv7s": [
+      "/src"
+    ],
+    "iPhoneOS-aarch64": [
+      "/src"
+    ]
+  },
+  "libogg": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build",
+      "/src/bitwise.c",
+      "/src/framing.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build",
+      "/src/bitwise.c",
+      "/src/framing.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build",
+      "/src/bitwise.c",
+      "/src/framing.c"
+    ]
+  },
+  "libplacebo": {
+    "iPhoneOS-armv7": [
+      ""
+    ],
+    "iPhoneOS-armv7s": [
+      ""
+    ],
+    "iPhoneOS-aarch64": [
+      ""
+    ]
+  },
+  "libshout": {
+    "iPhoneOS-armv7": [
+      "/src",
+      "/src/common/avl",
+      "/src/common/httpp",
+      "/src/common/net",
+      "/src/common/thread",
+      "/src/common/timing"
+    ],
+    "iPhoneOS-armv7s": [
+      "/src",
+      "/src/common/avl",
+      "/src/common/httpp",
+      "/src/common/net",
+      "/src/common/thread",
+      "/src/common/timing"
+    ],
+    "iPhoneOS-aarch64": [
+      "/src",
+      "/src/common/avl",
+      "/src/common/httpp",
+      "/src/common/net",
+      "/src/common/thread",
+      "/src/common/timing"
+    ]
+  },
+  "libtasn1": {
+    "iPhoneOS-armv7": [
+      "/lib",
+      "/lib/gllib"
+    ],
+    "iPhoneOS-armv7s": [
+      "/lib",
+      "/lib/gllib"
+    ],
+    "iPhoneOS-aarch64": [
+      "/lib",
+      "/lib/gllib"
+    ]
+  },
+  "libtheora": {
+    "iPhoneOS-armv7": [
+      "/lib"
+    ],
+    "iPhoneOS-armv7s": [
+      "/lib"
+    ],
+    "iPhoneOS-aarch64": [
+      "/lib"
+    ]
+  },
+  "libvorbis": {
+    "iPhoneOS-armv7": [
+      "/lib"
+    ],
+    "iPhoneOS-armv7s": [
+      "/lib"
+    ],
+    "iPhoneOS-aarch64": [
+      "/lib"
+    ]
+  },
+  "libvpx": {
+    "iPhoneOS-armv7": [
+      "/_build"
+    ],
+    "iPhoneOS-armv7s": [
+      "/_build"
+    ],
+    "iPhoneOS-aarch64": [
+      "/_build"
+    ]
+  },
+  "libxml2": {
+    "iPhoneOS-armv7": [
+      ""
+    ],
+    "iPhoneOS-armv7s": [
+      ""
+    ],
+    "iPhoneOS-aarch64": [
+      ""
+    ]
+  },
+  "live555": {
+    "iPhoneOS-armv7": [
+      "/BasicUsageEnvironment",
+      "/UsageEnvironment",
+      "/groupsock",
+      "/liveMedia"
+    ],
+    "iPhoneOS-armv7s": [
+      "/BasicUsageEnvironment",
+      "/UsageEnvironment",
+      "/groupsock",
+      "/liveMedia"
+    ],
+    "iPhoneOS-aarch64": [
+      "/BasicUsageEnvironment",
+      "/UsageEnvironment",
+      "/groupsock",
+      "/liveMedia"
+    ]
+  },
+  "matroska": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build",
+      "/src/KaxAttached.cpp",
+      "/src/KaxAttachments.cpp",
+      "/src/KaxBlock.cpp",
+      "/src/KaxBlockData.cpp"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build",
+      "/src/KaxAttached.cpp",
+      "/src/KaxAttachments.cpp",
+      "/src/KaxBlock.cpp",
+      "/src/KaxBlockData.cpp"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build",
+      "/src/KaxAttached.cpp",
+      "/src/KaxAttachments.cpp",
+      "/src/KaxBlock.cpp",
+      "/src/KaxBlockData.cpp"
+    ]
+  },
+  "mpg123": {
+    "iPhoneOS-armv7": [
+      ""
+    ],
+    "iPhoneOS-armv7s": [
+      ""
+    ],
+    "iPhoneOS-aarch64": [
+      ""
+    ]
+  },
+  "mysofa": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build/src",
+      "/src/hdf/btree.c",
+      "/src/hdf/dataobject.c",
+      "/src/hdf/fractalhead.c",
+      "/src/hdf/gcol.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build/src",
+      "/src/hdf/btree.c",
+      "/src/hdf/dataobject.c",
+      "/src/hdf/fractalhead.c",
+      "/src/hdf/gcol.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build/src",
+      "/src/hdf/btree.c",
+      "/src/hdf/dataobject.c",
+      "/src/hdf/fractalhead.c",
+      "/src/hdf/gcol.c"
+    ]
+  },
+  "nfs": {
+    "iPhoneOS-armv7": [
+      "",
+      "/lib",
+      "/mount",
+      "/nfs",
+      "/nfs4",
+      "/portmap"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/lib",
+      "/mount",
+      "/nfs",
+      "/nfs4",
+      "/portmap"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/lib",
+      "/mount",
+      "/nfs",
+      "/nfs4",
+      "/portmap"
+    ]
+  },
+  "openjpeg": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build/src/lib/openjp2",
+      "/src/lib/openjp2/bio.c",
+      "/src/lib/openjp2/cio.c",
+      "/src/lib/openjp2/dwt.c",
+      "/src/lib/openjp2/event.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build/src/lib/openjp2",
+      "/src/lib/openjp2/bio.c",
+      "/src/lib/openjp2/cio.c",
+      "/src/lib/openjp2/dwt.c",
+      "/src/lib/openjp2/event.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build/src/lib/openjp2",
+      "/src/lib/openjp2/bio.c",
+      "/src/lib/openjp2/cio.c",
+      "/src/lib/openjp2/dwt.c",
+      "/src/lib/openjp2/event.c"
+    ]
+  },
+  "opus": {
+    "iPhoneOS-armv7": [
+      ""
+    ],
+    "iPhoneOS-armv7s": [
+      ""
+    ],
+    "iPhoneOS-aarch64": [
+      ""
+    ]
+  },
+  "png": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build",
+      "/arm/arm_init.c",
+      "/arm/filter_neon_intrinsics.c",
+      "/arm/palette_neon_intrinsics.c",
+      "/png.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build",
+      "/arm/arm_init.c",
+      "/arm/filter_neon_intrinsics.c",
+      "/arm/palette_neon_intrinsics.c",
+      "/png.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build",
+      "/arm/arm_init.c",
+      "/arm/filter_neon_intrinsics.c",
+      "/arm/palette_neon_intrinsics.c",
+      "/png.c"
+    ]
+  },
+  "protobuf": {
+    "iPhoneOS-armv7": [
+      "/src"
+    ],
+    "iPhoneOS-armv7s": [
+      "/src"
+    ],
+    "iPhoneOS-aarch64": [
+      "/src"
+    ]
+  },
+  "smb2": {
+    "iPhoneOS-armv7": [
+      "",
+      "/lib"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/lib"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/lib"
+    ]
+  },
+  "soxr": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build/src",
+      "/src/avfft32.c",
+      "/src/avfft32s.c",
+      "/src/cr.c",
+      "/src/cr32.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build/src",
+      "/src/avfft32.c",
+      "/src/avfft32s.c",
+      "/src/cr.c",
+      "/src/cr32.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build/src",
+      "/src/avfft32.c",
+      "/src/avfft32s.c",
+      "/src/cr.c",
+      "/src/cr32.c"
+    ]
+  },
+  "spatialaudio": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build",
+      "/source/AmbisonicBase.cpp",
+      "/source/AmbisonicBinauralizer.cpp",
+      "/source/AmbisonicCommons.cpp",
+      "/source/AmbisonicDecoder.cpp"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build",
+      "/source/AmbisonicBase.cpp",
+      "/source/AmbisonicBinauralizer.cpp",
+      "/source/AmbisonicCommons.cpp",
+      "/source/AmbisonicDecoder.cpp"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build",
+      "/source/AmbisonicBase.cpp",
+      "/source/AmbisonicBinauralizer.cpp",
+      "/source/AmbisonicCommons.cpp",
+      "/source/AmbisonicDecoder.cpp"
+    ]
+  },
+  "speex": {
+    "iPhoneOS-armv7": [
+      "/libspeex"
+    ],
+    "iPhoneOS-armv7s": [
+      "/libspeex"
+    ],
+    "iPhoneOS-aarch64": [
+      "/libspeex"
+    ]
+  },
+  "ssh2": {
+    "iPhoneOS-armv7": [
+      "/src"
+    ],
+    "iPhoneOS-armv7s": [
+      "/src"
+    ],
+    "iPhoneOS-aarch64": [
+      "/src"
+    ]
+  },
+  "taglib": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build/taglib",
+      "/taglib/ape/apefile.cpp",
+      "/taglib/ape/apefooter.cpp",
+      "/taglib/ape/apeitem.cpp",
+      "/taglib/ape/apeproperties.cpp"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build/taglib",
+      "/taglib/ape/apefile.cpp",
+      "/taglib/ape/apefooter.cpp",
+      "/taglib/ape/apeitem.cpp",
+      "/taglib/ape/apeproperties.cpp"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build/taglib",
+      "/taglib/ape/apefile.cpp",
+      "/taglib/ape/apefooter.cpp",
+      "/taglib/ape/apeitem.cpp",
+      "/taglib/ape/apeproperties.cpp"
+    ]
+  },
+  "twolame": {
+    "iPhoneOS-armv7": [
+      "/libtwolame"
+    ],
+    "iPhoneOS-armv7s": [
+      "/libtwolame"
+    ],
+    "iPhoneOS-aarch64": [
+      "/libtwolame"
+    ]
+  },
+  "upnp": {
+    "iPhoneOS-armv7": [
+      "/ixml",
+      "/upnp"
+    ],
+    "iPhoneOS-armv7s": [
+      "/ixml",
+      "/upnp"
+    ],
+    "iPhoneOS-aarch64": [
+      "/ixml",
+      "/upnp"
+    ]
+  },
+  "zlib": {
+    "iPhoneOS-armv7": [
+      "",
+      "/_build",
+      "/adler32.c",
+      "/compress.c",
+      "/crc32.c",
+      "/deflate.c"
+    ],
+    "iPhoneOS-armv7s": [
+      "",
+      "/_build",
+      "/adler32.c",
+      "/compress.c",
+      "/crc32.c",
+      "/deflate.c"
+    ],
+    "iPhoneOS-aarch64": [
+      "",
+      "/_build",
+      "/adler32.c",
+      "/compress.c",
+      "/crc32.c",
+      "/deflate.c"
+    ]
+  },
+  "zvbi": {
+    "iPhoneOS-armv7": [
+      "/src"
+    ],
+    "iPhoneOS-armv7s": [
+      "/src"
+    ],
+    "iPhoneOS-aarch64": [
+      "/src"
+    ]
+  }
+}

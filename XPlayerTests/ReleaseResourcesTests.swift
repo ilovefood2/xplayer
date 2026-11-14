@@ -10,6 +10,14 @@ final class ReleaseResourcesTests: XCTestCase {
         XCTAssertTrue(try AppInformation.document("License", extension: "txt").contains("MIT License"))
         XCTAssertTrue(try AppInformation.document("ThirdPartyNotices").contains("MobileVLCKit 3.7.3"))
         XCTAssertTrue(try AppInformation.document("MobileVLCKit-LGPL", extension: "txt").contains("GNU LESSER GENERAL PUBLIC LICENSE"))
+        let dependencyLicenses = try AppInformation.document("ThirdPartyLicenses", extension: "txt")
+        XCTAssertTrue(dependencyLicenses.contains("Sara Golemon"))
+        XCTAssertTrue(dependencyLicenses.contains("libass contributors"))
+        XCTAssertTrue(dependencyLicenses.contains("Redistributions in binary form"))
+        let notices = try AppInformation.dependencyNotices()
+        XCTAssertEqual(notices.first?.title, "Acknowledgements")
+        XCTAssertTrue(notices.contains { $0.title == "ssh2 1.10.0" && $0.text.contains("Sara Golemon") })
+        XCTAssertTrue(notices.contains { $0.title == "libass 0.17.3" && $0.text.contains("libass contributors") })
         for ext in ["mkv", "avi", "webm", "ts", "mts", "m2ts"] {
             XCTAssertTrue(UTType(filenameExtension: ext)?.conforms(to: .movie) == true, ext)
         }

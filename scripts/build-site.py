@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Render the same privacy/support text shipped in the app as a static site."""
 import html
+import json
 import re
 import shutil
 from pathlib import Path
@@ -8,6 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 DOCS = ROOT / 'docs'
 DOCS.mkdir(exist_ok=True)
+VERSION = json.loads((ROOT / 'package.json').read_text())['version']
+SOURCE_URL = f'https://github.com/ilovefood2/xplayer/tree/ios-v{VERSION}'
 
 def linked(text):
     escaped = html.escape(text)
@@ -42,7 +45,7 @@ def write_page(filename, title, body):
 <title>{html.escape(title)} · xplayer</title><meta name="description" content="xplayer video player: privacy, support, and license information.">
 <link rel="icon" href="icon.png"><style>{STYLE}</style></head><body>
 <nav aria-label="Main navigation"><a href="index.html">xplayer</a><a href="privacy.html">Privacy</a><a href="support.html">Support</a><a href="license.html">License</a></nav>
-<main>{body}</main><footer>© 2026 xplayer contributors · <a href="mailto:a@ikel.ca">a@ikel.ca</a> · <a href="https://github.com/ilovefood2/xplayer">Source code</a> · <a href="https://github.com/ilovefood2/xplayer/issues">Issues</a></footer>
+<main>{body}</main><footer>© 2026 xplayer contributors · <a href="mailto:a@ikel.ca">a@ikel.ca</a> · <a href="{SOURCE_URL}">Source code for {VERSION}</a> · <a href="https://github.com/ilovefood2/xplayer/issues">Issues</a><p>This product includes software developed by Niels Provos. Portions of this software are based in part on the work of the FreeType Team.</p></footer>
 </body></html>'''
     (DOCS / filename).write_text(page)
 
@@ -56,7 +59,7 @@ write_page('index.html', 'Offline videos, organized', '''<img class="icon" src="
 for name, filename in [('PrivacyPolicy', 'privacy.html'), ('Support', 'support.html')]:
     text = (ROOT / 'XPlayer/Resources' / (name + '.md')).read_text()
     write_page(filename, name.replace('PrivacyPolicy', 'Privacy Policy'), render(text))
-write_page('license.html', 'License', '<h1>License</h1><pre>' + html.escape((ROOT / 'LICENSE').read_text()) + '</pre>' + render((ROOT / 'THIRD_PARTY_NOTICES.md').read_text()))
+write_page('license.html', 'License', '<h1>License</h1><pre>' + html.escape((ROOT / 'LICENSE').read_text()) + '</pre>' + render((ROOT / 'THIRD_PARTY_NOTICES.md').read_text()) + '<h2>Bundled dependency licenses</h2><pre>' + html.escape((ROOT / 'XPlayer/Resources/ThirdPartyLicenses.txt').read_text()) + '</pre>')
 shutil.copyfile(ROOT / 'XPlayer/Assets.xcassets/AppIcon.appiconset/AppIcon.png', DOCS / 'icon.png')
 (DOCS / '.nojekyll').touch()
 assert 'href="https://github.com/ilovefood2/xplayer/issues"' in (DOCS / 'privacy.html').read_text()

@@ -1,0 +1,1621 @@
+
+--- libtheora-1.1.1/tests/comment.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: routines for validating comment header code
+  last mod: $Id: comment.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/tests/noop_theora.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: routines for validating codec initialization
+  last mod: $Id: noop_theora.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/tests/granulepos_theora.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: routines for validating encoder granulepos generation
+  last mod: $Id: granulepos_theora.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/tests/noop.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: routines for validating codec initialization
+  last mod: $Id: noop.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/tests/comment_theora.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: routines for validating comment header code
+  last mod: $Id: comment_theora.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/tests/tests.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: common test utilities
+  last mod: $Id: tests.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/tests/granulepos.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: routines for validating encoder granulepos generation
+  last mod: $Id: granulepos.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/LICENSE ---
+
+Please see the file COPYING for the copyright license for this software.
+
+In addition to and irrespective of the copyright license associated
+with this software, On2 Technologies, Inc. makes the following statement
+regarding technology used in this software:
+
+  On2 represents and warrants that it shall not assert any rights 
+  relating to infringement of On2's registered patents, nor initiate
+  any litigation asserting such rights, against any person who, or
+  entity which utilizes the On2 VP3 Codec Software, including any 
+  use, distribution, and sale of said Software; which make changes, 
+  modifications, and improvements in said Software; and to use,
+  distribute, and sell said changes as well as applications for other 
+  fields of use.
+
+This reference implementation is originally derived from the On2 VP3
+Codec Software, and the Theora video format is essentially compatible
+with the VP3 video format, consisting of a backward-compatible superset.
+
+
+--- libtheora-1.1.1/AUTHORS ---
+
+Monty <monty@xiph.org>
+	- Original VP3 port
+
+Ralph Giles
+Timothy B. Terriberry
+Monty
+	- Ongoing development
+	
+Dan B. Miller
+	- Pre alpha3 development
+	
+Rudolf Marek
+Wim Tayman
+Dan Lenski
+Nils Pipenbrinck
+Monty
+	- MMX optimized functions
+	
+Aaron Colwell
+Thomas Vander Stichele
+Jan Gerber
+Conrad Parker
+Cristian Adam
+Sebastian Pippin
+Simon Hosie
+	- Bug fixes, enhancements, build systems.
+	
+Mauricio Piacentini
+	- Original win32 projects and example ports
+	- VP3->Theora transcoder
+
+Silvia Pfeiffer
+	- Figures for the spec
+
+Michael Smith
+Andre Pang
+calc
+Chris Cheney
+Brendan Cully
+Edward Hervey
+Adam Moss
+Colin Ward
+Jeremy C. Reed
+Arc Riley
+Rodolphe Ortalo
+	- Bug fixes
+
+
+and other Xiph.org contributors
+
+
+--- libtheora-1.1.1/doc/spec/vp3huff.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2007                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+    function: dump the VP3.1 huffman tables in a form suitable for
+	inclusion in the spec.
+    last mod: $Id: vp3huff.c 14078 2007-10-31 21:24:44Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/symbian/config.h ---
+
+/*
+   Copyright (C) 2003 Commonwealth Scientific and Industrial Research
+   Organisation (CSIRO) Australia
+
+   Redistribution and use in source and binary forms, with or without
+   modification, are permitted provided that the following conditions
+   are met:
+
+   - Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+
+   - Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+
+   - Neither the name of CSIRO Australia nor the names of its
+   contributors may be used to endorse or promote products derived from
+   this software without specific prior written permission.
+
+   THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+   ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+   LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+   PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE ORGANISATION OR
+   CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+   EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+   PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+   PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+   LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
+   NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
+--- libtheora-1.1.1/COPYING ---
+
+Copyright (C) 2002-2009 Xiph.org Foundation
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+
+- Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+
+- Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+
+- Neither the name of the Xiph.org Foundation nor the names of its
+contributors may be used to endorse or promote products derived from
+this software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+A PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION
+OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+--- libtheora-1.1.1/include/theora/theoradec.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: theora.h,v 1.8 2004/03/15 22:17:32 derf Exp $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/include/theora/theora.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: theora.h,v 1.17 2003/12/06 18:06:19 arc Exp $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/examples/getopt1.c ---
+
+/* getopt_long and getopt_long_only entry points for GNU getopt.
+   Copyright (C) 1987,88,89,90,91,92,93,94,96,97,98
+     Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, write to the Free
+   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307 USA.  */
+
+--- libtheora-1.1.1/examples/png2theora.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009,2009           *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function: example encoder application; makes an Ogg Theora
+            file from a sequence of png images
+  last mod: $Id: png2theora.c 16503 2009-08-22 18:14:02Z giles $
+             based on code from Vegard Nossum
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/examples/dump_video.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: example dumpvid application; dumps  Theora streams
+  last mod: $Id: dump_video.c,v 1.2 2004/03/24 19:12:42 derf Exp $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/examples/getopt.h ---
+
+/* Declarations for getopt.
+   Copyright (C) 1989-1994, 1996-1999, 2001 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, write to the Free
+   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307 USA.  */
+
+--- libtheora-1.1.1/examples/player_example.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function: example SDL player application; plays Ogg Theora files (with
+            optional Vorbis audio second stream)
+  last mod: $Id: player_example.c 16551 2009-09-09 17:53:13Z gmaxwell $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/examples/getopt.c ---
+
+/* Getopt for GNU.
+   NOTE: getopt is now part of the C library, so if you don't know what
+   "Keep this file name-space clean" means, talk to drepper@gnu.org
+   before changing it!
+   Copyright (C) 1987,88,89,90,91,92,93,94,95,96,98,99,2000,2001
+   	Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, write to the Free
+   Software Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA
+   02111-1307 USA.  */
+
+--- libtheora-1.1.1/examples/encoder_example.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function: example encoder application; makes an Ogg Theora/Vorbis
+            file from YUV4MPEG2 and WAV input
+  last mod: $Id: encoder_example.c 16517 2009-08-25 19:48:57Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/examples/dump_psnr.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function: example dumpvid application; dumps  Theora streams
+  last mod: $Id: dump_video.c 15675 2009-02-06 09:43:27Z tterribe $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/win32/getopt1.c ---
+
+/* getopt_long and getopt_long_only entry points for GNU getopt.
+   Copyright (C) 1987,88,89,90,91,92,93,94,96,97,98
+     Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the GNU C Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.  */
+
+--- libtheora-1.1.1/win32/getopt_win.h ---
+
+/* Declarations for getopt.
+   Copyright (C) 1989,90,91,92,93,94,96,97,98 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the GNU C Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.  */
+
+--- libtheora-1.1.1/win32/experimental/transcoder/transcoder_example.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2004                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: example encoder application; makes an Ogg Theora/Vorbis
+            file from YUV4MPEG2 and WAV input
+  last mod: $Id: transcoder_example.c,v 1.4 2004/03/20 00:14:04 tterribe Exp $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/win32/experimental/transcoder/avi2vp3/avilib.h ---
+
+/*
+ *  avilib.h
+ *
+ *  Copyright (C) Thomas Östreich - June 2001
+ *  multiple audio track support Copyright (C) 2002 Thomas Östreich
+ *
+ *  Original code:
+ *  Copyright (C) 1999 Rainer Johanni <Rainer@Johanni.de> 
+ *
+ *  This file is part of transcode, a linux video stream processing tool
+ *      
+ *  transcode is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2, or (at your option)
+ *  any later version.
+ *   
+ *  transcode is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *   
+ *  You should have received a copy of the GNU General Public License
+ *  along with GNU Make; see the file COPYING.  If not, write to
+ *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. 
+ *
+ */
+
+--- libtheora-1.1.1/win32/experimental/transcoder/avi2vp3/avilib.c ---
+
+/*
+ *  avilib.c
+ *
+ *  Copyright (C) Thomas Östreich - June 2001
+ *  multiple audio track support Copyright (C) 2002 Thomas Östreich 
+ *
+ *  Original code:
+ *  Copyright (C) 1999 Rainer Johanni <Rainer@Johanni.de> 
+ *
+ *  This file is part of transcode, a linux video stream processing tool
+ *      
+ *  transcode is free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2, or (at your option)
+ *  any later version.
+ *   
+ *  transcode is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *   
+ *  You should have received a copy of the GNU General Public License
+ *  along with GNU Make; see the file COPYING.  If not, write to
+ *  the Free Software Foundation, 675 Mass Ave, Cambridge, MA 02139, USA. 
+ *
+ */
+
+--- libtheora-1.1.1/win32/experimental/wincompat/getopt_long.c ---
+
+/*-
+ * Copyright (c) 2000 The NetBSD Foundation, Inc.
+ * All rights reserved.
+ *
+ * This code is derived from software contributed to The NetBSD Foundation
+ * by Dieter Baron and Thomas Klausner.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *        This product includes software developed by the NetBSD
+ *        Foundation, Inc. and its contributors.
+ * 4. Neither the name of The NetBSD Foundation nor the names of its
+ *    contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE NETBSD FOUNDATION, INC. AND CONTRIBUTORS
+ * ``AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED
+ * TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE FOUNDATION OR CONTRIBUTORS
+ * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+ * POSSIBILITY OF SUCH DAMAGE.
+ */
+
+--- libtheora-1.1.1/win32/experimental/wincompat/getopt.c ---
+
+/*
+ * Copyright (c) 1987, 1993, 1994
+ *	The Regents of the University of California.  All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ * 1. Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ * 2. Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ * 3. All advertising materials mentioning features or use of this software
+ *    must display the following acknowledgement:
+ *	This product includes software developed by the University of
+ *	California, Berkeley and its contributors.
+ * 4. Neither the name of the University nor the names of its contributors
+ *    may be used to endorse or promote products derived from this software
+ *    without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ * ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+ * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+ * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+ * HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+ * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+ * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+ * SUCH DAMAGE.
+ */
+
+--- libtheora-1.1.1/win32/getopt.c ---
+
+/* Getopt for GNU.
+   NOTE: getopt is now part of the C library, so if you don't know what
+   "Keep this file name-space clean" means, talk to drepper@gnu.org
+   before changing it!
+
+   Copyright (C) 1987, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99
+   	Free Software Foundation, Inc.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Library General Public License as
+   published by the Free Software Foundation; either version 2 of the
+   License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Library General Public License for more details.
+
+   You should have received a copy of the GNU Library General Public
+   License along with the GNU C Library; see the file COPYING.LIB.  If not,
+   write to the Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+   Boston, MA 02111-1307, USA.  */
+
+--- libtheora-1.1.1/lib/apiwrapper.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: apiwrapper.h 13596 2007-08-23 20:05:38Z tterribe $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/internal.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: internal.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/encfrag.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: encfrag.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/decode.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: decode.c 16581 2009-09-25 22:56:16Z gmaxwell $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/encoder_disabled.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: encoder_disabled.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/cpu.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+ function:
+    last mod: $Id: cpu.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/analyze.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function: mode selection code
+  last mod: $Id$
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/bitpack.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE OggTheora SOURCE CODE IS (C) COPYRIGHT 1994-2009             *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function: packing variable sized words into an octet stream
+  last mod: $Id: bitpack.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86/mmxstate.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: mmxstate.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86/mmxencfrag.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: dsp_mmx.c 14579 2008-03-12 06:42:40Z xiphmont $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86/x86int.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: x86int.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86/mmxfdct.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 1999-2006                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86/x86enc.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: x86state.c 15675 2009-02-06 09:43:27Z tterribe $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86/x86enc.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: x86int.h 15675 2009-02-06 09:43:27Z tterribe $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86/mmxidct.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: mmxidct.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86/mmxfrag.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: mmxfrag.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86/x86state.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: x86state.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/huffman.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: huffman.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/huffdec.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: huffdec.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/apiwrapper.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: apiwrapper.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/dequant.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: dequant.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/decinfo.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: decinfo.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/rate.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: rate.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/decapiwrapper.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: decapiwrapper.c 13596 2007-08-23 20:05:38Z tterribe $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/ocintrin.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: ocintrin.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/enquant.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: enquant.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/bitpack.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE OggTheora SOURCE CODE IS (C) COPYRIGHT 1994-2009             *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function: packing variable sized words into an octet stream
+  last mod: $Id: bitwise.c 7675 2004-09-01 00:34:39Z xiphmont $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/tokenize.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: tokenize.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/fdct.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: fdct.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/internal.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: internal.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/idct.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: idct.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/dct.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: dct.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/huffdec.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: huffdec.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/info.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: info.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/mcenc.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id$
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/dequant.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: dequant.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/quant.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: quant.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/fragment.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: fragment.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/cpu.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+ CPU capability detection for x86 processors.
+  Originally written by Rudolf Marek.
+
+ function:
+  last mod: $Id: cpu.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86_vc/mmxstate.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: mmxstate.c 16584 2009-09-26 19:35:55Z tterribe $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86_vc/mmxencfrag.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: dsp_mmx.c 14579 2008-03-12 06:42:40Z xiphmont $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86_vc/mmxfdct.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 1999-2006                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/x86_vc/mmxfrag.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: mmxfrag.c 16578 2009-09-25 19:50:48Z cristianadam $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/state.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: state.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/encint.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: encint.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/quant.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: quant.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/decint.h ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation and contributors http://www.xiph.org/ *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+    last mod: $Id: decint.h 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/
+
+--- libtheora-1.1.1/lib/encode.c ---
+
+/********************************************************************
+ *                                                                  *
+ * THIS FILE IS PART OF THE OggTheora SOFTWARE CODEC SOURCE CODE.   *
+ * USE, DISTRIBUTION AND REPRODUCTION OF THIS LIBRARY SOURCE IS     *
+ * GOVERNED BY A BSD-STYLE SOURCE LICENSE INCLUDED WITH THIS SOURCE *
+ * IN 'COPYING'. PLEASE READ THESE TERMS BEFORE DISTRIBUTING.       *
+ *                                                                  *
+ * THE Theora SOURCE CODE IS COPYRIGHT (C) 2002-2009                *
+ * by the Xiph.Org Foundation http://www.xiph.org/                  *
+ *                                                                  *
+ ********************************************************************
+
+  function:
+  last mod: $Id: encode.c 16503 2009-08-22 18:14:02Z giles $
+
+ ********************************************************************/

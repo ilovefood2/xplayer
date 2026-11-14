@@ -23,3 +23,7 @@ No account, ads, or tracking SDKs. Your videos and playlists are stored locally 
 
 SUPPORTED FORMATS
 MP4, M4V, and MOV use Apple playback, typically H.264 or HEVC. MKV (Matroska), AVI, WebM, and MPEG-TS (.ts, .mts, .m2ts) use the bundled MobileVLCKit decoder, with play/pause and seeking. Support depends on the encoded media; damaged files or unsupported codecs may not play. DRM-protected media is not supported. You provide your own video files; the app does not include a streaming catalog or download videos from websites.
+
+OPEN-SOURCE ACKNOWLEDGEMENTS
+This product includes software developed by Niels Provos. Portions of this software are based in part on the work of the FreeType Team. Full dependency notices, licenses, and source links are available in Help & About.
+This software is based in part on the work of the Independent JPEG Group.

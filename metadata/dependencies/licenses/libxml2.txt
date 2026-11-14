@@ -1,0 +1,2130 @@
+
+--- libxml2-2.9.14/libxml.h ---
+
+/*
+ * libxml.h: internal header only used during the compilation of libxml
+ *
+ * See COPYRIGHT for the status of this software
+ *
+ * Author: breese@users.sourceforge.net
+ */
+
+--- libxml2-2.9.14/save.h ---
+
+/*
+ * Summary: Internal Interfaces for saving in libxml2
+ * Description: this module describes a few interfaces which were
+ *              added along with the API changes in 2.9.0
+ *              those are private routines at this point
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/buf.c ---
+
+/*
+ * buf.c: memory buffers for libxml2
+ *
+ * new buffer structures and entry points to simplify the maintenance
+ * of libxml2 and ensure we keep good control over memory allocations
+ * and stay 64 bits clean.
+ * The new entry point use the xmlBufPtr opaque structure and
+ * xmlBuf...() counterparts to the old xmlBuf...() functions
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/win32/wince/wincecompat.c ---
+
+/*
+ * wincecompat.c : wince compatibility module
+ *
+ * See Copyright for the status of this software.
+ *
+ * javier@tiresiassoft.com
+ *
+ * 17 Sep 2002  created
+ */
+
+--- libxml2-2.9.14/win32/wince/wincecompat.h ---
+
+/*
+ * wincecompat.h : wince compatibility header file 
+ *
+ * See Copyright for the status of this software.
+ *
+ * javier@tiresiassoft.com
+ *
+ * 17 Sep 2002  created
+ */
+
+--- libxml2-2.9.14/Copyright ---
+
+Except where otherwise noted in the source code (e.g. the files hash.c,
+list.c and the trio files, which are covered by a similar licence but
+with different Copyright notices) all the files are:
+
+ Copyright (C) 1998-2012 Daniel Veillard.  All Rights Reserved.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is fur-
+nished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FIT-
+NESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+
+
+--- libxml2-2.9.14/trio.h ---
+
+/*************************************************************************
+ *
+ * $Id$
+ *
+ * Copyright (C) 1998 Bjorn Reese and Daniel Stenberg.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
+ * CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
+ *
+ *************************************************************************
+ *
+ * http://ctrio.sourceforge.net/
+ *
+ ************************************************************************/
+
+--- libxml2-2.9.14/tree.c ---
+
+/*
+ * tree.c : implementation of access function for an XML tree.
+ *
+ * References:
+ *   XHTML 1.0 W3C REC: http://www.w3.org/TR/2002/REC-xhtml1-20020801/
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ *
+ */
+
+--- libxml2-2.9.14/tree.c ---
+
+/*
+ * NOTE about the CopyNode operations !
+ *
+ * They are split into external and internal parts for one
+ * tricky reason: namespaces. Doing a direct copy of a node
+ * say RPM:Copyright without changing the namespace pointer to
+ * something else can produce stale links. One way to do it is
+ * to keep a reference counter but this doesn't work as soon
+ * as one moves the element or the subtree out of the scope of
+ * the existing namespace. The actual solution seems to be to add
+ * a copy of the namespace at the top of the copied tree if
+ * not available in the subtree.
+ * Hence two functions, the public front-end call the inner ones
+ * The argument "recursive" normally indicates a recursive copy
+ * of the node with values 0 (no) and 1 (yes).  For XInclude,
+ * however, we allow a value of 2 to indicate copy properties and
+ * namespace info, but don't recurse on children.
+ */
+
+--- libxml2-2.9.14/triostr.c ---
+
+/*************************************************************************
+ *
+ * $Id$
+ *
+ * Copyright (C) 2001 Bjorn Reese and Daniel Stenberg.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
+ * CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
+ *
+ ************************************************************************/
+
+--- libxml2-2.9.14/xmlmodule.c ---
+
+/*
+ * xmlmodule.c : basic API for dynamic module loading added 2.6.17
+ *
+ * See Copyright for the status of this software.
+ *
+ * joelwreed@comcast.net
+ *
+ * http://www.fortran-2000.com/ArnaudRecipes/sharedlib.html
+ */
+
+--- libxml2-2.9.14/xmlcatalog.c ---
+
+/*
+ * xmlcatalog.c : a small utility program to handle XML catalogs
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/SAX2.c ---
+
+/*
+ * SAX2.c : Default SAX2 handler to build a tree.
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <daniel@veillard.com>
+ */
+
+--- libxml2-2.9.14/os400/rpgsupport.c ---
+
+/**
+***     Additional procedures for ILE/RPG support.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/iconv/iconv.c ---
+
+/**
+***     iconv_open(), iconv(), iconv_close() wrappers for the OS/400.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/iconv/bldcsndfa/bldcsndfa.c ---
+
+/**
+***     Build a deterministic finite automaton to associate CCSIDs with
+***             character set names.
+***
+***     Compile on OS/400 with options SYSIFCOPT(*IFSIO).
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/iconv/iconv.h ---
+
+/**
+***     Declarations for the iconv wrappers.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/xmllintcl.c ---
+
+/**
+***     XMLLINT command response program.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/xmlcatlgcl.c ---
+
+/**
+***     XMLCATALOG command response program.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/transcode.h ---
+
+/**
+***     Transcoding support declarations.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/wrappers.c ---
+
+/**
+***     UTF-8/EBCDIC wrappers to system and C library procedures.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/dlfcn/dlfcn.c ---
+
+/**
+***     dlopen(), dlclose() dlsym(), dlerror() emulation for OS/400.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/wrappers.h ---
+
+/**
+***     Replace system/C library calls by EBCDIC wrappers.
+***     This is a layer inserted between libxml2 itself and the EBCDIC
+***             environment.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/rpgsupport.h ---
+
+/**
+***     Additional declarations for ILE/RPG support.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/transcode.c ---
+
+/**
+***     Transcoding support and wrappers.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/os400/libxmlmain.c ---
+
+/**
+***     QADRT/QADRTMAIN2 substitution program.
+***     This is needed because the IBM-provided QADRTMAIN2 does not
+***     properly translate arguments by default or if no locale is provided.
+***
+***     See Copyright for the status of this software.
+***
+***     Author: Patrick Monnerat <pm@datasphere.ch>, DATASPHERE S.A.
+**/
+
+--- libxml2-2.9.14/testC14N.c ---
+
+/*
+ * Canonical XML implementation test program
+ * (http://www.w3.org/TR/2001/REC-xml-c14n-20010315)
+ *
+ * See Copyright for the status of this software.
+ *
+ * Author: Aleksey Sanin <aleksey@aleksey.com>
+ */
+
+--- libxml2-2.9.14/testrecurse.c ---
+
+/*
+ * testrecurse.c: C program to run libxml2 regression tests checking entities
+ *            recursions
+ *
+ * To compile on Unixes:
+ * cc -o testrecurse `xml2-config --cflags` testrecurse.c `xml2-config --libs` -lpthread
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/HTMLtree.c ---
+
+/*
+ * HTMLtree.c : implementation of access function for an HTML tree.
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/testHTML.c ---
+
+/*
+ * testHTML.c : a small tester program for HTML input.
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/enc.h ---
+
+/*
+ * Summary: Internal Interfaces for encoding in libxml2
+ * Description: this module describes a few interfaces which were
+ *              added along with the API changes in 2.9.0
+ *              those are private routines at this point
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/testchar.c ---
+
+/**
+ * Test the UTF-8 decoding routines
+ *
+ * author: Daniel Veillard
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/testapi.c ---
+
+/*
+ * testapi.c: libxml2 API tester program.
+ *
+ * Automatically generated by gentest.py from libxml2-api.xml
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/include/libxml/valid.h ---
+
+/*
+ * Summary: The DTD validation
+ * Description: API for the DTD handling and the validity checking
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xpathInternals.h ---
+
+/*
+ * Summary: internal interfaces for XML Path Language implementation
+ * Description: internal interfaces for XML Path Language implementation
+ *              used to build new modules on top of XPath like XPointer and
+ *              XSLT
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlsave.h ---
+
+/*
+ * Summary: the XML document serializer
+ * Description: API to save document or subtree of document
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/SAX.h ---
+
+/*
+ * Summary: Old SAX version 1 handler, deprecated
+ * Description: DEPRECATED set of SAX version 1 interfaces used to
+ *              build the DOM tree.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/catalog.h ---
+
+/**
+ * Summary: interfaces to the Catalog handling system
+ * Description: the catalog module implements the support for
+ * XML Catalogs and SGML catalogs
+ *
+ * SGML Open Technical Resolution TR9401:1997.
+ * http://www.jclark.com/sp/catalog.htm
+ *
+ * XML Catalogs Working Draft 06 August 2001
+ * http://www.oasis-open.org/committees/entity/spec-2001-08-06.html
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/tree.h ---
+
+/*
+ * Summary: interfaces for tree manipulation
+ * Description: this module describes the structures found in an tree resulting
+ *              from an XML or HTML parsing, as well as the API provided for
+ *              various processing on that tree
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/relaxng.h ---
+
+/*
+ * Summary: implementation of the Relax-NG validation
+ * Description: implementation of the Relax-NG validation
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlwriter.h ---
+
+/*
+ * Summary: text writing API for XML
+ * Description: text writing API for XML
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Alfred Mickautsch <alfred@mickautsch.de>
+ */
+
+--- libxml2-2.9.14/include/libxml/parser.h ---
+
+/*
+ * Summary: the core parser module
+ * Description: Interfaces, constants and types related to the XML parser
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlreader.h ---
+
+/*
+ * Summary: the XMLReader implementation
+ * Description: API of the XML streaming API based on C# interfaces.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/SAX2.h ---
+
+/*
+ * Summary: SAX2 parser interface used to build the DOM tree
+ * Description: those are the default SAX2 interfaces used by
+ *              the library when building DOM tree.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/hash.h ---
+
+/*
+ * Summary: Chained hash tables
+ * Description: This module implements the hash table support used in
+ *		various places in the library.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Bjorn Reese <bjorn.reese@systematic.dk>
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlmemory.h ---
+
+/*
+ * Summary: interface for the memory allocator
+ * Description: provides interfaces for the memory allocator,
+ *              including debugging capabilities.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/nanoftp.h ---
+
+/*
+ * Summary: minimal FTP implementation
+ * Description: minimal FTP implementation allowing to fetch resources
+ *              like external subset.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/schemasInternals.h ---
+
+/*
+ * Summary: internal interfaces for XML Schemas
+ * Description: internal interfaces for the XML Schemas handling
+ *              and schema validity checking
+ *		The Schemas development is a Work In Progress.
+ *              Some of those interfaces are not guaranteed to be API or ABI stable !
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/c14n.h ---
+
+/*
+ * Summary: Provide Canonical XML and Exclusive XML Canonicalization
+ * Description: the c14n modules provides a
+ *
+ * "Canonical XML" implementation
+ * http://www.w3.org/TR/xml-c14n
+ *
+ * and an
+ *
+ * "Exclusive XML Canonicalization" implementation
+ * http://www.w3.org/TR/xml-exc-c14n
+
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Aleksey Sanin <aleksey@aleksey.com>
+ */
+
+--- libxml2-2.9.14/include/libxml/list.h ---
+
+/*
+ * Summary: lists interfaces
+ * Description: this module implement the list support used in
+ * various place in the library.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Gary Pennington <Gary.Pennington@uk.sun.com>
+ */
+
+--- libxml2-2.9.14/include/libxml/HTMLparser.h ---
+
+/*
+ * Summary: interface for an HTML 4.0 non-verifying parser
+ * Description: this module implements an HTML 4.0 non-verifying parser
+ *              with API compatible with the XML parser ones. It should
+ *              be able to parse "real world" HTML, even if severely
+ *              broken from a specification point of view.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/parserInternals.h ---
+
+/*
+ * Summary: internals routines and limits exported by the parser.
+ * Description: this module exports a number of internal parsing routines
+ *              they are not really all intended for applications but
+ *              can prove useful doing low level processing.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/schematron.h ---
+
+/*
+ * Summary: XML Schemastron implementation
+ * Description: interface to the XML Schematron validity checking.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/entities.h ---
+
+/*
+ * Summary: interface for the XML entities handling
+ * Description: this module provides some of the entity API needed
+ *              for the parser and applications.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlstring.h ---
+
+/*
+ * Summary: set of routines to process strings
+ * Description: type and interfaces needed for the internal string handling
+ *              of the library, especially UTF8 processing.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/nanohttp.h ---
+
+/*
+ * Summary: minimal HTTP implementation
+ * Description: minimal HTTP implementation allowing to fetch resources
+ *              like external subset.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xlink.h ---
+
+/*
+ * Summary: unfinished XLink detection module
+ * Description: unfinished XLink detection module
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlautomata.h ---
+
+/*
+ * Summary: API to build regexp automata
+ * Description: the API to build regexp automata
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/uri.h ---
+
+/**
+ * Summary: library of generic URI related routines
+ * Description: library of generic URI related routines
+ *              Implements RFC 2396
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/globals.h ---
+
+/*
+ * Summary: interface for all global variables of the library
+ * Description: all the global variables and thread handling for
+ *              those variables is handled by this module.
+ *
+ * The bottom of this file is automatically generated by build_glob.py
+ * based on the description file global.data
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Gary Pennington <Gary.Pennington@uk.sun.com>, Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xpath.h ---
+
+/*
+ * Summary: XML Path Language implementation
+ * Description: API for the XML Path Language implementation
+ *
+ * XML Path Language implementation
+ * XPath is a language for addressing parts of an XML document,
+ * designed to be used by both XSLT and XPointer
+ *     http://www.w3.org/TR/xpath
+ *
+ * Implements
+ * W3C Recommendation 16 November 1999
+ *     http://www.w3.org/TR/1999/REC-xpath-19991116
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xpointer.h ---
+
+/*
+ * Summary: API to handle XML Pointers
+ * Description: API to handle XML Pointers
+ * Base implementation was made accordingly to
+ * W3C Candidate Recommendation 7 June 2000
+ * http://www.w3.org/TR/2000/CR-xptr-20000607
+ *
+ * Added support for the element() scheme described in:
+ * W3C Proposed Recommendation 13 November 2002
+ * http://www.w3.org/TR/2002/PR-xptr-element-20021113/
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/pattern.h ---
+
+/*
+ * Summary: pattern expression handling
+ * Description: allows to compile and test pattern expressions for nodes
+ *              either in a tree or based on a parser state.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlregexp.h ---
+
+/*
+ * Summary: regular expressions handling
+ * Description: basic API for libxml regular expressions handling used
+ *              for XML Schemas and validation.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlmodule.h ---
+
+/*
+ * Summary: dynamic module loading
+ * Description: basic API for dynamic module loading, used by
+ *              libexslt added in 2.6.17
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Joel W. Reed
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlexports.h ---
+
+/*
+ * Summary: macros for marking symbols as exportable/importable.
+ * Description: macros for marking symbols as exportable/importable.
+ *
+ * Copy: See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/include/libxml/dict.h ---
+
+/*
+ * Summary: string dictionary
+ * Description: dictionary of reusable strings, just used to avoid allocation
+ *         and freeing operations.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlversion.h ---
+
+/*
+ * Summary: compile-time version information
+ * Description: compile-time version information for the XML library
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/threads.h ---
+
+/**
+ * Summary: interfaces for thread handling
+ * Description: set of generic threading related routines
+ *              should work with pthreads, Windows native or TLS threads
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlschemas.h ---
+
+/*
+ * Summary: incomplete XML Schemas structure implementation
+ * Description: interface to the XML Schemas handling and schema validity
+ *              checking, it is incomplete right now.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlschemastypes.h ---
+
+/*
+ * Summary: implementation of XML Schema Datatypes
+ * Description: module providing the XML Schema Datatypes implementation
+ *              both definition and validity checking
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xinclude.h ---
+
+/*
+ * Summary: implementation of XInclude
+ * Description: API to handle XInclude processing,
+ * implements the
+ * World Wide Web Consortium Last Call Working Draft 10 November 2003
+ * http://www.w3.org/TR/2003/WD-xinclude-20031110
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/debugXML.h ---
+
+/*
+ * Summary: Tree debugging APIs
+ * Description: Interfaces to a set of routines used for debugging the tree
+ *              produced by the XML parser.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/HTMLtree.h ---
+
+/*
+ * Summary: specific APIs to process HTML tree, especially serialization
+ * Description: this module implements a few function needed to process
+ *              tree in an HTML specific way.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/encoding.h ---
+
+/*
+ * Summary: interface for the encoding conversion functions
+ * Description: interface for the encoding conversion functions needed for
+ *              XML basic encoding and iconv() support.
+ *
+ * Related specs are
+ * rfc2044        (UTF-8 and UTF-16) F. Yergeau Alis Technologies
+ * [ISO-10646]    UTF-8 and UTF-16 in Annexes
+ * [ISO-8859-1]   ISO Latin-1 characters codes.
+ * [UNICODE]      The Unicode Consortium, "The Unicode Standard --
+ *                Worldwide Character Encoding -- Version 1.0", Addison-
+ *                Wesley, Volume 1, 1991, Volume 2, 1992.  UTF-8 is
+ *                described in Unicode Technical Report #4.
+ * [US-ASCII]     Coded Character Set--7-bit American Standard Code for
+ *                Information Interchange, ANSI X3.4-1986.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlerror.h ---
+
+/*
+ * Summary: error handling
+ * Description: the API used to report errors
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/xmlIO.h ---
+
+/*
+ * Summary: interface for the I/O interfaces used by the parser
+ * Description: interface for the I/O interfaces used by the parser
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/include/libxml/DOCBparser.h ---
+
+/*
+ * Summary: old DocBook SGML parser
+ * Description: interface for a DocBook SGML non-verifying parser
+ * This code is DEPRECATED, and should not be used anymore.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/xmlregexp.c ---
+
+/*
+ * regexp.c: generic and extensible Regular Expression engine
+ *
+ * Basically designed with the purpose of compiling regexps for
+ * the variety of validation/schemas mechanisms now available in
+ * XML related specifications these include:
+ *    - XML-1.0 DTD validation
+ *    - XML Schemas structure part 1
+ *    - XML Schemas Datatypes part 2 especially Appendix F
+ *    - RELAX-NG/TREX i.e. the counter proposal
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <veillard@redhat.com>
+ */
+
+--- libxml2-2.9.14/globals.c ---
+
+/*
+ * globals.c: definition and handling of the set of global variables
+ *            of the library
+ *
+ * The bottom of this file is automatically generated by build_glob.py
+ * based on the description file global.data
+ *
+ * See Copyright for the status of this software.
+ *
+ * Gary Pennington <Gary.Pennington@uk.sun.com>
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/xmlstring.c ---
+
+/*
+ * string.c : an XML string utilities module
+ *
+ * This module provides various utility functions for manipulating
+ * the xmlChar* type. All functions named xmlStr* have been moved here
+ * from the parser.c file (their original home).
+ *
+ * See Copyright for the status of this software.
+ *
+ * UTF8 string routines from:
+ * William Brack <wbrack@mmm.com.hk>
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/doc/examples/tree2.c ---
+
+/* 
+ * section:  Tree
+ * synopsis: Creates a tree
+ * purpose:  Shows how to create document, nodes and dump it to stdout or file.
+ * usage:    tree2 <filename>  -Default output: stdout
+ * test:     tree2 > tree2.tmp && diff tree2.tmp $(srcdir)/tree2.res
+ * author:   Lucas Brasilino <brasilino@recife.pe.gov.br>
+ * copy:     see Copyright for the status of this software
+ */
+
+--- libxml2-2.9.14/doc/examples/reader2.c ---
+
+/**
+ * section: xmlReader
+ * synopsis: Parse and validate an XML file with an xmlReader
+ * purpose: Demonstrate the use of xmlReaderForFile() to parse an XML file
+ *          validating the content in the process and activating options
+ *          like entities substitution, and DTD attributes defaulting.
+ *          (Note that the XMLReader functions require libxml2 version later
+ *          than 2.6.)
+ * usage: reader2 <valid_xml_filename>
+ * test: reader2 test2.xml > reader1.tmp && diff reader1.tmp $(srcdir)/reader1.res
+ * author: Daniel Veillard
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/io2.c ---
+
+/**
+ * section: InputOutput
+ * synopsis: Output to char buffer
+ * purpose: Demonstrate the use of xmlDocDumpMemory
+ *          to output document to a character buffer
+ * usage: io2
+ * test: io2 > io2.tmp && diff io2.tmp $(srcdir)/io2.res
+ * author: John Fleck
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/io1.c ---
+
+/**
+ * section: InputOutput
+ * synopsis: Example of custom Input/Output
+ * purpose: Demonstrate the use of xmlRegisterInputCallbacks
+ *          to build a custom I/O layer, this is used in an
+ *          XInclude method context to show how dynamic document can
+ *          be built in a clean way.
+ * usage: io1
+ * test: io1 > io1.tmp && diff io1.tmp $(srcdir)/io1.res
+ * author: Daniel Veillard
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/reader3.c ---
+
+/**
+ * section: xmlReader
+ * synopsis: Show how to extract subdocuments with xmlReader
+ * purpose: Demonstrate the use of xmlTextReaderPreservePattern() 
+ *          to parse an XML file with the xmlReader while collecting
+ *          only some subparts of the document.
+ *          (Note that the XMLReader functions require libxml2 version later
+ *          than 2.6.)
+ * usage: reader3
+ * test: reader3 > reader3.tmp && diff reader3.tmp $(srcdir)/reader3.res
+ * author: Daniel Veillard
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/parse3.c ---
+
+/**
+ * section: Parsing
+ * synopsis: Parse an XML document in memory to a tree and free it
+ * purpose: Demonstrate the use of xmlReadMemory() to read an XML file
+ *          into a tree and xmlFreeDoc() to free the resulting tree
+ * usage: parse3
+ * test: parse3
+ * author: Daniel Veillard
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/parse4.c ---
+
+/**
+ * section: Parsing
+ * synopsis: Parse an XML document chunk by chunk to a tree and free it
+ * purpose: Demonstrate the use of xmlCreatePushParserCtxt() and
+ *          xmlParseChunk() to read an XML file progressively
+ *          into a tree and xmlFreeDoc() to free the resulting tree
+ * usage: parse4 test3.xml
+ * test: parse4 test3.xml
+ * author: Daniel Veillard
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/xpath1.c ---
+
+/** 
+ * section: 	XPath
+ * synopsis: 	Evaluate XPath expression and prints result node set.
+ * purpose: 	Shows how to evaluate XPath expression and register 
+ *          	known namespaces in XPath context.
+ * usage:	xpath1 <xml-file> <xpath-expr> [<known-ns-list>]
+ * test:	xpath1 test3.xml '//child2' > xpath1.tmp && diff xpath1.tmp $(srcdir)/xpath1.res
+ * author: 	Aleksey Sanin
+ * copy: 	see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/reader4.c ---
+
+/**
+ * section: xmlReader
+ * synopsis: Parse multiple XML files reusing an xmlReader
+ * purpose: Demonstrate the use of xmlReaderForFile() and
+ * xmlReaderNewFile to parse XML files while reusing the reader object
+ * and parser context.  (Note that the XMLReader functions require
+ * libxml2 version later than 2.6.)
+ * usage: reader4 <filename> [ filename ... ]
+ * test: reader4 test1.xml test2.xml test3.xml > reader4.tmp && diff reader4.tmp $(srcdir)/reader4.res
+ * author: Graham Bennett
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/xpath2.c ---
+
+/** 
+ * section: 	XPath
+ * synopsis: 	Load a document, locate subelements with XPath, modify
+ *              said elements and save the resulting document.
+ * purpose: 	Shows how to make a full round-trip from a load/edit/save
+ * usage:	xpath2 <xml-file> <xpath-expr> <new-value>
+ * test:	xpath2 test3.xml '//discarded' discarded > xpath2.tmp && diff xpath2.tmp $(srcdir)/xpath2.res
+ * author: 	Aleksey Sanin and Daniel Veillard
+ * copy: 	see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/parse2.c ---
+
+/**
+ * section: Parsing
+ * synopsis: Parse and validate an XML file to a tree and free the result
+ * purpose: Create a parser context for an XML file, then parse and validate
+ *          the file, creating a tree, check the validation result
+ *          and xmlFreeDoc() to free the resulting tree.
+ * usage: parse2 test2.xml
+ * test: parse2 test2.xml
+ * author: Daniel Veillard
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/reader1.c ---
+
+/**
+ * section: xmlReader
+ * synopsis: Parse an XML file with an xmlReader
+ * purpose: Demonstrate the use of xmlReaderForFile() to parse an XML file
+ *          and dump the information about the nodes found in the process.
+ *          (Note that the XMLReader functions require libxml2 version later
+ *          than 2.6.)
+ * usage: reader1 <filename>
+ * test: reader1 test2.xml > reader1.tmp && diff reader1.tmp $(srcdir)/reader1.res
+ * author: Daniel Veillard
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/testWriter.c ---
+
+/**
+ * section: xmlWriter
+ * synopsis: use various APIs for the xmlWriter
+ * purpose: tests a number of APIs for the xmlWriter, especially
+ *          the various methods to write to a filename, to a memory
+ *          buffer, to a new document, or to a subtree. It shows how to
+ *          do encoding string conversions too. The resulting
+ *          documents are then serialized.
+ * usage: testWriter
+ * test: testWriter && for i in 1 2 3 4 ; do diff $(srcdir)/writer.xml writer$$i.tmp || break ; done
+ * author: Alfred Mickautsch
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/tree1.c ---
+
+/**
+ * section: Tree
+ * synopsis: Navigates a tree to print element names
+ * purpose: Parse a file to a tree, use xmlDocGetRootElement() to
+ *          get the root element, then walk the document and print
+ *          all the element name in document order.
+ * usage: tree1 filename_or_URL
+ * test: tree1 test2.xml > tree1.tmp && diff tree1.tmp $(srcdir)/tree1.res
+ * author: Dodji Seketeli
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/doc/examples/parse1.c ---
+
+/**
+ * section: Parsing
+ * synopsis: Parse an XML file to a tree and free it
+ * purpose: Demonstrate the use of xmlReadFile() to read an XML file
+ *          into a tree and xmlFreeDoc() to free the resulting tree
+ * usage: parse1 test1.xml
+ * test: parse1 test1.xml
+ * author: Daniel Veillard
+ * copy: see Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/SAX.c ---
+
+/*
+ * SAX.c : Old SAX v1 handlers to build a tree.
+ *         Deprecated except for compatibility
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <daniel@veillard.com>
+ */
+
+--- libxml2-2.9.14/runsuite.c ---
+
+/*
+ * runsuite.c: C program to run libxml2 against published testsuites
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/xmlschemastypes.c ---
+
+/*
+ * schemastypes.c : implementation of the XML Schema Datatypes
+ *             definition and validity checking
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <veillard@redhat.com>
+ */
+
+--- libxml2-2.9.14/valid.c ---
+
+/*
+ * valid.c : part of the code use to do the DTD handling and the validity
+ *           checking
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/testURI.c ---
+
+/*
+ * testURI.c : a small tester program for XML input.
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/catalog.c ---
+
+/**
+ * catalog.c: set of generic Catalog related routines
+ *
+ * Reference:  SGML Open Technical Resolution TR9401:1997.
+ *             http://www.jclark.com/sp/catalog.htm
+ *
+ *             XML Catalogs Working Draft 06 August 2001
+ *             http://www.oasis-open.org/committees/entity/spec-2001-08-06.html
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel.Veillard@imag.fr
+ */
+
+--- libxml2-2.9.14/xlink.c ---
+
+/*
+ * xlink.c : implementation of the hyperlinks detection module
+ *           This version supports both XML XLinks and HTML simple links
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/xzlib.h ---
+
+/**
+ * xzlib.h: header for the front end for the transparent support of lzma
+ *          compression at the I/O layer
+ *
+ * See Copyright for the status of this software.
+ *
+ * Anders F Bjorklund <afb@users.sourceforge.net>
+ */
+
+--- libxml2-2.9.14/trionan.h ---
+
+/*************************************************************************
+ *
+ * $Id$
+ *
+ * Copyright (C) 2001 Bjorn Reese <breese@users.sourceforge.net>
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
+ * CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
+ *
+ ************************************************************************/
+
+--- libxml2-2.9.14/legacy.c ---
+
+/*
+ * legacy.c: set of deprecated routines, not to be used anymore but
+ *           kept purely for ABI compatibility
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/threads.c ---
+
+/**
+ * threads.c: set of generic threading related routines
+ *
+ * See Copyright for the status of this software.
+ *
+ * Gary Pennington <Gary.Pennington@uk.sun.com>
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/runtest.c ---
+
+/*
+ * runtest.c: C program to run libxml2 regression tests without
+ *            requiring make or Python, and reducing platform dependencies
+ *            to a strict minimum.
+ *
+ * To compile on Unixes:
+ * cc -o runtest `xml2-config --cflags` runtest.c `xml2-config --libs` -lpthread
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/example/gjobread.c ---
+
+/*
+ * gjobread.c : a small test program for gnome jobs XML format
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel.Veillard@w3.org
+ */
+
+--- libxml2-2.9.14/parser.c ---
+
+/*
+ * parser.c : an XML 1.0 parser, namespaces and validity support are mostly
+ *            implemented on top of the SAX interfaces
+ *
+ * References:
+ *   The XML specification:
+ *     http://www.w3.org/TR/REC-xml
+ *   Original 1.0 version:
+ *     http://www.w3.org/TR/1998/REC-xml-19980210
+ *   XML second edition working draft
+ *     http://www.w3.org/TR/2000/WD-xml-2e-20000814
+ *
+ * Okay this is a big file, the parser core is around 7000 lines, then it
+ * is followed by the progressive parser top routines, then the various
+ * high level APIs to call the parser and a few miscellaneous functions.
+ * A number of helper functions and deprecated ones have been moved to
+ * parserInternals.c to reduce this file size.
+ * As much as possible the functions are associated with their relative
+ * production in the XML specification. A few productions defining the
+ * different ranges of character are actually implanted either in
+ * parserInternals.h or parserInternals.c
+ * The DOM tree build is realized from the default SAX callbacks in
+ * the module SAX.c.
+ * The routines doing the validation checks are in valid.c and called either
+ * from the SAX callbacks or as standalone functions using a preparsed
+ * document.
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/uri.c ---
+
+/**
+ * uri.c: set of generic URI related routines
+ *
+ * Reference: RFCs 3986, 2732 and 2373
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/testRelax.c ---
+
+/*
+ * testRelax.c : a small tester program for RelaxNG validation
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel.Veillard@w3.org
+ */
+
+--- libxml2-2.9.14/DOCBparser.c ---
+
+/*
+ * DOCBparser.c : an attempt to parse SGML Docbook documents
+ *
+ * This is deprecated !!!
+ * Code removed with release 2.6.0 it was broken.
+ * The doc are expect to be migrated to XML DocBook
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/runxmlconf.c ---
+
+/*
+ * runxmlconf.c: C program to run XML W3C conformance testsuites
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/testRegexp.c ---
+
+/*
+ * testRegexp.c: simple module for testing regular expressions
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <veillard@redhat.com>
+ */
+
+--- libxml2-2.9.14/xmllint.c ---
+
+/*
+ * xmllint.c : a small tester program for XML input.
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/entities.c ---
+
+/*
+ * entities.c : implementation for the XML entities handling
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/encoding.c ---
+
+/*
+ * encoding.c : implements the encoding conversion functions needed for XML
+ *
+ * Related specs:
+ * rfc2044        (UTF-8 and UTF-16) F. Yergeau Alis Technologies
+ * rfc2781        UTF-16, an encoding of ISO 10646, P. Hoffman, F. Yergeau
+ * [ISO-10646]    UTF-8 and UTF-16 in Annexes
+ * [ISO-8859-1]   ISO Latin-1 characters codes.
+ * [UNICODE]      The Unicode Consortium, "The Unicode Standard --
+ *                Worldwide Character Encoding -- Version 1.0", Addison-
+ *                Wesley, Volume 1, 1991, Volume 2, 1992.  UTF-8 is
+ *                described in Unicode Technical Report #4.
+ * [US-ASCII]     Coded Character Set--7-bit American Standard Code for
+ *                Information Interchange, ANSI X3.4-1986.
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ *
+ * Original code for IsoLatin1 and UTF-16 by "Martin J. Duerst" <duerst@w3.org>
+ */
+
+--- libxml2-2.9.14/xpath.c ---
+
+/*
+ * xpath.c: XML Path Language implementation
+ *          XPath is a language for addressing parts of an XML document,
+ *          designed to be used by both XSLT and XPointer
+ *
+ * Reference: W3C Recommendation 16 November 1999
+ *     http://www.w3.org/TR/1999/REC-xpath-19991116
+ * Public reference:
+ *     http://www.w3.org/TR/xpath
+ *
+ * See Copyright for the status of this software
+ *
+ * Author: daniel@veillard.com
+ *
+ */
+
+--- libxml2-2.9.14/python/types.c ---
+
+/*
+ * types.c: converter functions between the internal representation
+ *          and the Python objects
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/python/libxml.c ---
+
+/*
+ * libxml.c: this modules implements the main part of the glue of the
+ *           libxml2 library and the Python interpreter. It provides the
+ *           entry points where an automatically generated stub is either
+ *           unpractical or would not match cleanly the Python model.
+ *
+ * If compiled with MERGED_MODULES, the entry point will be used to
+ * initialize both the libxml2 and the libxslt wrappers
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/testAutomata.c ---
+
+/*
+ * testAutomata.c: simple module for testing regexp automata
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <veillard@redhat.com>
+ */
+
+--- libxml2-2.9.14/trionan.c ---
+
+/*************************************************************************
+ *
+ * $Id$
+ *
+ * Copyright (C) 2001 Bjorn Reese <breese@users.sourceforge.net>
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
+ * CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
+ *
+ ************************************************************************
+ *
+ * Functions to handle special quantities in floating-point numbers
+ * (that is, NaNs and infinity). They provide the capability to detect
+ * and fabricate special quantities.
+ *
+ * Although written to be as portable as possible, it can never be
+ * guaranteed to work on all platforms, as not all hardware supports
+ * special quantities.
+ *
+ * The approach used here (approximately) is to:
+ *
+ *   1. Use C99 functionality when available.
+ *   2. Use IEEE 754 bit-patterns if possible.
+ *   3. Use platform-specific techniques.
+ *
+ ************************************************************************/
+
+--- libxml2-2.9.14/timsort.h ---
+
+/*
+ * The MIT License (MIT)
+ *
+ * Copyright (c) 2010-2017 Christopher Swenson.
+ * Copyright (c) 2012 Vojtech Fried.
+ * Copyright (c) 2012 Google Inc. All Rights Reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a
+ * copy of this software and associated documentation files (the "Software"),
+ * to deal in the Software without restriction, including without limitation
+ * the rights to use, copy, modify, merge, publish, distribute, sublicense,
+ * and/or sell copies of the Software, and to permit persons to whom the
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
+--- libxml2-2.9.14/nanohttp.c ---
+
+/*
+ * nanohttp.c: minimalist HTTP GET implementation to fetch external subsets.
+ *             focuses on size, streamability, reentrancy and portability
+ *
+ * This is clearly not a general purpose HTTP implementation
+ * If you look for one, check:
+ *         http://www.w3.org/Library/
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/fuzz/testFuzzer.c ---
+
+/*
+ * testFuzzer.c: Test program for the custom entity loader used to fuzz
+ * with multiple inputs.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/fuzz/xml.c ---
+
+/*
+ * xml.c: a libFuzzer target to test several XML parser interfaces.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/fuzz/uri.c ---
+
+/*
+ * uri.c: a libFuzzer target to test the URI module.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/fuzz/xpath.c ---
+
+/*
+ * xpath.c: a libFuzzer target to test XPath and XPointer expressions.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/fuzz/regexp.c ---
+
+/*
+ * regexp.c: a libFuzzer target to test the regexp module.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/fuzz/genSeed.c ---
+
+/*
+ * xmlSeed.c: Generate the XML seed corpus for fuzzing.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/fuzz/schema.c ---
+
+/*
+ * schema.c: a libFuzzer target to test the XML Schema processor.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/fuzz/fuzz.c ---
+
+/*
+ * fuzz.c: Common functions for fuzzing.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/fuzz/html.c ---
+
+/*
+ * html.c: a libFuzzer target to test several HTML parser interfaces.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/fuzz/fuzz.h ---
+
+/*
+ * fuzz.h: Common functions and macros for fuzzing.
+ *
+ * See Copyright for the status of this software.
+ */
+
+--- libxml2-2.9.14/testSchemas.c ---
+
+/*
+ * testSchemas.c : a small tester program for Schema validation
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel.Veillard@w3.org
+ */
+
+--- libxml2-2.9.14/list.c ---
+
+/*
+ * list.c: lists handling implementation
+ *
+ * Copyright (C) 2000 Gary Pennington and Daniel Veillard.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
+ * CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
+ *
+ * Author: Gary.Pennington@uk.sun.com
+ */
+
+--- libxml2-2.9.14/xinclude.c ---
+
+/*
+ * xinclude.c : Code to implement XInclude processing
+ *
+ * World Wide Web Consortium W3C Last Call Working Draft 10 November 2003
+ * http://www.w3.org/TR/2003/WD-xinclude-20031110
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/schematron.c ---
+
+/*
+ * schematron.c : implementation of the Schematron schema validity checking
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <daniel@veillard.com>
+ */
+
+--- libxml2-2.9.14/debugXML.c ---
+
+/*
+ * debugXML.c : This is a set of routines used for debugging the tree
+ *              produced by the XML parser.
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <daniel@veillard.com>
+ */
+
+--- libxml2-2.9.14/HTMLparser.c ---
+
+/*
+ * HTMLparser.c : an HTML 4.0 non-verifying parser
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/triop.h ---
+
+/*************************************************************************
+ *
+ * $Id$
+ *
+ * Copyright (C) 2000 Bjorn Reese and Daniel Stenberg.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
+ * CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
+ *
+ ************************************************************************
+ *
+ * Private functions, types, etc. used for callback functions.
+ *
+ * The ref pointer is an opaque type and should remain as such.
+ * Private data must only be accessible through the getter and
+ * setter functions.
+ *
+ ************************************************************************/
+
+--- libxml2-2.9.14/c14n.c ---
+
+/*
+ * "Canonical XML" implementation
+ * http://www.w3.org/TR/xml-c14n
+ *
+ * "Exclusive XML Canonicalization" implementation
+ * http://www.w3.org/TR/xml-exc-c14n
+ *
+ * See Copyright for the status of this software.
+ *
+ * Author: Aleksey Sanin <aleksey@aleksey.com>
+ */
+
+--- libxml2-2.9.14/testSAX.c ---
+
+/*
+ * testSAX.c : a small tester program for parsing using the SAX API.
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/xmlIO.c ---
+
+/*
+ * xmlIO.c : implementation of the I/O interfaces used by the parser
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ *
+ * 14 Nov 2000 ht - for VMS, truncated name of long functions to under 32 char
+ */
+
+--- libxml2-2.9.14/hash.c ---
+
+/*
+ * hash.c: chained hash tables
+ *
+ * Reference: Your favorite introductory book on algorithms
+ *
+ * Copyright (C) 2000,2012 Bjorn Reese and Daniel Veillard.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
+ * CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
+ *
+ * Author: breese@users.sourceforge.net
+ */
+
+--- libxml2-2.9.14/trio.c ---
+
+/*************************************************************************
+ *
+ * $Id$
+ *
+ * Copyright (C) 1998 Bjorn Reese and Daniel Stenberg.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
+ * CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
+ *
+ *************************************************************************
+ *
+ * A note to trio contributors:
+ *
+ * Avoid heap allocation at all costs to ensure that the trio functions
+ * are async-safe. The exceptions are the printf/fprintf functions, which
+ * uses fputc, and the asprintf functions and the <alloc> modifier, which
+ * by design are required to allocate form the heap.
+ *
+ ************************************************************************/
+
+--- libxml2-2.9.14/dict.c ---
+
+/*
+ * dict.c: dictionary of reusable strings, just used to avoid allocation
+ *         and freeing operations.
+ *
+ * Copyright (C) 2003-2012 Daniel Veillard.
+ *
+ * Permission to use, copy, modify, and distribute this software for any
+ * purpose with or without fee is hereby granted, provided that the above
+ * copyright notice and this permission notice appear in all copies.
+ *
+ * THIS SOFTWARE IS PROVIDED ``AS IS'' AND WITHOUT ANY EXPRESS OR IMPLIED
+ * WARRANTIES, INCLUDING, WITHOUT LIMITATION, THE IMPLIED WARRANTIES OF
+ * MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE AUTHORS AND
+ * CONTRIBUTORS ACCEPT NO RESPONSIBILITY IN ANY CONCEIVABLE MANNER.
+ *
+ * Author: daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/xmlschemas.c ---
+
+/*
+ * schemas.c : implementation of the XML Schema handling and
+ *             schema validity checking
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <veillard@redhat.com>
+ */
+
+--- libxml2-2.9.14/buf.h ---
+
+/*
+ * Summary: Internal Interfaces for memory buffers in libxml2
+ * Description: this module describes most of the new xmlBuf buffer
+ *              entry points, those are private routines, with a
+ *              few exceptions exported in tree.h. This was added
+ *              in 2.9.0.
+ *
+ * Copy: See Copyright for the status of this software.
+ *
+ * Author: Daniel Veillard
+ */
+
+--- libxml2-2.9.14/xmlsave.c ---
+
+/*
+ * xmlsave.c: Implementation of the document serializer
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/testModule.c ---
+
+/*
+ * testModule.c : a small tester program for xmlModule
+ *
+ * See Copyright for the status of this software.
+ *
+ * joelwreed@comcast.net
+ */
+
+--- libxml2-2.9.14/error.c ---
+
+/*
+ * error.c: module displaying/handling XML parser errors
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <daniel@veillard.com>
+ */
+
+--- libxml2-2.9.14/parserInternals.c ---
+
+/*
+ * parserInternals.c : Internal routines (and obsolete ones) needed for the
+ *                     XML and HTML parsers.
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/xpointer.c ---
+
+/*
+ * xpointer.c : Code to handle XML Pointer
+ *
+ * Base implementation was made accordingly to
+ * W3C Candidate Recommendation 7 June 2000
+ * http://www.w3.org/TR/2000/CR-xptr-20000607
+ *
+ * Added support for the element() scheme described in:
+ * W3C Proposed Recommendation 13 November 2002
+ * http://www.w3.org/TR/2002/PR-xptr-element-20021113/
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/testlimits.c ---
+
+/*
+ * testlimits.c: C program to run libxml2 regression tests checking various
+ *       limits in document size. Will consume a lot of RAM and CPU cycles
+ *
+ * To compile on Unixes:
+ * cc -o testlimits `xml2-config --cflags` testlimits.c `xml2-config --libs` -lpthread
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/xmlreader.c ---
+
+/*
+ * xmlreader.c: implements the xmlTextReader streaming node API
+ *
+ * NOTE:
+ *   XmlTextReader.Normalization Property won't be supported, since
+ *     it makes the parser non compliant to the XML recommendation
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/relaxng.c ---
+
+/*
+ * relaxng.c : implementation of the Relax-NG handling and validity checking
+ *
+ * See Copyright for the status of this software.
+ *
+ * Daniel Veillard <veillard@redhat.com>
+ */
+
+--- libxml2-2.9.14/testXPath.c ---
+
+/*
+ * testXPath.c : a small tester program for XPath.
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/pattern.c ---
+
+/*
+ * pattern.c: Implementation of selectors for nodes
+ *
+ * Reference:
+ *   http://www.w3.org/TR/2001/REC-xmlschema-1-20010502/
+ *   to some extent
+ *   http://www.w3.org/TR/1999/REC-xml-19991116
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */
+
+--- libxml2-2.9.14/xzlib.c ---
+
+/**
+ * xzlib.c: front end for the transparent support of lzma compression
+ *          at the I/O layer, based on an example file from lzma project
+ *
+ * See Copyright for the status of this software.
+ *
+ * Anders F Bjorklund <afb@users.sourceforge.net>
+ */
+
+--- libxml2-2.9.14/testReader.c ---
+
+/*
+ * testReader.c : a small tester program for parsing using the xmlReader
+ *
+ * See Copyright for the status of this software.
+ *
+ * daniel@veillard.com
+ */

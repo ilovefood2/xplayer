@@ -16,6 +16,13 @@ or analytics.
 Apple codecs apply to native playback; MKV, AVI, WebM, and MPEG-TS use the bundled MobileVLCKit decoder.
 DRM-protected content and website downloads are not supported.
 
+This product includes software developed by Niels Provos. Portions of this
+software are based in part on the work of the FreeType Team. Complete collected
+dependency licenses are available offline in Help & About → Third-Party Licenses.
+Release-specific source and relinking instructions are in
+[docs/dependency-build.md](docs/dependency-build.md).
+This software is based in part on the work of the Independent JPEG Group.
+
 ## Source and license
 
 The native application is independently implemented and MIT-licensed. See

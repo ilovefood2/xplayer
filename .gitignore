@@ -10,3 +10,4 @@ build/
 node_modules/
 package-lock.json
 Vendor/
+__pycache__/

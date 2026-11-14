@@ -43,6 +43,7 @@
 		F21FB06450C02A496ECB8443 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6CA5B4B2D6CA1DC81FA48196 /* Assets.xcassets */; };
 		F285D6B19DFE307821CBCF7A /* ReleaseResourcesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39A8FB179B3EEEFB222126A /* ReleaseResourcesTests.swift */; };
 		F4B17609F5628564E0E8FEBB /* PrivacyPolicy.md in Resources */ = {isa = PBXBuildFile; fileRef = E42802D81AE239E03C92FBF8 /* PrivacyPolicy.md */; };
+		FF3A4D584B6357378D28CF86 /* ThirdPartyLicenses.txt in Resources */ = {isa = PBXBuildFile; fileRef = B86B6F74297B9ABE19C1C25A /* ThirdPartyLicenses.txt */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,40 +79,41 @@
 
 /* Begin PBXFileReference section */
 		0218B0A16761F19D26D4D5D5 /* ThirdPartyNotices.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = ThirdPartyNotices.md; sourceTree = "<group>"; };
-		04FD6885E45D991CCF86073D /* stream.ts */ = {isa = PBXFileReference; path = stream.ts; sourceTree = "<group>"; };
+		04FD6885E45D991CCF86073D /* stream.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = stream.ts; sourceTree = "<group>"; };
 		10D0C25E094FF06E930EB315 /* PlaylistViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaylistViews.swift; sourceTree = "<group>"; };
 		13A9F9BFBA5E04E41F678DA0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		177D62AC15D24379180A2A42 /* LibraryViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViews.swift; sourceTree = "<group>"; };
-		1DB974E975D904784961DD64 /* clip.webm */ = {isa = PBXFileReference; path = clip.webm; sourceTree = "<group>"; };
+		1DB974E975D904784961DD64 /* clip.webm */ = {isa = PBXFileReference; lastKnownFileType = file; path = clip.webm; sourceTree = "<group>"; };
 		4475D9061D50F492B7A8DE06 /* XPlayerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPlayerUITests.swift; sourceTree = "<group>"; };
 		4B6D2E4D476A7E78B754019D /* MobileVLCKit.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = MobileVLCKit.xcframework; path = Vendor/MobileVLCKit/MobileVLCKit.xcframework; sourceTree = "<group>"; };
-		4DB87782A76CFA73E7FB25CB /* av1.webm */ = {isa = PBXFileReference; path = av1.webm; sourceTree = "<group>"; };
+		4DB87782A76CFA73E7FB25CB /* av1.webm */ = {isa = PBXFileReference; lastKnownFileType = file; path = av1.webm; sourceTree = "<group>"; };
 		4FAF32AE412EBBBA1E145780 /* LibraryStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStore.swift; sourceTree = "<group>"; };
 		51BD5905938CAC51EBB7BC87 /* PlaybackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackTests.swift; sourceTree = "<group>"; };
-		545014A6BECDBC1705FE3AA8 /* finder.m2ts */ = {isa = PBXFileReference; path = finder.m2ts; sourceTree = "<group>"; };
+		545014A6BECDBC1705FE3AA8 /* finder.m2ts */ = {isa = PBXFileReference; lastKnownFileType = file; path = finder.m2ts; sourceTree = "<group>"; };
 		549DE771ECEF0CE37832A5A1 /* Support.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Support.md; sourceTree = "<group>"; };
-		5EB1BF2AF54DC1EE28FC7370 /* controls.mp4 */ = {isa = PBXFileReference; path = controls.mp4; sourceTree = "<group>"; };
+		5EB1BF2AF54DC1EE28FC7370 /* controls.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = controls.mp4; sourceTree = "<group>"; };
 		6CA5B4B2D6CA1DC81FA48196 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7A25B2379F2AE2B7B88B0F28 /* clip.mp4 */ = {isa = PBXFileReference; path = clip.mp4; sourceTree = "<group>"; };
+		7A25B2379F2AE2B7B88B0F28 /* clip.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = clip.mp4; sourceTree = "<group>"; };
 		90A8BA13245045940F6CDC57 /* VideoHTTPServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoHTTPServer.swift; sourceTree = "<group>"; };
-		A583B79A37F4D19894F41171 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
+		A583B79A37F4D19894F41171 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		A85C9DFF45E557986EF913A2 /* XPlayerTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = XPlayerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B1ECFE7E6A0F863B60B38E00 /* seek.mkv */ = {isa = PBXFileReference; path = seek.mkv; sourceTree = "<group>"; };
+		B1ECFE7E6A0F863B60B38E00 /* seek.mkv */ = {isa = PBXFileReference; lastKnownFileType = file; path = seek.mkv; sourceTree = "<group>"; };
 		B4F116935A655A1171FB88C5 /* XPlayerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XPlayerApp.swift; sourceTree = "<group>"; };
 		B653AC7D19150C69805B9408 /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		BA4D2BC923A96646AA2DD7C0 /* XPlayer.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = XPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B86B6F74297B9ABE19C1C25A /* ThirdPartyLicenses.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThirdPartyLicenses.txt; sourceTree = "<group>"; };
+		BA4D2BC923A96646AA2DD7C0 /* XPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = XPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C74D2B9AD21A99AFCFA929A8 /* clip.avi */ = {isa = PBXFileReference; lastKnownFileType = video.avi; path = clip.avi; sourceTree = "<group>"; };
-		C921324F14BF19943AA54130 /* vp9.webm */ = {isa = PBXFileReference; path = vp9.webm; sourceTree = "<group>"; };
+		C921324F14BF19943AA54130 /* vp9.webm */ = {isa = PBXFileReference; lastKnownFileType = file; path = vp9.webm; sourceTree = "<group>"; };
 		D5566507F342C642E2B7F7EF /* XPlayerUITests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = XPlayerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D5C9DCF94FE645DF172DA4DA /* seek.mp4 */ = {isa = PBXFileReference; path = seek.mp4; sourceTree = "<group>"; };
+		D5C9DCF94FE645DF172DA4DA /* seek.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = seek.mp4; sourceTree = "<group>"; };
 		D6D2307CA45323107A477AC7 /* MobileVLCKit-LGPL.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = "MobileVLCKit-LGPL.txt"; sourceTree = "<group>"; };
 		D80FA91F15FBCD800AAAB587 /* PlaybackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackController.swift; sourceTree = "<group>"; };
 		DA503BABDD8543D51F68B5EA /* LibraryStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryStoreTests.swift; sourceTree = "<group>"; };
-		DB2CBDCE3860552264CD54EE /* finder.ts */ = {isa = PBXFileReference; path = finder.ts; sourceTree = "<group>"; };
+		DB2CBDCE3860552264CD54EE /* finder.ts */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.typescript; path = finder.ts; sourceTree = "<group>"; };
 		E39A8FB179B3EEEFB222126A /* ReleaseResourcesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReleaseResourcesTests.swift; sourceTree = "<group>"; };
 		E42802D81AE239E03C92FBF8 /* PrivacyPolicy.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = PrivacyPolicy.md; sourceTree = "<group>"; };
 		E4D0A792D65910FEBD9C7956 /* License.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = License.txt; sourceTree = "<group>"; };
-		F3A315C1F102C35A569FC2B5 /* clip.mkv */ = {isa = PBXFileReference; path = clip.mkv; sourceTree = "<group>"; };
+		F3A315C1F102C35A569FC2B5 /* clip.mkv */ = {isa = PBXFileReference; lastKnownFileType = file; path = clip.mkv; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +199,7 @@
 				D6D2307CA45323107A477AC7 /* MobileVLCKit-LGPL.txt */,
 				E42802D81AE239E03C92FBF8 /* PrivacyPolicy.md */,
 				549DE771ECEF0CE37832A5A1 /* Support.md */,
+				B86B6F74297B9ABE19C1C25A /* ThirdPartyLicenses.txt */,
 				0218B0A16761F19D26D4D5D5 /* ThirdPartyNotices.md */,
 			);
 			path = Resources;
@@ -374,6 +377,7 @@
 				19370F8EB2BFE18AA1022627 /* PrivacyInfo.xcprivacy in Resources */,
 				F4B17609F5628564E0E8FEBB /* PrivacyPolicy.md in Resources */,
 				A3FE0E366E66800D362D4CD7 /* Support.md in Resources */,
+				FF3A4D584B6357378D28CF86 /* ThirdPartyLicenses.txt in Resources */,
 				996B8546FAC585FC062B2F4D /* ThirdPartyNotices.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,6 +473,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 468U2JDYD3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"Vendor/MobileVLCKit\"",
@@ -490,6 +495,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				DEVELOPMENT_TEAM = 468U2JDYD3;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"Vendor/MobileVLCKit\"",
@@ -558,7 +564,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -577,7 +583,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.142;
+				MARKETING_VERSION = 4.11.143;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -625,7 +631,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 142;
+				CURRENT_PROJECT_VERSION = 143;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -638,7 +644,7 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
-				MARKETING_VERSION = 4.11.142;
+				MARKETING_VERSION = 4.11.143;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
